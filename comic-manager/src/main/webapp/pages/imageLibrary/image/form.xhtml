@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" 
+                      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+                      
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:c="http://java.sun.com/jstl/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:a4j="http://richfaces.org/a4j"
+      xmlns:rich="http://richfaces.org/rich">
+    <head/>
+    <body>
+        <ui:composition>
+            <ui:include src="/pages/imageLibrary/common/modalPanels.xhtml"/>
+            <h:form id="cm-image-form">
+                <ui:include src="/pages/common/perspectiveButtons.xhtml">
+                    <ui:param name="entityType" value="image"/>
+                    <ui:param name="managedBean" value="#{imageBean}"/>
+                </ui:include>
+                <rich:panelBar>
+                    <rich:panelBarItem label="Main">
+                        <fieldset>
+                            <ol>
+                                <li>
+                                    <label for="image-label">Label: </label>
+                                    <h:inputText id="image-label"
+                                                 value="#{imageBean.entity.label}"
+                                                 size="50" maxlength="100"
+                                                 disabled="#{imageBean.formButtonController.formDisabled}"/>
+                                </li>
+                                <li>
+                                    <label for="image-filename">File Name: </label>
+                                    <h:inputText id="image-filename"
+                                                 value="#{imageBean.entity.fileName}"
+                                                 size="50" maxlength="100"
+                                                 disabled="#{imageBean.formButtonController.formDisabled}"/>
+                                </li>
+                                <li>
+                                    <label for="image-type">
+                                        <a4j:commandLink value="Image Type"
+                                                         actionListener="#{imageTypeBean.processFirstButton}"
+                                                         oncomplete="Richfaces.showModalPanel('cm-imagetype-modal-panel');"
+                                                         reRender="cm-imagetype-modal-panel-content"/>
+                                        Value:
+                                    </label>
+                                    <h:selectOneMenu id="image-type"
+                                                     value="#{imageBean.entity.type}"
+                                                     converter="objectHexConverter"
+                                                     disabled="#{imageBean.formButtonController.formDisabled}">
+                                        <f:selectItems value="#{imageTypeBean.entitiesAsSelectItems}"/>
+                                    </h:selectOneMenu>
+                                </li>
+                            </ol>
+                        </fieldset>
+                        <a href="/ComicManager/getImage?fileName=#{imageBean.entity.fileName}&amp;typeValue=#{imageBean.entity.type.value}"
+                           target="_blank">
+                            <img src="/ComicManager/getImage?fileName=#{imageBean.entity.fileName}&amp;typeValue=#{imageBean.entity.type.value}&amp;height=300"
+                                 alt="Image Unavailable"/>
+                        </a>
+                    </rich:panelBarItem>
+                    <rich:panelBarItem label="Administrative">
+                        <ui:include src="/pages/common/administrativePanel.xhtml">
+                            <ui:param name="entityType" value="image"/>
+                            <ui:param name="managedBean" value="#{imageBean}"/>
+                        </ui:include>
+                    </rich:panelBarItem>
+                </rich:panelBar>
+                <ui:include src="/pages/common/formButtons.xhtml">
+                    <ui:param name="entityType" value="image"/>
+                    <ui:param name="managedBean" value="#{imageBean}"/>
+                </ui:include>
+            </h:form>
+        </ui:composition>
+    </body>
+</html>

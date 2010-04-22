@@ -1,0 +1,511 @@
+/*
+    Comic Manager Style Sheet.
+
+    AUTHOR  Ron Rickard
+*/
+
+body {
+    background-color: #b0c4de;
+    font-size: 100%;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+}
+
+/* Page Layout */
+#cm-page {
+    font-size: 11px;
+    margin: 0 auto;
+    padding: 0;
+    position: relative;
+    width: 960px;
+}
+
+#cm-content {
+    background-color: #ffffff;
+    margin: 0;
+    padding: 0;
+    position: relative;
+    width: 100%;
+}
+
+#cm-header {
+    background-color: #ffffff;
+    height: 50px;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+}
+
+#cm-footer {
+    background-color: #ffffff;
+    clear: both;
+    float: left;
+    font-family: Arial,Helvetica,sans-serif;
+    font-size: 8px;
+    font-style: italic;
+    height: 20px;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+    width: 100%;
+}
+
+#cm-report {
+    background-color: #ffffff;
+    margin: 0;
+    padding: 0;
+    position: relative;
+    width: 100%;
+}
+
+/* Content Layout */
+#cm-column1 {
+    background-color: #ffffff;
+    float: left;
+    margin: 0;
+    padding: 0;
+    position: relative;
+    width: 40%;
+}
+
+#cm-column2 {
+    background-color: #ffffff;
+    float: right;
+    margin: 0;
+    padding: 0;
+    position: relative;
+    width: 60%;
+}
+
+#cm-filter {
+    background-color: #ffffff;
+    margin: 0;
+    padding: 0;
+}
+
+#cm-form {
+    background-color: #ffffff;
+    margin: 0;
+    padding: 0 5px;
+}
+
+#cm-login {
+    background-color: #ffffff;
+    float: left;
+    margin: 0;
+    padding: 0;
+    position: relative;
+    width: 100%;
+}
+
+#cm-search {
+    background-color: #c1e0fc;
+    border: 1px solid #000000;
+    float: right;
+    margin: 5px;
+    padding: 0;
+}
+
+#cm-table {
+    background-color: #ffffff;
+    margin: 0;
+    padding: 0 35px;
+}
+
+/* Forms */
+form input[type="button"], form input[type="submit"] {
+    background-color: #326ad1;
+    color: #ffffff;
+    font-family: Arial,Helvetica,sans-serif;
+    font-size: 11px;
+    font-weight: bold;
+}
+
+form input[type="button"][disabled], form input[type="submit"][disabled] {
+    background-color: #e5e8f0;
+    color: #cad4e5;
+    font-family: Arial,Helvetica,sans-serif;
+    font-size: 11px;
+    font-weight: bold;
+}
+
+form fieldset {
+    border-width: 0;
+    clear: left;
+    float: left;
+    margin: 0;
+    padding: 0;
+}
+
+form input, form fieldset input {
+    font-family: Arial,Helvetica,sans-serif;
+    font-size: 11px;
+    margin: 2px;
+    padding: 0;
+}
+
+form fieldset label {
+    background-color: #c1e0fc;
+    float: left;
+    font-family: Arial,Helvetica,sans-serif;
+    font-size: 11px;
+    margin: 2px;
+    padding: 4px;
+    text-align: right;
+    width: 100px;
+}
+
+form fieldset ol {
+    list-style: none;
+}
+
+form fieldset li {
+    clear: left;
+    float: left;
+    width: 100%;
+    white-space: nowrap;
+}
+
+form select, form fieldset select {
+    font-family: Arial,Helvetica,sans-serif;
+    font-size: 11px;
+    margin: 2px;
+    padding: 0;
+}
+
+.cm-filter-buttons, .cm-form-buttons, .cm-perspective-buttons {
+    text-align: center;
+    white-space: nowrap;
+    margin: 15px 0;
+}
+
+.cm-report-content, .cm-modal-panel-content {
+    vertical-align: top;
+}
+
+/* Table */
+.cm-table-cell {
+    float: left;
+    font-family: Arial,Helvetica,sans-serif;
+    font-size: 11px;
+    height: 13px;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.cm-table-scroller {
+    height: 300px;
+    overflow: auto;
+}
+
+/* Category Table */
+#cm-category-table-scroller {
+    width: 225px;
+}
+
+.cm-category-table-selected-row {
+    background-color: #999999;
+}
+
+.cm-table-category-name-cell {
+    width: 200px;
+}
+
+/* Character Table */
+#cm-character-table-scroller {
+    width: 225px;
+}
+
+.cm-character-table-selected-row {
+    background-color: #999999;
+}
+
+.cm-table-character-name-cell {
+    width: 200px;
+}
+
+/* Comic Table */
+#cm-comic-table-scroller {
+    height: 500px;
+    width: 325px;
+}
+
+.cm-comic-table-selected-row {
+    background-color: #999999;
+}
+
+.cm-table-comic-issue-cell {
+    width: 45px;
+}
+
+.cm-table-comic-print-cell {
+    width: 35px;
+}
+
+.cm-table-comic-distribution-cell {
+    width: 105px;
+}
+
+.cm-table-comic-date-cell {
+    width: 85px;
+}
+
+/* Comic Type Table */
+#cm-comictype-table-scroller {
+    width: 225px;
+}
+
+.cm-comictype-table-selected-row {
+    background-color: #999999;
+}
+
+.cm-table-comictype-value-cell {
+    width: 200px;
+}
+
+/* Distribution Table */
+#cm-distribution-table-scroller {
+    width: 225px;
+}
+
+.cm-distribution-table-selected-row {
+    background-color: #999999;
+}
+
+.cm-table-distribution-value-cell {
+    width: 200px;
+}
+
+/* Have Table */
+#cm-have-table-scroller {
+    width: 250px;
+}
+
+.cm-have-table-selected-row {
+    background-color: #999999;
+}
+
+.cm-table-have-grade-cell {
+    width: 40px;
+}
+
+.cm-table-have-location-cell {
+    width: 100px;
+}
+
+.cm-table-have-price-cell {
+    width: 40px;
+}
+
+.cm-table-have-quantity-cell {
+    width: 20px;
+}
+
+/* Image Table */
+#cm-image-table-scroller {
+    height: 500px;
+    width: 325px;
+}
+
+.cm-image-table-selected-row {
+    background-color: #999999;
+}
+
+.cm-table-image-filename-cell {
+    width: 300px;
+}
+
+.cm-table-image-label-cell {
+    width: 300px;
+}
+
+/* Image Type Table */
+#cm-imagetype-table-scroller {
+    width: 430px;
+}
+
+.cm-imagetype-table-selected-row {
+    background-color: #999999;
+}
+
+.cm-table-imagetype-directorypath-cell {
+    width: 200px;
+}
+
+.cm-table-imagetype-value-cell {
+    width: 200px;
+}
+
+/* Location Table */
+#cm-location-table-scroller {
+    width: 225px;
+}
+
+.cm-location-table-selected-row {
+    background-color: #999999;
+}
+
+.cm-table-location-name-cell {
+    width: 200px;
+}
+
+/* Profession Table */
+#cm-profession-table-scroller {
+    width: 225px;
+}
+
+.cm-profession-table-selected-row {
+    background-color: #999999;
+}
+
+.cm-table-profession-value-cell {
+    width: 200px;
+}
+
+/* Publisher Table */
+#cm-publisher-table-scroller {
+    width: 225px;
+}
+
+.cm-publisher-table-selected-row {
+    background-color: #999999;
+}
+
+.cm-table-publisher-name-cell {
+    width: 200px;
+}
+
+/* Title Table */
+#cm-title-table-scroller {
+    height: 500px;
+    width: 325px;
+}
+
+.cm-title-table-selected-row {
+    background-color: #999999;
+}
+
+.cm-table-title-name-cell {
+    width: 300px;
+}
+
+/* Title Type Table */
+#cm-titletype-table-scroller {
+    width: 225px;
+}
+
+.cm-titletype-table-selected-row {
+    background-color: #999999;
+}
+
+.cm-table-titletype-value-cell {
+    width: 200px;
+}
+
+/* Trait Table */
+#cm-trait-table-scroller {
+    width: 225px;
+}
+
+.cm-trait-table-selected-row {
+    background-color: #999999;
+}
+
+.cm-table-trait-value-cell {
+    width: 200px;
+}
+
+/* Report */
+.cm-report-cell {
+    float: left;
+    font-family: Arial,Helvetica,sans-serif;
+    font-size: 11px;
+    height: 13px;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+/* Location Report */
+.cm-locationreport-title-cell {
+    width: 350px;
+}
+
+.cm-locationreport-issue-cell {
+    width: 40px;
+}
+
+.cm-locationreport-distribution-cell {
+    width: 70px;
+}
+
+.cm-locationreport-date-cell {
+    width: 50px;
+}
+
+.cm-locationreport-grade-cell {
+    width: 40px;
+}
+
+.cm-locationreport-quantity-cell {
+    width: 25px;
+}
+
+/* Title Report */
+
+.cm-titlereport-issue-cell {
+    width: 40px;
+}
+
+.cm-titlereport-distribution-cell {
+    width: 70px;
+}
+
+.cm-titlereport-date-cell {
+    width: 50px;
+}
+
+.cm-titlereport-grade-cell {
+    width: 40px;
+}
+
+.cm-titlereport-location-cell {
+    width: 70px;
+}
+
+.cm-titlereport-quantity-cell {
+    width: 25px;
+}
+
+/* RichFaces Specific */
+.rich-tabpanel-content {
+    font-size: 11px;
+    margin: 0;
+    padding: 0;
+}
+
+.rich-table-firstrow:hover {
+    background-color: #cccccc;
+}
+
+.rich-table-cell {
+    font-family: Arial,Helvetica,sans-serif;
+    font-size: 11px;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+/* RichFaces Modal Panel */
+.dr-mpnl-pnl {
+    overflow: auto!important;
+}
+
+.rich-mpnl-body {
+    height: 92%;
+    width: 99%;
+    padding: 0;
+}
+
+.rich-mpnl-body .content {
+    padding: 10px;
+}

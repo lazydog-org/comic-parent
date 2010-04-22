@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+                      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:a4j="http://richfaces.org/a4j">
+    <head/>
+    <body>
+        <ui:component>
+            <h:form id="cm-locationreport-form">
+                <fieldset>
+                    <ol>
+                        <li>
+                            <label for="locationreport-location">Location Name: </label>
+                            <h:selectOneMenu id="locationreport-location"
+                                             value="#{locationReportBean.location}"
+                                             converter="objectHexConverter">
+                                <f:selectItems value="#{locationBean.entitiesAsSelectItems}"/>
+                            </h:selectOneMenu>
+                        </li>
+                        <li>
+                            <label style="background-color: #ffffff;"/>
+                            <a4j:commandButton value="Generate Report"
+                                               actionListener="#{locationReportBean.processReportButton}"
+                                               reRender="cm-locationreport-content"/>
+                        </li>
+                    </ol>
+                </fieldset>
+            </h:form>
+            <h:form id="cm-titlereport-form">
+                <fieldset>
+                    <ol>
+                        <li>
+                            <label for="titlereport-title">Title Name: </label>
+                            <h:selectOneMenu id="titlereport-title"
+                                             value="#{titleReportBean.title}"
+                                             converter="objectHexConverter">
+                                <f:selectItems value="#{titleReportBean.titlesAsSelectItems}"/>
+                            </h:selectOneMenu>
+                        </li>
+                        <li>
+                            <label style="background-color: #ffffff;"/>
+                            <a4j:commandButton value="Generate Report"
+                                               actionListener="#{titleReportBean.processReportButton}"
+                                               reRender="cm-titlereport-content"/>
+                        </li>
+                    </ol>
+                </fieldset>
+            </h:form>
+        </ui:component>
+    </body>
+</html>

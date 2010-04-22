@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<faces-config 
+    xmlns="http://java.sun.com/xml/ns/javaee"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://java.sun.com/xml/ns/javaee
+                        http://java.sun.com/xml/ns/javaee/web-facesconfig_1_2.xsd"
+    version="1.2">
+
+    <converter>
+        <converter-for-class>java.util.Date</converter-for-class>
+        <converter-class>comic.manager.converter.CustomDateTimeConverter</converter-class>
+    </converter>
+    <converter>
+        <converter-id>imageParseableConverter</converter-id>
+        <converter-class>comic.manager.converter.ImageParseableConverter</converter-class>
+    </converter>
+    <converter>
+        <converter-id>monthYearConverter</converter-id>
+        <converter-class>comic.manager.converter.MonthYearConverter</converter-class>
+    </converter>
+    <converter>
+        <converter-id>objectHexConverter</converter-id>
+        <converter-class>comic.manager.converter.ObjectHexConverter</converter-class>
+    </converter>
+    <converter>
+        <converter-id>professionListConverter</converter-id>
+        <converter-class>comic.manager.converter.ProfessionListConverter</converter-class>
+    </converter>
+    <converter>
+        <converter-id>publisherListConverter</converter-id>
+        <converter-class>comic.manager.converter.PublisherListConverter</converter-class>
+    </converter>
+    <!--
+    <lifecycle>
+        <phase-listener>comic.manager.phaselistener.Debug</phase-listener>
+    </lifecycle>
+    -->
+</faces-config>
+
+
+

@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence
+    xmlns="http://java.sun.com/xml/ns/persistence" 
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+    xsi:schemaLocation="http://java.sun.com/xml/ns/persistence 
+                        http://java.sun.com/xml/ns/persistence/persistence_1_0.xsd"
+    version="1.0">
+        
+    <persistence-unit name="ComicCollectionPU" transaction-type="JTA">
+        <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
+        <jta-data-source>jdbc/ComicCollectionPool</jta-data-source>
+        <mapping-file>comic/repository/jpa/mapping/category-mapping.xml</mapping-file>
+        <mapping-file>comic/repository/jpa/mapping/character-mapping.xml</mapping-file>
+        <mapping-file>comic/repository/jpa/mapping/comic-mapping.xml</mapping-file>
+        <mapping-file>comic/repository/jpa/mapping/comicGrade-mapping.xml</mapping-file>
+        <mapping-file>comic/repository/jpa/mapping/comicType-mapping.xml</mapping-file>
+        <mapping-file>comic/repository/jpa/mapping/creator-mapping.xml</mapping-file>
+        <mapping-file>comic/repository/jpa/mapping/distribution-mapping.xml</mapping-file>
+        <mapping-file>comic/repository/jpa/mapping/entity-mapping.xml</mapping-file>
+        <mapping-file>comic/repository/jpa/mapping/have-mapping.xml</mapping-file>
+        <mapping-file>comic/repository/jpa/mapping/image-mapping.xml</mapping-file>
+        <mapping-file>comic/repository/jpa/mapping/imageType-mapping.xml</mapping-file>
+        <mapping-file>comic/repository/jpa/mapping/imprint-mapping.xml</mapping-file>
+        <mapping-file>comic/repository/jpa/mapping/location-mapping.xml</mapping-file>
+        <mapping-file>comic/repository/jpa/mapping/person-mapping.xml</mapping-file>
+        <mapping-file>comic/repository/jpa/mapping/profession-mapping.xml</mapping-file>
+        <mapping-file>comic/repository/jpa/mapping/publisher-mapping.xml</mapping-file>
+        <mapping-file>comic/repository/jpa/mapping/title-mapping.xml</mapping-file>
+        <mapping-file>comic/repository/jpa/mapping/titleType-mapping.xml</mapping-file>
+        <mapping-file>comic/repository/jpa/mapping/trait-mapping.xml</mapping-file>
+        <mapping-file>comic/repository/jpa/mapping/user-mapping.xml</mapping-file>
+        <mapping-file>comic/repository/jpa/mapping/userPreference-mapping.xml</mapping-file>
+        <mapping-file>comic/repository/jpa/mapping/want-mapping.xml</mapping-file>
+        <class>comic.api.model.Category</class>
+        <class>comic.api.model.Character</class>
+        <class>comic.api.model.Comic</class>
+        <class>comic.api.model.ComicGrade</class>
+        <class>comic.api.model.ComicType</class>
+        <class>comic.api.model.Creator</class>
+        <class>comic.api.model.Distribution</class>
+        <class>comic.api.model.Entity</class>
+        <class>comic.api.model.Have</class>
+        <class>comic.api.model.Image</class>
+        <class>comic.api.model.ImageType</class>
+        <class>comic.api.model.Imprint</class>
+        <class>comic.api.model.Location</class>
+        <class>comic.api.model.Person</class>
+        <class>comic.api.model.Profession</class>
+        <class>comic.api.model.Publisher</class>
+        <class>comic.api.model.Title</class>
+        <class>comic.api.model.TitleType</class>
+        <class>comic.api.model.Trait</class>
+        <class>comic.api.model.User</class>
+        <class>comic.api.model.UserPreference</class>
+        <class>comic.api.model.Want</class>
+    </persistence-unit>
+</persistence>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" 
+                      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+                      
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:a4j="http://richfaces.org/a4j">
+    <head/>
+    <body>
+        <ui:composition>
+            <h:form id="cm-#{entityType}-filter" class="cm-filter-buttons">
+                <a4j:repeat value="#{filterManagedBean.buttons}" var="button">
+                    <h:commandButton value="#{button}"
+                                     actionListener="#{managedBean.processFilterButton}"
+                                     disabled="#{filterManagedBean.buttonDisabledMap[button]}"/>
+                </a4j:repeat>
+            </h:form>
+        </ui:composition>
+    </body>
+</html>

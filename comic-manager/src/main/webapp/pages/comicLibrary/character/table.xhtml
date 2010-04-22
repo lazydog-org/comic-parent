@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" 
+                      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+                      
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:a4j="http://richfaces.org/a4j"
+      xmlns:rich="http://richfaces.org/rich">
+    <head/>
+    <body>
+        <ui:composition>
+            <h:form id="cm-character-table">
+                <rich:dataTable>
+                    <rich:column headerClass="cm-table-cell cm-table-character-name-cell">
+                        <f:facet name="header">
+                            <h:outputText value="Character Name"/>
+                        </f:facet>
+                    </rich:column>
+                </rich:dataTable>
+                <div id="cm-character-table-scroller" class="cm-table-scroller">
+                    <rich:dataTable id="cm-character-table-body"
+                                    value="#{characterBean.entities}" var="character"
+                                    binding="#{characterBean.dataTable}">
+                        <a4j:support event="onRowClick" 
+                                     actionListener="#{characterBean.processRowClick}"
+                                     reRender="cm-character-table-body,cm-character-form"/>
+                        <rich:column styleClass="cm-table-cell cm-table-character-name-cell #{(character.id == characterBean.entity.id) ? 'cm-character-table-selected-row' : ''}">
+                            <h:outputText value="#{character.name}"/>
+                        </rich:column>
+                    </rich:dataTable>
+                </div>
+                <script type="text/javascript">
+                    //<![CDATA[
+                    scroll();
+
+                    function scroll() {
+                        getElementByClass('cm-character-table-selected-row').scrollIntoView(true);
+                    }
+
+                    function getElementByClass(theClass) {
+
+                        // Create array of all elements.
+                        var elements = document.getElementsByTagName("*");
+                        var pattern = new RegExp("\\b" + theClass + "\\b");
+
+                        // Loop through the elements.
+                        for (i = 0; i < elements.length; i++) {
+
+                            // Check if the element has the specified class.
+                            if (pattern.test(elements[i].className)) {
+
+                                // Get the first element.
+                                var element = elements[i];
+                                break;
+
+                            }
+                        }
+                        return element;
+                    }
+
+                    window.onload = scroll;
+                    //]]>
+                </script>
+            </h:form>
+        </ui:composition>
+    </body>
+</html>

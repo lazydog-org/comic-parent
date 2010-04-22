@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" 
+                      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+                      
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html">
+    <head/>
+    <body>
+        <ui:composition template="/layout/subtopicLayout.xhtml">
+            <ui:define name="filter">
+                <h:panelGrid>
+                    <h:panelGroup>
+                        <h:outputText value="#{comicBean.entity.title.name}"/>
+                        <f:verbatim>&amp;nbsp;</f:verbatim>
+                        (Vol. <h:outputText value="#{comicBean.entity.title.volume}"/>)
+                    </h:panelGroup>
+                    <h:panelGroup>
+                        <h:outputText value="#{comicBean.entity.title.publishers}"
+                                      converter="publisherListConverter"/>
+                        ,<f:verbatim>&amp;nbsp;</f:verbatim>
+                        <h:outputText value="#{comicBean.entity.title.publishStartDate}">
+                            <f:convertDateTime pattern="MM/yyyy"/>
+                        </h:outputText>
+                        <f:verbatim>&amp;nbsp;</f:verbatim>-<f:verbatim>&amp;nbsp;</f:verbatim>
+                        <h:outputText value="#{comicBean.entity.title.publishEndDate}">
+                            <f:convertDateTime pattern="MM/yyyy"/>
+                        </h:outputText>
+                        <f:verbatim>&amp;nbsp;</f:verbatim>
+                        (<h:outputText value="#{comicBean.entity.title.type.value}"/>)
+                    </h:panelGroup>
+                </h:panelGrid>
+                <ui:include src="/pages/comicLibrary/comic/filter.xhtml"/>
+            </ui:define>
+            <ui:define name="form">
+                <ui:include src="/pages/comicLibrary/comic/form.xhtml"/>
+            </ui:define>
+            <ui:define name="search">
+                <ui:include src="/pages/search/titleSearch.xhtml"/>
+            </ui:define>
+            <ui:define name="table">
+                <ui:include src="/pages/comicLibrary/comic/table.xhtml"/>
+            </ui:define>
+        </ui:composition>
+    </body>
+</html>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<entity-mappings
+    xmlns="http://java.sun.com/xml/ns/persistence/orm"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://java.sun.com/xml/ns/persistence/orm 
+                        http://java.sun.com/xml/ns/persistence/orm_1_0.xsd"
+    version="1.0">
+
+    <package>comic.api.model</package>
+    <entity class="Imprint" access="FIELD" metadata-complete="true">
+        <table name="imprint" schema="comic_collection"/>
+        <named-query name="Imprint.findAll">
+            <query>select i from Imprint i</query>
+        </named-query>
+        <attributes>
+            <basic name="name">
+                <column name="name" nullable="false" unique="true"/>
+            </basic>
+            <many-to-one name="image" fetch="EAGER">
+                <join-column name="image_id"/>
+            </many-to-one>
+            <many-to-one name="publisher" fetch="EAGER">
+                <join-column name="publisher_id" nullable="false"/>
+            </many-to-one>
+        </attributes>
+    </entity>
+</entity-mappings>

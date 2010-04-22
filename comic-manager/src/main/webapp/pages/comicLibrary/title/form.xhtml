@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" 
+                      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+                      
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:c="http://java.sun.com/jstl/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:a4j="http://richfaces.org/a4j"
+      xmlns:rich="http://richfaces.org/rich"
+      xmlns:comic="http://comic/comicTags">
+    <head/>
+    <body>
+        <ui:composition>
+            <ui:include src="/pages/comicLibrary/common/modalPanels.xhtml"/>
+            <h:form id="cm-title-form">
+                <a4j:htmlCommandLink value="Manage Issues"
+                                     actionListener="#{comicBean.processFirstButton}"
+                                     disabled="#{titleBean.comicLinkDisabled}">
+                    <f:attribute name="subtopic" value="COMIC"/>
+                    <f:actionListener type="comic.manager.actionlistener.ActivateSubtopic"/>
+                </a4j:htmlCommandLink>
+                <ui:include src="/pages/common/perspectiveButtons.xhtml">
+                    <ui:param name="entityType" value="title"/>
+                    <ui:param name="managedBean" value="#{titleBean}"/>
+                </ui:include>
+                <rich:panelBar>
+                    <rich:panelBarItem label="Main">
+                        <fieldset>
+                            <ol>
+                                <li>
+                                    <label for="title-name">Title Name: </label>
+                                    <h:inputText id="title-name"
+                                                 value="#{titleBean.entity.name}"
+                                                 size="50" maxlength="100"
+                                                 disabled="#{titleBean.formButtonController.formDisabled}"/>
+                                </li>
+                                <li>
+                                    <label for="title-volume">Volume: </label>
+                                    <rich:inputNumberSpinner id="title-volume"
+                                                             value="#{titleBean.entity.volume}"
+                                                             minValue="1" maxValue="99" inputSize="2"
+                                                             disabled="#{titleBean.formButtonController.formDisabled}"/>
+                                </li>
+                                <li>
+                                    <label for="title-publishers">
+                                        <a4j:commandLink value="Publisher"
+                                                 actionListener="#{publisherBean.processFirstButton}"
+                                                 oncomplete="Richfaces.showModalPanel('cm-publisher-modal-panel');"
+                                                 reRender="cm-publisher-modal-panel-content"/>
+                                        Name(s):
+                                    </label>
+                                    <h:selectManyListbox id="title-publishers"
+                                                         value="#{titleBean.entity.publishers}" size="4"
+                                                         converter="objectHexConverter"
+                                                         disabled="#{titleBean.formButtonController.formDisabled}">
+                                        <f:selectItems value="#{publisherBean.entitiesAsSelectItems}"/>
+                                    </h:selectManyListbox>
+                                </li>
+                                <li>
+                                    <label for="title-type">
+                                        <a4j:commandLink value="Title Type"
+                                                         actionListener="#{titleTypeBean.processFirstButton}"
+                                                         oncomplete="Richfaces.showModalPanel('cm-titletype-modal-panel');"
+                                                         reRender="cm-titletype-modal-panel-content"/>
+                                        Value:
+                                    </label>
+                                    <h:selectOneMenu id="title-type"
+                                                     value="#{titleBean.entity.type}"
+                                                     converter="objectHexConverter"
+                                                     disabled="#{titleBean.formButtonController.formDisabled}">
+                                        <f:selectItems value="#{titleTypeBean.entitiesAsSelectItems}"/>
+                                    </h:selectOneMenu>
+                                </li>
+                                <li>
+                                    <label for="title-publishstartdate">Publish Start Date: </label>
+                                    <h:selectOneMenu id="title-publishstartdate"
+                                                     value="#{titleBean.entity.publishStartDate}"
+                                                     converter="monthYearConverter"
+                                                     disabled="#{titleBean.formButtonController.formDisabled}">
+                                        <comic:monthYearSelectItems empty="true"
+                                                                    startDate="#{titleBean.startDate}"
+                                                                    endDate="#{titleBean.endDate}"/>
+                                    </h:selectOneMenu>
+                                </li>
+                                <li>
+                                    <label for="title-publishenddate">Publish End Date: </label>
+                                    <h:selectOneMenu id="title-publishenddate"
+                                                     value="#{titleBean.entity.publishEndDate}"
+                                                     converter="monthYearConverter"
+                                                     disabled="#{titleBean.formButtonController.formDisabled}">
+                                        <comic:monthYearSelectItems empty="true"
+                                                                    startDate="#{titleBean.startDate}"
+                                                                    endDate="#{titleBean.endDate}"/>
+                                    </h:selectOneMenu>
+                                </li>
+                                <li>
+                                    <label for="title-category">
+                                        <a4j:commandLink value="Category"
+                                                         actionListener="#{categoryBean.processFirstButton}"
+                                                         oncomplete="Richfaces.showModalPanel('cm-category-modal-panel');"
+                                                         reRender="cm-category-modal-panel-content"/>
+                                        Name(s):
+                                    </label>
+                                    <h:selectManyListbox id="title-category"
+                                                         value="#{titleBean.entity.categories}" size="4"
+                                                         converter="objectHexConverter"
+                                                         disabled="#{titleBean.formButtonController.formDisabled}">
+                                        <f:selectItems value="#{categoryBean.entitiesAsSelectItems}"/>
+                                    </h:selectManyListbox>
+                                </li>
+                            </ol>
+                        </fieldset>
+                    </rich:panelBarItem>
+                    <rich:panelBarItem label="Administrative">
+                        <ui:include src="/pages/common/administrativePanel.xhtml">
+                            <ui:param name="entityType" value="title"/>
+                            <ui:param name="managedBean" value="#{titleBean}"/>
+                        </ui:include>
+                    </rich:panelBarItem>
+                </rich:panelBar>
+                <ui:include src="/pages/common/formButtons.xhtml">
+                    <ui:param name="entityType" value="title"/>
+                    <ui:param name="managedBean" value="#{titleBean}"/>
+                </ui:include>
+            </h:form>   
+        </ui:composition>
+    </body>
+</html>

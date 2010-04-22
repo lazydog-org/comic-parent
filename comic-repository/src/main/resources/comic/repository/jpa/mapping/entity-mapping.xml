@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<entity-mappings
+    xmlns="http://java.sun.com/xml/ns/persistence/orm"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://java.sun.com/xml/ns/persistence/orm 
+                        http://java.sun.com/xml/ns/persistence/orm_1_0.xsd"
+    version="1.0">
+
+    <package>comic.api.model</package>
+    <mapped-superclass class="Entity" access="FIELD" metadata-complete="true">
+        <attributes> 
+            <id name="id">
+                <column name="id"/>
+                <generated-value strategy="IDENTITY"/>
+            </id>
+            <basic name="createTime">
+                <column name="create_time" nullable="false"/>
+                <temporal>TIMESTAMP</temporal>
+            </basic>
+            <basic name="modifyTime">
+                <column name="modify_time"/>
+                <temporal>TIMESTAMP</temporal>
+            </basic>
+            <many-to-one name="createUser" fetch="EAGER">
+                <join-column name="create_user_id" nullable="false"/>
+            </many-to-one>
+            <many-to-one name="modifyUser" fetch="EAGER">
+                <join-column name="modify_user_id"/>
+            </many-to-one>
+            <transient name="entityClass"/>
+        </attributes>
+    </mapped-superclass>
+</entity-mappings>

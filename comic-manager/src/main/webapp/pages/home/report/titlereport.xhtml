@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+                      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:c="http://java.sun.com/jstl/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:rich="http://richfaces.org/rich">
+    <head/>
+    <body>
+        <ui:composition>
+            <h:panelGrid columns="2" columnClasses="cm-report-content, cm-report-content">
+                <rich:dataTable value="#{titleReportBean.haves}" var="have">
+                    <f:facet name="header">
+                        <rich:columnGroup>
+                            <rich:column colspan="6" headerClass="cm-report-cell">
+                                <h:outputText value="Title Name: #{titleReportBean.title.name}"/>
+                                (Vol. <h:outputText value="#{titleReportBean.title.volume}"/>)
+                            </rich:column>
+                        </rich:columnGroup>
+                    </f:facet>
+                    <rich:column headerClass="cm-report-cell cm-titlereport-issue-cell"
+                                 styleClass="cm-report-cell cm-titlereport-issue-cell">
+                        <f:facet name="header">
+                            <h:outputText value="Issue"/>
+                        </f:facet>
+                        <h:outputText value="#{have.comic.number}"/>
+                        <h:outputText value="#{have.comic.variant}"/>
+                    </rich:column>
+                    <rich:column headerClass="cm-report-cell cm-titlereport-distribution-cell"
+                                 styleClass="cm-report-cell cm-titlereport-distribution-cell">
+                        <f:facet name="header">
+                            <h:outputText value="Distribution"/>
+                        </f:facet>
+                        <h:outputText value="#{have.comic.distribution.value}"/>
+                    </rich:column>
+                    <rich:column headerClass="cm-report-cell cm-titlereport-date-cell"
+                                 styleClass="cm-report-cell cm-titlereport-date-cell">
+                        <f:facet name="header">
+                            <h:outputText value="Date"/>
+                        </f:facet>
+                        <h:outputText value="#{have.comic.publishDate}">
+                            <f:convertDateTime pattern="MM/yyyy"/>
+                        </h:outputText>
+                    </rich:column>
+                    <rich:column headerClass="cm-report-cell cm-titlereport-grade-cell"
+                                 styleClass="cm-report-cell cm-titlereport-grade-cell">
+                        <f:facet name="header">
+                            <h:outputText value="Grade"/>
+                        </f:facet>
+                        <h:outputText value="#{have.comicGrade.code}"/>
+                    </rich:column>
+                    <rich:column headerClass="cm-report-cell cm-titlereport-location-cell"
+                                 styleClass="cm-report-cell cm-titlereport-location-cell">
+                        <f:facet name="header">
+                            <h:outputText value="Location Name"/>
+                        </f:facet>
+                        <h:outputText value="#{have.location.name}"/>
+                    </rich:column>
+                    <rich:column headerClass="cm-report-cell cm-titlereport-quantity-cell"
+                                 styleClass="cm-report-cell cm-titlereport-quantity-cell">
+                        <f:facet name="header">
+                            <h:outputText value="#"/>
+                        </f:facet>
+                        <h:outputText value="#{have.quantity}"/>
+                    </rich:column>
+                </rich:dataTable>
+                <h:form>
+                    <h:commandLink value="print" onclick="window.print();" class="no-print"/>
+                </h:form>
+            </h:panelGrid>
+        </ui:composition>
+    </body>
+</html>

@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" 
+                      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+                      
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:a4j="http://richfaces.org/a4j"
+      xmlns:rich="http://richfaces.org/rich">
+    <head/>
+    <body>
+        <ui:composition>
+            <h:inputHidden value="#{haveBean.entity.comic}" converter="objectHexConverter"/>
+            <fieldset>
+                <ol>
+                    <li>
+                        <label for="have-comicgrade">Comic Grade Code: </label>
+                        <h:selectOneMenu id="have-comicgrade"
+                                         value="#{haveBean.entity.comicGrade}"
+                                         converter="objectHexConverter"
+                                         disabled="#{haveBean.formButtonController.formDisabled}">
+                            <f:selectItems value="#{comicGradeBean.entitiesAsSelectItems}"/>
+                        </h:selectOneMenu>
+                    </li>
+                    <li>
+                        <label for="have-location">
+                            <a4j:commandLink value="Location"
+                                             actionListener="#{locationBean.processFirstButton}"
+                                             oncomplete="Richfaces.showModalPanel('cm-location-modal-panel');"
+                                             reRender="cm-location-modal-panel-content"/>
+                            Name:
+                        </label>
+                        <h:selectOneMenu id="have-location"
+                                         value="#{haveBean.entity.location}"
+                                         converter="objectHexConverter"
+                                         disabled="#{haveBean.formButtonController.formDisabled}">
+                            <f:selectItems value="#{locationBean.entitiesAsSelectItems}"/>
+                        </h:selectOneMenu>
+                    </li>
+                    <li>
+                        <label for="have-purchaseprice">Purchase Price: </label>
+                        <h:inputText id="have-purchaseprice"
+                                     value="#{haveBean.entity.purchasePrice}"
+                                     size="9" maxlength="9"
+                                     disabled="#{haveBean.formButtonController.formDisabled}"/>
+                    </li>
+                    <li>
+                        <label for="have-quantity">Quantity: </label>
+                        <rich:inputNumberSpinner id="have-quantity"
+                                                 value="#{haveBean.entity.quantity}"
+                                                 minValue="1" maxValue="999" inputSize="3"
+                                                 disabled="#{haveBean.formButtonController.formDisabled}"/>
+                    </li>
+                </ol>
+            </fieldset>
+        </ui:composition>
+    </body>
+</html>

@@ -1,0 +1,38 @@
+/*
+    Comic Manager Style Sheet.
+
+    AUTHOR  Ron Rickard
+*/
+
+body {
+    float: none;
+    font-size: 100%;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+}
+
+/* Page Layout */
+#cm-page {
+    font-size: 11px;
+    margin: 0;
+    padding: 0;
+    position: relative;
+    width: 100%;
+}
+
+#cm-content {
+    display: none;
+}
+
+#cm-header {
+    display: none;
+}
+
+#cm-footer {
+    display: none;
+}
+
+.no-print {
+    display: none;
+}

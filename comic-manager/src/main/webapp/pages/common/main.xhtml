@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" 
+                      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+                      
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:c="http://java.sun.com/jstl/core"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:rich="http://richfaces.org/rich">
+    <head/>
+    <body>
+        <ui:composition template="/layout/pageLayout.xhtml">
+            <ui:define name="title">Comic Manager</ui:define>
+            <ui:define name="header">
+                <ui:include src="/pages/common/header.xhtml"/>
+            </ui:define>
+            <ui:define name="report">
+                <ui:include src="/pages/home/common/reports.xhtml"/>
+            </ui:define>
+            <ui:define name="content">
+                <rich:tabPanel id="cm-tab-panel" selectedTab="#{navigator.topic}" switchType="server">
+                    <rich:tab name="HOME" label="Home">
+                        <f:attribute name="topic" value="HOME"/>
+                        <f:actionListener type="comic.manager.actionlistener.ActivateTopic"/>
+                        <c:if test="#{navigator.topic == 'HOME'}">
+                            <ui:include src="#{navigator.subtopicContent}"/>
+                        </c:if>
+                    </rich:tab>
+                    <rich:tab name="COMIC_LIBRARY" label="Comic Library" actionListener="#{titleBean.processFirstButton}">
+                        <f:attribute name="topic" value="COMIC_LIBRARY"/>
+                        <f:actionListener type="comic.manager.actionlistener.ActivateTopic"/>
+                        <c:if test="#{navigator.topic == 'COMIC_LIBRARY'}">
+                            <ui:include src="#{navigator.subtopicContent}"/>
+                        </c:if>
+                    </rich:tab>
+                    <rich:tab name="IMAGE_LIBRARY" label="Image Library" actionListener="#{imageBean.processFirstButton}">
+                        <f:attribute name="topic" value="IMAGE_LIBRARY"/>
+                        <f:actionListener type="comic.manager.actionlistener.ActivateTopic"/>
+                        <c:if test="#{navigator.topic == 'IMAGE_LIBRARY'}">
+                            <ui:include src="#{navigator.subtopicContent}"/>
+                        </c:if>
+                    </rich:tab>
+                </rich:tabPanel>
+            </ui:define>
+            <ui:define name="footer">
+                <ui:include src="/pages/common/footer.xhtml"/>
+            </ui:define>
+        </ui:composition>
+    </body>
+</html>

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" 
+                      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+                      
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html">
+    <head/>
+    <body>
+        <ui:composition>
+            <fieldset>
+                <ol>
+                    <li>
+                        <label for="imagetype-value">Image Type Value: </label>
+                        <h:inputText id="imagetype-value"
+                                     value="#{imageTypeBean.entity.value}"
+                                     size="25" maxlength="50"
+                                     disabled="true"/>
+                        <h:inputHidden value="#{imageTypeBean.entity.value}"/>
+                    </li>
+                    <li>
+                        <label for="imagetype-directorypath">Directory Path: </label>
+                        <h:inputText id="imagetype-directorypath"
+                                     value="#{imageTypeBean.entity.directoryPath}"
+                                     size="25" maxlength="100"
+                                     disabled="#{imageTypeBean.formButtonController.formDisabled}"/>
+                    </li>
+                </ol>
+            </fieldset>
+        </ui:composition>
+    </body>
+</html>

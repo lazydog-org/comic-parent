@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+                      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:a4j="http://richfaces.org/a4j"
+      xmlns:rich="http://richfaces.org/rich">
+    <head/>
+    <body>
+        <ui:composition>
+            <rich:modalPanel id="cm-#{entityType}-modal-panel" minWidth="800" minHeight="200" autosized="true">
+                <f:facet name="header">
+                    <h:panelGroup>
+                        #{entityType}
+                    </h:panelGroup>
+                </f:facet>
+                <f:facet name="controls">
+                    <h:panelGroup>
+                        <h:form>
+                            <a4j:commandLink value="close"
+                                             actionListener="#{parentManagedBean.processFirstButton}"
+                                             oncomplete="Richfaces.hideModalPanel('cm-#{entityType}-modal-panel');"
+                                             reRender="cm-#{parentEntityType}-filter,cm-#{parentEntityType}-table,cm-#{parentEntityType}-form"/>
+                        </h:form>
+                    </h:panelGroup>
+                </f:facet>
+                <h:panelGrid id="cm-#{entityType}-modal-panel-content" columns="2" columnClasses="cm-modal-panel-content, cm-modal-panel-content">
+                    <ui:include src="/pages/imageLibrary/#{entityType}/table.xhtml"/>
+                    <ui:include src="/pages/imageLibrary/common/modalPanelForm.xhtml">
+                        <ui:param name="entityType" value="#{entityType}"/>
+                        <ui:param name="managedBean" value="#{managedBean}"/>
+                    </ui:include>
+                </h:panelGrid>
+            </rich:modalPanel>
+        </ui:composition>
+    </body>
+</html>

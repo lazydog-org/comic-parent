@@ -1,0 +1,238 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" 
+                      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+                      
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:c="http://java.sun.com/jstl/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:a4j="http://richfaces.org/a4j"
+      xmlns:rich="http://richfaces.org/rich"
+      xmlns:comic="http://comic/comicTags">
+    <head/>
+    <body>
+        <ui:composition>
+            <ui:include src="/pages/comicLibrary/common/modalPanels.xhtml"/>
+            <h:form id="cm-comic-form">
+                <h:inputHidden value="#{comicBean.entity.title}" converter="objectHexConverter"/>
+                <c:if test="#{!comicBean.listLinkDisabled}">
+                    <a4j:commandLink value="Manage Collection"
+                                     actionListener="#{haveBean.processFirstButton}"
+                                     oncomplete="Richfaces.showModalPanel('cm-have-modal-panel');"
+                                     reRender="cm-have-modal-panel-content"/>
+                    <rich:spacer width="5"/>
+                    <c:choose>
+                        <c:when test="#{comicBean.addToWishlistRendered}">
+                            <a4j:commandLink value="Add to Wishlist"
+                                             actionListener="#{comicBean.processAddToWishlist}"
+                                             reRender="cm-comic-form"/>
+                        </c:when>
+                        <c:otherwise>
+                            <a4j:commandLink value="Remove from Wishlist"
+                                             actionListener="#{comicBean.processRemoveFromWishlist}"
+                                             reRender="cm-comic-form"/>
+                        </c:otherwise>
+                    </c:choose>
+                </c:if>
+                <rich:spacer width="5"/>
+                <a4j:htmlCommandLink value="Return to Title Selection"
+                                     actionListener="#{titleBean.processFirstButton}">
+                    <f:attribute name="subtopic" value="TITLE"/>
+                    <f:actionListener type="comic.manager.actionlistener.ActivateSubtopic"/>
+                </a4j:htmlCommandLink>
+                <ui:include src="/pages/common/perspectiveButtons.xhtml">
+                    <ui:param name="entityType" value="comic"/>
+                    <ui:param name="managedBean" value="#{comicBean}"/>
+                </ui:include>
+                <rich:panelBar>
+                    <rich:panelBarItem label="Main">
+                        <fieldset>
+                            <ol>
+                                <li>
+                                    <label for="comic-number">Start Number: </label>
+                                    <rich:inputNumberSpinner id="comic-number"
+                                                             value="#{comicBean.entity.number}"
+                                                             minValue="0" maxValue="1000" inputSize="3"
+                                                             disabled="#{comicBean.formButtonController.formDisabled}"/>
+                                </li>
+                                <c:if test="#{comicBean.perspective == 'ADD_MANY'}">
+                                    <li>
+                                        <label for="comic-endnumber">End Number:</label>
+                                        <rich:inputNumberSpinner id="comic-endnumber"
+                                                                 value="#{comicBean.endNumber}"
+                                                                 minValue="0" maxValue="1000" inputSize="3"
+                                                                 disabled="#{comicBean.formButtonController.formDisabled}"/>
+                                    </li>
+                                </c:if>
+                                <li>
+                                    <label for="comic-variant">Variant: </label>
+                                    <h:selectOneMenu id="comic-variant"
+                                                     value="#{comicBean.entity.variant}"
+                                                     disabled="#{comicBean.formButtonController.formDisabled}">
+                                        <f:selectItems value="#{comicBean.variantsAsSelectItems}"/>
+                                    </h:selectOneMenu>
+                                </li>
+                                <li>
+                                    <label for="comic-print">Print: </label>
+                                    <rich:inputNumberSpinner id="comic-print"
+                                                             value="#{comicBean.entity.print}"
+                                                             minValue="1" maxValue="99" inputSize="2"
+                                                             disabled="#{comicBean.formButtonController.formDisabled}"/>
+                                </li>
+                                <li>
+                                    <label for="comic-type">
+                                        <a4j:commandLink value="Comic Type"
+                                                         actionListener="#{comicTypeBean.processFirstButton}"
+                                                         oncomplete="Richfaces.showModalPanel('cm-comictype-modal-panel');"
+                                                         reRender="cm-comictype-modal-panel-content"/>
+                                        Value:
+                                    </label>
+                                    <h:selectOneMenu id="comic-type"
+                                                     value="#{comicBean.entity.type}"
+                                                     converter="objectHexConverter"
+                                                     disabled="#{comicBean.formButtonController.formDisabled}">
+                                        <f:selectItems value="#{comicTypeBean.entitiesAsSelectItems}"/>
+                                    </h:selectOneMenu>
+                                </li>
+                                <li>
+                                    <label for="comic-distribution">
+                                        <a4j:commandLink value="Distribution"
+                                                         actionListener="#{distributionBean.processFirstButton}"
+                                                         oncomplete="Richfaces.showModalPanel('cm-distribution-modal-panel');"
+                                                         reRender="cm-distribution-modal-panel-content"/>
+                                        Value:
+                                    </label>
+                                    <h:selectOneMenu id="comic-distribution"
+                                                     value="#{comicBean.entity.distribution}"
+                                                     converter="objectHexConverter"
+                                                     disabled="#{comicBean.formButtonController.formDisabled}">
+                                        <f:selectItems value="#{distributionBean.entitiesAsSelectItems}"/>
+                                    </h:selectOneMenu>
+                                </li>
+                                <li>
+                                    <label for="comic-publishdate">Publish Date: </label>
+                                    <h:selectOneMenu id="comic-publishdate"
+                                                     value="#{comicBean.entity.publishDate}"
+                                                     converter="monthYearConverter"
+                                                     disabled="#{comicBean.formButtonController.formDisabled}">
+                                        <comic:monthYearSelectItems empty="true"
+                                                                    startDate="#{comicBean.startDate}"
+                                                                    endDate="#{comicBean.endDate}"/>
+                                    </h:selectOneMenu>
+                                </li>
+                                <li>
+                                    <label for="comic-coverprice">Cover Price: </label>
+                                    <h:inputText id="comic-coverprice"
+                                                 value="#{comicBean.entity.coverPrice}"
+                                                 size="6" maxlength="6"
+                                                 disabled="#{comicBean.formButtonController.formDisabled}"/>
+                                </li>
+                                <li>
+                                    <label for="comic-description">Description: </label>
+                                    <h:inputTextarea id="comic-description"
+                                                     value="#{comicBean.entity.description}"
+                                                     cols="20" rows="8"
+                                                     disabled="#{comicBean.formButtonController.formDisabled}"/>
+                                </li>
+                            </ol>
+                        </fieldset>
+                        <a id="comic-image"
+                           href="/ComicManager/getImage?fileName=#{comicBean.entity.image.fileName}&amp;typeValue=#{comicBean.entity.image.type.value}"
+                           target="_blank">
+                            <img id="image"
+                                 src="/ComicManager/getImage?fileName=#{comicBean.entity.image.fileName}&amp;typeValue=#{comicBean.entity.image.type.value}&amp;height=300"
+                                 alt="Image Unavailable"/>
+                        </a>
+                        <script type="text/javascript">
+                            //<![CDATA[
+                            function showImage() {
+                                var selectImage = document.getElementById("cm-comic-form:selectImage");
+                                var selectedImage = selectImage.options[selectImage.selectedIndex].value;
+                                var selectedImageArray = selectedImage.split(";");
+                                var fileName = selectedImageArray[1];
+                                var image = document.getElementById('image');
+                                if (image) {
+                                    image.src = "/ComicManager/getImage?fileName=" + fileName +
+                                                "&typeValue=comic&height=300";
+                                }
+                                var imageLink = document.getElementById('comic-image');
+                                if (imageLink) {
+                                    imageLink.href = "/ComicManager/getImage?fileName=" + fileName +
+                                                     "&typeValue=comic";
+                                }
+                            }
+                            //]]>
+                        </script>
+                        <fieldset>
+                            <ol>
+                                <li>
+                                    <label for="comic-image">Image Label: </label>
+                                    <h:selectOneMenu id="selectImage"
+                                                     value="#{comicBean.entity.image}"
+                                                     converter="imageParseableConverter"
+                                                     disabled="#{comicBean.formButtonController.formDisabled}"
+                                                     onchange="showImage();">
+                                        <f:selectItems value="#{imageBean.comicImagesAsSelectItems}"/>
+                                    </h:selectOneMenu>
+                                </li>
+                            </ol>
+                        </fieldset>
+                    </rich:panelBarItem>
+                    <rich:panelBarItem label="Trait">
+                        <fieldset>
+                            <ol>
+                                <li>
+                                    <label for="comic-traits">
+                                        <a4j:commandLink value="Trait"
+                                                         actionListener="#{traitBean.processFirstButton}"
+                                                         oncomplete="Richfaces.showModalPanel('cm-trait-modal-panel');"
+                                                         reRender="cm-trait-modal-panel-content"/>
+                                        Value(s):
+                                    </label>
+                                    <h:selectManyListbox id="comic-traits"
+                                                         value="#{comicBean.entity.traits}" size="6"
+                                                         converter="objectHexConverter"
+                                                         disabled="#{comicBean.formButtonController.formDisabled}">
+                                        <f:selectItems value="#{traitBean.entitiesAsSelectItems}"/>
+                                    </h:selectManyListbox>
+                                </li>
+                            </ol>
+                        </fieldset>
+                    </rich:panelBarItem>
+                    <rich:panelBarItem label="Character">
+                        <fieldset>
+                            <ol>
+                                <li>
+                                    <label for="comic-characters">
+                                        <a4j:commandLink value="Character"
+                                                         actionListener="#{characterBean.processFirstButton}"
+                                                         oncomplete="Richfaces.showModalPanel('cm-character-modal-panel');"
+                                                         reRender="cm-character-modal-panel-content"/>
+                                        Name(s):
+                                    </label>
+                                    <h:selectManyListbox id="comic-characters"
+                                                         value="#{comicBean.entity.characters}" size="6"
+                                                         converter="objectHexConverter"
+                                                         disabled="#{comicBean.formButtonController.formDisabled}">
+                                        <f:selectItems value="#{characterBean.entitiesAsSelectItems}"/>
+                                    </h:selectManyListbox>
+                                </li>
+                            </ol>
+                        </fieldset>
+                    </rich:panelBarItem>
+                    <rich:panelBarItem label="Administrative">
+                        <ui:include src="/pages/common/administrativePanel.xhtml">
+                            <ui:param name="entityType" value="comic"/>
+                            <ui:param name="managedBean" value="#{comicBean}"/>
+                        </ui:include>
+                    </rich:panelBarItem>
+                </rich:panelBar>
+                <ui:include src="/pages/common/formButtons.xhtml">
+                    <ui:param name="entityType" value="comic"/>
+                    <ui:param name="managedBean" value="#{comicBean}"/>
+                </ui:include>
+            </h:form>
+        </ui:composition>
+    </body>
+</html>

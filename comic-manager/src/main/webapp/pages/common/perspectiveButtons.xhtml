@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+                      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:c="http://java.sun.com/jstl/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:a4j="http://richfaces.org/a4j"
+      xmlns:rich="http://richfaces.org/rich">
+    <head/>
+    <body>
+        <ui:composition>
+            <div class="cm-perspective-buttons">
+                <c:if test="#{managedBean.formButtonController.buttonRenderedMap['&lt;&lt;']}">
+                    <a4j:commandButton value="&lt;&lt;"
+                                       actionListener="#{managedBean.processFirstButton}"
+                                       disabled="#{managedBean.formButtonController.buttonDisabledMap['&lt;&lt;']}"
+                                       reRender="cm-#{entityType}-table,cm-#{entityType}-form"/>
+                </c:if>
+                <c:if test="#{managedBean.formButtonController.buttonRenderedMap['&lt;']}">
+                    <a4j:commandButton value="&lt;"
+                                       actionListener="#{managedBean.processPreviousButton}"
+                                       disabled="#{managedBean.formButtonController.buttonDisabledMap['&lt;']}"
+                                       reRender="cm-#{entityType}-table,cm-#{entityType}-form"/>
+                </c:if>
+                <rich:spacer width="10"/>
+                <c:if test="#{managedBean.formButtonController.buttonRenderedMap['edit']}">
+                    <a4j:commandButton value="edit"
+                                       actionListener="#{managedBean.processEditButton}"
+                                       disabled="#{managedBean.formButtonController.buttonDisabledMap['edit']}"
+                                       reRender="cm-#{entityType}-table,cm-#{entityType}-form"/>
+                </c:if>
+                <c:if test="#{managedBean.formButtonController.buttonRenderedMap['duplicate']}">
+                    <a4j:commandButton value="duplicate"
+                                       actionListener="#{managedBean.processDuplicateButton}"
+                                       disabled="#{managedBean.formButtonController.buttonDisabledMap['duplicate']}"
+                                       reRender="cm-#{entityType}-table,cm-#{entityType}-form"/>
+                </c:if>
+                <c:if test="#{managedBean.formButtonController.buttonRenderedMap['delete']}">
+                    <a4j:commandButton value="delete"
+                                       actionListener="#{managedBean.processDeleteButton}"
+                                       disabled="#{managedBean.formButtonController.buttonDisabledMap['delete']}"
+                                       reRender="cm-#{entityType}-table,cm-#{entityType}-form"/>
+                </c:if>
+                <c:if test="#{managedBean.formButtonController.buttonRenderedMap['add']}">
+                    <a4j:commandButton value="add"
+                                       actionListener="#{managedBean.processAddButton}"
+                                       disabled="#{managedBean.formButtonController.buttonDisabledMap['add']}"
+                                       reRender="cm-#{entityType}-table,cm-#{entityType}-form"/>
+                </c:if>
+                <c:if test="#{managedBean.formButtonController.buttonRenderedMap['add range']}">
+                    <a4j:commandButton value="add range"
+                                       actionListener="#{managedBean.processAddManyButton}"
+                                       disabled="#{managedBean.formButtonController.buttonDisabledMap['add range']}"
+                                       reRender="cm-#{entityType}-table,cm-#{entityType}-form"/>
+                </c:if>
+                <rich:spacer width="10"/>
+                <c:if test="#{managedBean.formButtonController.buttonRenderedMap['&gt;']}">
+                    <a4j:commandButton value="&gt;"
+                                       actionListener="#{managedBean.processNextButton}"
+                                       disabled="#{managedBean.formButtonController.buttonDisabledMap['&gt;']}"
+                                       reRender="cm-#{entityType}-table,cm-#{entityType}-form"/>
+                </c:if>
+                <c:if test="#{managedBean.formButtonController.buttonRenderedMap['&gt;&gt;']}">
+                    <a4j:commandButton value="&gt;&gt;"
+                                       actionListener="#{managedBean.processLastButton}"
+                                       disabled="#{managedBean.formButtonController.buttonDisabledMap['&gt;&gt;']}"
+                                       reRender="cm-#{entityType}-table,cm-#{entityType}-form"/>
+                </c:if>
+            </div>
+        </ui:composition>
+    </body>
+</html>

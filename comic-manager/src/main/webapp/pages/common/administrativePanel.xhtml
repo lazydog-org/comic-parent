@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+                      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:c="http://java.sun.com/jstl/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html">
+    <head/>
+    <body>
+        <ui:composition>
+            <c:choose>
+                <c:when test="#{managedBean.formButtonController.formDisabled}">
+                    <h:inputHidden value="#{managedBean.entity}" converter="objectHexConverter"/>
+                </c:when>
+                <c:otherwise>
+                    <h:inputHidden value="#{managedBean.entity.id}"/>
+                    <h:inputHidden value="#{managedBean.entity.createTime}"/>
+                    <h:inputHidden value="#{managedBean.entity.createUser}" converter="objectHexConverter"/>
+                    <h:inputHidden value="#{managedBean.entity.modifyTime}"/>
+                    <h:inputHidden value="#{managedBean.entity.modifyUser}" converter="objectHexConverter"/>
+                    <h:inputHidden value="#{managedBean.oldEntity}" converter="objectHexConverter"/>
+                </c:otherwise>
+            </c:choose>
+            <h:inputHidden value="#{managedBean.perspective}"/>
+            <fieldset>
+                <ol>
+                    <li>
+                        <label for="#{entityType}-id">ID: </label>
+                        <h:inputText id="#{entityType}-id"
+                                     value="#{managedBean.entity.id}"
+                                     disabled="true"/>
+                    </li>
+                    <li>
+                        <label for="#{entityType}-createtime">Create Time: </label>
+                        <h:inputText id="#{entityType}-createtime"
+                                     value="#{managedBean.entity.createTime}"
+                                     disabled="true"/>
+                    </li>
+                    <li>
+                        <label for="#{entityType}-createuser">Create User: </label>
+                        <h:inputText id="#{entityType}-createuser"
+                                     value="#{managedBean.entity.createUser.name}"
+                                     disabled="true"/>
+                    </li>
+                    <li>
+                        <label for="#{entityType}-modifytime">Modify Time: </label>
+                        <h:inputText id="#{entityType}-modifytime"
+                                     value="#{managedBean.entity.modifyTime}"
+                                     disabled="true"/>
+                    </li>
+                    <li>
+                        <label for="#{entityType}-modifyuser">Modify User: </label>
+                        <h:inputText id="#{entityType}-modifyuser"
+                                     value="#{managedBean.entity.modifyUser.name}"
+                                     disabled="true"/>
+                    </li>
+                    <li>
+                        <label for="#{entityType}-perspective">Perspective: </label>
+                        <h:inputText id="#{entityType}-perspective"
+                                     value="#{managedBean.perspective}"
+                                     disabled="true"/>
+                    </li>
+                </ol>
+            </fieldset>
+        </ui:composition>
+    </body>
+</html>
