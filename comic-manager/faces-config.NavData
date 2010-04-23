@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Scene Scope="Project" version="2">
+    <Scope Scope="Faces Configuration Only"/>
+    <Scope Scope="Project">
+        <Node id="pages/comicLibrary/title/subtopicContent.xhtml" x="650" y="300" zoom="true"/>
+        <Node id="pages/home/main.xhtml" x="400" y="300" zoom="true"/>
+        <Node id="pages/comicLibrary/comic/table.xhtml" x="1400" y="150" zoom="true"/>
+        <Node id="pages/comicLibrary/category/table.xhtml" x="650" y="150" zoom="true"/>
+        <Node id="pages/comicLibrary/trait/table.xhtml" x="1400" y="750" zoom="true"/>
+        <Node id="pages/common/formButtons.xhtml" x="150" y="1350" zoom="true"/>
+        <Node id="pages/common/perspectiveButtons.xhtml" x="1150" y="450" zoom="true"/>
+        <Node id="pages/comicLibrary/title/filter.xhtml" x="2400" y="300" zoom="true"/>
+        <Node id="pages/comicLibrary/profession/form.xhtml" x="650" y="1200" zoom="true"/>
+        <Node id="pages/comicLibrary/comictype/form.xhtml" x="650" y="900" zoom="true"/>
+        <Node id="pages/comicLibrary/common/modalPanels.xhtml" x="2150" y="300" zoom="true"/>
+        <Node id="pages/imageLibrary/image/table.xhtml" x="400" y="1200" zoom="true"/>
+        <Node id="pages/common/header.xhtml" x="400" y="1350" zoom="true"/>
+        <Node id="pages/search/imageSearch.xhtml" x="1900" y="450" zoom="true"/>
+        <Node id="pages/comicLibrary/titletype/table.xhtml" x="1400" y="450" zoom="true"/>
+        <Node id="pages/common/filterButtons.xhtml" x="400" y="900" zoom="true"/>
+        <Node id="pages/home/report/locationreport.xhtml" x="2650" y="150" zoom="true"/>
+        <Node id="pages/comicLibrary/character/form.xhtml" x="2400" y="150" zoom="true"/>
+        <Node id="pages/comicLibrary/character/table.xhtml" x="900" y="600" zoom="true"/>
+        <Node id="pages/comicLibrary/location/form.xhtml" x="1150" y="600" zoom="true"/>
+        <Node id="pages/imageLibrary/common/modalPanel.xhtml" x="1400" y="300" zoom="true"/>
+        <Node id="pages/imageLibrary/common/modalPanelForm.xhtml" x="650" y="1050" zoom="true"/>
+        <Node id="pages/comicLibrary/category/form.xhtml" x="900" y="300" zoom="true"/>
+        <Node id="pages/comicLibrary/comic/form.xhtml" x="650" y="450" zoom="true"/>
+        <Node id="pages/comicLibrary/publisher/table.xhtml" x="1650" y="450" zoom="true"/>
+        <Node id="pages/comicLibrary/trait/form.xhtml" x="1650" y="300" zoom="true"/>
+        <Node id="layout/pageLayout.xhtml" x="150" y="150" zoom="true"/>
+        <Node id="index.jsp" x="1150" y="300" zoom="true"/>
+        <Node id="layout/subtopicLayout.xhtml" x="150" y="1050" zoom="true"/>
+        <Node id="pages/imageLibrary/imagetype/table.xhtml" x="2150" y="150" zoom="true"/>
+        <Node id="pages/comicLibrary/comic/filter.xhtml" x="900" y="750" zoom="true"/>
+        <Node id="pages/imageLibrary/common/modalPanels.xhtml" x="150" y="600" zoom="true"/>
+        <Node id="pages/common/login.xhtml" x="150" y="300" zoom="true"/>
+        <Node id="pages/comicLibrary/distribution/form.xhtml" x="150" y="750" zoom="true"/>
+        <Node id="pages/comicLibrary/common/modalPanelForm.xhtml" x="150" y="1500" zoom="true"/>
+        <Node id="pages/imageLibrary/image/form.xhtml" x="900" y="150" zoom="true"/>
+        <Node id="pages/search/titleSearch.xhtml" x="400" y="750" zoom="true"/>
+        <Node id="pages/comicLibrary/publisher/form.xhtml" x="1650" y="150" zoom="true"/>
+        <Node id="pages/imageLibrary/image/subtopicContent.xhtml" x="400" y="150" zoom="true"/>
+        <Node id="pages/comicLibrary/title/table.xhtml" x="1150" y="750" zoom="true"/>
+        <Node id="pages/imageLibrary/image/filter.xhtml" x="1400" y="600" zoom="true"/>
+        <Node id="pages/comicLibrary/profession/table.xhtml" x="900" y="900" zoom="true"/>
+        <Node id="pages/comicLibrary/have/table.xhtml" x="900" y="450" zoom="true"/>
+        <Node id="pages/comicLibrary/comic/subtopicContent.xhtml" x="650" y="750" zoom="true"/>
+        <Node id="pages/home/common/reports.xhtml" x="650" y="600" zoom="true"/>
+        <Node id="pages/common/footer.xhtml" x="150" y="900" zoom="true"/>
+        <Node id="pages/common/main.xhtml" x="400" y="600" zoom="true"/>
+        <Node id="pages/home/report/titlereport.xhtml" x="900" y="1050" zoom="true"/>
+        <Node id="pages/comicLibrary/title/form.xhtml" x="1900" y="150" zoom="true"/>
+        <Node id="pages/comicLibrary/titletype/form.xhtml" x="400" y="450" zoom="true"/>
+        <Node id="pages/comicLibrary/common/modalPanel.xhtml" x="1150" y="150" zoom="true"/>
+        <Node id="pages/comicLibrary/have/form.xhtml" x="1900" y="300" zoom="true"/>
+        <Node id="pages/comicLibrary/location/table.xhtml" x="1150" y="900" zoom="true"/>
+        <Node id="pages/common/administrativePanel.xhtml" x="150" y="450" zoom="true"/>
+        <Node id="pages/imageLibrary/imagetype/form.xhtml" x="400" y="1050" zoom="true"/>
+        <Node id="pages/comicLibrary/comictype/table.xhtml" x="1650" y="600" zoom="true"/>
+        <Node id="pages/comicLibrary/distribution/table.xhtml" x="150" y="1200" zoom="true"/>
+    </Scope>
+    <Scope Scope="All Faces Configurations"/>
+</Scene>

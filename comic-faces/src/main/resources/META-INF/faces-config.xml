@@ -7,29 +7,29 @@
     version="1.2">
 
     <component>
-        <component-type>comic.faces.MonthYearSelectItems</component-type>
-        <component-class>comic.faces.component.MonthYearSelectItems</component-class>
+        <component-type>org.lazydog.comic.faces.MonthYearSelectItems</component-type>
+        <component-class>org.lazydog.comic.faces.component.MonthYearSelectItems</component-class>
     </component>
     <component>
-        <component-type>comic.faces.TogglePanel</component-type>
-        <component-class>comic.faces.component.TogglePanel</component-class>
+        <component-type>org.lazydog.comic.faces.TogglePanel</component-type>
+        <component-class>org.lazydog.comic.faces.component.TogglePanel</component-class>
     </component>
     <component>
-        <component-type>comic.faces.TogglePanelTrigger</component-type>
-        <component-class>comic.faces.component.TogglePanelTrigger</component-class>
+        <component-type>org.lazydog.comic.faces.TogglePanelTrigger</component-type>
+        <component-class>org.lazydog.comic.faces.component.TogglePanelTrigger</component-class>
     </component>
     <render-kit>
         <renderer>
-            <component-family>comic.faces.TogglePanel</component-family>
-            <renderer-type>comic.faces.HtmlTogglePanelRenderer</renderer-type>
-            <renderer-class>comic.faces.renderer.html.HtmlTogglePanelRenderer</renderer-class>
+            <component-family>org.lazydog.comic.faces.TogglePanel</component-family>
+            <renderer-type>org.lazydog.comic.faces.HtmlTogglePanelRenderer</renderer-type>
+            <renderer-class>org.lazydog.comic.faces.renderer.html.HtmlTogglePanelRenderer</renderer-class>
         </renderer>
     </render-kit>
     <render-kit>
         <renderer>
-            <component-family>comic.faces.TogglePanelTrigger</component-family>
-            <renderer-type>comic.faces.HtmlTogglePanelTriggerRenderer</renderer-type>
-            <renderer-class>comic.faces.renderer.html.HtmlTogglePanelTriggerRenderer</renderer-class>
+            <component-family>org.lazydog.comic.faces.TogglePanelTrigger</component-family>
+            <renderer-type>org.lazydog.comic.faces.HtmlTogglePanelTriggerRenderer</renderer-type>
+            <renderer-class>org.lazydog.comic.faces.renderer.html.HtmlTogglePanelTriggerRenderer</renderer-class>
         </renderer>
     </render-kit>
 </faces-config>

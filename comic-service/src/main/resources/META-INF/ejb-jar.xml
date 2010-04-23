@@ -9,13 +9,13 @@
     <display-name>ComicServiceEJB</display-name>
     <interceptors>
         <interceptor>
-            <interceptor-class>comic.service.interceptor.ServiceMonitor</interceptor-class>
+            <interceptor-class>org.lazydog.comic.internal.service.interceptor.ServiceMonitor</interceptor-class>
         </interceptor>
     </interceptors>
     <assembly-descriptor>
         <interceptor-binding>
             <ejb-name>*</ejb-name>
-            <interceptor-class>comic.service.interceptor.ServiceMonitor</interceptor-class>
+            <interceptor-class>org.lazydog.comic.internal.service.interceptor.ServiceMonitor</interceptor-class>
         </interceptor-binding>
     </assembly-descriptor>
 </ejb-jar>

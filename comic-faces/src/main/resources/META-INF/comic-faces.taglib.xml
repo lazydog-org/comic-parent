@@ -20,7 +20,7 @@
     <tag>
         <tag-name>monthYearSelectItems</tag-name>
         <component>
-            <component-type>comic.faces.MonthYearSelectItems</component-type>
+            <component-type>org.lazydog.comic.faces.MonthYearSelectItems</component-type>
         </component>
     </tag>
     <tag>
@@ -30,15 +30,15 @@
     <tag>
         <tag-name>togglePanel</tag-name>
         <component>
-            <component-type>comic.faces.TogglePanel</component-type>
-            <renderer-type>comic.faces.HtmlTogglePanelRenderer</renderer-type>
+            <component-type>org.lazydog.comic.faces.TogglePanel</component-type>
+            <renderer-type>org.lazydog.comic.faces.HtmlTogglePanelRenderer</renderer-type>
         </component>
     </tag>
     <tag>  
         <tag-name>togglePanelTrigger</tag-name>  
         <component>  
-            <component-type>comic.faces.TogglePanelTrigger</component-type>
-            <renderer-type>comic.faces.HtmlTogglePanelTriggerRenderer</renderer-type>
+            <component-type>org.lazydog.comic.faces.TogglePanelTrigger</component-type>
+            <renderer-type>org.lazydog.comic.faces.HtmlTogglePanelTriggerRenderer</renderer-type>
         </component>  
     </tag>
 </facelet-taglib>

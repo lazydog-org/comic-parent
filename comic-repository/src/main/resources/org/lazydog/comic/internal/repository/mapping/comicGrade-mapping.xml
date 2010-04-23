@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<entity-mappings
+    xmlns="http://java.sun.com/xml/ns/persistence/orm"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://java.sun.com/xml/ns/persistence/orm 
+                        http://java.sun.com/xml/ns/persistence/orm_1_0.xsd"
+    version="1.0">
+
+    <package>org.lazydog.comic.model</package>
+    <entity class="ComicGrade" access="FIELD" metadata-complete="true">
+        <table name="comic_grade" schema="comic_collection"/>
+        <named-query name="ComicGrade.findAll">
+            <query>select c from ComicGrade c</query>
+        </named-query>
+        <attributes>
+            <basic name="code">
+                <column name="code" nullable="false"/>
+            </basic>
+            <basic name="name">
+                <column name="name" nullable="false"/>
+            </basic>
+            <basic name="scale">
+                <column name="scale" nullable="false"/>
+            </basic>
+        </attributes>
+    </entity>
+</entity-mappings>

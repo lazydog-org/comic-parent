@@ -19,7 +19,7 @@
                                      actionListener="#{comicBean.processFirstButton}"
                                      disabled="#{titleBean.comicLinkDisabled}">
                     <f:attribute name="subtopic" value="COMIC"/>
-                    <f:actionListener type="comic.manager.actionlistener.ActivateSubtopic"/>
+                    <f:actionListener type="org.lazydog.comic.manager.actionlistener.ActivateSubtopic"/>
                 </a4j:htmlCommandLink>
                 <ui:include src="/pages/common/perspectiveButtons.xhtml">
                     <ui:param name="entityType" value="title"/>

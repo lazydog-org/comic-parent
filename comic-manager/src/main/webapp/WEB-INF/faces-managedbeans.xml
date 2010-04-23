@@ -8,130 +8,108 @@
 
     <managed-bean>
         <managed-bean-name>categoryBean</managed-bean-name>
-        <managed-bean-class>comic.manager.bean.CategoryBean</managed-bean-class>
-        <managed-bean-scope>request</managed-bean-scope>
-    </managed-bean>
+        <managed-bean-class>org.lazydog.comic.manager.bean.CategoryBean</managed-bean-class>
+        <managed-bean-scope>request</managed-bean-scope></managed-bean>
     <managed-bean>
         <managed-bean-name>characterBean</managed-bean-name>
-        <managed-bean-class>comic.manager.bean.CharacterBean</managed-bean-class>
-        <managed-bean-scope>request</managed-bean-scope>
-    </managed-bean>
+        <managed-bean-class>org.lazydog.comic.manager.bean.CharacterBean</managed-bean-class>
+        <managed-bean-scope>request</managed-bean-scope></managed-bean>
     <managed-bean>
         <managed-bean-name>comicBean</managed-bean-name>
-        <managed-bean-class>comic.manager.bean.ComicBean</managed-bean-class>
-        <managed-bean-scope>request</managed-bean-scope>
-    </managed-bean>
+        <managed-bean-class>org.lazydog.comic.manager.bean.ComicBean</managed-bean-class>
+        <managed-bean-scope>request</managed-bean-scope></managed-bean>
     <managed-bean>
         <managed-bean-name>comicGradeBean</managed-bean-name>
-        <managed-bean-class>comic.manager.bean.ComicGradeBean</managed-bean-class>
-        <managed-bean-scope>request</managed-bean-scope>
-    </managed-bean>
+        <managed-bean-class>org.lazydog.comic.manager.bean.ComicGradeBean</managed-bean-class>
+        <managed-bean-scope>request</managed-bean-scope></managed-bean>
     <managed-bean>
         <managed-bean-name>comicTypeBean</managed-bean-name>
-        <managed-bean-class>comic.manager.bean.ComicTypeBean</managed-bean-class>
-        <managed-bean-scope>request</managed-bean-scope>
-    </managed-bean>
+        <managed-bean-class>org.lazydog.comic.manager.bean.ComicTypeBean</managed-bean-class>
+        <managed-bean-scope>request</managed-bean-scope></managed-bean>
     <managed-bean>
         <managed-bean-name>comicTypeFilter</managed-bean-name>
-        <managed-bean-class>comic.manager.helper.bean.ComicTypeFilter</managed-bean-class>
-        <managed-bean-scope>request</managed-bean-scope>
-    </managed-bean>
+        <managed-bean-class>org.lazydog.comic.manager.helper.bean.ComicTypeFilter</managed-bean-class>
+        <managed-bean-scope>request</managed-bean-scope></managed-bean>
     <managed-bean>
         <managed-bean-name>distributionBean</managed-bean-name>
-        <managed-bean-class>comic.manager.bean.DistributionBean</managed-bean-class>
-        <managed-bean-scope>request</managed-bean-scope>
-    </managed-bean>
+        <managed-bean-class>org.lazydog.comic.manager.bean.DistributionBean</managed-bean-class>
+        <managed-bean-scope>request</managed-bean-scope></managed-bean>
     <managed-bean>
         <managed-bean-name>haveBean</managed-bean-name>
-        <managed-bean-class>comic.manager.bean.HaveBean</managed-bean-class>
-        <managed-bean-scope>request</managed-bean-scope>
-    </managed-bean>
+        <managed-bean-class>org.lazydog.comic.manager.bean.HaveBean</managed-bean-class>
+        <managed-bean-scope>request</managed-bean-scope></managed-bean>
     <managed-bean>
         <managed-bean-name>imageBean</managed-bean-name>
-        <managed-bean-class>comic.manager.bean.ImageBean</managed-bean-class>
-        <managed-bean-scope>request</managed-bean-scope>
-    </managed-bean>
+        <managed-bean-class>org.lazydog.comic.manager.bean.ImageBean</managed-bean-class>
+        <managed-bean-scope>request</managed-bean-scope></managed-bean>
     <managed-bean>
         <managed-bean-name>imageSearcher</managed-bean-name>
-        <managed-bean-class>comic.manager.helper.bean.ImageSearcher</managed-bean-class>
-        <managed-bean-scope>request</managed-bean-scope>
-    </managed-bean>
+        <managed-bean-class>org.lazydog.comic.manager.helper.bean.ImageSearcher</managed-bean-class>
+        <managed-bean-scope>request</managed-bean-scope></managed-bean>
     <managed-bean>
         <managed-bean-name>imageTypeBean</managed-bean-name>
-        <managed-bean-class>comic.manager.bean.ImageTypeBean</managed-bean-class>
-        <managed-bean-scope>request</managed-bean-scope>
-    </managed-bean>
+        <managed-bean-class>org.lazydog.comic.manager.bean.ImageTypeBean</managed-bean-class>
+        <managed-bean-scope>request</managed-bean-scope></managed-bean>
     <managed-bean>
         <managed-bean-name>imageTypeFilter</managed-bean-name>
-        <managed-bean-class>comic.manager.helper.bean.ImageTypeFilter</managed-bean-class>
-        <managed-bean-scope>request</managed-bean-scope>
-    </managed-bean>
+        <managed-bean-class>org.lazydog.comic.manager.helper.bean.ImageTypeFilter</managed-bean-class>
+        <managed-bean-scope>request</managed-bean-scope></managed-bean>
     <managed-bean>
         <managed-bean-name>imprintBean</managed-bean-name>
-        <managed-bean-class>comic.manager.bean.Imprint</managed-bean-class>
-        <managed-bean-scope>request</managed-bean-scope>
-    </managed-bean>
+        <managed-bean-class>org.lazydog.comic.manager.bean.Imprint</managed-bean-class>
+        <managed-bean-scope>request</managed-bean-scope></managed-bean>
     <managed-bean>
         <managed-bean-name>locationBean</managed-bean-name>
-        <managed-bean-class>comic.manager.bean.LocationBean</managed-bean-class>
-        <managed-bean-scope>request</managed-bean-scope>
-    </managed-bean>
+        <managed-bean-class>org.lazydog.comic.manager.bean.LocationBean</managed-bean-class>
+        <managed-bean-scope>request</managed-bean-scope></managed-bean>
     <managed-bean>
         <managed-bean-name>locationReportBean</managed-bean-name>
-        <managed-bean-class>comic.manager.report.bean.LocationReportBean</managed-bean-class>
-        <managed-bean-scope>request</managed-bean-scope>
-    </managed-bean>
+        <managed-bean-class>org.lazydog.comic.manager.report.bean.LocationReportBean</managed-bean-class>
+        <managed-bean-scope>request</managed-bean-scope></managed-bean>
     <managed-bean>
         <managed-bean-name>navigator</managed-bean-name>
-        <managed-bean-class>comic.manager.helper.bean.Navigator</managed-bean-class>
-        <managed-bean-scope>request</managed-bean-scope>
-    </managed-bean>
+        <managed-bean-class>org.lazydog.comic.manager.helper.bean.Navigator</managed-bean-class>
+        <managed-bean-scope>request</managed-bean-scope></managed-bean>
     <managed-bean>
         <managed-bean-name>professionBean</managed-bean-name>
-        <managed-bean-class>comic.manager.bean.ProfessionBean</managed-bean-class>
-        <managed-bean-scope>request</managed-bean-scope>
-    </managed-bean>
+        <managed-bean-class>org.lazydog.comic.manager.bean.ProfessionBean</managed-bean-class>
+        <managed-bean-scope>request</managed-bean-scope></managed-bean>
     <managed-bean>
         <managed-bean-name>publisherBean</managed-bean-name>
-        <managed-bean-class>comic.manager.bean.PublisherBean</managed-bean-class>
-        <managed-bean-scope>request</managed-bean-scope>
-    </managed-bean>
+        <managed-bean-class>org.lazydog.comic.manager.bean.PublisherBean</managed-bean-class>
+        <managed-bean-scope>request</managed-bean-scope></managed-bean>
     <managed-bean>
         <managed-bean-name>titleBean</managed-bean-name>
-        <managed-bean-class>comic.manager.bean.TitleBean</managed-bean-class>
-        <managed-bean-scope>request</managed-bean-scope>
-    </managed-bean>
+        <managed-bean-class>org.lazydog.comic.manager.bean.TitleBean</managed-bean-class>
+        <managed-bean-scope>request</managed-bean-scope></managed-bean>
     <managed-bean>
         <managed-bean-name>titleReportBean</managed-bean-name>
-        <managed-bean-class>comic.manager.report.bean.TitleReportBean</managed-bean-class>
-        <managed-bean-scope>request</managed-bean-scope>
-    </managed-bean>
+        <managed-bean-class>org.lazydog.comic.manager.report.bean.TitleReportBean</managed-bean-class>
+        <managed-bean-scope>request</managed-bean-scope></managed-bean>
     <managed-bean>
         <managed-bean-name>titleSearcher</managed-bean-name>
-        <managed-bean-class>comic.manager.helper.bean.TitleSearcher</managed-bean-class>
-        <managed-bean-scope>request</managed-bean-scope>
-    </managed-bean>
+        <managed-bean-class>org.lazydog.comic.manager.helper.bean.TitleSearcher</managed-bean-class>
+        <managed-bean-scope>request</managed-bean-scope></managed-bean>
     <managed-bean>
         <managed-bean-name>titleTypeBean</managed-bean-name>
-        <managed-bean-class>comic.manager.bean.TitleTypeBean</managed-bean-class>
-        <managed-bean-scope>request</managed-bean-scope>
-    </managed-bean>
+        <managed-bean-class>org.lazydog.comic.manager.bean.TitleTypeBean</managed-bean-class>
+        <managed-bean-scope>request</managed-bean-scope></managed-bean>
     <managed-bean>
         <managed-bean-name>titleTypeFilter</managed-bean-name>
-        <managed-bean-class>comic.manager.helper.bean.TitleTypeFilter</managed-bean-class>
-        <managed-bean-scope>request</managed-bean-scope>
-    </managed-bean>
+        <managed-bean-class>org.lazydog.comic.manager.helper.bean.TitleTypeFilter</managed-bean-class>
+        <managed-bean-scope>request</managed-bean-scope></managed-bean>
     <managed-bean>
         <managed-bean-name>traitBean</managed-bean-name>
-        <managed-bean-class>comic.manager.bean.TraitBean</managed-bean-class>
-        <managed-bean-scope>request</managed-bean-scope>
-    </managed-bean>
+        <managed-bean-class>org.lazydog.comic.manager.bean.TraitBean</managed-bean-class>
+        <managed-bean-scope>request</managed-bean-scope></managed-bean>
     <managed-bean>
         <managed-bean-name>userBean</managed-bean-name>
-        <managed-bean-class>comic.manager.bean.UserBean</managed-bean-class>
-        <managed-bean-scope>request</managed-bean-scope>
-    </managed-bean>
+        <managed-bean-class>org.lazydog.comic.manager.bean.UserBean</managed-bean-class>
+        <managed-bean-scope>request</managed-bean-scope></managed-bean>
 </faces-config>
+
+
+
 
 
 

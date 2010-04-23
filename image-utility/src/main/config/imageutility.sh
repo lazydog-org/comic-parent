@@ -16,6 +16,6 @@ CLASSPATH=$CLASSPATH:$LIBDIR/hibernate-validator.jar
 CLASSPATH=$CLASSPATH:$LIBDIR/javaee.jar
 CLASSPATH=$CLASSPATH:$LIBDIR/slf4j-api.jar
 CLASSPATH=$CLASSPATH:$LIBDIR/validation-api.jar
-MAINCLASS=comic.image.utility.ImageUtility
+MAINCLASS=org.lazydog.comic.image.utility.ImageUtility
 
 $JAVA_HOME/bin/java -classpath $CLASSPATH $MAINCLASS $ARGS

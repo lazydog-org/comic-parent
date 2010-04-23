@@ -39,7 +39,7 @@
                 <a4j:htmlCommandLink value="Return to Title Selection"
                                      actionListener="#{titleBean.processFirstButton}">
                     <f:attribute name="subtopic" value="TITLE"/>
-                    <f:actionListener type="comic.manager.actionlistener.ActivateSubtopic"/>
+                    <f:actionListener type="org.lazydog.comic.manager.actionlistener.ActivateSubtopic"/>
                 </a4j:htmlCommandLink>
                 <ui:include src="/pages/common/perspectiveButtons.xhtml">
                     <ui:param name="entityType" value="comic"/>

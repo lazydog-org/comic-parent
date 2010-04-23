@@ -21,21 +21,21 @@
                 <rich:tabPanel id="cm-tab-panel" selectedTab="#{navigator.topic}" switchType="server">
                     <rich:tab name="HOME" label="Home">
                         <f:attribute name="topic" value="HOME"/>
-                        <f:actionListener type="comic.manager.actionlistener.ActivateTopic"/>
+                        <f:actionListener type="org.lazydog.comic.manager.actionlistener.ActivateTopic"/>
                         <c:if test="#{navigator.topic == 'HOME'}">
                             <ui:include src="#{navigator.subtopicContent}"/>
                         </c:if>
                     </rich:tab>
                     <rich:tab name="COMIC_LIBRARY" label="Comic Library" actionListener="#{titleBean.processFirstButton}">
                         <f:attribute name="topic" value="COMIC_LIBRARY"/>
-                        <f:actionListener type="comic.manager.actionlistener.ActivateTopic"/>
+                        <f:actionListener type="org.lazydog.comic.manager.actionlistener.ActivateTopic"/>
                         <c:if test="#{navigator.topic == 'COMIC_LIBRARY'}">
                             <ui:include src="#{navigator.subtopicContent}"/>
                         </c:if>
                     </rich:tab>
                     <rich:tab name="IMAGE_LIBRARY" label="Image Library" actionListener="#{imageBean.processFirstButton}">
                         <f:attribute name="topic" value="IMAGE_LIBRARY"/>
-                        <f:actionListener type="comic.manager.actionlistener.ActivateTopic"/>
+                        <f:actionListener type="org.lazydog.comic.manager.actionlistener.ActivateTopic"/>
                         <c:if test="#{navigator.topic == 'IMAGE_LIBRARY'}">
                             <ui:include src="#{navigator.subtopicContent}"/>
                         </c:if>
