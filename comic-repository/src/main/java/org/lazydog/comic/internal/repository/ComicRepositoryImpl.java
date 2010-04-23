@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.Remote;
 import javax.ejb.Stateless;
+import javax.interceptor.Interceptors;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
@@ -11,6 +12,7 @@ import javax.persistence.Query;
 import org.lazydog.comic.criteria.Criteria;
 import org.lazydog.comic.model.Entity;
 import org.lazydog.comic.spi.repository.ComicRepository;
+import org.lazydog.utilities.ejbmonitor.interceptor.EJBMonitor;
 
 
 /**
@@ -21,6 +23,7 @@ import org.lazydog.comic.spi.repository.ComicRepository;
  */
 @Stateless(mappedName="ejb/ComicRepository")
 @Remote(ComicRepository.class)
+@Interceptors(EJBMonitor.class)
 public class ComicRepositoryImpl
        implements ComicRepository {
 

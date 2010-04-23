@@ -6,11 +6,13 @@ import javax.ejb.EJB;
 import javax.ejb.EJBException;
 import javax.ejb.Remote;
 import javax.ejb.Stateless;
+import javax.interceptor.Interceptors;
 import org.lazydog.comic.criteria.Criteria;
 import org.lazydog.comic.model.Entity;
 import org.lazydog.comic.model.User;
 import org.lazydog.comic.service.ComicService;
 import org.lazydog.comic.spi.repository.ComicRepository;
+import org.lazydog.utilities.ejbmonitor.interceptor.EJBMonitor;
 
 
 /**
@@ -20,6 +22,7 @@ import org.lazydog.comic.spi.repository.ComicRepository;
  */
 @Stateless(mappedName="ejb/ComicService")
 @Remote(ComicService.class)
+@Interceptors(EJBMonitor.class)
 public class ComicServiceImpl
        implements ComicService {
 
