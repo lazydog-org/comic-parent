@@ -2,6 +2,7 @@ package org.lazydog.comic.internal.service;
 
 import java.util.Date;
 import java.util.List;
+import javax.ejb.EJB;
 import javax.ejb.EJBException;
 import javax.ejb.Remote;
 import javax.ejb.Stateless;
@@ -10,8 +11,6 @@ import org.lazydog.comic.model.Entity;
 import org.lazydog.comic.model.User;
 import org.lazydog.comic.service.ComicService;
 import org.lazydog.comic.spi.repository.ComicRepository;
-import org.lazydog.comic.spi.repository.ComicRepositoryFactory;
-import org.lazydog.comic.spi.repository.ComicRepositoryFactoryException;
 
 
 /**
@@ -24,6 +23,8 @@ import org.lazydog.comic.spi.repository.ComicRepositoryFactoryException;
 public class ComicServiceImpl
        implements ComicService {
 
+    private ComicRepository comicRepository;
+
     /**
      * Find the entity.
      *
@@ -35,7 +36,7 @@ public class ComicServiceImpl
     @Override
     public <T extends Entity<T>> T find(Class<T> entityClass,
                                         Integer id) {
-        return this.getComicRepository().find(entityClass, id);
+        return this.comicRepository.find(entityClass, id);
     }
 
     /**
@@ -47,7 +48,7 @@ public class ComicServiceImpl
      */
     @Override
     public <T extends Entity<T>> T find(Criteria<T> criteria) {
-        return this.getComicRepository().find(criteria);
+        return this.comicRepository.find(criteria);
     }
 
     /**
@@ -157,7 +158,7 @@ public class ComicServiceImpl
      */
     @Override
     public <T extends Entity<T>> List<T> findList(Class<T> entityClass) {
-        return this.getComicRepository().findList(entityClass);
+        return this.comicRepository.findList(entityClass);
     }
 
     /**
@@ -169,7 +170,7 @@ public class ComicServiceImpl
      */
     @Override
     public <T extends Entity<T>> List<T> findList(Criteria<T> criteria) {
-        return this.getComicRepository().findList(criteria);
+        return this.comicRepository.findList(criteria);
     }
 
     /**
@@ -318,37 +319,6 @@ public class ComicServiceImpl
     }
 
     /**
-     * Get the comic repository.
-     *
-     * @return  the comic repository.
-     */
-    private ComicRepository getComicRepository() {
-
-        // Declare.
-        ComicRepository comicRepository;
-
-        // Initialize.
-        comicRepository = null;
-
-        try {
-
-            // Declare.
-            ComicRepositoryFactory comicRepositoryFactory;
-
-            // Get the comic repository factory.
-            comicRepositoryFactory = ComicRepositoryFactory.instance();
-
-            // Get the comic repository.
-            comicRepository = comicRepositoryFactory.createComicRepository();
-        }
-        catch(ComicRepositoryFactoryException e) {
-            // Ignore.
-        }
-
-        return comicRepository;
-    }
-
-    /**
      * Prepare the entity for saving.
      *
      * @param  entity       the entity.
@@ -392,7 +362,7 @@ public class ComicServiceImpl
     @Override
     public <T extends Entity<T>> void remove(Class<T> entityClass,
                                              Integer id) {
-        this.getComicRepository().remove(entityClass, id);
+        this.comicRepository.remove(entityClass, id);
     }
     
     /**
@@ -411,7 +381,7 @@ public class ComicServiceImpl
         entity = this.prepEntityForSave(entity, user);
 
         // Save the entity.
-        return this.getComicRepository().persist(entity);
+        return this.comicRepository.persist(entity);
     }
 
     /**
@@ -434,6 +404,17 @@ public class ComicServiceImpl
         }
 
         // Save the entities.
-        return this.getComicRepository().persistList(entities);
+        return this.comicRepository.persistList(entities);
     }
+
+    /**
+     * Set the comic repository.
+     *
+     * @param  comicRepository  the comic repository.
+     */
+    @EJB(mappedName="ejb/ComicRepository", beanInterface=ComicRepository.class)
+    protected void setComicRepository(ComicRepository comicRepository) {
+        this.comicRepository = comicRepository;
+    }
+
 }
