@@ -86,7 +86,7 @@ public class LocationBean
         
         // Loop through the entities.
         for(Location entity : this.getEntities()) {
-System.out.println(entity);
+
             // Add the entity to the select items.
             entitiesAsSelectItems.add(new SelectItem(
                 entity, entity.getName()));
