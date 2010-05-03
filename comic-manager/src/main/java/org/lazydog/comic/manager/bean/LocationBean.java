@@ -42,7 +42,7 @@ public class LocationBean
 
         try {
 
-            // Check if the comic and user session values exist.
+            // Check if the user session values exist.
             if (SessionUtility.valueExists(SessionKey.USER)) {
 
                 // Declare.
@@ -58,7 +58,7 @@ public class LocationBean
                 criteria.add(ComparisonOperation.eq(
                         "createUser",
                         SessionUtility.getValue(SessionKey.USER, User.class)));
-                criteria.addOrder(Order.asc("name"));
+                criteria.addOrder(Order.desc("name"));
             }
         }
         catch(Exception e) {
@@ -86,7 +86,7 @@ public class LocationBean
         
         // Loop through the entities.
         for(Location entity : this.getEntities()) {
-
+System.out.println(entity);
             // Add the entity to the select items.
             entitiesAsSelectItems.add(new SelectItem(
                 entity, entity.getName()));
