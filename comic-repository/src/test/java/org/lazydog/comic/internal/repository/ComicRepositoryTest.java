@@ -3,14 +3,10 @@ package org.lazydog.comic.internal.repository;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import javax.naming.Context;
+import javax.naming.InitialContext;
 import org.lazydog.comic.criteria.Criteria;
 import org.lazydog.comic.criteria.CriteriaFactory;
-import org.lazydog.comic.criteria.criterion.ComparisonOperation;
-import org.lazydog.comic.criteria.criterion.ComparisonOperator;
-import org.lazydog.comic.criteria.criterion.LogicalOperation;
-import org.lazydog.comic.criteria.criterion.LogicalOperator;
-import org.lazydog.comic.criteria.criterion.Order;
-import org.lazydog.comic.criteria.criterion.OrderDirection;
 import org.lazydog.comic.model.Category;
 import org.lazydog.comic.model.Character;
 import org.lazydog.comic.model.Comic;
@@ -33,92 +29,89 @@ import org.lazydog.comic.model.User;
 import org.lazydog.comic.model.UserPreference;
 import org.lazydog.comic.model.Want;
 import org.lazydog.comic.spi.repository.ComicRepository;
-import org.lazydog.comic.spi.repository.ComicRepositoryFactory;
+import static org.junit.Assert.*;
+import org.junit.Before;
+import org.junit.Ignore;
+import org.junit.Test;
 
 
-public class ComicRepositoryTester {
+/**
+ * Unit test for ComicRepository class.
+ *
+ * @author  Ron Rickard
+ */
+public class ComicRepositoryTest {
 
-    Criteria<Category> categoryCriteria;
-    Criteria<Character> characterCriteria;
-    Criteria<Comic> comicCriteria;
-    Criteria<ComicGrade> comicGradeCriteria;
-    Criteria<ComicType> comicTypeCriteria;
-    Criteria<Creator> creatorCriteria;
-    Criteria<Distribution> distributionCriteria;
-    Criteria<Have> haveCriteria;
-    Criteria<Image> imageCriteria;
-    Criteria<ImageType> imageTypeCriteria;
-    Criteria<Imprint> imprintCriteria;
-    Criteria<Location> locationCriteria;
-    Criteria<Person> personCriteria;
-    Criteria<Profession> professionCriteria;
-    Criteria<Publisher> publisherCriteria;
-    Criteria<Title> titleCriteria;
-    Criteria<TitleType> titleTypeCriteria;
-    Criteria<Trait> traitCriteria;
-    Criteria<User> userCriteria;
-    Criteria<Want> wantCriteria;
-    Criteria<UserPreference> userPreferenceCriteria;
-    ComicRepository comicRepository;
-    SimpleDateFormat sdf;
+    private Criteria<Category> categoryCriteria;
+    private Criteria<Character> characterCriteria;
+    private Criteria<Comic> comicCriteria;
+    private Criteria<ComicGrade> comicGradeCriteria;
+    private Criteria<ComicType> comicTypeCriteria;
+    private Criteria<Creator> creatorCriteria;
+    private Criteria<Distribution> distributionCriteria;
+    private Criteria<Have> haveCriteria;
+    private Criteria<Image> imageCriteria;
+    private Criteria<ImageType> imageTypeCriteria;
+    private Criteria<Imprint> imprintCriteria;
+    private Criteria<Location> locationCriteria;
+    private Criteria<Person> personCriteria;
+    private Criteria<Profession> professionCriteria;
+    private Criteria<Publisher> publisherCriteria;
+    private Criteria<Title> titleCriteria;
+    private Criteria<TitleType> titleTypeCriteria;
+    private Criteria<Trait> traitCriteria;
+    private Criteria<User> userCriteria;
+    private Criteria<Want> wantCriteria;
+    private Criteria<UserPreference> userPreferenceCriteria;
+    private ComicRepository comicRepository;
+    private SimpleDateFormat sdf;
 
-    public ComicRepositoryTester() {
-        
-        try {
-            
-            // Declare.
-            CriteriaFactory criteriaFactory;
-            ComicRepositoryFactory comicRepositoryFactory;
+    @Before
+    public void initialize() throws Exception {
 
-            // Get the factories.
-            criteriaFactory = CriteriaFactory.instance();
-            comicRepositoryFactory = ComicRepositoryFactory.instance();
+        // Declare.
+        Context context;
+        CriteriaFactory criteriaFactory;
 
-            // Initialize the criteria.
-            categoryCriteria = criteriaFactory.createCriteria(Category.class);
-            characterCriteria = criteriaFactory.createCriteria(Character.class);
-            comicCriteria = criteriaFactory.createCriteria(Comic.class);
-            comicGradeCriteria = criteriaFactory.createCriteria(ComicGrade.class);
-            comicTypeCriteria = criteriaFactory.createCriteria(ComicType.class);
-            creatorCriteria = criteriaFactory.createCriteria(Creator.class);
-            distributionCriteria = criteriaFactory.createCriteria(Distribution.class);
-            haveCriteria = criteriaFactory.createCriteria(Have.class);
-            imageCriteria = criteriaFactory.createCriteria(Image.class);
-            imageTypeCriteria = criteriaFactory.createCriteria(ImageType.class);
-            imprintCriteria = criteriaFactory.createCriteria(Imprint.class);
-            locationCriteria = criteriaFactory.createCriteria(Location.class);
-            personCriteria = criteriaFactory.createCriteria(Person.class);
-            professionCriteria = criteriaFactory.createCriteria(Profession.class);
-            publisherCriteria = criteriaFactory.createCriteria(Publisher.class);
-            titleCriteria = criteriaFactory.createCriteria(Title.class);
-            titleTypeCriteria = criteriaFactory.createCriteria(TitleType.class);
-            traitCriteria = criteriaFactory.createCriteria(Trait.class);
-            userCriteria = criteriaFactory.createCriteria(User.class);
-            userPreferenceCriteria = criteriaFactory.createCriteria(UserPreference.class);
-            wantCriteria = criteriaFactory.createCriteria(Want.class);
+        // Initialize the context.
+        context = new InitialContext();
 
-            // Create the comic repository.
-            comicRepository = comicRepositoryFactory.createComicRepository();
+        // Get the comic repository.
+        comicRepository = (ComicRepository)context.lookup("ejb/ComicRepository");
 
-            sdf = new SimpleDateFormat("MM/DD/yyyy HH:mm:ss");
-        }
-        catch(Exception e) {
-            System.err.println("Unable to get the comic repository.");
-            System.err.println(e);
-        }
+        // Get the criteria factory.
+        criteriaFactory = CriteriaFactory.instance();
+
+        // Initialize the criteria.
+        categoryCriteria = criteriaFactory.createCriteria(Category.class);
+        characterCriteria = criteriaFactory.createCriteria(Character.class);
+        comicCriteria = criteriaFactory.createCriteria(Comic.class);
+        comicGradeCriteria = criteriaFactory.createCriteria(ComicGrade.class);
+        comicTypeCriteria = criteriaFactory.createCriteria(ComicType.class);
+        creatorCriteria = criteriaFactory.createCriteria(Creator.class);
+        distributionCriteria = criteriaFactory.createCriteria(Distribution.class);
+        haveCriteria = criteriaFactory.createCriteria(Have.class);
+        imageCriteria = criteriaFactory.createCriteria(Image.class);
+        imageTypeCriteria = criteriaFactory.createCriteria(ImageType.class);
+        imprintCriteria = criteriaFactory.createCriteria(Imprint.class);
+        locationCriteria = criteriaFactory.createCriteria(Location.class);
+        personCriteria = criteriaFactory.createCriteria(Person.class);
+        professionCriteria = criteriaFactory.createCriteria(Profession.class);
+        publisherCriteria = criteriaFactory.createCriteria(Publisher.class);
+        titleCriteria = criteriaFactory.createCriteria(Title.class);
+        titleTypeCriteria = criteriaFactory.createCriteria(TitleType.class);
+        traitCriteria = criteriaFactory.createCriteria(Trait.class);
+        userCriteria = criteriaFactory.createCriteria(User.class);
+        userPreferenceCriteria = criteriaFactory.createCriteria(UserPreference.class);
+        wantCriteria = criteriaFactory.createCriteria(Want.class);
+
+        // Initialize the data format.
+        sdf = new SimpleDateFormat("MM/DD/yyyy HH:mm:ss");
     }
 
-    public static void main(String[] args) {
-
-        ComicRepositoryTester tester = new ComicRepositoryTester();
-
-        tester.testFindList();
-        //tester.testFindListByCriteria();
-        //tester.testFindTitleListByCriteria();
-        
-    }
-
-    public void testFindList() {
+    @Ignore
+    @Test
+    public void findList() throws Exception {
 
         System.out.println(sdf.format(new Date()) + " Fetching all objects ...");
 
@@ -168,8 +161,10 @@ public class ComicRepositoryTester {
 
         System.out.println(sdf.format(new Date()) + " Finished.");
     }
-    
-    public void testFindListByCriteria() {
+
+    @Ignore
+    @Test
+    public void findListByCriteria() throws Exception {
 
         System.out.println(sdf.format(new Date()) + " Fetching all objects ...");
 
@@ -218,68 +213,5 @@ public class ComicRepositoryTester {
         System.out.println("number of wants = " + wants.size());
 
         System.out.println(sdf.format(new Date()) + " Finished.");
-    }
-
-    public void testFindTitleListByCriteria() {
-
-        try {
-
-            System.out.println(sdf.format(new Date()) + " Fetching titles ...");
-
-            Publisher publisher = comicRepository.find(Publisher.class, 5);
-            titleCriteria.add(ComparisonOperation.memberOf("publishers", publisher));
-            TitleType type = comicRepository.find(TitleType.class, 1);
-            System.out.println(type);
-            titleCriteria.add(LogicalOperation.and(ComparisonOperation.eq("type", type)));
-            titleCriteria.addOrder(Order.asc("name"));
-            System.out.println(titleCriteria.getQlString());
-            
-            List<Title> titles = comicRepository.findList(titleCriteria);
-
-            System.out.println("number of titles = " + titles.size());
-            for (Title title: titles) {
-                System.out.println(title);
-            }
-            
-            System.out.println(sdf.format(new Date()) + " Finished.");
-        }
-        catch(Exception e) {
-            System.err.println("Unable to find title list by query criteria.");
-            System.err.println(e);
-        }
-    }
-
-    public void testComicPersist() {
-
-        Distribution distribution = comicRepository.find(Distribution.class, 1);
-        Title title = comicRepository.find(Title.class, 1);
-        ComicType type = comicRepository.find(ComicType.class, 1);
-
-        // Create comic.
-        Comic comic = new Comic();
-        comic.setDistribution(distribution);
-        comic.setNumber(9999);
-        comic.setPrint(1);
-        comic.setTitle(title);
-        comic.setType(type);
-        comic.setVariant("Z");
-
-        // Persist the comic.
-        comicRepository.persist(comic);
-    }
-
-    public void testImagePersist() {
-
-        // Create image.
-        Image image = new Image();
-        image.setFileName("test2.jpg");
-        image.setLabel("Test");
-        ImageType type = comicRepository.find(ImageType.class, 6);
-        image.setType(type);
-        image.setCreateTime(new Date());
-        image.setModifyTime(new Date());
-
-        // Persist image.
-        comicRepository.persist(image);
     }
 }
