@@ -3,6 +3,7 @@ package org.lazydog.comic.internal.repository;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import javax.ejb.embeddable.EJBContainer;
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import org.lazydog.comic.criteria.Criteria;
@@ -29,8 +30,8 @@ import org.lazydog.comic.model.User;
 import org.lazydog.comic.model.UserPreference;
 import org.lazydog.comic.model.Want;
 import org.lazydog.comic.spi.repository.ComicRepository;
-import static org.junit.Assert.*;
-import org.junit.Before;
+import org.junit.AfterClass;
+import org.junit.BeforeClass;
 import org.junit.Ignore;
 import org.junit.Test;
 
@@ -42,42 +43,49 @@ import org.junit.Test;
  */
 public class ComicRepositoryTest {
 
-    private Criteria<Category> categoryCriteria;
-    private Criteria<Character> characterCriteria;
-    private Criteria<Comic> comicCriteria;
-    private Criteria<ComicGrade> comicGradeCriteria;
-    private Criteria<ComicType> comicTypeCriteria;
-    private Criteria<Creator> creatorCriteria;
-    private Criteria<Distribution> distributionCriteria;
-    private Criteria<Have> haveCriteria;
-    private Criteria<Image> imageCriteria;
-    private Criteria<ImageType> imageTypeCriteria;
-    private Criteria<Imprint> imprintCriteria;
-    private Criteria<Location> locationCriteria;
-    private Criteria<Person> personCriteria;
-    private Criteria<Profession> professionCriteria;
-    private Criteria<Publisher> publisherCriteria;
-    private Criteria<Title> titleCriteria;
-    private Criteria<TitleType> titleTypeCriteria;
-    private Criteria<Trait> traitCriteria;
-    private Criteria<User> userCriteria;
-    private Criteria<Want> wantCriteria;
-    private Criteria<UserPreference> userPreferenceCriteria;
-    private ComicRepository comicRepository;
-    private SimpleDateFormat sdf;
+    private static Criteria<Category> categoryCriteria;
+    private static Criteria<Character> characterCriteria;
+    private static Criteria<Comic> comicCriteria;
+    private static Criteria<ComicGrade> comicGradeCriteria;
+    private static Criteria<ComicType> comicTypeCriteria;
+    private static Criteria<Creator> creatorCriteria;
+    private static Criteria<Distribution> distributionCriteria;
+    private static Criteria<Have> haveCriteria;
+    private static Criteria<Image> imageCriteria;
+    private static Criteria<ImageType> imageTypeCriteria;
+    private static Criteria<Imprint> imprintCriteria;
+    private static Criteria<Location> locationCriteria;
+    private static Criteria<Person> personCriteria;
+    private static Criteria<Profession> professionCriteria;
+    private static Criteria<Publisher> publisherCriteria;
+    private static Criteria<Title> titleCriteria;
+    private static Criteria<TitleType> titleTypeCriteria;
+    private static Criteria<Trait> traitCriteria;
+    private static Criteria<User> userCriteria;
+    private static Criteria<Want> wantCriteria;
+    private static Criteria<UserPreference> userPreferenceCriteria;
+    private static ComicRepository comicRepository;
+    private static EJBContainer ejbContainer;
+    private static SimpleDateFormat sdf;
 
-    @Before
-    public void initialize() throws Exception {
+    @BeforeClass
+    public static void initialize() throws Exception {
 
         // Declare.
-        Context context;
+        //Context context;
         CriteriaFactory criteriaFactory;
 
         // Initialize the context.
-        context = new InitialContext();
+        //context = new InitialContext();
+
+        // Create the EJB container.
+        ejbContainer = EJBContainer.createEJBContainer();
 
         // Get the comic repository.
-        comicRepository = (ComicRepository)context.lookup("ejb/ComicRepository");
+        comicRepository = (ComicRepository)ejbContainer.getContext().lookup("ejb/ComicRepository");
+
+        
+        //comicRepository = (ComicRepository)context.lookup("ejb/ComicRepository");
 
         // Get the criteria factory.
         criteriaFactory = CriteriaFactory.instance();
@@ -109,7 +117,11 @@ public class ComicRepositoryTest {
         sdf = new SimpleDateFormat("MM/DD/yyyy HH:mm:ss");
     }
 
-    @Ignore
+    @AfterClass
+    public static void destroy() {
+        ejbContainer.close();
+    }
+
     @Test
     public void findList() throws Exception {
 
@@ -162,7 +174,6 @@ public class ComicRepositoryTest {
         System.out.println(sdf.format(new Date()) + " Finished.");
     }
 
-    @Ignore
     @Test
     public void findListByCriteria() throws Exception {
 
