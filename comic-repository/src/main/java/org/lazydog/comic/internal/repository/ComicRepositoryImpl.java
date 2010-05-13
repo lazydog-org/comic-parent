@@ -33,7 +33,8 @@ public class ComicRepositoryImpl
     /**
      * Find the entity.
      *
-     * @param  id  the ID.
+     * @param  entityClass  the entity class.
+     * @param  id           the ID.
      *
      * @return  the entity.
      */
@@ -88,6 +89,8 @@ public class ComicRepositoryImpl
 
     /**
      * Find the list of entities.
+     *
+     * @param  entityClass  the entity class.
      *
      * @return  the list of entities.
      */
@@ -210,7 +213,8 @@ public class ComicRepositoryImpl
     /**
      * Remove the entity.
      *
-     * @param  id  the ID.
+     * @param  entityClass  the entity class.
+     * @param  id           the ID.
      */
     @Override
     public <T extends Entity<T>> void remove(Class<T> entityClass, Integer id) {
