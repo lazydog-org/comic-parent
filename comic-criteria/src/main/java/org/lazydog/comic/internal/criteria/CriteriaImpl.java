@@ -20,6 +20,7 @@ public class CriteriaImpl<T extends Entity<T>>
                   Serializable {
 
     private String entityAlias;
+    private Class<T> entityClass;
     private List<Criterion> orders;
     private StringBuffer ordersStringBuffer;
     private StringBuffer qlStringBuffer;
@@ -36,6 +37,9 @@ public class CriteriaImpl<T extends Entity<T>>
         // Declare.
         String entityName;
 
+        // Get the entity class.
+        this.entityClass = entityClass;
+        
         // Get the entity name.
         entityName = entityClass.getSimpleName();
         
@@ -140,6 +144,15 @@ public class CriteriaImpl<T extends Entity<T>>
         }
 
         return this;
+    }
+
+    /**
+     * Get the entity class.
+     * 
+     * @return  the entity class.
+     */
+    public Class<T> getEntityClass() {
+        return this.entityClass;
     }
 
     /**
