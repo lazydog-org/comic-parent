@@ -151,6 +151,7 @@ public class CriteriaImpl<T extends Entity<T>>
      * 
      * @return  the entity class.
      */
+    @Override
     public Class<T> getEntityClass() {
         return this.entityClass;
     }
