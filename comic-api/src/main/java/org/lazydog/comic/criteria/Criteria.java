@@ -21,7 +21,9 @@ public interface Criteria<T extends Entity<T>> {
 
     public Criteria<T> addOrders(List<Criterion> criterion);
 
-    public abstract Map<String, Object> getParameters();
+    public Class<T> getEntityClass();
 
-    public abstract String getQlString();
+    public Map<String, Object> getParameters();
+
+    public String getQlString();
 }
