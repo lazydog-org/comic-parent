@@ -122,6 +122,7 @@ public class ComicRepositoryTest {
         ejbContainer.close();
     }
 
+    @Ignore
     @Test
     public void findList() throws Exception {
 
