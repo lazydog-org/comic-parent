@@ -1,0 +1,7 @@
+insert into comic_collection.distribution
+		(id,value,create_time,create_user_id)
+	 values (null,'Direct',now(),1),
+	 	(null,'Newsstand',now(),1),
+		(null,'Mail Away',now(),1),
+		(null,'Store Giveaway',now(),1),
+		(null,'Convention',now(),1);

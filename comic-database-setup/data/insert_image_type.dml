@@ -1,0 +1,8 @@
+insert into comic_collection.image_type
+		(id,value,directory_path,create_time,create_user_id)
+	 values (null,'Incoming','/image/incoming',now(),1),
+		(null,'Comic','/image/comic',now(),1),
+		(null,'Title','/image/title',now(),1),
+		(null,'Publisher','/image/publisher',now(),1),
+		(null,'Character','/image/character',now(),1),
+		(null,'Certificate','/image/certificate',now(),1);
