@@ -30,11 +30,11 @@ public abstract class Entity<T extends Entity<T>>
     @NotNull(message="Create time is required.")
     private Date createTime;
     @Valid @NotNull(message="Create user is required.")
-    private User createUser;
+    private ApplicationUser createUser;
     private Class<T> entityClass;
     private Integer id;
     private Date modifyTime;
-    private User modifyUser;
+    private ApplicationUser modifyUser;
     
 
     /**
@@ -101,7 +101,7 @@ public abstract class Entity<T extends Entity<T>>
      *
      * @return  the create user.
      */
-    public User getCreateUser() {
+    public ApplicationUser getCreateUser() {
         return this.createUser;
     }
 
@@ -153,7 +153,7 @@ public abstract class Entity<T extends Entity<T>>
      *
      * @return  the modify user.
      */
-    public User getModifyUser() {
+    public ApplicationUser getModifyUser() {
         return this.modifyUser;
     }
 
@@ -171,7 +171,7 @@ public abstract class Entity<T extends Entity<T>>
      *
      * @param  createUser  the create user.
      */
-    public void setCreateUser(User createUser) {
+    public void setCreateUser(ApplicationUser createUser) {
         this.createUser = createUser;
     }
 
@@ -198,7 +198,7 @@ public abstract class Entity<T extends Entity<T>>
      *
      * @param  modifyUser  the modify user.
      */
-    public void setModifyUser(User modifyUser) {
+    public void setModifyUser(ApplicationUser modifyUser) {
         this.modifyUser = modifyUser;
     }
 

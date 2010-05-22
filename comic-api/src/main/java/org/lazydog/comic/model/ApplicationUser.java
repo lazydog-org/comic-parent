@@ -6,29 +6,29 @@ import javax.validation.constraints.Size;
 
 
 /**
- * Entity class used to represent a user.
+ * Entity class used to represent an application user.
  *
  * @author  Ron Rickard
  */
-public class User 
-       extends Entity<User>
-       implements Comparable<User>,
+public class ApplicationUser
+       extends Entity<ApplicationUser>
+       implements Comparable<ApplicationUser>,
                   Serializable {
     
     // Declare.
     @NotNull(message="Name is required.") 
     @Size(max=50, message="Name cannot contain more than 50 characters.")
     private String name;
-    private UserPreference userPreference;
+    private ApplicationUserPreference preference;
     
     /**
      * Constructor.
      */
-    public User() {
+    public ApplicationUser() {
 
         super();
         this.setName(null);
-        this.setUserPreference(null);
+        this.setPreference(null);
     }
     
     /**
@@ -42,7 +42,7 @@ public class User
      *          object.
      */
     @Override
-    public int compareTo(User object) {
+    public int compareTo(ApplicationUser object) {
         
         // Declare.
         int lastCompare;
@@ -66,15 +66,15 @@ public class User
      * @return  a copy of this object.
      */
     @Override
-    public User copy() {
+    public ApplicationUser copy() {
         
         // Declare.
-        User copy;
+        ApplicationUser copy;
         
         // Create a copy.
         copy = super.copy();
         copy.setName(this.getName());
-        copy.setUserPreference(this.getUserPreference());
+        copy.setPreference(this.getPreference());
 
         return copy;
     }
@@ -97,8 +97,8 @@ public class User
         
         // Check if the object is an instance of this class
         // and is equal to this object.
-        if (object instanceof User &&
-            this.compareTo((User)object) == 0) {
+        if (object instanceof ApplicationUser &&
+            this.compareTo((ApplicationUser)object) == 0) {
             equals = true;
         }
         
@@ -115,12 +115,12 @@ public class User
     }
        
     /**
-     * Get the user preference.
+     * Get the preference.
      *
-     * @return  the user preference.
+     * @return  the preference.
      */
-    public UserPreference getUserPreference() {
-        return this.userPreference;
+    public ApplicationUserPreference getPreference() {
+        return this.preference;
     }
 
     /**
@@ -150,12 +150,12 @@ public class User
     }
 
     /**
-     * Set the user preference.
+     * Set the preference.
      *
-     * @param  userPreference  the user preference.
+     * @param  preference  the preference.
      */
-    public void setUserPreference(UserPreference userPreference) {
-        this.userPreference = userPreference;
+    public void setPreference(ApplicationUserPreference preference) {
+        this.preference = preference;
     }
     
     /**
@@ -172,7 +172,7 @@ public class User
         // Initialize.
         toString = new StringBuffer();
         
-        toString.append("User [");
+        toString.append("ApplicationUser [");
         toString.append("name = ").append(this.getName());
         toString.append("]");
         

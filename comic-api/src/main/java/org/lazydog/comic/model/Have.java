@@ -56,12 +56,12 @@ public class Have
         int lastCompare;
         Comic thatComic;
         ComicGrade thatComicGrade;
-        User thatCreateUser;
+        ApplicationUser thatCreateUser;
         Location thatLocation;
         Double thatPurchasePrice;
         Comic thisComic;
         ComicGrade thisComicGrade;
-        User thisCreateUser;
+        ApplicationUser thisCreateUser;
         Location thisLocation;
         Double thisPurchasePrice;
 
@@ -69,12 +69,12 @@ public class Have
         lastCompare = 0;
         thatComic = (object.getComic() == null) ? new Comic() : object.getComic();
         thatComicGrade = (object.getComicGrade() == null) ? new ComicGrade() : object.getComicGrade();
-        thatCreateUser = (object.getCreateUser() == null) ? new User() : object.getCreateUser();
+        thatCreateUser = (object.getCreateUser() == null) ? new ApplicationUser() : object.getCreateUser();
         thatLocation = (object.getLocation() == null) ? new Location() : object.getLocation();
         thatPurchasePrice = object.getPurchasePrice();
         thisComic = (this.getComic() == null) ? new Comic() : this.getComic();
         thisComicGrade = (this.getComicGrade() == null) ? new ComicGrade() : this.getComicGrade();
-        thisCreateUser = (this.getCreateUser() == null) ? new User() : this.getCreateUser();
+        thisCreateUser = (this.getCreateUser() == null) ? new ApplicationUser() : this.getCreateUser();
         thisLocation = (this.getLocation() == null) ? new Location() : this.getLocation();
         thisPurchasePrice = this.getPurchasePrice();
         
@@ -191,7 +191,7 @@ public class Have
         // Declare.
         Comic thisComic;
         ComicGrade thisComicGrade;
-        User thisCreateUser;
+        ApplicationUser thisCreateUser;
         Location thisLocation;
         Double thisPurchasePrice;
         Integer thisQuantity;
@@ -199,7 +199,7 @@ public class Have
         // Initialize.
         thisComic = (this.getComic() == null) ? new Comic() : this.getComic();
         thisComicGrade = (this.getComicGrade() == null) ? new ComicGrade() : this.getComicGrade();
-        thisCreateUser = (this.getCreateUser() == null) ? new User() : this.getCreateUser();
+        thisCreateUser = (this.getCreateUser() == null) ? new ApplicationUser() : this.getCreateUser();
         thisLocation = (this.getLocation() == null) ? new Location() : this.getLocation();
         thisPurchasePrice = this.getPurchasePrice();
         thisQuantity = this.getQuantity();

@@ -8,13 +8,13 @@ import javax.validation.Valid;
 
 
 /**
- * Entity class used to represent user preference.
+ * Entity class used to represent a application user preference.
  *
  * @author  Ron Rickard
  */
-public class UserPreference 
-       extends Entity<UserPreference>
-       implements Comparable<UserPreference>,
+public class ApplicationUserPreference
+       extends Entity<ApplicationUserPreference>
+       implements Comparable<ApplicationUserPreference>,
                   Serializable {
 
     // Declare.
@@ -36,7 +36,7 @@ public class UserPreference
     /**
      * Constructor.
      */
-    public UserPreference() {
+    public ApplicationUserPreference() {
         
         super();
         this.setComicGrade(null);
@@ -59,13 +59,13 @@ public class UserPreference
      *          object.
      */
     @Override
-    public int compareTo(UserPreference object) {
+    public int compareTo(ApplicationUserPreference object) {
 
         // Declare.
         int lastCompare;
         ComicGrade thatComicGrade;
         ComicType thatComicType;
-        User thatCreateUser;
+        ApplicationUser thatCreateUser;
         Distribution thatDistribution;
         ImageType thatImageType;
         Date thatMinimumPublishDate;
@@ -73,7 +73,7 @@ public class UserPreference
         TitleType thatTitleType;
         ComicGrade thisComicGrade;
         ComicType thisComicType;
-        User thisCreateUser;
+        ApplicationUser thisCreateUser;
         Distribution thisDistribution;
         ImageType thisImageType;
         Date thisMinimumPublishDate;
@@ -84,7 +84,7 @@ public class UserPreference
         lastCompare = 0;
         thatComicGrade = (object.getComicGrade() == null) ? new ComicGrade() : object.getComicGrade();
         thatComicType = (object.getComicType() == null) ? new ComicType() : object.getComicType();
-        thatCreateUser = (object.getCreateUser() == null) ? new User() : object.getCreateUser();
+        thatCreateUser = (object.getCreateUser() == null) ? new ApplicationUser() : object.getCreateUser();
         thatDistribution = (object.getDistribution() == null) ? new Distribution() : object.getDistribution();
         thatImageType = (object.getImageType() == null) ? new ImageType() : object.getImageType();
         thatMinimumPublishDate = (object.getMinimumPublishDate() == null) ? this.getEpoch() : object.getMinimumPublishDate();
@@ -92,7 +92,7 @@ public class UserPreference
         thatTitleType = (object.getTitleType() == null) ? new TitleType() : object.getTitleType();
         thisComicGrade = (this.getComicGrade() == null) ? new ComicGrade() : this.getComicGrade();
         thisComicType = (this.getComicType() == null) ? new ComicType() : this.getComicType();
-        thisCreateUser = (this.getCreateUser() == null) ? new User() : this.getCreateUser();
+        thisCreateUser = (this.getCreateUser() == null) ? new ApplicationUser() : this.getCreateUser();
         thisDistribution = (this.getDistribution() == null) ? new Distribution() : this.getDistribution();
         thisImageType = (this.getImageType() == null) ? new ImageType() : this.getImageType();
         thisMinimumPublishDate = (this.getMinimumPublishDate() == null) ? this.getEpoch() : this.getMinimumPublishDate();
@@ -120,10 +120,10 @@ public class UserPreference
      * @return  a copy of this object.
      */
     @Override
-    public UserPreference copy() {
+    public ApplicationUserPreference copy() {
         
         // Declare.
-        UserPreference copy;
+        ApplicationUserPreference copy;
         
         // Create a copy.
         copy = super.copy();
@@ -156,8 +156,8 @@ public class UserPreference
 
         // Check if the object is an instance of this class
         // and is equal to this object.
-        if (object instanceof UserPreference &&
-            this.compareTo((UserPreference)object) == 0) {
+        if (object instanceof ApplicationUserPreference &&
+            this.compareTo((ApplicationUserPreference)object) == 0) {
             equals = true;
         }
 
@@ -238,7 +238,7 @@ public class UserPreference
         // Declare.
         ComicGrade thisComicGrade;
         ComicType  thisComicType;
-        User thisCreateUser;
+        ApplicationUser thisCreateUser;
         Distribution thisDistribution;
         ImageType thisImageType;
         Date thisMinimumPublishDate;
@@ -248,7 +248,7 @@ public class UserPreference
         // Initialize.
         thisComicGrade = (this.getComicGrade() == null) ? new ComicGrade() : this.getComicGrade();
         thisComicType = (this.getComicType() == null) ? new ComicType() : this.getComicType();
-        thisCreateUser = (this.getCreateUser() == null) ? new User() : this.getCreateUser();
+        thisCreateUser = (this.getCreateUser() == null) ? new ApplicationUser() : this.getCreateUser();
         thisDistribution = (this.getDistribution() == null) ? new Distribution() : this.getDistribution();
         thisImageType = (this.getImageType() == null) ? new ImageType() : this.getImageType();
         thisMinimumPublishDate = (this.getMinimumPublishDate() == null) ? this.getEpoch() : this.getMinimumPublishDate();
@@ -364,7 +364,7 @@ public class UserPreference
         // Initialize.
         toString = new StringBuffer();
         
-        toString.append("UserPreference [");
+        toString.append("ApplicationUserPreference [");
         toString.append("comicGrade = ").append(this.getComicGrade());
         toString.append(", comicType = ").append(this.getComicType());
         toString.append(", distribution = ").append(this.getDistribution());
