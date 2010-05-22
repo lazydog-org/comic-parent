@@ -61,9 +61,9 @@
                 <join-column name="comic_type_id" nullable="false"/>
             </many-to-one>
             <many-to-many name="characters" fetch="EAGER">
-                <join-table name="comic_character">
+                <join-table name="comic_character_appearance">
                     <join-column name="comic_id"/>
-                    <inverse-join-column name="character_id"/>
+                    <inverse-join-column name="comic_character_id"/>
                 </join-table>
             </many-to-many>
             <many-to-many name="creators" fetch="EAGER">

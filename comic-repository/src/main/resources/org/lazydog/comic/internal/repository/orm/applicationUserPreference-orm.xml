@@ -6,10 +6,10 @@
                         http://java.sun.com/xml/ns/persistence/orm_2_0.xsd"
     version="2.0">
     <package>org.lazydog.comic.model</package>
-    <entity class="UserPreference" access="FIELD" metadata-complete="true">
-        <table name="user_preference" schema="comic_collection"/>
-        <named-query name="UserPreference.findAll">
-            <query>select u from UserPreference u</query>
+    <entity class="ApplicationUserPreference" access="FIELD" metadata-complete="true">
+        <table name="application_user_preference" schema="comic_collection"/>
+        <named-query name="ApplicationUserPreference.findAll">
+            <query>select a from ApplicationUserPreference a</query>
         </named-query>
         <attributes>
             <basic name="minimumPublishDate">
