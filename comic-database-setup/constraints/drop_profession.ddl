@@ -1,3 +1,3 @@
 alter table comic_collection.profession
-	drop foreign key profession__user__fk1,
-	drop foreign key profession__user__fk2;
+	drop foreign key profession__application_user__fk1,
+	drop foreign key profession__application_user__fk2;

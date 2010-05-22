@@ -1,4 +1,4 @@
-insert into comic_collection.user_preference
+insert into comic_collection.application_user_preference
 		(id,minimum_publish_date,comic_grade_id,comic_type_id,
 		 distribution_id,image_type_id,publisher_id,title_type_id,
 		 create_time,create_user_id)
@@ -10,7 +10,7 @@ insert into comic_collection.user_preference
 	        comic_collection.image_type it,
 		comic_collection.publisher p,
 		comic_collection.title_type tt,
-		comic_collection.user u
+		comic_collection.application_user u
 	  where cg.code = 'NM'
 	    and ct.value = 'Regular'
 	    and d.value = 'Direct'

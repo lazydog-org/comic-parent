@@ -1,5 +1,11 @@
 create table comic_collection.comic_character
-	(character_id		int(10) unsigned not null,
-	 comic_id		int(10) unsigned not null,
-	 primary key (character_id, comic_id)
+	(id			int(10) unsigned not null auto_increment,
+	 name			varchar(50) not null,
+	 image_id		int(10) unsigned,
+	 create_time		datetime not null,
+	 create_user_id		int(10) unsigned not null,
+	 modify_time		datetime,
+	 modify_user_id		int(10) unsigned,
+	 primary key (id),
+	 unique key (name)
 	) type = innodb;

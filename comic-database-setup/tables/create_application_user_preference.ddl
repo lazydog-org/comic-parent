@@ -1,4 +1,4 @@
-create table comic_collection.user_preference
+create table comic_collection.application_user_preference
 	(id			int(10) unsigned not null auto_increment,
 	 minimum_publish_date	date not null,
 	 comic_grade_id		int(10) unsigned not null,
