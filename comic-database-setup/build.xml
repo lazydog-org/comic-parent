@@ -15,7 +15,6 @@
 		<ant dir="schemas" target="create"/>
 		<ant dir="privileges" target="grant"/>
 		<ant dir="tables" target="create"/>
-		<ant dir="bootstrap" target="insert"/>
 		<ant dir="data" target="insert"/>
 		<ant dir="constraints" target="add"/>
 	</target>
