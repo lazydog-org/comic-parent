@@ -6,7 +6,7 @@ import org.lazydog.comic.criteria.Criteria;
 import org.lazydog.comic.criteria.CriteriaFactory;
 import org.lazydog.comic.model.Image;
 import org.lazydog.comic.model.ImageType;
-import org.lazydog.comic.model.User;
+import org.lazydog.comic.model.ApplicationUser;
 import org.lazydog.comic.service.ComicService;
 import java.io.File;
 import java.io.PrintStream;
@@ -78,19 +78,19 @@ public class ImageUtility {
      * 
      * @throws  Exception  if unable to get the user.
      */
-    private User getUser()
+    private ApplicationUser getUser()
             throws Exception {
 
         // Declare.
-        Criteria<User> criteria;
+        Criteria<ApplicationUser> criteria;
         CriteriaFactory criteriaFactory;
-        User user;
+        ApplicationUser user;
 
         // Initialize criteria factory.
         criteriaFactory = CriteriaFactory.instance();
 
         // Set the criteria.
-        criteria = criteriaFactory.createCriteria(User.class);
+        criteria = criteriaFactory.createCriteria(ApplicationUser.class);
         criteria.add(ComparisonOperation.eq("name", "admin"));
 
         // Find the user.
