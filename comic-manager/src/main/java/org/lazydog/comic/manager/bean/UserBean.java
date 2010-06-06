@@ -3,7 +3,7 @@ package org.lazydog.comic.manager.bean;
 import org.lazydog.comic.criteria.criterion.ComparisonOperation;
 import org.lazydog.comic.criteria.Criteria;
 import org.lazydog.comic.criteria.CriteriaFactory;
-import org.lazydog.comic.model.User;
+import org.lazydog.comic.model.ApplicationUser;
 import org.lazydog.comic.service.ComicService;
 import org.lazydog.comic.manager.utility.SessionKey;
 import org.lazydog.comic.manager.utility.SessionUtility;
@@ -42,15 +42,15 @@ public class UserBean
         try {
 
             // Declare.
-            Criteria<User> criteria;
+            Criteria<ApplicationUser> criteria;
             CriteriaFactory criteriaFactory;
-            User user;
+            ApplicationUser user;
 
             // Initialize criteria factory.
             criteriaFactory = CriteriaFactory.instance();
 
             // Create a new criteria.
-            criteria = criteriaFactory.createCriteria(User.class);
+            criteria = criteriaFactory.createCriteria(ApplicationUser.class);
 
             // Modify the criteria.
             criteria.add(ComparisonOperation.eq("name", this.name));
@@ -66,7 +66,7 @@ public class UserBean
 
                 // Put the user preference on the session.
                 SessionUtility.putValue(
-                        SessionKey.USER_PREFERENCE, user.getUserPreference());
+                        SessionKey.USER_PREFERENCE, user.getPreference());
 
                 // Flag that the user is authenticated.
                 this.authenticated = true;

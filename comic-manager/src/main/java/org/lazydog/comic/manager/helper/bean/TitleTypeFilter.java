@@ -1,7 +1,7 @@
 package org.lazydog.comic.manager.helper.bean;
 
+import org.lazydog.comic.model.ApplicationUserPreference;
 import org.lazydog.comic.model.TitleType;
-import org.lazydog.comic.model.UserPreference;
 import org.lazydog.comic.manager.utility.SessionKey;
 import java.io.Serializable;
 
@@ -51,7 +51,7 @@ public class TitleTypeFilter
      * @return  the user preference type.
      */
     @Override
-    protected TitleType getUserPreferenceType(UserPreference userPreference) {
+    protected TitleType getUserPreferenceType(ApplicationUserPreference userPreference) {
         return userPreference.getTitleType();
     }
 }

@@ -1,7 +1,7 @@
 package org.lazydog.comic.manager.helper.bean;
 
+import org.lazydog.comic.model.ApplicationUserPreference;
 import org.lazydog.comic.model.ImageType;
-import org.lazydog.comic.model.UserPreference;
 import org.lazydog.comic.manager.utility.SessionKey;
 import java.io.Serializable;
 
@@ -51,7 +51,7 @@ public class ImageTypeFilter
      * @return  the user preference type.
      */
     @Override
-    protected ImageType getUserPreferenceType(UserPreference userPreference) {
+    protected ImageType getUserPreferenceType(ApplicationUserPreference userPreference) {
         return userPreference.getImageType();
     }
 }

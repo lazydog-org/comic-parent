@@ -8,8 +8,8 @@ import javax.ejb.Remote;
 import javax.ejb.Stateless;
 import javax.interceptor.Interceptors;
 import org.lazydog.comic.criteria.Criteria;
+import org.lazydog.comic.model.ApplicationUser;
 import org.lazydog.comic.model.Entity;
-import org.lazydog.comic.model.User;
 import org.lazydog.comic.service.ComicService;
 import org.lazydog.comic.spi.repository.ComicRepository;
 import org.lazydog.utilities.ejbmonitor.interceptor.EJBMonitor;
@@ -324,13 +324,13 @@ public class ComicServiceImpl
     /**
      * Prepare the entity for saving.
      *
-     * @param  entity       the entity.
-     * @param  user         the user.
+     * @param  entity  the entity.
+     * @param  user    the user.
      *
      * @return  the prepared entity.
      */
     private <T extends Entity<T>> T prepEntityForSave(T entity,
-                                                      User user) {
+                                                      ApplicationUser user) {
 
         // Check to see if this is a new entity.
         if (entity.getId() == null) {
@@ -378,7 +378,7 @@ public class ComicServiceImpl
      */
     @Override
     public <T extends Entity<T>> T save(T entity,
-                                        User user) {
+                                        ApplicationUser user) {
 
         // Prepare the entity for saving.
         entity = this.prepEntityForSave(entity, user);
@@ -397,7 +397,7 @@ public class ComicServiceImpl
      */
     @Override
     public <T extends Entity<T>> List<T> saveList(List<T> entities,
-                                                  User user) {
+                                                  ApplicationUser user) {
 
         // Loop through the entities.
         for (T entity : entities) {

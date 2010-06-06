@@ -4,8 +4,8 @@ import org.lazydog.comic.criteria.criterion.ComparisonOperation;
 import org.lazydog.comic.criteria.criterion.Order;
 import org.lazydog.comic.criteria.Criteria;
 import org.lazydog.comic.criteria.CriteriaFactory;
+import org.lazydog.comic.model.ApplicationUserPreference;
 import org.lazydog.comic.model.Entity;
-import org.lazydog.comic.model.UserPreference;
 import org.lazydog.comic.service.ComicService;
 import org.lazydog.comic.manager.utility.SessionKey;
 import org.lazydog.comic.manager.utility.SessionUtility;
@@ -181,7 +181,7 @@ public abstract class AbstractTypeFilter<T extends Entity<T>>
     public T getType() {
         return (SessionUtility.valueExists(this.getTypeSessionKey())) ?
             SessionUtility.getValue(this.getTypeSessionKey(), this.getEntityClass()) :
-            this.getUserPreferenceType(SessionUtility.getValue(SessionKey.USER_PREFERENCE, UserPreference.class));
+            this.getUserPreferenceType(SessionUtility.getValue(SessionKey.USER_PREFERENCE, ApplicationUserPreference.class));
     }
 
     /**
@@ -203,7 +203,7 @@ public abstract class AbstractTypeFilter<T extends Entity<T>>
      * 
      * @return  the user preference type.
      */
-    protected abstract T getUserPreferenceType(UserPreference userPreference);
+    protected abstract T getUserPreferenceType(ApplicationUserPreference userPreference);
 
     /**
      * Set the comic service.

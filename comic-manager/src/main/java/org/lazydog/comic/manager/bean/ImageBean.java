@@ -5,9 +5,9 @@ import org.lazydog.comic.criteria.criterion.LogicalOperation;
 import org.lazydog.comic.criteria.criterion.Order;
 import org.lazydog.comic.criteria.Criteria;
 import org.lazydog.comic.criteria.CriteriaFactory;
+import org.lazydog.comic.model.ApplicationUser;
 import org.lazydog.comic.model.Image;
 import org.lazydog.comic.model.Title;
-import org.lazydog.comic.model.User;
 import org.lazydog.comic.manager.helper.bean.ImageSearcher;
 import org.lazydog.comic.manager.helper.bean.ImageTypeFilter;
 import org.lazydog.comic.manager.utility.FileUtility;
@@ -317,7 +317,7 @@ public class ImageBean
 
                 // Restore the entity.
                 this.comicService.save(this.entity,
-                        SessionUtility.getValue(SessionKey.USER, User.class));
+                        SessionUtility.getValue(SessionKey.USER, ApplicationUser.class));
 
                 FacesContext.getCurrentInstance().addMessage(null,
                         new FacesMessage("Cannot delete the entity."));
@@ -437,7 +437,7 @@ public class ImageBean
             // Save the entity.
             this.entity = this.comicService.save(
                     this.entity,
-                    SessionUtility.getValue(SessionKey.USER, User.class));
+                    SessionUtility.getValue(SessionKey.USER, ApplicationUser.class));
 
             // Move the file and check the move.
             if (!FileUtility.moveFile(
@@ -448,7 +448,7 @@ public class ImageBean
 
                 // Restore the entity.
                 this.comicService.save(this.oldEntity,
-                        SessionUtility.getValue(SessionKey.USER, User.class));
+                        SessionUtility.getValue(SessionKey.USER, ApplicationUser.class));
 
                 FacesContext.getCurrentInstance().addMessage(null,
                         new FacesMessage("Cannot save the entity."));

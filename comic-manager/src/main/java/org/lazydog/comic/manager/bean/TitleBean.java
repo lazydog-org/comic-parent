@@ -4,11 +4,11 @@ import org.lazydog.comic.criteria.criterion.ComparisonOperation;
 import org.lazydog.comic.criteria.criterion.LogicalOperation;
 import org.lazydog.comic.criteria.criterion.Order;
 import org.lazydog.comic.criteria.Criteria;
+import org.lazydog.comic.model.ApplicationUser;
+import org.lazydog.comic.model.ApplicationUserPreference;
 import org.lazydog.comic.model.Category;
 import org.lazydog.comic.model.Publisher;
 import org.lazydog.comic.model.Title;
-import org.lazydog.comic.model.User;
-import org.lazydog.comic.model.UserPreference;
 import org.lazydog.comic.manager.helper.bean.TitleSearcher;
 import org.lazydog.comic.manager.helper.bean.TitleTypeFilter;
 import org.lazydog.comic.manager.utility.FormButtonController;
@@ -187,7 +187,7 @@ public class TitleBean
         
             // Set the publishers in the new entity.
             publishers.add(SessionUtility
-                    .getValue(SessionKey.USER_PREFERENCE, UserPreference.class)
+                    .getValue(SessionKey.USER_PREFERENCE, ApplicationUserPreference.class)
                     .getPublisher());
             newEntity.setPublishers(publishers);
         }
@@ -216,7 +216,7 @@ public class TitleBean
             
             // The start date is the user preference minimum publish date.
             startDate = SessionUtility
-                    .getValue(SessionKey.USER_PREFERENCE, UserPreference.class)
+                    .getValue(SessionKey.USER_PREFERENCE, ApplicationUserPreference.class)
                     .getMinimumPublishDate();
         }
         else {
@@ -374,7 +374,7 @@ public class TitleBean
             // Save the entity.
             this.entity = this.comicService.save(
                     this.entity,
-                    SessionUtility.getValue(SessionKey.USER, User.class));
+                    SessionUtility.getValue(SessionKey.USER, ApplicationUser.class));
 
             // Modify the perspective.
             this.perspective = Perspective.VIEW;

@@ -7,7 +7,7 @@
         <version>1.1-SNAPSHOT</version>
     </parent>
     <artifactId>comic-repository</artifactId>
-    <packaging>jar</packaging>
+    <packaging>ejb</packaging>
     <name>Comic Repository</name>
     <build>
         <plugins>

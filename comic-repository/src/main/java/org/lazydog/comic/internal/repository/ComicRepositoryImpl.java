@@ -98,7 +98,7 @@ public class ComicRepositoryImpl
         // Declare.
         List<T> entities;
         TypedQuery<T> query;
-System.out.println(entityClass.getSimpleName());
+
         // Create the named query.
         query = this.entityManager.createNamedQuery(
             entityClass.getSimpleName() + ".findAll", entityClass);
