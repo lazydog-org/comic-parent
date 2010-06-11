@@ -16,50 +16,102 @@
                 <artifactId>maven-ejb-plugin</artifactId>
                 <version>2.2.1</version>
                 <configuration>
-                    <ejbVersion>3.0</ejbVersion>
+                    <ejbVersion>3.1</ejbVersion>
                 </configuration>
             </plugin>
         </plugins>
     </build>
     <dependencies>
         <dependency>
-            <groupId>org.glassfish.appclient</groupId>
-            <artifactId>gf-client</artifactId>
-            <version>3.1-b02</version>
+            <groupId>com.ctc.wstx</groupId>
+            <artifactId>woodstox-osgi</artifactId>
+            <version>3.2.1</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.sun.corba</groupId>
+            <artifactId>glassfish-corba-orb</artifactId>
+            <version>3.0.0-b041</version>
             <scope>test</scope>
         </dependency>
         <!--
         <dependency>
-            <groupId>com.sun.appserver</groupId>
-            <artifactId>appserv-admin</artifactId>
-            <version>9.1</version>
+            <groupId>org.eclipse.persistence</groupId>
+            <artifactId>org.eclipse.persistence.antlr</artifactId>
+            <version>2.0.0</version>
             <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>com.sun.appserver</groupId>
-            <artifactId>appserv-deployment-client</artifactId>
-            <version>9.1</version>
+            <groupId>org.eclipse.persistence</groupId>
+            <artifactId>org.eclipse.persistence.asm</artifactId>
+            <version>2.0.0</version>
             <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>com.sun.appserver</groupId>
-            <artifactId>appserv-ext</artifactId>
-            <version>9.1</version>
+            <groupId>org.eclipse.persistence</groupId>
+            <artifactId>org.eclipse.persistence.core</artifactId>
+            <version>2.0.0</version>
             <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>com.sun.appserver</groupId>
-            <artifactId>appserv-rt</artifactId>
-            <version>9.1</version>
+            <groupId>org.eclipse.persistence</groupId>
+            <artifactId>org.eclipse.persistence.jpa</artifactId>
+            <version>2.0.0</version>
             <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>com.sun.appserver</groupId>
-            <artifactId>javaee</artifactId>
-            <version>9.1</version>
+            <groupId>org.eclipse.persistence</groupId>
+            <artifactId>org.eclipse.persistence.jpa.modelgen</artifactId>
+            <version>2.0.0</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.eclipse.persistence</groupId>
+            <artifactId>org.eclipse.persistence.oracle</artifactId>
+            <version>2.0.0</version>
             <scope>test</scope>
         </dependency>
         -->
+        <dependency>
+            <groupId>org.glassfish.appclient</groupId>
+            <artifactId>gf-client</artifactId>
+            <version>3.0</version>
+            <scope>test</scope>
+            <exclusions>
+                <exclusion>
+                    <groupId>com.ctc.wstx</groupId>
+                    <artifactId>woodstox-osgi</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>com.sun.corba</groupId>
+                    <artifactId>glassfish-corba-orb</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.eclipse.persistence</groupId>
+                    <artifactId>org.eclipse.persistence.antlr</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.eclipse.persistence</groupId>
+                    <artifactId>org.eclipse.persistence.asm</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.eclipse.persistence</groupId>
+                    <artifactId>org.eclipse.persistence.core</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.eclipse.persistence</groupId>
+                    <artifactId>org.eclipse.persistence.jpa</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.eclipse.persistence</groupId>
+                    <artifactId>org.eclipse.persistence.jpa.modelgen</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.eclipse.persistence</groupId>
+                    <artifactId>org.eclipse.persistence.oracle</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
         <dependency>
             <groupId>javax</groupId>
             <artifactId>javaee-api</artifactId>
@@ -72,12 +124,14 @@
             <version>4.8.1</version>
             <scope>test</scope>
         </dependency>
+        <!--
         <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-validator</artifactId>
             <version>4.0.2.GA</version>
             <scope>provided</scope>
         </dependency>
+        -->
         <dependency>
             <groupId>org.lazydog.utilities</groupId>
             <artifactId>ejb-monitor</artifactId>
