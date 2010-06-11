@@ -17,6 +17,7 @@
                 <version>2.4.1</version>
                 <configuration>
                     <generateApplicationXml>true</generateApplicationXml>
+                    <version>6</version>
                     <modules>
                         <webModule>
                             <groupId>${project.groupId}</groupId>
