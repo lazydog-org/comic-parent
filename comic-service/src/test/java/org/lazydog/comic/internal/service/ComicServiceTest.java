@@ -40,6 +40,7 @@ import javax.naming.InitialContext;
  * 
  * @author  Ron Rickard
  */
+@Ignore
 public class ComicServiceTest {
 
     private static Criteria<ApplicationUser> applicationUserCriteria;
