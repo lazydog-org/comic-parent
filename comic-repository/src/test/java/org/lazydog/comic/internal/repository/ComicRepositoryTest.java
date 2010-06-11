@@ -39,6 +39,7 @@ import org.junit.Test;
  *
  * @author  Ron Rickard
  */
+@Ignore
 public class ComicRepositoryTest {
 
     private static Criteria<ApplicationUser> applicationUserCriteria;
