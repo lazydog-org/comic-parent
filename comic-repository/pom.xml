@@ -16,7 +16,7 @@
                 <artifactId>maven-ejb-plugin</artifactId>
                 <version>2.2.1</version>
                 <configuration>
-                    <ejbVersion>3.0</ejbVersion>
+                    <ejbVersion>3.1</ejbVersion>
                 </configuration>
             </plugin>
         </plugins>
@@ -44,17 +44,6 @@
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
             <version>5.1.12</version>
-        </dependency>
-        <dependency>
-            <groupId>org.eclipse.persistence</groupId>
-            <artifactId>eclipselink</artifactId>
-            <version>2.0.2</version>
-        </dependency>
-        <dependency>
-            <groupId>org.eclipse.persistence</groupId>
-            <artifactId>javax.persistence</artifactId>
-            <version>2.0.0</version>
-            <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>org.lazydog.utilities</groupId>
