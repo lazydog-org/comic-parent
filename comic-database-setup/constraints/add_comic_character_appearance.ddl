@@ -1,0 +1,9 @@
+alter table comic_collection.comic_character_appearance
+	add index (comic_id),
+	add constraint comic_character_appearance__comic__fk
+                foreign key (comic_id)
+		references comic (id),
+        add index (comic_character_id),
+	add constraint comic_character_appearance__comic_character__fk
+                foreign key (comic_character_id)
+		references comic_character (id);
