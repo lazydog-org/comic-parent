@@ -5,12 +5,12 @@ import org.lazydog.comic.criteria.criterion.LogicalOperation;
 import org.lazydog.comic.criteria.criterion.Order;
 import org.lazydog.comic.criteria.Criteria;
 import org.lazydog.comic.criteria.CriteriaFactory;
-import org.lazydog.comic.model.ApplicationUser;
-import org.lazydog.comic.model.ApplicationUserPreference;
+import org.lazydog.comic.model.Character;
 import org.lazydog.comic.model.Comic;
-import org.lazydog.comic.model.ComicCharacter;
 import org.lazydog.comic.model.Title;
 import org.lazydog.comic.model.Trait;
+import org.lazydog.comic.model.User;
+import org.lazydog.comic.model.UserPreference;
 import org.lazydog.comic.model.Want;
 import org.lazydog.comic.manager.helper.bean.ComicTypeFilter;
 import org.lazydog.comic.manager.utility.FormButtonController;
@@ -94,7 +94,7 @@ public class ComicBean
             criteria.add(ComparisonOperation.eq("comic",
                     SessionUtility.getValue(SessionKey.COMIC, Comic.class)));
             criteria.add(LogicalOperation.and(ComparisonOperation.eq("createUser",
-                    SessionUtility.getValue(SessionKey.USER, ApplicationUser.class))));
+                    SessionUtility.getValue(SessionKey.USER, User.class))));
 
             // Get the want.
             want = this.comicService.find(criteria);
@@ -268,7 +268,7 @@ public class ComicBean
  
             // Set the distribution in the new entity.
             newEntity.setDistribution(SessionUtility
-                    .getValue(SessionKey.USER_PREFERENCE, ApplicationUserPreference.class)
+                    .getValue(SessionKey.USER_PREFERENCE, UserPreference.class)
                     .getDistribution());
         }
 
@@ -303,7 +303,7 @@ public class ComicBean
             
             // The start date is the user preference minimum publish date.
             startDate = SessionUtility
-                    .getValue(SessionKey.USER_PREFERENCE, ApplicationUserPreference.class)
+                    .getValue(SessionKey.USER_PREFERENCE, UserPreference.class)
                     .getMinimumPublishDate();
         }
         else {
@@ -376,7 +376,7 @@ public class ComicBean
 
             // Save the want.
             want = this.comicService.save(
-                    want, SessionUtility.getValue(SessionKey.USER, ApplicationUser.class));
+                    want, SessionUtility.getValue(SessionKey.USER, User.class));
         }
         catch(Exception e) {
 
@@ -485,7 +485,7 @@ public class ComicBean
     public void processOkButton(ActionEvent actionEvent) {
 
         // Convert the java.utils.Arrays$ArrayList to java.utils.ArrayList.
-        this.entity.setCharacters(new ArrayList<ComicCharacter>(this.entity.getCharacters()));
+        this.entity.setCharacters(new ArrayList<Character>(this.entity.getCharacters()));
         this.entity.setTraits(new ArrayList<Trait>(this.entity.getTraits()));
 
         // Check if this is the add, duplicate, or edit perspective.
@@ -529,7 +529,7 @@ public class ComicBean
                 // Save the entity.
                 this.entity = this.comicService.save(
                         this.entity,
-                        SessionUtility.getValue(SessionKey.USER, ApplicationUser.class));
+                        SessionUtility.getValue(SessionKey.USER, User.class));
 
                 // Modify the perspective.
                 this.perspective = Perspective.VIEW;
@@ -650,7 +650,7 @@ public class ComicBean
                         // Save the entities.
                         entities = this.comicService.saveList(
                                 entities,
-                                SessionUtility.getValue(SessionKey.USER, ApplicationUser.class));
+                                SessionUtility.getValue(SessionKey.USER, User.class));
 
                         // Set the entity to the first saved entity.
                         this.entity = entities.get(0);
@@ -751,7 +751,7 @@ public class ComicBean
             criteria.add(ComparisonOperation.eq("comic",
                     SessionUtility.getValue(SessionKey.COMIC, Comic.class)));
             criteria.add(LogicalOperation.and(ComparisonOperation.eq("createUser",
-                    SessionUtility.getValue(SessionKey.USER, ApplicationUser.class))));
+                    SessionUtility.getValue(SessionKey.USER, User.class))));
 
             // Get the want.
             want = this.comicService.find(criteria);

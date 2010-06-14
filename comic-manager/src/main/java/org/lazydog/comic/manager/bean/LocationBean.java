@@ -4,8 +4,8 @@ import org.lazydog.comic.criteria.criterion.ComparisonOperation;
 import org.lazydog.comic.criteria.criterion.Order;
 import org.lazydog.comic.criteria.Criteria;
 import org.lazydog.comic.criteria.CriteriaFactory;
-import org.lazydog.comic.model.ApplicationUser;
 import org.lazydog.comic.model.Location;
+import org.lazydog.comic.model.User;
 import org.lazydog.comic.manager.utility.SessionKey;
 import org.lazydog.comic.manager.utility.SessionUtility;
 import java.io.Serializable;
@@ -57,7 +57,7 @@ public class LocationBean
                 // Modify the criteria.
                 criteria.add(ComparisonOperation.eq(
                         "createUser",
-                        SessionUtility.getValue(SessionKey.USER, ApplicationUser.class)));
+                        SessionUtility.getValue(SessionKey.USER, User.class)));
                 criteria.addOrder(Order.desc("name"));
             }
         }

@@ -44,16 +44,16 @@ public class Want
         // Declare.
         int lastCompare;
         Comic thatComic;
-        ApplicationUser thatCreateUser;
+        User thatCreateUser;
         Comic thisComic;
-        ApplicationUser thisCreateUser;
+        User thisCreateUser;
 
         // Initialize.
         lastCompare = 0;
         thatComic = (object.getComic() == null) ? new Comic() : object.getComic();
-        thatCreateUser = (object.getCreateUser() == null) ? new ApplicationUser() : object.getCreateUser();
+        thatCreateUser = (object.getCreateUser() == null) ? new User() : object.getCreateUser();
         thisComic = (this.getComic() == null) ? new Comic() : this.getComic();
-        thisCreateUser = (this.getCreateUser() == null) ? new ApplicationUser() : this.getCreateUser();
+        thisCreateUser = (this.getCreateUser() == null) ? new User() : this.getCreateUser();
         
         // Compare this object to the object.
         lastCompare = thisCreateUser.compareTo(thatCreateUser);
@@ -125,11 +125,11 @@ public class Want
         
         // Declare.
         Comic thisComic;
-        ApplicationUser thisCreateUser;
+        User thisCreateUser;
         
         // Initialize.
         thisComic = (this.getComic() == null) ? new Comic() : this.getComic();
-        thisCreateUser = (this.getCreateUser() == null) ? new ApplicationUser() : this.getCreateUser();
+        thisCreateUser = (this.getCreateUser() == null) ? new User() : this.getCreateUser();
         
         return thisCreateUser.hashCode()*31
              + thisComic.hashCode();

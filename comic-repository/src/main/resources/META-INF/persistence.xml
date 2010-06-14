@@ -3,37 +3,37 @@
     xmlns="http://java.sun.com/xml/ns/persistence" 
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
     xsi:schemaLocation="http://java.sun.com/xml/ns/persistence 
-                        http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd"
-    version="2.0">
+                        http://java.sun.com/xml/ns/persistence/persistence_1_0.xsd"
+    version="1.0">
+        
     <persistence-unit name="ComicCollectionPU" transaction-type="JTA">
+        <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
         <jta-data-source>jdbc/ComicCollectionPool</jta-data-source>
-        <mapping-file>org/lazydog/comic/internal/repository/orm/applicationUser-orm.xml</mapping-file>
-        <mapping-file>org/lazydog/comic/internal/repository/orm/applicationUserPreference-orm.xml</mapping-file>
-        <mapping-file>org/lazydog/comic/internal/repository/orm/category-orm.xml</mapping-file>
-        <mapping-file>org/lazydog/comic/internal/repository/orm/comic-orm.xml</mapping-file>
-        <mapping-file>org/lazydog/comic/internal/repository/orm/comicCharacter-orm.xml</mapping-file>
-        <mapping-file>org/lazydog/comic/internal/repository/orm/comicGrade-orm.xml</mapping-file>
-        <mapping-file>org/lazydog/comic/internal/repository/orm/comicType-orm.xml</mapping-file>
-        <mapping-file>org/lazydog/comic/internal/repository/orm/creator-orm.xml</mapping-file>
-        <mapping-file>org/lazydog/comic/internal/repository/orm/distribution-orm.xml</mapping-file>
-        <mapping-file>org/lazydog/comic/internal/repository/orm/entity-orm.xml</mapping-file>
-        <mapping-file>org/lazydog/comic/internal/repository/orm/have-orm.xml</mapping-file>
-        <mapping-file>org/lazydog/comic/internal/repository/orm/image-orm.xml</mapping-file>
-        <mapping-file>org/lazydog/comic/internal/repository/orm/imageType-orm.xml</mapping-file>
-        <mapping-file>org/lazydog/comic/internal/repository/orm/imprint-orm.xml</mapping-file>
-        <mapping-file>org/lazydog/comic/internal/repository/orm/location-orm.xml</mapping-file>
-        <mapping-file>org/lazydog/comic/internal/repository/orm/person-orm.xml</mapping-file>
-        <mapping-file>org/lazydog/comic/internal/repository/orm/profession-orm.xml</mapping-file>
-        <mapping-file>org/lazydog/comic/internal/repository/orm/publisher-orm.xml</mapping-file>
-        <mapping-file>org/lazydog/comic/internal/repository/orm/title-orm.xml</mapping-file>
-        <mapping-file>org/lazydog/comic/internal/repository/orm/titleType-orm.xml</mapping-file>
-        <mapping-file>org/lazydog/comic/internal/repository/orm/trait-orm.xml</mapping-file>
-        <mapping-file>org/lazydog/comic/internal/repository/orm/want-orm.xml</mapping-file>
-        <class>org.lazydog.comic.model.ApplicationUser</class>
-        <class>org.lazydog.comic.model.ApplicationUserPreference</class>
+        <mapping-file>org/lazydog/comic/internal/repository/mapping/category-mapping.xml</mapping-file>
+        <mapping-file>org/lazydog/comic/internal/repository/mapping/character-mapping.xml</mapping-file>
+        <mapping-file>org/lazydog/comic/internal/repository/mapping/comic-mapping.xml</mapping-file>
+        <mapping-file>org/lazydog/comic/internal/repository/mapping/comicGrade-mapping.xml</mapping-file>
+        <mapping-file>org/lazydog/comic/internal/repository/mapping/comicType-mapping.xml</mapping-file>
+        <mapping-file>org/lazydog/comic/internal/repository/mapping/creator-mapping.xml</mapping-file>
+        <mapping-file>org/lazydog/comic/internal/repository/mapping/distribution-mapping.xml</mapping-file>
+        <mapping-file>org/lazydog/comic/internal/repository/mapping/entity-mapping.xml</mapping-file>
+        <mapping-file>org/lazydog/comic/internal/repository/mapping/have-mapping.xml</mapping-file>
+        <mapping-file>org/lazydog/comic/internal/repository/mapping/image-mapping.xml</mapping-file>
+        <mapping-file>org/lazydog/comic/internal/repository/mapping/imageType-mapping.xml</mapping-file>
+        <mapping-file>org/lazydog/comic/internal/repository/mapping/imprint-mapping.xml</mapping-file>
+        <mapping-file>org/lazydog/comic/internal/repository/mapping/location-mapping.xml</mapping-file>
+        <mapping-file>org/lazydog/comic/internal/repository/mapping/person-mapping.xml</mapping-file>
+        <mapping-file>org/lazydog/comic/internal/repository/mapping/profession-mapping.xml</mapping-file>
+        <mapping-file>org/lazydog/comic/internal/repository/mapping/publisher-mapping.xml</mapping-file>
+        <mapping-file>org/lazydog/comic/internal/repository/mapping/title-mapping.xml</mapping-file>
+        <mapping-file>org/lazydog/comic/internal/repository/mapping/titleType-mapping.xml</mapping-file>
+        <mapping-file>org/lazydog/comic/internal/repository/mapping/trait-mapping.xml</mapping-file>
+        <mapping-file>org/lazydog/comic/internal/repository/mapping/user-mapping.xml</mapping-file>
+        <mapping-file>org/lazydog/comic/internal/repository/mapping/userPreference-mapping.xml</mapping-file>
+        <mapping-file>org/lazydog/comic/internal/repository/mapping/want-mapping.xml</mapping-file>
         <class>org.lazydog.comic.model.Category</class>
+        <class>org.lazydog.comic.model.Character</class>
         <class>org.lazydog.comic.model.Comic</class>
-        <class>org.lazydog.comic.model.ComicCharacter</class>
         <class>org.lazydog.comic.model.ComicGrade</class>
         <class>org.lazydog.comic.model.ComicType</class>
         <class>org.lazydog.comic.model.Creator</class>
@@ -50,7 +50,8 @@
         <class>org.lazydog.comic.model.Title</class>
         <class>org.lazydog.comic.model.TitleType</class>
         <class>org.lazydog.comic.model.Trait</class>
+        <class>org.lazydog.comic.model.User</class>
+        <class>org.lazydog.comic.model.UserPreference</class>
         <class>org.lazydog.comic.model.Want</class>
-        <validation-mode>NONE</validation-mode>
     </persistence-unit>
 </persistence>

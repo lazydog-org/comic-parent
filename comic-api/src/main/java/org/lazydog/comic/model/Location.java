@@ -44,16 +44,16 @@ public class Location
         
         // Declare.
         int lastCompare;
-        ApplicationUser thatCreateUser;
+        User thatCreateUser;
         String thatName;
-        ApplicationUser thisCreateUser;
+        User thisCreateUser;
         String thisName;
 
         // Initialize.
         lastCompare = 0;
-        thatCreateUser = (object.getCreateUser() == null) ? new ApplicationUser() : object.getCreateUser();
+        thatCreateUser = (object.getCreateUser() == null) ? new User() : object.getCreateUser();
         thatName = (object.getName() == null) ? "" : object.getName();
-        thisCreateUser = (this.getCreateUser() == null) ? new ApplicationUser() : this.getCreateUser();
+        thisCreateUser = (this.getCreateUser() == null) ? new User() : this.getCreateUser();
         thisName = (this.getName() == null) ? "" : this.getName();
         
         // Compare this object to the object.
@@ -125,11 +125,11 @@ public class Location
     public int hashCode() {
         
         // Declare.
-        ApplicationUser thisCreateUser;
+        User thisCreateUser;
         String thisName;
         
         // Initialize.
-        thisCreateUser = (this.getCreateUser() == null) ? new ApplicationUser() : this.getCreateUser();
+        thisCreateUser = (this.getCreateUser() == null) ? new User() : this.getCreateUser();
         thisName = (this.getName() == null) ? "" : this.getName();
         
         return thisCreateUser.hashCode()*31

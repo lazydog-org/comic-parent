@@ -1,6 +1,6 @@
 package org.lazydog.comic.manager.actionlistener;
 
-import org.lazydog.comic.model.ApplicationUserPreference;
+import org.lazydog.comic.model.UserPreference;
 import org.lazydog.comic.manager.utility.SessionKey;
 import org.lazydog.comic.manager.utility.SessionUtility;
 import org.lazydog.comic.manager.utility.TitleSearchBy;
@@ -25,11 +25,11 @@ public class ActivateTitleSearcher
     public void processAction(ActionEvent actionEvent) {
 
         // Declare.
-        ApplicationUserPreference userPreference;
+        UserPreference userPreference;
 
         // Get the user preference from the session.
         userPreference = SessionUtility
-                .getValue(SessionKey.USER_PREFERENCE, ApplicationUserPreference.class);
+                .getValue(SessionKey.USER_PREFERENCE, UserPreference.class);
 
         // Check if there is a user preference.
         if (userPreference != null) {

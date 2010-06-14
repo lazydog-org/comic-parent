@@ -1,8 +1,8 @@
 package org.lazydog.comic.manager.bean;
 
 import org.lazydog.comic.criteria.Criteria;
-import org.lazydog.comic.model.ApplicationUser;
 import org.lazydog.comic.model.Entity;
+import org.lazydog.comic.model.User;
 import org.lazydog.comic.service.ComicService;
 import org.lazydog.comic.manager.utility.FormButtonController;
 import org.lazydog.comic.manager.utility.Perspective;
@@ -446,7 +446,7 @@ public abstract class AbstractDataAccessBean<T extends Entity<T>>
             // Save the entity.
             this.entity = this.comicService.save(
                     this.entity,
-                    SessionUtility.getValue(SessionKey.USER, ApplicationUser.class));
+                    SessionUtility.getValue(SessionKey.USER, User.class));
 
             // Modify the perspective.
             this.perspective = Perspective.VIEW;

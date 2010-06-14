@@ -5,10 +5,10 @@ import org.lazydog.comic.criteria.criterion.LogicalOperation;
 import org.lazydog.comic.criteria.criterion.Order;
 import org.lazydog.comic.criteria.Criteria;
 import org.lazydog.comic.criteria.CriteriaFactory;
-import org.lazydog.comic.model.ApplicationUser;
-import org.lazydog.comic.model.ApplicationUserPreference;
 import org.lazydog.comic.model.Comic;
 import org.lazydog.comic.model.Have;
+import org.lazydog.comic.model.User;
+import org.lazydog.comic.model.UserPreference;
 import org.lazydog.comic.manager.utility.SessionKey;
 import org.lazydog.comic.manager.utility.SessionUtility;
 import java.io.Serializable;
@@ -63,7 +63,7 @@ public class HaveBean
                         SessionUtility.getValue(SessionKey.COMIC, Comic.class)));
                 criteria.add(LogicalOperation.and(ComparisonOperation.eq(
                         "createUser",
-                        SessionUtility.getValue(SessionKey.USER, ApplicationUser.class))));
+                        SessionUtility.getValue(SessionKey.USER, User.class))));
                 criteria.addOrder(Order.desc("comicGrade.scale"));
                 criteria.addOrder(Order.asc("location.name"));
                 criteria.addOrder(Order.desc("purchasePrice"));
@@ -120,7 +120,7 @@ public class HaveBean
 
             // Set the comic grade in the new entity.
             newEntity.setComicGrade(SessionUtility
-                    .getValue(SessionKey.USER_PREFERENCE, ApplicationUserPreference.class)
+                    .getValue(SessionKey.USER_PREFERENCE, UserPreference.class)
                     .getComicGrade());
         }
 

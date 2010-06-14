@@ -8,7 +8,7 @@ import javax.interceptor.Interceptors;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
-import javax.persistence.TypedQuery;
+import javax.persistence.Query;
 import org.lazydog.comic.criteria.Criteria;
 import org.lazydog.comic.model.Entity;
 import org.lazydog.comic.spi.repository.ComicRepository;
@@ -33,8 +33,7 @@ public class ComicRepositoryImpl
     /**
      * Find the entity.
      *
-     * @param  entityClass  the entity class.
-     * @param  id           the ID.
+     * @param  id  the ID.
      *
      * @return  the entity.
      */
@@ -51,6 +50,7 @@ public class ComicRepositoryImpl
      * @return  the entity.
      */
     @Override
+    @SuppressWarnings("unchecked")
     public <T extends Entity<T>> T find(Criteria<T> criteria) {
 
         // Declare.
@@ -62,21 +62,22 @@ public class ComicRepositoryImpl
         try {
 
             // Declare.
-            TypedQuery<T> query;
+            Query query;
 
             // Create the query.
             query = this.entityManager.createQuery(
-                    criteria.getQlString(), criteria.getEntityClass());
+                    criteria.getQlString());
 
             // Loop through the parameters.
             for(String key : criteria.getParameters().keySet()) {
 
                 // Set the query parameters.
-                query.setParameter(key, criteria.getParameters().get(key));
+                query.setParameter(
+                        key, criteria.getParameters().get(key));
             }
 
             // Get the query result.
-            result = query.getSingleResult();
+            result = (T)query.getSingleResult();
         }
         catch(NoResultException e) {
             // Ignore.
@@ -88,20 +89,19 @@ public class ComicRepositoryImpl
     /**
      * Find the list of entities.
      *
-     * @param  entityClass  the entity class.
-     *
      * @return  the list of entities.
      */
     @Override
+    @SuppressWarnings("unchecked")
     public <T extends Entity<T>> List<T> findList(Class<T> entityClass) {
 
         // Declare.
         List<T> entities;
-        TypedQuery<T> query;
+        Query query;
 
         // Create the named query.
         query = this.entityManager.createNamedQuery(
-            entityClass.getSimpleName() + ".findAll", entityClass);
+            entityClass.getSimpleName() + ".findAll");
 
         // Get the query result.
         entities = query.getResultList();
@@ -117,26 +117,39 @@ public class ComicRepositoryImpl
      * @return  the list of entities.
      */
     @Override
+    @SuppressWarnings("unchecked")
     public <T extends Entity<T>> List<T> findList(Criteria<T> criteria) {
 
         // Declare.
         List<T> entities;
-        TypedQuery<T> query;
+        Query query;
+        List result;
+
+        // Initialize.
+        entities = null;
 
         // Create the query.
         query = this.entityManager.createQuery(
-                criteria.getQlString(), criteria.getEntityClass());
+                criteria.getQlString());
 
         // Loop through the parameters.
         for(String key : criteria.getParameters().keySet()) {
 
             // Set the query parameters.
-            query.setParameter(key, criteria.getParameters().get(key));
+            query.setParameter(
+                    key, criteria.getParameters().get(key));
         }
 
         // Get the query result.
-        entities = query.getResultList();
+        result = query.getResultList();
 
+        // Check if the result is not null.
+        if (result != null) {
+
+            // Convert the result.
+            entities = new ArrayList<T>(result);
+        }
+        
         return entities;
     }
 
@@ -197,8 +210,7 @@ public class ComicRepositoryImpl
     /**
      * Remove the entity.
      *
-     * @param  entityClass  the entity class.
-     * @param  id           the ID.
+     * @param  id  the ID.
      */
     @Override
     public <T extends Entity<T>> void remove(Class<T> entityClass, Integer id) {

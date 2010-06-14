@@ -21,7 +21,7 @@ public class Comic
                   Serializable {
 
     // Declare.
-    private List<ComicCharacter> characters = new ArrayList<ComicCharacter>();
+    private List<Character> characters = new ArrayList<Character>();
     private Double coverPrice;
     private List<Creator> creators = new ArrayList<Creator>();
     private String description;
@@ -192,7 +192,7 @@ public class Comic
      * 
      * @return  the characters.
      */
-    public List<ComicCharacter> getCharacters() {
+    public List<Character> getCharacters() {
         return this.characters;
     }
     
@@ -350,10 +350,10 @@ public class Comic
      * 
      * @param  characters  the characters.
      */
-    public void setCharacters(List<ComicCharacter> characters) {
+    public void setCharacters(List<Character> characters) {
         
         if (characters == null) {
-            this.characters = new ArrayList<ComicCharacter>();
+            this.characters = new ArrayList<Character>();
         }
         else {
             this.characters = characters;
