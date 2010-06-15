@@ -14,7 +14,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-ejb-plugin</artifactId>
-                <version>2.2</version>
+                <version>2.2.1</version>
                 <configuration>
                     <ejbVersion>3.0</ejbVersion>
                 </configuration>
@@ -26,26 +26,43 @@
             <groupId>com.sun.appserver</groupId>
             <artifactId>appserv-admin</artifactId>
             <version>9.1</version>
+            <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>com.sun.appserver</groupId>
             <artifactId>appserv-deployment-client</artifactId>
             <version>9.1</version>
+            <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>com.sun.appserver</groupId>
             <artifactId>appserv-ext</artifactId>
             <version>9.1</version>
+            <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>com.sun.appserver</groupId>
             <artifactId>appserv-rt</artifactId>
             <version>9.1</version>
+            <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>com.sun.appserver</groupId>
             <artifactId>javaee</artifactId>
             <version>9.1</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>javax.ejb</groupId>
+            <artifactId>ejb-api</artifactId>
+            <version>3.0</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.8.1</version>
+            <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.lazydog.utilities</groupId>

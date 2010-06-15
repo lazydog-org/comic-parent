@@ -1,5 +1,11 @@
 package org.lazydog.comic.internal.service;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.List;
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
 import org.lazydog.comic.model.Category;
 import org.lazydog.comic.model.Character;
 import org.lazydog.comic.model.Comic;
@@ -22,53 +28,46 @@ import org.lazydog.comic.model.User;
 import org.lazydog.comic.model.UserPreference;
 import org.lazydog.comic.model.Want;
 import org.lazydog.comic.service.ComicService;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.List;
-import javax.naming.Context;
-import javax.naming.InitialContext;
+import org.junit.Before;
+import org.junit.Ignore;
+import org.junit.Test;
 
 
 /**
+ * Unit tests for ComicServiceImpl class.
  *
  * @author  Ron Rickard
  */
-public class ComicServiceTester {
+public class ComicServiceTest {
 
     ComicService comicService;
     SimpleDateFormat sdf;
 
-    public ComicServiceTester() {
+    @Before
+    public void initialize() throws Exception {
 
         try {
+        // Declare.
+        Context context;
 
-            // Declare.
-            Context context;
+        // Initialize the context.
+        context = new InitialContext();
 
-            // Initialize the context.
-            context = new InitialContext();
-
-            // Initialize the services.
-            comicService = (ComicService)context.lookup("ejb/ComicService");
-
-            sdf = new SimpleDateFormat("MM/DD/yyyy HH:mm:ss");
+        // Initialize the services.
+        comicService = (ComicService)context.lookup("ejb/ComicService");
         }
-        catch(Exception e) {
-            System.err.println("Unable to initialize services.");
-            System.err.println(e);
+        catch(NamingException e) {
+            // Ignore.
         }
+
+        sdf = new SimpleDateFormat("MM/DD/yyyy HH:mm:ss");
     }
 
-    public static void main(String[] args) {
+    @Test
+    public void testFindList() throws Exception {
 
-        ComicServiceTester tester = new ComicServiceTester();
-
-        tester.testFindList();
-    }
-
-    public void testFindList() {
-
-        try {
+        // Check if the comic service is accessible.
+        if (comicService != null) {
 
             System.out.println(sdf.format(new Date()) + " Fetching all objects ...");
 
@@ -118,15 +117,14 @@ public class ComicServiceTester {
 
             System.out.println(sdf.format(new Date()) + " Finished.");
         }
-        catch(Exception e) {
-            System.err.println("Unable to get all.");
-            System.err.println(e);
-        }
     }
 
-    public void testCategorySave() {
+    @Ignore
+    @Test
+    public void testCategorySave() throws Exception {
 
-        try {
+        // Check if the comic service is accessible.
+        if (comicService != null) {
 
             // Change category.
             Category category = comicService.find(Category.class, 1);
@@ -136,16 +134,15 @@ public class ComicServiceTester {
             // Save the category.
             comicService.save(category, user);
         }
-        catch(Exception e) {
-            System.err.println("Unable to save category.");
-            System.err.println(e);
-        }
     }
 
-    public void testComicSave() {
+    @Ignore
+    @Test
+    public void testComicSave() throws Exception {
 
-        try {
-
+        // Check if the comic service is accessible.
+        if (comicService != null) {
+            
             // Create comic.
             Comic comic = comicService.find(Comic.class, 9815);
             comic.setId(null);
@@ -154,10 +151,6 @@ public class ComicServiceTester {
 
             // Save the comic.
             comicService.save(comic, user);
-        }
-        catch(Exception e) {
-            System.err.println("Unable to save comic.");
-            System.err.println(e);
         }
     }
 }
