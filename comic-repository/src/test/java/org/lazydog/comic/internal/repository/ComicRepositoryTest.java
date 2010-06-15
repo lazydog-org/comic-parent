@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.List;
 import javax.naming.Context;
 import javax.naming.InitialContext;
+import javax.naming.NamingException;
 import org.lazydog.comic.criteria.Criteria;
 import org.lazydog.comic.criteria.CriteriaFactory;
 import org.lazydog.comic.model.Category;
@@ -29,14 +30,12 @@ import org.lazydog.comic.model.User;
 import org.lazydog.comic.model.UserPreference;
 import org.lazydog.comic.model.Want;
 import org.lazydog.comic.spi.repository.ComicRepository;
-import static org.junit.Assert.*;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 
 
 /**
- * Unit test for ComicRepository class.
+ * Unit tests for ComicRepositoryImpl class.
  *
  * @author  Ron Rickard
  */
@@ -70,14 +69,22 @@ public class ComicRepositoryTest {
     public void initialize() throws Exception {
 
         // Declare.
-        Context context;
         CriteriaFactory criteriaFactory;
 
-        // Initialize the context.
-        context = new InitialContext();
+        try {
 
-        // Get the comic repository.
-        comicRepository = (ComicRepository)context.lookup("ejb/ComicRepository");
+            // Declare.
+            Context context;
+
+            // Initialize the context.
+            context = new InitialContext();
+
+            // Get the comic repository.
+            comicRepository = (ComicRepository)context.lookup("ejb/ComicRepository");
+        }
+        catch(NamingException e) {
+            // Ignore.
+        }
 
         // Get the criteria factory.
         criteriaFactory = CriteriaFactory.instance();
@@ -109,109 +116,115 @@ public class ComicRepositoryTest {
         sdf = new SimpleDateFormat("MM/DD/yyyy HH:mm:ss");
     }
 
-    @Ignore
     @Test
     public void findList() throws Exception {
 
-        System.out.println(sdf.format(new Date()) + " Fetching all objects ...");
+        // Check if the comic repository is accessible.
+        if (comicRepository != null) {
 
-        List<Category> categories = comicRepository.findList(Category.class);
-        List<Character> characters = comicRepository.findList(Character.class);
-        List<Comic> comics = comicRepository.findList(Comic.class);
-        List<ComicGrade> comicGrades = comicRepository.findList(ComicGrade.class);
-        List<ComicType> comicTypes = comicRepository.findList(ComicType.class);
-        List<Creator> creators = comicRepository.findList(Creator.class);
-        List<Distribution> distributions = comicRepository.findList(Distribution.class);
-        List<Have> haves = comicRepository.findList(Have.class);
-        List<Image> images = comicRepository.findList(Image.class);
-        List<ImageType> imageTypes = comicRepository.findList(ImageType.class);
-        List<Imprint> imprints = comicRepository.findList(Imprint.class);
-        List<Location> locations = comicRepository.findList(Location.class);
-        List<Person> persons = comicRepository.findList(Person.class);
-        List<Profession> professions = comicRepository.findList(Profession.class);
-        List<Publisher> publishers = comicRepository.findList(Publisher.class);
-        List<Title> titles = comicRepository.findList(Title.class);
-        List<TitleType> titleTypes = comicRepository.findList(TitleType.class);
-        List<Trait> traits = comicRepository.findList(Trait.class);
-        List<User> users = comicRepository.findList(User.class);
-        List<UserPreference> userPreferences = comicRepository.findList(UserPreference.class);
-        List<Want> wants = comicRepository.findList(Want.class);
+            System.out.println(sdf.format(new Date()) + " Fetching all objects ...");
 
-        System.out.println("number of categories = " + categories.size());
-        System.out.println("number of characters = " + characters.size());
-        System.out.println("number of comics = " + comics.size());
-        System.out.println("number of comicGrades = " + comicGrades.size());
-        System.out.println("number of comicTypes = " + comicTypes.size());
-        System.out.println("number of creators = " + creators.size());
-        System.out.println("number of distributions = " + distributions.size());
-        System.out.println("number of haves = " + haves.size());
-        System.out.println("number of images = " + images.size());
-        System.out.println("number of imageTypes = " + imageTypes.size());
-        System.out.println("number of imprint = " + imprints.size());
-        System.out.println("number of locations = " + locations.size());
-        System.out.println("number of persons = " + persons.size());
-        System.out.println("number of professions = " + professions.size());
-        System.out.println("number of publishers = " + publishers.size());
-        System.out.println("number of titles = " + titles.size());
-        System.out.println("number of titleTypes = " + titleTypes.size());
-        System.out.println("number of traits = " + traits.size());
-        System.out.println("number of users = " + users.size());
-        System.out.println("number of userPreferences = " + userPreferences.size());
-        System.out.println("number of wants = " + wants.size());
+            List<Category> categories = comicRepository.findList(Category.class);
+            List<Character> characters = comicRepository.findList(Character.class);
+            List<Comic> comics = comicRepository.findList(Comic.class);
+            List<ComicGrade> comicGrades = comicRepository.findList(ComicGrade.class);
+            List<ComicType> comicTypes = comicRepository.findList(ComicType.class);
+            List<Creator> creators = comicRepository.findList(Creator.class);
+            List<Distribution> distributions = comicRepository.findList(Distribution.class);
+            List<Have> haves = comicRepository.findList(Have.class);
+            List<Image> images = comicRepository.findList(Image.class);
+            List<ImageType> imageTypes = comicRepository.findList(ImageType.class);
+            List<Imprint> imprints = comicRepository.findList(Imprint.class);
+            List<Location> locations = comicRepository.findList(Location.class);
+            List<Person> persons = comicRepository.findList(Person.class);
+            List<Profession> professions = comicRepository.findList(Profession.class);
+            List<Publisher> publishers = comicRepository.findList(Publisher.class);
+            List<Title> titles = comicRepository.findList(Title.class);
+            List<TitleType> titleTypes = comicRepository.findList(TitleType.class);
+            List<Trait> traits = comicRepository.findList(Trait.class);
+            List<User> users = comicRepository.findList(User.class);
+            List<UserPreference> userPreferences = comicRepository.findList(UserPreference.class);
+            List<Want> wants = comicRepository.findList(Want.class);
 
-        System.out.println(sdf.format(new Date()) + " Finished.");
+            System.out.println("number of categories = " + categories.size());
+            System.out.println("number of characters = " + characters.size());
+            System.out.println("number of comics = " + comics.size());
+            System.out.println("number of comicGrades = " + comicGrades.size());
+            System.out.println("number of comicTypes = " + comicTypes.size());
+            System.out.println("number of creators = " + creators.size());
+            System.out.println("number of distributions = " + distributions.size());
+            System.out.println("number of haves = " + haves.size());
+            System.out.println("number of images = " + images.size());
+            System.out.println("number of imageTypes = " + imageTypes.size());
+            System.out.println("number of imprint = " + imprints.size());
+            System.out.println("number of locations = " + locations.size());
+            System.out.println("number of persons = " + persons.size());
+            System.out.println("number of professions = " + professions.size());
+            System.out.println("number of publishers = " + publishers.size());
+            System.out.println("number of titles = " + titles.size());
+            System.out.println("number of titleTypes = " + titleTypes.size());
+            System.out.println("number of traits = " + traits.size());
+            System.out.println("number of users = " + users.size());
+            System.out.println("number of userPreferences = " + userPreferences.size());
+            System.out.println("number of wants = " + wants.size());
+
+            System.out.println(sdf.format(new Date()) + " Finished.");
+        }
     }
 
-    @Ignore
     @Test
     public void findListByCriteria() throws Exception {
 
-        System.out.println(sdf.format(new Date()) + " Fetching all objects ...");
+        // Check if the comic repository is accessible.
+        if (comicRepository != null) {
 
-        List<Category> categories = comicRepository.findList(categoryCriteria);
-        List<Character> characters = comicRepository.findList(characterCriteria);
-        List<Comic> comics = comicRepository.findList(comicCriteria);
-        List<ComicGrade> comicGrades = comicRepository.findList(comicGradeCriteria);
-        List<ComicType> comicTypes = comicRepository.findList(comicTypeCriteria);
-        List<Creator> creators = comicRepository.findList(creatorCriteria);
-        List<Distribution> distributions = comicRepository.findList(distributionCriteria);
-        List<Have> haves = comicRepository.findList(haveCriteria);
-        List<Image> images = comicRepository.findList(imageCriteria);
-        List<ImageType> imageTypes = comicRepository.findList(imageTypeCriteria);
-        List<Imprint> imprints = comicRepository.findList(imprintCriteria);
-        List<Location> locations = comicRepository.findList(locationCriteria);
-        List<Person> persons = comicRepository.findList(personCriteria);
-        List<Profession> professions = comicRepository.findList(professionCriteria);
-        List<Publisher> publishers = comicRepository.findList(publisherCriteria);
-        List<Title> titles = comicRepository.findList(titleCriteria);
-        List<TitleType> titleTypes = comicRepository.findList(titleTypeCriteria);
-        List<Trait> traits = comicRepository.findList(traitCriteria);
-        List<User> users = comicRepository.findList(userCriteria);
-        List<UserPreference> userPreferences = comicRepository.findList(userPreferenceCriteria);
-        List<Want> wants = comicRepository.findList(wantCriteria);
+            System.out.println(sdf.format(new Date()) + " Fetching all objects ...");
 
-        System.out.println("number of categories = " + categories.size());
-        System.out.println("number of characters = " + characters.size());
-        System.out.println("number of comics = " + comics.size());
-        System.out.println("number of comicGrades = " + comicGrades.size());
-        System.out.println("number of comicTypes = " + comicTypes.size());
-        System.out.println("number of creators = " + creators.size());
-        System.out.println("number of distributions = " + distributions.size());
-        System.out.println("number of haves = " + haves.size());
-        System.out.println("number of images = " + images.size());
-        System.out.println("number of imageTypes = " + imageTypes.size());
-        System.out.println("number of imprints = " + imprints.size());
-        System.out.println("number of locations = " + locations.size());
-        System.out.println("number of persons = " + persons.size());
-        System.out.println("number of professions = " + professions.size());
-        System.out.println("number of publishers = " + publishers.size());
-        System.out.println("number of titles = " + titles.size());
-        System.out.println("number of titleTypes = " + titleTypes.size());
-        System.out.println("number of traits = " + traits.size());
-        System.out.println("number of users = " + users.size());
-        System.out.println("number of userPreferences = " + userPreferences.size());
-        System.out.println("number of wants = " + wants.size());
+            List<Category> categories = comicRepository.findList(categoryCriteria);
+            List<Character> characters = comicRepository.findList(characterCriteria);
+            List<Comic> comics = comicRepository.findList(comicCriteria);
+            List<ComicGrade> comicGrades = comicRepository.findList(comicGradeCriteria);
+            List<ComicType> comicTypes = comicRepository.findList(comicTypeCriteria);
+            List<Creator> creators = comicRepository.findList(creatorCriteria);
+            List<Distribution> distributions = comicRepository.findList(distributionCriteria);
+            List<Have> haves = comicRepository.findList(haveCriteria);
+            List<Image> images = comicRepository.findList(imageCriteria);
+            List<ImageType> imageTypes = comicRepository.findList(imageTypeCriteria);
+            List<Imprint> imprints = comicRepository.findList(imprintCriteria);
+            List<Location> locations = comicRepository.findList(locationCriteria);
+            List<Person> persons = comicRepository.findList(personCriteria);
+            List<Profession> professions = comicRepository.findList(professionCriteria);
+            List<Publisher> publishers = comicRepository.findList(publisherCriteria);
+            List<Title> titles = comicRepository.findList(titleCriteria);
+            List<TitleType> titleTypes = comicRepository.findList(titleTypeCriteria);
+            List<Trait> traits = comicRepository.findList(traitCriteria);
+            List<User> users = comicRepository.findList(userCriteria);
+            List<UserPreference> userPreferences = comicRepository.findList(userPreferenceCriteria);
+            List<Want> wants = comicRepository.findList(wantCriteria);
 
-        System.out.println(sdf.format(new Date()) + " Finished.");
+            System.out.println("number of categories = " + categories.size());
+            System.out.println("number of characters = " + characters.size());
+            System.out.println("number of comics = " + comics.size());
+            System.out.println("number of comicGrades = " + comicGrades.size());
+            System.out.println("number of comicTypes = " + comicTypes.size());
+            System.out.println("number of creators = " + creators.size());
+            System.out.println("number of distributions = " + distributions.size());
+            System.out.println("number of haves = " + haves.size());
+            System.out.println("number of images = " + images.size());
+            System.out.println("number of imageTypes = " + imageTypes.size());
+            System.out.println("number of imprints = " + imprints.size());
+            System.out.println("number of locations = " + locations.size());
+            System.out.println("number of persons = " + persons.size());
+            System.out.println("number of professions = " + professions.size());
+            System.out.println("number of publishers = " + publishers.size());
+            System.out.println("number of titles = " + titles.size());
+            System.out.println("number of titleTypes = " + titleTypes.size());
+            System.out.println("number of traits = " + traits.size());
+            System.out.println("number of users = " + users.size());
+            System.out.println("number of userPreferences = " + userPreferences.size());
+            System.out.println("number of wants = " + wants.size());
+
+            System.out.println(sdf.format(new Date()) + " Finished.");
+        }
     }
 }
