@@ -18,6 +18,7 @@
                 <configuration>
                     <generateApplicationXml>true</generateApplicationXml>
                     <defaultLibBundleDir>lib</defaultLibBundleDir>
+                    <version>5</version>
                     <modules>
                         <ejbModule>
                             <groupId>${project.groupId}</groupId>
