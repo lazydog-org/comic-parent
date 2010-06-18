@@ -10,7 +10,12 @@
     <entity class="Have" access="FIELD" metadata-complete="true">
         <table name="have" schema="comic_collection"/>
         <named-query name="Have.findAll">
-            <query>select h from Have h</query>
+            <query>
+                select h from Have h
+                left join fetch h.comic
+                left join fetch h.comicGrade
+                left join fetch h.location
+            </query>
         </named-query>
         <attributes>
             <basic name="purchasePrice">

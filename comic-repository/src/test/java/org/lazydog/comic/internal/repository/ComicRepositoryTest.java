@@ -172,7 +172,6 @@ public class ComicRepositoryTest {
         }
     }
 
-    @Ignore
     @Test
     public void findListHave() throws Exception {
 
@@ -183,19 +182,21 @@ public class ComicRepositoryTest {
             Date endTime;
             Date startTime;
 
-            startTime = new Date();
-            System.out.print("Fetching all haves ... ");
+            for (int x = 0; x < 10; x++) {
 
-            haves = comicRepository.findList(Have.class);
+                startTime = new Date();
+                System.out.print("Fetching all haves ... ");
 
-            endTime = new Date();
-            System.out.println(haves.size() + " retrieved in "
-                    + ((endTime.getTime() - startTime.getTime()) / 1000)
-                    + " seconds.");
+                haves = comicRepository.findList(Have.class);
+
+                endTime = new Date();
+                System.out.println(haves.size() + " retrieved in "
+                        + ((endTime.getTime() - startTime.getTime()) / 1000f)
+                        + " seconds.");
+            }
         }
     }
 
-    @Ignore
     @Test
     public void findListHaveByCriteria() throws Exception {
 
@@ -206,18 +207,22 @@ public class ComicRepositoryTest {
             Date endTime;
             Date startTime;
 
-            startTime = new Date();
-            System.out.print("Fetching all haves by criteria ... ");
+            for (int x = 0; x < 10; x++) {
 
-            haves = comicRepository.findList(haveCriteria);
+                startTime = new Date();
+                System.out.print("Fetching all haves by criteria ... ");
 
-            endTime = new Date();
-            System.out.println(haves.size() + " retrieved in "
-                    + ((endTime.getTime() - startTime.getTime()) / 1000)
-                    + " seconds.");
+                haves = comicRepository.findList(haveCriteria);
+
+                endTime = new Date();
+                System.out.println(haves.size() + " retrieved in "
+                        + ((endTime.getTime() - startTime.getTime()) / 1000f)
+                        + " seconds.");
+            }
         }
     }
 
+    @Ignore
     @Test
     public void findListHaveBySpecificCriteria() throws Exception {
 
@@ -225,29 +230,48 @@ public class ComicRepositoryTest {
         if (comicRepository != null) {
 
             List<Have> haves;
+            List<Title> titles;
             User user;
+            Date endTime;
+            Date startTime;
 
-            userCriteria.add(ComparisonOperation.eq("name", "rjrjr"));
-            user = comicRepository.find(userCriteria);
-
-            haveCriteria.add(ComparisonOperation.eq("createUser", user));
-            haveCriteria.addOrder(Order.asc("comic.title.name"));
-
-            haves = comicRepository.findList(haveCriteria);
-
-            if (haves != null) {
-
-                List<Title> titles;
-
+            for (int x = 0; x < 10; x++) {
+                
                 titles = new ArrayList<Title>();
 
-                for (Have have : haves) {
+                startTime = new Date();
+                System.out.print("Fetching all haves ... ");
 
-                    if (!titles.contains(have.getComic().getTitle())) {
+                userCriteria.add(ComparisonOperation.eq("name", "rjrjr"));
+                user = comicRepository.find(userCriteria);
 
-                        titles.add(have.getComic().getTitle());
+                haveCriteria.add(ComparisonOperation.eq("createUser", user));
+                //haveCriteria.addOrder(Order.asc("comic.title.name"));
+
+                haves = comicRepository.findList(haveCriteria);
+
+                endTime = new Date();
+                System.out.println(haves.size() + " retrieved in "
+                        + ((endTime.getTime() - startTime.getTime()) / 1000f)
+                        + " seconds.");
+                startTime = new Date();
+                System.out.print("Fetching all titles ... ");
+
+                if (haves != null) {
+
+                    for (Have have : haves) {
+
+                        if (!titles.contains(have.getComic().getTitle())) {
+
+                            titles.add(have.getComic().getTitle());
+                        }
                     }
                 }
+
+                endTime = new Date();
+                System.out.println(titles.size() + " retrieved in "
+                        + ((endTime.getTime() - startTime.getTime()) / 1000f)
+                        + " seconds.");
             }
         }
     }
@@ -270,7 +294,7 @@ public class ComicRepositoryTest {
 
             endTime = new Date();
             System.out.println(titles.size() + " retrieved in "
-                    + ((endTime.getTime() - startTime.getTime()) / 1000)
+                    + ((endTime.getTime() - startTime.getTime()) / 1000f)
                     + " seconds.");
         }
     }
@@ -293,7 +317,7 @@ public class ComicRepositoryTest {
 
             endTime = new Date();
             System.out.println(titles.size() + " retrieved in "
-                    + ((endTime.getTime() - startTime.getTime()) / 1000)
+                    + ((endTime.getTime() - startTime.getTime()) / 1000f)
                     + " seconds.");
         }
     }
