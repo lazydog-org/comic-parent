@@ -1,5 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<web-app version="2.5" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee                         http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
+<web-app 
+    xmlns="http://java.sun.com/xml/ns/javaee"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://java.sun.com/xml/ns/javaee
+                        http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+    version="2.5">
+
     <context-param>
         <param-name>facelets.DEVELOPMENT</param-name>
         <param-value>true</param-value>
@@ -56,6 +62,27 @@
     <session-config>
         <session-timeout>0</session-timeout>
     </session-config>
-
-
-    </web-app>
+    <login-config>
+        <auth-method>FORM</auth-method>
+        <realm-name>ldap-realm</realm-name>
+        <form-login-config>
+            <form-login-page>/pages/common/login.jsf</form-login-page>
+            <form-error-page>/pages/common/loginError.jsf</form-error-page>
+        </form-login-config>
+    </login-config>
+    <security-constraint>
+        <web-resource-collection>
+            <web-resource-name>Main Page</web-resource-name>
+            <url-pattern>/pages/common/main.jsf</url-pattern>
+            <http-method>GET</http-method>
+            <http-method>POST</http-method>
+        </web-resource-collection>
+        <auth-constraint>
+            <role-name>authorized</role-name>
+        </auth-constraint>
+    </security-constraint>
+    <security-role>
+        <description>Authorized User</description>
+        <role-name>authorized</role-name>
+    </security-role>
+</web-app>

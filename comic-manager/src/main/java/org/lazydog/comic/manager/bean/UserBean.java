@@ -10,8 +10,13 @@ import org.lazydog.comic.manager.utility.SessionUtility;
 import java.io.Serializable;
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
+import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import javax.servlet.RequestDispatcher;
 
 
 /**
@@ -22,10 +27,8 @@ import javax.faces.event.ActionEvent;
 public class UserBean
        implements Serializable {
 
-    private static final String FAILURE = "failure";
     private static final String SUCCESS = "success";
 
-    private boolean authenticated;
     private String name;
     private String password;
     private ComicService comicService;
@@ -33,55 +36,44 @@ public class UserBean
     /**
      * Authenticate.
      *
-     * @param  actionEvent  action event.
-     *
-     * @return  success or failure outcome.
+     * @return  null.
      */
-    public void authenticate(ActionEvent actionEvent) {
+    public String authenticate() {
 
         try {
 
             // Declare.
-            Criteria<User> criteria;
-            CriteriaFactory criteriaFactory;
-            User user;
+            ExternalContext context;
+            RequestDispatcher dispatcher;
+            HttpServletRequest request;
+            HttpServletResponse response;
 
-            // Initialize criteria factory.
-            criteriaFactory = CriteriaFactory.instance();
-
-            // Create a new criteria.
-            criteria = criteriaFactory.createCriteria(User.class);
-
-            // Modify the criteria.
-            criteria.add(ComparisonOperation.eq("name", this.name));
-
-            // Get the user.
-            user = this.comicService.find(criteria);
-
-            // Check if the user exists.
-            if (user != null) {
-
-                // Put the user on the session.
-                SessionUtility.putValue(SessionKey.USER, user);
-
-                // Put the user preference on the session.
-                SessionUtility.putValue(
-                        SessionKey.USER_PREFERENCE, user.getUserPreference());
-
-                // Flag that the user is authenticated.
-                this.authenticated = true;
-            }
-            else {
-
-                FacesContext.getCurrentInstance().addMessage(null,
-                        new FacesMessage("Invalid user name or password entered."));
-            }
+            // Dispatch to loginProxy.jsp.
+            context = FacesContext.getCurrentInstance().getExternalContext();
+            request = (HttpServletRequest)context.getRequest();
+            request.setAttribute("j_username", this.name);
+            request.setAttribute("j_password", this.password);
+            response = (HttpServletResponse)context.getResponse();
+            dispatcher = request.getRequestDispatcher("/pages/common/loginProxy.jsp");
+            dispatcher.forward(request, response);
         }
         catch(Exception e) {
 
             FacesContext.getCurrentInstance().addMessage(null,
                     new FacesMessage("Invalid user name or password entered."));
         }
+
+        return null;
+    }
+
+    /**
+     * Is the user authenticated?
+     *
+     * @return  true if the user is authenticated, otherwise false.
+     */
+    public Boolean getAuthenticated() {
+        return (FacesContext.getCurrentInstance().getExternalContext().getRemoteUser() != null) ?
+                Boolean.TRUE : Boolean.FALSE;
     }
 
     /**
@@ -104,29 +96,79 @@ public class UserBean
 
     /**
      * Login.
-     *
-     * @return  success or failure outcome.
+     * 
+     * @return  success outcome.
      */
     public String login() {
+        return SUCCESS;
+    }
+
+    /**
+     * Logout.
+     *
+     * @return  success outcome.
+     */
+    public String logout() {
 
         // Declare.
-        String outcome;
+        ExternalContext context;
+        HttpSession session;
 
-        // Set the outcome to failure.
-        outcome = FAILURE;
+        // Invalidate the session.
+        context = FacesContext.getCurrentInstance().getExternalContext();
+        session = (HttpSession)context.getSession(false);
+        session.invalidate();
 
-        if (this.authenticated) {
+        return SUCCESS;
+    }
 
-            // Set the outcome to success.
-            outcome = SUCCESS;
+    /**
+     * Lookup the user.
+     * 
+     * @param  actionEvent  the action event.
+     */
+    public void lookup(ActionEvent actionEvent) {
+
+        try {
+
+            // Declare.
+            Criteria<User> criteria;
+            CriteriaFactory criteriaFactory;
+            User user;
+
+            // Initialize the criteria factory.
+            criteriaFactory = CriteriaFactory.instance();
+
+            // Create a new criteria.
+            criteria = criteriaFactory.createCriteria(User.class);
+
+            // Modify the criteria.
+            criteria.add(ComparisonOperation.eq("name", this.name));
+
+            // Get the user.
+            user = this.comicService.find(criteria);
+
+            // Check if the user exists.
+            if (user != null) {
+
+                // Put the user on the session.
+                SessionUtility.putValue(SessionKey.USER, user);
+
+                // Put the user preference on the session.
+                SessionUtility.putValue(
+                        SessionKey.USER_PREFERENCE, user.getUserPreference());
+            }
+            else {
+
+                FacesContext.getCurrentInstance().addMessage(null,
+                        new FacesMessage("Invalid user name or password entered."));
+            }
         }
-        else {
+        catch(Exception e) {
 
-            // Set the outcome to failure.
-            outcome = FAILURE;
+            FacesContext.getCurrentInstance().addMessage(null,
+                        new FacesMessage("Invalid user name or password entered."));
         }
-
-        return outcome;
     }
 
     /**
