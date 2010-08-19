@@ -103,7 +103,7 @@ public class Comic
         thatDistribution = (object.getDistribution() == null) ? new Distribution() : object.getDistribution();
         thatNumber = (object.getNumber() == null) ? new Integer(0) : object.getNumber();
         thatPrint = object.getPrint();
-        thatPublishDate = (object.getPublishDate() == null) ? this.getEpoch() : object.getPublishDate();
+        thatPublishDate = (object.getPublishDate() == null) ? getEpoch() : object.getPublishDate();
         thatTitle = (object.getTitle() == null) ? new Title() : object.getTitle();
         thatType = (object.getType() == null) ? new ComicType() : object.getType();
         thatVariant = (object.getVariant() == null) ? "" : object.getVariant();
@@ -112,7 +112,7 @@ public class Comic
         thisDistribution = (this.getDistribution() == null) ? new Distribution() : this.getDistribution();
         thisNumber = (this.getNumber() == null) ? new Integer(0) : this.getNumber();
         thisPrint = this.getPrint();
-        thisPublishDate = (this.getPublishDate() == null) ? this.getEpoch() : this.getPublishDate();
+        thisPublishDate = (this.getPublishDate() == null) ? getEpoch() : this.getPublishDate();
         thisTitle = (this.getTitle() == null) ? new Title() : this.getTitle();
         thisType = (this.getType() == null) ? new ComicType() : this.getType();
         thisVariant = (this.getVariant() == null) ? "" : this.getVariant();
@@ -329,7 +329,7 @@ public class Comic
         thisDistribution = (this.getDistribution() == null) ? new Distribution() : this.getDistribution();
         thisNumber = (this.getNumber() == null) ? new Integer(0) : this.getNumber();
         thisPrint = this.getPrint();
-        thisPublishDate = (this.getPublishDate() == null) ? this.getEpoch() : this.getPublishDate();
+        thisPublishDate = (this.getPublishDate() == null) ? getEpoch() : this.getPublishDate();
         thisTitle = (this.getTitle() == null) ? new Title() : this.getTitle();
         thisType = (this.getType() == null) ? new ComicType() : this.getType();
         thisVariant = (this.getVariant() == null) ? "" : this.getVariant();
@@ -396,7 +396,7 @@ public class Comic
      * @param  description  the description.
      */
     public void setDescription(String description) {
-        this.description = this.trimmed(description);
+        this.description = trimmed(description);
     }
     
     /**
@@ -510,7 +510,7 @@ public class Comic
      * @param  variant  the variant.
      */
     public void setVariant(String variant) {
-        this.variant = this.trimmed(variant);
+        this.variant = trimmed(variant);
     }
 
     /**

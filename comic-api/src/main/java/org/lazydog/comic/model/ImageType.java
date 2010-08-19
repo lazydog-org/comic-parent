@@ -156,7 +156,7 @@ public class ImageType
      * @param  directoryPath  the directory path.
      */
     public void setDirectoryPath(String directoryPath) {
-        this.directoryPath = this.trimmed(directoryPath);
+        this.directoryPath = trimmed(directoryPath);
     }
     
     /**
@@ -165,7 +165,7 @@ public class ImageType
      * @param  value  the value.
      */
     public void setValue(String value) {
-        this.value = this.trimmed(value);
+        this.value = trimmed(value);
     }
      
     /**

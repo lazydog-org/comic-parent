@@ -110,7 +110,7 @@ public abstract class Entity<T extends Entity<T>>
      * 
      * @return  the epoch.
      */
-    protected Date getEpoch() {
+    protected static Date getEpoch() {
         
         // Declare.
         Date epoch;
@@ -209,20 +209,8 @@ public abstract class Entity<T extends Entity<T>>
      *
      * @return  the trimmed string.
      */
-    protected String trimmed(String value) {
-        
-        // Declare.
-        String newValue;
-        
-        // Initialize.
-        newValue = null;
-        
-        // Check if the string is not null and is not the empty string.
-        if (value != null && !value.trim().equals("")) {
-            newValue = value.trim();
-        }
-        
-        return newValue;
+    protected static String trimmed(String value) {
+        return (value != null) ? value.trim() : null;
     }
    
     /**

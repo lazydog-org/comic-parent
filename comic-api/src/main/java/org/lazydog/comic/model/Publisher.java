@@ -184,7 +184,7 @@ public class Publisher
      * @param  name  the name.
      */
     public void setName(String name) {
-        this.name = this.trimmed(name);
+        this.name = trimmed(name);
     }
 
     /**

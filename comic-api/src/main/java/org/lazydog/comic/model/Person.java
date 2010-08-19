@@ -156,7 +156,7 @@ public class Person
      * @param  firstName  the first name.
      */
     public void setFirstName(String firstName) {
-        this.firstName = this.trimmed(firstName);
+        this.firstName = trimmed(firstName);
     }
          
     /**
@@ -165,7 +165,7 @@ public class Person
      * @param  lastName  the last name.
      */
     public void setLastName(String lastName) {
-        this.lastName = this.trimmed(lastName);
+        this.lastName = trimmed(lastName);
     }
 
     /**

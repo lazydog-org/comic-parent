@@ -85,14 +85,14 @@ public class Title
         // Initialize.
         lastCompare = 0;
         thatName = (object.getName() == null) ? "" : object.getName();
-        thatPublishEndDate = (object.getPublishEndDate() == null) ? this.getEpoch() : object.getPublishEndDate();
-        thatPublishStartDate = (object.getPublishStartDate() == null) ? this.getEpoch() : object.getPublishStartDate();
+        thatPublishEndDate = (object.getPublishEndDate() == null) ? getEpoch() : object.getPublishEndDate();
+        thatPublishStartDate = (object.getPublishStartDate() == null) ? getEpoch() : object.getPublishStartDate();
         thatPublishers = (object.getPublishers() == null) ? new ArrayList<Publisher>() : object.getPublishers();
         thatType = (object.getType() == null) ? new TitleType() : object.getType();
         thatVolume = object.getVolume();
         thisName = (this.getName() == null) ? "" : this.getName();
-        thisPublishEndDate = (this.getPublishEndDate() == null) ? this.getEpoch() : this.getPublishEndDate();
-        thisPublishStartDate = (this.getPublishStartDate() == null) ? this.getEpoch() : this.getPublishStartDate();
+        thisPublishEndDate = (this.getPublishEndDate() == null) ? getEpoch() : this.getPublishEndDate();
+        thisPublishStartDate = (this.getPublishStartDate() == null) ? getEpoch() : this.getPublishStartDate();
         thisPublishers = (this.getPublishers() == null) ? new ArrayList<Publisher>() : this.getPublishers();
         thisType = (this.getType() == null) ? new TitleType() : this.getType();
         thisVolume = this.getVolume();
@@ -274,8 +274,8 @@ public class Title
         
         // Initialize.
         thisName = (this.getName() == null) ? "" : this.getName();
-        thisPublishEndDate = (this.getPublishEndDate() == null) ? this.getEpoch() : this.getPublishEndDate();
-        thisPublishStartDate = (this.getPublishStartDate() == null) ? this.getEpoch() : this.getPublishStartDate();
+        thisPublishEndDate = (this.getPublishEndDate() == null) ? getEpoch() : this.getPublishEndDate();
+        thisPublishStartDate = (this.getPublishStartDate() == null) ? getEpoch() : this.getPublishStartDate();
         thisPublishers = (this.getPublishers() == null) ? new ArrayList<Publisher>() : this.getPublishers();
         thisType = (this.getType() == null) ? new TitleType() : this.getType();
         thisVolume = this.getVolume();
@@ -333,7 +333,7 @@ public class Title
      * @param  name  the name.
      */
     public void setName(String name) {
-        this.name = this.trimmed(name);
+        this.name = trimmed(name);
     }
      
     /**

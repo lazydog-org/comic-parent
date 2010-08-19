@@ -135,7 +135,7 @@ public class Profession
      * @param  value  the value.
      */
     public void setValue(String value) {
-        this.value = this.trimmed(value);
+        this.value = trimmed(value);
     }
      
     /**

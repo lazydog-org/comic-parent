@@ -177,7 +177,7 @@ public class Image
      * @param  fileName  the file name.
      */
     public void setFileName(String fileName) {
-        this.fileName = this.trimmed(fileName);
+        this.fileName = trimmed(fileName);
     }
           
     /**
@@ -186,7 +186,7 @@ public class Image
      * @param  label  the label.
      */
     public void setLabel(String label) {
-        this.label = this.trimmed(label);
+        this.label = trimmed(label);
     }
     
     /**

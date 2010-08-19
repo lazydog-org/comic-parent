@@ -87,7 +87,7 @@ public class UserPreference
         thatCreateUser = (object.getCreateUser() == null) ? new User() : object.getCreateUser();
         thatDistribution = (object.getDistribution() == null) ? new Distribution() : object.getDistribution();
         thatImageType = (object.getImageType() == null) ? new ImageType() : object.getImageType();
-        thatMinimumPublishDate = (object.getMinimumPublishDate() == null) ? this.getEpoch() : object.getMinimumPublishDate();
+        thatMinimumPublishDate = (object.getMinimumPublishDate() == null) ? getEpoch() : object.getMinimumPublishDate();
         thatPublisher = (object.getPublisher() == null) ? new Publisher() : object.getPublisher();
         thatTitleType = (object.getTitleType() == null) ? new TitleType() : object.getTitleType();
         thisComicGrade = (this.getComicGrade() == null) ? new ComicGrade() : this.getComicGrade();
@@ -95,7 +95,7 @@ public class UserPreference
         thisCreateUser = (this.getCreateUser() == null) ? new User() : this.getCreateUser();
         thisDistribution = (this.getDistribution() == null) ? new Distribution() : this.getDistribution();
         thisImageType = (this.getImageType() == null) ? new ImageType() : this.getImageType();
-        thisMinimumPublishDate = (this.getMinimumPublishDate() == null) ? this.getEpoch() : this.getMinimumPublishDate();
+        thisMinimumPublishDate = (this.getMinimumPublishDate() == null) ? getEpoch() : this.getMinimumPublishDate();
         thisPublisher = (this.getPublisher() == null) ? new Publisher() : this.getPublisher();
         thisTitleType = (this.getTitleType() == null) ? new TitleType() : this.getTitleType();
         
@@ -251,7 +251,7 @@ public class UserPreference
         thisCreateUser = (this.getCreateUser() == null) ? new User() : this.getCreateUser();
         thisDistribution = (this.getDistribution() == null) ? new Distribution() : this.getDistribution();
         thisImageType = (this.getImageType() == null) ? new ImageType() : this.getImageType();
-        thisMinimumPublishDate = (this.getMinimumPublishDate() == null) ? this.getEpoch() : this.getMinimumPublishDate();
+        thisMinimumPublishDate = (this.getMinimumPublishDate() == null) ? getEpoch() : this.getMinimumPublishDate();
         thisPublisher = (this.getPublisher() == null) ? new Publisher() : this.getPublisher();
         thisTitleType = (this.getTitleType() == null) ? new TitleType() : this.getTitleType();
 

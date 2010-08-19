@@ -143,10 +143,10 @@ public class User
     /**
      * Set the name.
      *
-     * @param  value  the value.
+     * @param  name  the name.
      */
     public void setName(String name) {
-        this.name = this.trimmed(name);
+        this.name = trimmed(name);
     }
 
     /**

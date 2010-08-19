@@ -161,7 +161,7 @@ public class ComicGrade
      * @param  code  the code.
      */
     public void setCode(String code) {
-        this.code = this.trimmed(code);
+        this.code = trimmed(code);
     }
          
     /**
@@ -170,7 +170,7 @@ public class ComicGrade
      * @param  name  the name.
      */
     public void setName(String name) {
-        this.name = this.trimmed(name);
+        this.name = trimmed(name);
     }
             
     /**
