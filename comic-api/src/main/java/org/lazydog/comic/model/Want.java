@@ -18,16 +18,7 @@ public class Want
     // Declare.
     @Valid @NotNull(message="Comic is required.")
     private Comic comic;
-    
-    /**
-     * Constructor.
-     */
-    public Want() {
-        
-        super();
-        this.setComic(null);
-    }
- 
+
     /**
      * Compare this object to the specified object.
      *

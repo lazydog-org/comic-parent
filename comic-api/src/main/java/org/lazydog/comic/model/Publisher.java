@@ -23,18 +23,7 @@ public class Publisher
     @NotNull(message="Name is required.") 
     @Size(max=50, message="Name cannot contain more than 50 characters.")
     private String name;
-    
-    /**
-     * Constructor.
-     */
-    public Publisher() {
-        
-        super();
-        this.setImage(null);
-        this.setImprints(null);
-        this.setName(null);
-    }
-    
+
     /**
      * Compare this object to the specified object.
      *

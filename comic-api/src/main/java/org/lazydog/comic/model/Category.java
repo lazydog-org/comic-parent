@@ -21,15 +21,6 @@ public class Category
     private String name;
 
     /**
-     * Constructor.
-     */
-    public Category() {
-        
-        super();
-        this.setName(null);
-    }
-    
-    /**
      * Compare this object to the specified object.
      *
      * @param  object  the object to compare this object against.

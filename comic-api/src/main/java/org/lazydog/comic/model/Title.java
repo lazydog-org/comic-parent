@@ -36,23 +36,6 @@ public class Title
     private TitleType type;
     @NotNull(message="Volume is required.")
     private Integer volume;
-     
-    /**
-     * Constructor.
-     */
-    public Title() {
-
-        super();
-        this.setCategories(null);
-        this.setComics(null);
-        this.setImage(null);
-        this.setName(null);
-        this.setPublishEndDate(null);
-        this.setPublishStartDate(null);
-        this.setPublishers(null);
-        this.setType(null);
-        this.setVolume(null);
-    }
 
     /**
      * Compare this object to the specified object.

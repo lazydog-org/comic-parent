@@ -19,17 +19,7 @@ public class Profession
     @NotNull(message="Value is required.")
     @Size(max=50, message="Value cannot contain more than 50 characters.")
     private String value;
-    
 
-    /**
-     * Constructor.
-     */
-    public Profession() {
-        
-        super();
-        this.setValue(null);
-    }
-    
     /**
      * Compare this object to the specified object.
      *

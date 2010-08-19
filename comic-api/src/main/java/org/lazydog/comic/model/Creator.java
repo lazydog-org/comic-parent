@@ -20,17 +20,7 @@ public class Creator
     private Person person;
     @Valid @NotNull(message="Profession is required.")
     private Profession profession;
-    
-    /**
-     * Constructor.
-     */
-    public Creator() {
-        
-        super();
-        this.setPerson(null);
-        this.setProfession(null);
-    }
- 
+
     /**
      * Compare this object to the specified object.
      *

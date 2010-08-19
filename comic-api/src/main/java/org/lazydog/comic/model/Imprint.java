@@ -23,18 +23,7 @@ public class Imprint
     private String name;
     @Valid @NotNull(message="Publisher is required.")
     private Publisher publisher;
-    
-    /**
-     * Constructor.
-     */
-    public Imprint() {
-        
-        super();
-        this.setImage(null);
-        this.setName(null);
-        this.setPublisher(null);
-    }
-    
+
     /**
      * Compare this object to the specified object.
      *

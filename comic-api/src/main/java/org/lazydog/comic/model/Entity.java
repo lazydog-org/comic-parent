@@ -42,11 +42,7 @@ public abstract class Entity<T extends Entity<T>>
      */
     @SuppressWarnings("unchecked")
     public Entity() {
-        
-        this.setCreateTime(null);
-        this.setId(null);
-        this.setModifyTime(null);
-        
+
         // Set the entity class.
         this.entityClass = (Class<T>)((ParameterizedType)this.getClass()
             .getGenericSuperclass()).getActualTypeArguments()[0];

@@ -32,21 +32,6 @@ public class UserPreference
     private Publisher publisher;
     @Valid @NotNull(message="Title type is required.")
     private TitleType titleType;
-    
-    /**
-     * Constructor.
-     */
-    public UserPreference() {
-        
-        super();
-        this.setComicGrade(null);
-        this.setComicType(null);
-        this.setDistribution(null);
-        this.setImageType(null);
-        this.setMinimumPublishDate(null);
-        this.setPublisher(null);
-        this.setTitleType(null);
-    }
 
     /**
      * Compare this object to the specified object.

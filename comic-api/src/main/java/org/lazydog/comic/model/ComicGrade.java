@@ -24,18 +24,7 @@ public class ComicGrade
     private String name;
     @NotNull(message="Scale is required.")
     private Double scale;
-    
-    /**
-     * Constructor.
-     */
-    public ComicGrade() {
-        
-        super();
-        this.setCode(null);
-        this.setName(null);
-        this.setScale(null);
-    }
-    
+
     /**
      * Compare this object to the specified object.
      *

@@ -25,20 +25,7 @@ public class Have
     private Double purchasePrice;
     @NotNull(message="Quantity is required.")
     private Integer quantity;
-    
-    /**
-     * Constructor.
-     */
-    public Have() {
-        
-        super();
-        this.setComic(null);
-        this.setComicGrade(null);
-        this.setLocation(null);
-        this.setPurchasePrice(null);
-        this.setQuantity(null);
-    }
- 
+
     /**
      * Compare this object to the specified object.
      *

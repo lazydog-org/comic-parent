@@ -26,17 +26,6 @@ public class Image
     private ImageType type;
 
     /**
-     * Constructor.
-     */
-    public Image() {
-        
-        super();
-        this.setFileName(null);
-        this.setLabel(null);
-        this.setType(null);
-    }
-    
-    /**
      * Compare this object to the specified object.
      *
      * @param  object  the object to compare this object against.

@@ -19,15 +19,6 @@ public class Location
     @NotNull(message="Name is required.") 
     @Size(max=50, message="Name cannot contain more than 50 characters.")
     private String name;
-    
-    /**
-     * Constructor.
-     */
-    public Location() {
-        
-        super();
-        this.setName(null);
-    }
 
     /**
      * Compare this object to the specified object.

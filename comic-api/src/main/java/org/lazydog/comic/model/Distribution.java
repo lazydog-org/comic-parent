@@ -21,15 +21,6 @@ public class Distribution
     private String value;
 
     /**
-     * Constructor.
-     */
-    public Distribution() {
-        
-        super();
-        this.setValue(null);
-    }
-    
-    /**
      * Compare this object to the specified object.
      *
      * @param  object  the object to compare this object against.

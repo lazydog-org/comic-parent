@@ -21,15 +21,6 @@ public class Trait
     private String value;
 
     /**
-     * Constructor.
-     */
-    public Trait() {
-        
-        super();
-        this.setValue(null);
-    }
-    
-    /**
      * Compare this object to the specified object.
      *
      * @param  object  the object to compare this object against.

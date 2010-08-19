@@ -20,17 +20,7 @@ public class User
     @Size(max=50, message="Name cannot contain more than 50 characters.")
     private String name;
     private UserPreference userPreference;
-    
-    /**
-     * Constructor.
-     */
-    public User() {
 
-        super();
-        this.setName(null);
-        this.setUserPreference(null);
-    }
-    
     /**
      * Compare this object to the specified object.
      *

@@ -22,17 +22,7 @@ public class Person
     @NotNull(message="Last name is required.")
     @Size(max=50, message="Last name cannot contain more than 50 characters.")
     private String lastName;
-    
-    /**
-     * Constructor.
-     */
-    public Person() {
-        
-        super();
-        this.setFirstName(null);
-        this.setLastName(null);
-    }
-    
+
     /**
      * Compare this object to the specified object.
      *

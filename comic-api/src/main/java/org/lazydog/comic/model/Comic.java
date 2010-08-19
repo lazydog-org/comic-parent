@@ -40,27 +40,6 @@ public class Comic
     @NotNull(message="Variant is required.") 
     @Size(max=1, message="Variant cannot contain more than 1 character.")
     private String variant;
-    
-    /**
-     * Constructor.
-     */
-    public Comic() {
-        
-        super();
-        this.setCharacters(null);
-        this.setCoverPrice(null);
-        this.setCreators(null);
-        this.setDescription(null);
-        this.setDistribution(null);
-        this.setImage(null);
-        this.setNumber(null);
-        this.setPrint(null);
-        this.setPublishDate(null);
-        this.setTitle(null);
-        this.setTraits(null);
-        this.setType(null);
-        this.setVariant(null);
-    }
 
     /**
      * Compare this object to the specified object.

@@ -24,16 +24,6 @@ public class ImageType
     private String value;
 
     /**
-     * Constructor.
-     */
-    public ImageType() {
-        
-        super();
-        this.setDirectoryPath(null);
-        this.setValue(null);
-    }
-    
-    /**
      * Compare this object to the specified object.
      *
      * @param  object  the object to compare this object against.
