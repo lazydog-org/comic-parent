@@ -76,7 +76,7 @@
         <module>comic-api</module>
         <module>comic-data-access-ejb</module>
         <module>comic-service-ejb</module>
-        <module>comic-service-ear</module>
+        <module>comic-ejbs-ear</module>
         <module>image-utility</module>
         <module>comic-faces</module>
         <module>comic-manager</module>
