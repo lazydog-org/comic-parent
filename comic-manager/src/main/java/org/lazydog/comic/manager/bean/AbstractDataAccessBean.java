@@ -1,8 +1,8 @@
 package org.lazydog.comic.manager.bean;
 
+import org.lazydog.comic.ComicService;
 import org.lazydog.comic.model.Entity;
 import org.lazydog.comic.model.User;
-import org.lazydog.comic.service.ComicService;
 import org.lazydog.comic.manager.utility.FormButtonController;
 import org.lazydog.comic.manager.utility.Perspective;
 import org.lazydog.comic.manager.utility.SessionKey;

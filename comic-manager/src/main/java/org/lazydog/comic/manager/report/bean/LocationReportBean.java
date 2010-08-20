@@ -1,9 +1,9 @@
 package org.lazydog.comic.manager.report.bean;
 
+import org.lazydog.comic.ComicService;
 import org.lazydog.comic.model.Have;
 import org.lazydog.comic.model.Location;
 import org.lazydog.comic.model.User;
-import org.lazydog.comic.service.ComicService;
 import org.lazydog.comic.manager.utility.SessionKey;
 import org.lazydog.comic.manager.utility.SessionUtility;
 import org.lazydog.data.access.criterion.ComparisonOperation;

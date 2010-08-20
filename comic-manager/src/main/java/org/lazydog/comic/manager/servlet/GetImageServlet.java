@@ -1,7 +1,7 @@
 package org.lazydog.comic.manager.servlet;
 
+import org.lazydog.comic.ComicService;
 import org.lazydog.comic.model.ImageType;
-import org.lazydog.comic.service.ComicService;
 import org.lazydog.data.access.criterion.ComparisonOperation;
 import org.lazydog.data.access.Criteria;
 import org.lazydog.data.access.CriteriaFactory;

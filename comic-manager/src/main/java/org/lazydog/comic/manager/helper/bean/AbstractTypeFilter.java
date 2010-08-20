@@ -1,8 +1,8 @@
 package org.lazydog.comic.manager.helper.bean;
 
+import org.lazydog.comic.ComicService;
 import org.lazydog.comic.model.Entity;
 import org.lazydog.comic.model.UserPreference;
-import org.lazydog.comic.service.ComicService;
 import org.lazydog.comic.manager.utility.SessionKey;
 import org.lazydog.comic.manager.utility.SessionUtility;
 import org.lazydog.data.access.criterion.ComparisonOperation;

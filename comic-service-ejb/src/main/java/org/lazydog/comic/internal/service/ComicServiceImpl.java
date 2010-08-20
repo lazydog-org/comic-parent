@@ -410,17 +410,4 @@ public class ComicServiceImpl
         // Save the entities.
         return this.comicDataAccess.persistList(entities);
     }
-
-    /**
-     * Set the comic repository.
-     *
-     * @param  comicRepository  the comic repository.
-     */
-    /*
-    @EJB(mappedName="ejb/ComicRepository", beanInterface=ComicRepository.class)
-    protected void setComicRepository(ComicRepository comicRepository) {
-        this.comicDataAccess = comicDataAccess;
-    }
-    */
-
 }

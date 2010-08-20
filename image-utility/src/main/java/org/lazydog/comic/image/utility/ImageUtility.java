@@ -1,9 +1,9 @@
 package org.lazydog.comic.image.utility;
 
+import org.lazydog.comic.ComicService;
 import org.lazydog.comic.model.Image;
 import org.lazydog.comic.model.ImageType;
 import org.lazydog.comic.model.User;
-import org.lazydog.comic.service.ComicService;
 import org.lazydog.data.access.criterion.ComparisonOperation;
 import org.lazydog.data.access.criterion.LogicalOperation;
 import org.lazydog.data.access.Criteria;
