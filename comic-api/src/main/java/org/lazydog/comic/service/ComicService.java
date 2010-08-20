@@ -1,9 +1,9 @@
 package org.lazydog.comic.service;
 
 import java.util.List;
-import org.lazydog.comic.criteria.Criteria;
 import org.lazydog.comic.model.Entity;
 import org.lazydog.comic.model.User;
+import org.lazydog.data.access.Criteria;
 
 
 /**

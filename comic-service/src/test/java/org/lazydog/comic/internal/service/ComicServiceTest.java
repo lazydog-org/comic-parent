@@ -73,12 +73,12 @@ public class ComicServiceTest {
 
             List<Category> categories = comicService.findList(Category.class);
             List<Character> characters = comicService.findList(Character.class);
-            List<Comic> comics = comicService.findList(Comic.class);
+            //List<Comic> comics = comicService.findList(Comic.class);
             List<ComicGrade> comicGrades = comicService.findList(ComicGrade.class);
             List<ComicType> comicTypes = comicService.findList(ComicType.class);
             List<Creator> creators = comicService.findList(Creator.class);
             List<Distribution> distributions = comicService.findList(Distribution.class);
-            List<Have> haves = comicService.findList(Have.class);
+            //List<Have> haves = comicService.findList(Have.class);
             List<Image> images = comicService.findList(Image.class);
             List<ImageType> imageTypes = comicService.findList(ImageType.class);
             List<Imprint> imprints = comicService.findList(Imprint.class);
@@ -86,7 +86,7 @@ public class ComicServiceTest {
             List<Person> persons = comicService.findList(Person.class);
             List<Profession> professions = comicService.findList(Profession.class);
             List<Publisher> publishers = comicService.findList(Publisher.class);
-            List<Title> titles = comicService.findList(Title.class);
+            //List<Title> titles = comicService.findList(Title.class);
             List<TitleType> titleTypes = comicService.findList(TitleType.class);
             List<Trait> traits = comicService.findList(Trait.class);
             List<User> users = comicService.findList(User.class);
@@ -95,12 +95,12 @@ public class ComicServiceTest {
 
             System.out.println("number of categories = " + categories.size());
             System.out.println("number of characters = " + characters.size());
-            System.out.println("number of comics = " + comics.size());
+            //System.out.println("number of comics = " + comics.size());
             System.out.println("number of comicGrades = " + comicGrades.size());
             System.out.println("number of comicTypes = " + comicTypes.size());
             System.out.println("number of creators = " + creators.size());
             System.out.println("number of distributions = " + distributions.size());
-            System.out.println("number of haves = " + haves.size());
+            //System.out.println("number of haves = " + haves.size());
             System.out.println("number of images = " + images.size());
             System.out.println("number of imageTypes = " + imageTypes.size());
             System.out.println("number of imprints = " + imprints.size());
@@ -108,7 +108,7 @@ public class ComicServiceTest {
             System.out.println("number of persons = " + persons.size());
             System.out.println("number of professions = " + professions.size());
             System.out.println("number of publishers = " + publishers.size());
-            System.out.println("number of titles = " + titles.size());
+            //System.out.println("number of titles = " + titles.size());
             System.out.println("number of titleTypes = " + titleTypes.size());
             System.out.println("number of traits = " + traits.size());
             System.out.println("number of users = " + users.size());
