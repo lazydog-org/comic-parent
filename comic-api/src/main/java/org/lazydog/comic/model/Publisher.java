@@ -45,8 +45,8 @@ public class Publisher
 
         // Initialize.
         lastCompare = 0;
-        thatName = normalize(that.getName(), String.class);
-        thisName = normalize(this.getName(), String.class);
+        thatName = replaceNull(that.getName(), "");
+        thisName = replaceNull(this.getName(), "");
 
         // Compare this object to the object.
         lastCompare = thisName.compareTo(thatName);
@@ -139,7 +139,7 @@ public class Publisher
         String thisName;
         
         // Initialize.
-        thisName = normalize(this.getName(), String.class);
+        thisName = replaceNull(this.getName(), "");
         
         return thisName.hashCode();
     }
@@ -159,13 +159,7 @@ public class Publisher
      * @param  imprints  the imprints.
      */
     public void setImprints(List<Imprint> imprints) {
-
-        if (imprints == null) {
-            this.imprints = new ArrayList<Imprint>();
-        }
-        else {
-            this.imprints = imprints;
-        }
+        this.imprints = replaceNull(imprints, new ArrayList<Imprint>());
     }
 
     /**

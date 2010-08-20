@@ -169,13 +169,7 @@ public class ComicGrade
      * @param  scale  the scale.
      */
     public void setScale(Double scale) {
-        
-        if (scale == null) {
-            this.scale = new Double(0.0);
-        }
-        else {
-            this.scale = scale;
-        }
+        this.scale = replaceNull(scale, new Double(0.0));
     }
      
     /**

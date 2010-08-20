@@ -43,10 +43,10 @@ public class Location
 
         // Initialize.
         lastCompare = 0;
-        thatCreateUser = normalize(that.getCreateUser(), User.class);
-        thatName = normalize(that.getName(), String.class);
-        thisCreateUser = normalize(this.getCreateUser(), User.class);
-        thisName = normalize(this.getName(), String.class);
+        thatCreateUser = replaceNull(that.getCreateUser(), new User());
+        thatName = replaceNull(that.getName(), "");
+        thisCreateUser = replaceNull(this.getCreateUser(), new User());
+        thisName = replaceNull(this.getName(), "");
         
         // Compare this object to the object.
         lastCompare = thisCreateUser.compareTo(thatCreateUser);
@@ -121,8 +121,8 @@ public class Location
         String thisName;
         
         // Initialize.
-        thisCreateUser = normalize(this.getCreateUser(), User.class);
-        thisName = normalize(this.getName(), String.class);
+        thisCreateUser = replaceNull(this.getCreateUser(), new User());
+        thisName = replaceNull(this.getName(), "");
         
         return thisCreateUser.hashCode()*31
              + thisName.hashCode();

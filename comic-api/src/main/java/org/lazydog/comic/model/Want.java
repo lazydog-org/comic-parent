@@ -42,10 +42,10 @@ public class Want
 
         // Initialize.
         lastCompare = 0;
-        thatComic = normalize(that.getComic(), Comic.class);
-        thatCreateUser = normalize(that.getCreateUser(), User.class);
-        thisComic = normalize(this.getComic(), Comic.class);
-        thisCreateUser = normalize(this.getCreateUser(), User.class);
+        thatComic = replaceNull(that.getComic(), new Comic());
+        thatCreateUser = replaceNull(that.getCreateUser(), new User());
+        thisComic = replaceNull(this.getComic(), new Comic());
+        thisCreateUser = replaceNull(this.getCreateUser(), new User());
         
         // Compare this object to the object.
         lastCompare = thisCreateUser.compareTo(thatCreateUser);
@@ -120,8 +120,8 @@ public class Want
         User thisCreateUser;
         
         // Initialize.
-        thisComic = normalize(this.getComic(), Comic.class);
-        thisCreateUser = normalize(this.getCreateUser(), User.class);
+        thisComic = replaceNull(this.getComic(), new Comic());
+        thisCreateUser = replaceNull(this.getCreateUser(), new User());
         
         return thisCreateUser.hashCode()*31
              + thisComic.hashCode();

@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.validation.Valid;
@@ -30,7 +32,9 @@ public class Comic
     private Distribution distribution;
     private Image image;
     private Integer number;
-    @NotNull(message="Print is required.") 
+    @NotNull(message="Print is required.")
+    @Min(value=1, message="Print must be at least 1.")
+    @Max(value=99, message="Print must be at most 99.")
     private Integer print = new Integer(1);
     private Date publishDate;
     @Valid @NotNull(message="Title is required.")
@@ -79,23 +83,23 @@ public class Comic
         // Initialize.
         lastCompare = 0;
         thatCoverPrice = that.getCoverPrice();
-        thatDescription = normalize(that.getDescription(), String.class);
-        thatDistribution = normalize(that.getDistribution(), Distribution.class);
-        thatNumber = normalize(that.getNumber(), Integer.class);
+        thatDescription = replaceNull(that.getDescription(), "");
+        thatDistribution = replaceNull(that.getDistribution(), new Distribution());
+        thatNumber = replaceNull(that.getNumber(), new Integer(0));
         thatPrint = that.getPrint();
-        thatPublishDate = normalize(that.getPublishDate(), Date.class);
-        thatTitle = normalize(that.getTitle(), Title.class);
-        thatType = normalize(that.getType(), ComicType.class);
-        thatVariant = normalize(that.getVariant(), String.class);
+        thatPublishDate = replaceNull(that.getPublishDate(), epoch());
+        thatTitle = replaceNull(that.getTitle(), new Title());
+        thatType = replaceNull(that.getType(), new ComicType());
+        thatVariant = replaceNull(that.getVariant(), "");
         thisCoverPrice = this.getCoverPrice();
-        thisDescription = normalize(this.getDescription(), String.class);
-        thisDistribution = normalize(this.getDistribution(), Distribution.class);
-        thisNumber = normalize(this.getNumber(), Integer.class);
+        thisDescription = replaceNull(this.getDescription(), "");
+        thisDistribution = replaceNull(this.getDistribution(), new Distribution());
+        thisNumber = replaceNull(this.getNumber(), new Integer(0));
         thisPrint = this.getPrint();
-        thisPublishDate = normalize(this.getPublishDate(), Date.class);
-        thisTitle = normalize(this.getTitle(), Title.class);
-        thisType = normalize(this.getType(), ComicType.class);
-        thisVariant = normalize(this.getVariant(), String.class);
+        thisPublishDate = replaceNull(this.getPublishDate(), epoch());
+        thisTitle = replaceNull(this.getTitle(), new Title());
+        thisType = replaceNull(this.getType(), new ComicType());
+        thisVariant = replaceNull(this.getVariant(), "");
         
         // Compare this object to the object.
         lastCompare = thisTitle.compareTo(thatTitle);
@@ -305,14 +309,14 @@ public class Comic
         
         // Initialize.
         thisCoverPrice = this.getCoverPrice();
-        thisDescription = normalize(this.getDescription(), String.class);
-        thisDistribution = normalize(this.getDistribution(), Distribution.class);
-        thisNumber = normalize(this.getNumber(), Integer.class);
+        thisDescription = replaceNull(this.getDescription(), "");
+        thisDistribution = replaceNull(this.getDistribution(), new Distribution());
+        thisNumber = replaceNull(this.getNumber(), new Integer(0));
         thisPrint = this.getPrint();
-        thisPublishDate = normalize(this.getPublishDate(), Date.class);
-        thisTitle = normalize(this.getTitle(), Title.class);
-        thisType = normalize(this.getType(), ComicType.class);
-        thisVariant = normalize(this.getVariant(), String.class);
+        thisPublishDate = replaceNull(this.getPublishDate(), epoch());
+        thisTitle = replaceNull(this.getTitle(), new Title());
+        thisType = replaceNull(this.getType(), new ComicType());
+        thisVariant = replaceNull(this.getVariant(), "");
         
         return thisTitle.hashCode()*7^8
              + thisType.hashCode()*7^7
@@ -331,13 +335,7 @@ public class Comic
      * @param  characters  the characters.
      */
     public void setCharacters(List<Character> characters) {
-        
-        if (characters == null) {
-            this.characters = new ArrayList<Character>();
-        }
-        else {
-            this.characters = characters;
-        }
+        this.characters = replaceNull(characters, new ArrayList<Character>());
     }
     
     /**
@@ -346,13 +344,7 @@ public class Comic
      * @param  coverPrice  the cover price.
      */
     public void setCoverPrice(Double coverPrice) {
-        
-        if (coverPrice == null) {
-            this.coverPrice = new Double(0.0);
-        }
-        else {
-            this.coverPrice = coverPrice;
-        }
+        this.coverPrice =  replaceNull(coverPrice, new Double(0.0));
     }
 
     /**
@@ -361,13 +353,7 @@ public class Comic
      * @param  creators  the creators.
      */
     public void setCreators(List<Creator> creators) {
-
-        if (creators == null) {
-            this.creators = new ArrayList<Creator>();
-        }
-        else {
-            this.creators = creators;
-        }
+        this.creators = replaceNull(creators, new ArrayList<Creator>());
     }
 
     /**
@@ -411,14 +397,8 @@ public class Comic
      *
      * @param  print  the print.
      */
-    public void setPrint(Integer print) {
-        
-        if (print == null || print.intValue() < 1) {
-            this.print = new Integer(1);
-        }
-        else {
-            this.print = print;
-        }
+    public void setPrint(Integer print) {   
+        this.print = replaceNull(print, new Integer(1));
     }
                         
     /**
@@ -466,13 +446,7 @@ public class Comic
      * @param  traits  the traits.
      */
     public void setTraits(List<Trait> traits) {
-        
-        if (traits == null) {
-            this.traits = new ArrayList<Trait>();
-        }
-        else {
-            this.traits = traits;
-        }
+        this.traits = replaceNull(traits, new ArrayList<Trait>());
     }
                                 
     /**

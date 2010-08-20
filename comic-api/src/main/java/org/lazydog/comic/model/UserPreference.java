@@ -68,22 +68,22 @@ public class UserPreference
 
         // Initialize.
         lastCompare = 0;
-        thatComicGrade = normalize(that.getComicGrade(), ComicGrade.class);
-        thatComicType = normalize(that.getComicType(), ComicType.class);
-        thatCreateUser = normalize(that.getCreateUser(), User.class);
-        thatDistribution = normalize(that.getDistribution(), Distribution.class);
-        thatImageType = normalize(that.getImageType(), ImageType.class);
-        thatMinimumPublishDate = normalize(that.getMinimumPublishDate(), Date.class);
-        thatPublisher = normalize(that.getPublisher(), Publisher.class);
-        thatTitleType = normalize(that.getTitleType(), TitleType.class);
-        thisComicGrade = normalize(this.getComicGrade(), ComicGrade.class);
-        thisComicType = normalize(this.getComicType(), ComicType.class);
-        thisCreateUser = normalize(this.getCreateUser(), User.class);
-        thisDistribution = normalize(this.getDistribution(), Distribution.class);
-        thisImageType = normalize(this.getImageType(), ImageType.class);
-        thisMinimumPublishDate = normalize(this.getMinimumPublishDate(), Date.class);
-        thisPublisher = normalize(this.getPublisher(), Publisher.class);
-        thisTitleType = normalize(this.getTitleType(), TitleType.class);
+        thatComicGrade = replaceNull(that.getComicGrade(), new ComicGrade());
+        thatComicType = replaceNull(that.getComicType(), new ComicType());
+        thatCreateUser = replaceNull(that.getCreateUser(), new User());
+        thatDistribution = replaceNull(that.getDistribution(), new Distribution());
+        thatImageType = replaceNull(that.getImageType(), new ImageType());
+        thatMinimumPublishDate = replaceNull(that.getMinimumPublishDate(), epoch());
+        thatPublisher = replaceNull(that.getPublisher(), new Publisher());
+        thatTitleType = replaceNull(that.getTitleType(), new TitleType());
+        thisComicGrade = replaceNull(this.getComicGrade(), new ComicGrade());
+        thisComicType = replaceNull(this.getComicType(), new ComicType());
+        thisCreateUser = replaceNull(this.getCreateUser(), new User());
+        thisDistribution = replaceNull(this.getDistribution(), new Distribution());
+        thisImageType = replaceNull(this.getImageType(), new ImageType());
+        thisMinimumPublishDate = replaceNull(this.getMinimumPublishDate(), epoch());
+        thisPublisher = replaceNull(this.getPublisher(), new Publisher());
+        thisTitleType = replaceNull(this.getTitleType(), new TitleType());
         
 
         // Compare this object to the object.
@@ -232,14 +232,14 @@ public class UserPreference
         TitleType thisTitleType;
 
         // Initialize.
-        thisComicGrade = normalize(this.getComicGrade(), ComicGrade.class);
-        thisComicType = normalize(this.getComicType(), ComicType.class);
-        thisCreateUser = normalize(this.getCreateUser(), User.class);
-        thisDistribution = normalize(this.getDistribution(), Distribution.class);
-        thisImageType = normalize(this.getImageType(), ImageType.class);
-        thisMinimumPublishDate = normalize(this.getMinimumPublishDate(), Date.class);
-        thisPublisher = normalize(this.getPublisher(), Publisher.class);
-        thisTitleType = normalize(this.getTitleType(), TitleType.class);
+        thisComicGrade = replaceNull(this.getComicGrade(), new ComicGrade());
+        thisComicType = replaceNull(this.getComicType(), new ComicType());
+        thisCreateUser = replaceNull(this.getCreateUser(), new User());
+        thisDistribution = replaceNull(this.getDistribution(), new Distribution());
+        thisImageType = replaceNull(this.getImageType(), new ImageType());
+        thisMinimumPublishDate = replaceNull(this.getMinimumPublishDate(), epoch());
+        thisPublisher = replaceNull(this.getPublisher(), new Publisher());
+        thisTitleType = replaceNull(this.getTitleType(), new TitleType());
 
         return thisCreateUser.hashCode()*7^7
              + thisComicGrade.hashCode()*7^6

@@ -1,6 +1,7 @@
 package org.lazydog.comic.model;
 
 import java.io.Serializable;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.Valid;
 
@@ -25,6 +26,7 @@ public class Have
     private Location location;
     private Double purchasePrice = new Double(0.0);
     @NotNull(message="Quantity is required.")
+    @Min(value=1, message="Quantity must be at least 1.")
     private Integer quantity = new Integer(1);
 
     /**
@@ -55,15 +57,15 @@ public class Have
 
         // Initialize.
         lastCompare = 0;
-        thatComic = normalize(that.getComic(), Comic.class);
-        thatComicGrade = normalize(that.getComicGrade(), ComicGrade.class);
-        thatCreateUser = normalize(that.getCreateUser(), User.class);
-        thatLocation = normalize(that.getLocation(), Location.class);
+        thatComic = replaceNull(that.getComic(), new Comic());
+        thatComicGrade = replaceNull(that.getComicGrade(), new ComicGrade());
+        thatCreateUser = replaceNull(that.getCreateUser(), new User());
+        thatLocation = replaceNull(that.getLocation(), new Location());
         thatPurchasePrice = that.getPurchasePrice();
-        thisComic = normalize(this.getComic(), Comic.class);
-        thisComicGrade = normalize(this.getComicGrade(), ComicGrade.class);
-        thisCreateUser = normalize(this.getCreateUser(), User.class);
-        thisLocation = normalize(this.getLocation(), Location.class);
+        thisComic = replaceNull(this.getComic(), new Comic());
+        thisComicGrade = replaceNull(this.getComicGrade(), new ComicGrade());
+        thisCreateUser = replaceNull(this.getCreateUser(), new User());
+        thisLocation = replaceNull(this.getLocation(), new Location());
         thisPurchasePrice = this.getPurchasePrice();
         
         // Compare this object to the object.
@@ -184,10 +186,10 @@ public class Have
         Double thisPurchasePrice;
         
         // Initialize.
-        thisComic = normalize(this.getComic(), Comic.class);
-        thisComicGrade = normalize(this.getComicGrade(), ComicGrade.class);
-        thisCreateUser = normalize(this.getCreateUser(), User.class);
-        thisLocation = normalize(this.getLocation(), Location.class);
+        thisComic = replaceNull(this.getComic(), new Comic());
+        thisComicGrade = replaceNull(this.getComicGrade(), new ComicGrade());
+        thisCreateUser = replaceNull(this.getCreateUser(), new User());
+        thisLocation = replaceNull(this.getLocation(), new Location());
         thisPurchasePrice = this.getPurchasePrice();
 
         return thisCreateUser.hashCode()*7^4
@@ -230,13 +232,7 @@ public class Have
      * @param  purchasePrice  the purchase price.
      */
     public void setPurchasePrice(Double purchasePrice) {
-
-        if (purchasePrice == null) {
-            this.purchasePrice = new Double(0.0);
-        }
-        else {
-            this.purchasePrice = purchasePrice;
-        }
+        this.purchasePrice = replaceNull(purchasePrice, new Double(0.0));
     }
 
     /**

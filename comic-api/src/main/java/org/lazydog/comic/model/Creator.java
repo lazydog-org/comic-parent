@@ -44,10 +44,10 @@ public class Creator
 
         // Initialize.
         lastCompare = 0;
-        thatPerson = normalize(that.getPerson(), Person.class);
-        thatProfession = normalize(that.getProfession(), Profession.class);
-        thisPerson = normalize(this.getPerson(), Person.class);
-        thisProfession = normalize(this.getProfession(), Profession.class);
+        thatPerson = replaceNull(that.getPerson(), new Person());
+        thatProfession = replaceNull(that.getProfession(), new Profession());
+        thisPerson = replaceNull(this.getPerson(), new Person());
+        thisProfession = replaceNull(this.getProfession(), new Profession());
         
         // Compare this object to the object.
         lastCompare = thisPerson.compareTo(thatPerson);
@@ -132,8 +132,8 @@ public class Creator
         Profession thisProfession;
         
         // Initialize.
-        thisPerson = normalize(this.getPerson(), Person.class);
-        thisProfession = normalize(this.getProfession(), Profession.class);
+        thisPerson = replaceNull(this.getPerson(), new Person());
+        thisProfession = replaceNull(this.getProfession(), new Profession());
         
         return thisPerson.hashCode()*31
              + thisProfession.hashCode();

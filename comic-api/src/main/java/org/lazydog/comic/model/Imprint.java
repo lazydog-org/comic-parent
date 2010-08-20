@@ -47,10 +47,10 @@ public class Imprint
 
         // Initialize.
         lastCompare = 0;
-        thatName = normalize(that.getName(), String.class);
-        thatPublisher = normalize(that.getPublisher(), Publisher.class);
-        thisName = normalize(this.getName(), String.class);
-        thisPublisher = normalize(this.getPublisher(), Publisher.class);
+        thatName = replaceNull(that.getName(), "");
+        thatPublisher = replaceNull(that.getPublisher(), new Publisher());
+        thisName = replaceNull(this.getName(), "");
+        thisPublisher = replaceNull(this.getPublisher(), new Publisher());
 
         // Compare this object to the object.
         lastCompare = thisPublisher.compareTo(thatPublisher);
@@ -145,8 +145,8 @@ public class Imprint
         Publisher thisPublisher;
         
         // Initialize.
-        thisName = normalize(this.getName(), String.class);
-        thisPublisher = normalize(this.getPublisher(), Publisher.class);
+        thisName = replaceNull(this.getName(), "");
+        thisPublisher = replaceNull(this.getPublisher(), new Publisher());
         
         return thisPublisher.hashCode()*31
              + thisName.hashCode();

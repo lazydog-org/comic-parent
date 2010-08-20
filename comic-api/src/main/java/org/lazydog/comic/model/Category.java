@@ -41,8 +41,8 @@ public class Category
 
         // Initialize.
         lastCompare = 0;
-        thatName = normalize(that.getName(), String.class);
-        thisName = normalize(this.getName(), String.class);
+        thatName = replaceNull(that.getName(), "");
+        thisName = replaceNull(this.getName(), "");
         
         // Compare this object to the object.
         lastCompare = thisName.compareTo(thatName);
@@ -115,7 +115,7 @@ public class Category
         String thisName;
         
         // Initialize.
-        thisName = normalize(this.getName(), String.class);
+        thisName = replaceNull(this.getName(), "");
         
         return thisName.hashCode();
     }

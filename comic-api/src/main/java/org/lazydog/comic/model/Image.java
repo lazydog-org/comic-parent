@@ -50,12 +50,12 @@ public class Image
 
         // Initialize.
         lastCompare = 0;
-        thatFileName = normalize(that.getFileName(), String.class);
-        thatLabel = normalize(that.getLabel(), String.class);
-        thatType = normalize(that.getType(), ImageType.class);
-        thisFileName = normalize(this.getFileName(), String.class);
-        thisLabel = normalize(this.getLabel(), String.class);
-        thisType = normalize(this.getType(), ImageType.class);
+        thatFileName = replaceNull(that.getFileName(), "");
+        thatLabel = replaceNull(that.getLabel(), "");
+        thatType = replaceNull(that.getType(), new ImageType());
+        thisFileName = replaceNull(this.getFileName(), "");
+        thisLabel = replaceNull(this.getLabel(), "");
+        thisType = replaceNull(this.getType(), new ImageType());
         
         // Compare this object to the object.
         lastCompare = thisType.compareTo(thatType);
@@ -152,9 +152,9 @@ public class Image
         ImageType thisType;
         
         // Initialize.
-        thisFileName = normalize(this.getFileName(), String.class);
-        thisLabel = normalize(this.getLabel(), String.class);
-        thisType = normalize(this.getType(), ImageType.class);
+        thisFileName = replaceNull(this.getFileName(), "");
+        thisLabel = replaceNull(this.getLabel(), "");
+        thisType = replaceNull(this.getType(), new ImageType());
         
         return thisType.hashCode()*7^2 +
                thisLabel.hashCode()*7 +

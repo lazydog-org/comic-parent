@@ -46,10 +46,10 @@ public class Person
 
         // Initialize.
         lastCompare = 0;
-        thatFirstName = normalize(that.getFirstName(), String.class);
-        thatLastName = normalize(that.getLastName(), String.class);
-        thisFirstName = normalize(this.getFirstName(), String.class);
-        thisLastName = normalize(this.getLastName(), String.class);
+        thatFirstName = replaceNull(that.getFirstName(), "");
+        thatLastName = replaceNull(that.getLastName(), "");
+        thisFirstName = replaceNull(this.getFirstName(), "");
+        thisLastName = replaceNull(this.getLastName(), "");
         
         // Compare this object to the object.
         lastCompare = thisLastName.compareTo(thatLastName);
@@ -134,8 +134,8 @@ public class Person
         String thisLastName;
         
         // Initialize.
-        thisFirstName = normalize(this.getFirstName(), String.class);
-        thisLastName = normalize(this.getLastName(), String.class);
+        thisFirstName = replaceNull(this.getFirstName(), "");
+        thisLastName = replaceNull(this.getLastName(), "");
         
         return thisLastName.hashCode()*31
              + thisFirstName.hashCode();

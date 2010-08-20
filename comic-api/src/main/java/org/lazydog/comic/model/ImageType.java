@@ -46,10 +46,10 @@ public class ImageType
 
         // Initialize.
         lastCompare = 0;
-        thatDirectoryPath = normalize(that.getDirectoryPath(),String.class);
-        thatValue = normalize(that.getValue(), String.class);
-        thisDirectoryPath = normalize(this.getDirectoryPath(), String.class);
-        thisValue = normalize(this.getValue(), String.class);
+        thatDirectoryPath = replaceNull(that.getDirectoryPath(), "");
+        thatValue = replaceNull(that.getValue(), "");
+        thisDirectoryPath = replaceNull(this.getDirectoryPath(), "");
+        thisValue = replaceNull(this.getValue(), "");
         
         // Compare this object to the object.
         lastCompare = thisValue.compareTo(thatValue);
@@ -134,8 +134,8 @@ public class ImageType
         String thisValue;
         
         // Initialize.
-        thisDirectoryPath = normalize(this.getDirectoryPath(), String.class);
-        thisValue = normalize(this.getValue(), String.class);
+        thisDirectoryPath = replaceNull(this.getDirectoryPath(), "");
+        thisValue = replaceNull(this.getValue(), "");
         
         return thisValue.hashCode()*31
              + thisDirectoryPath.hashCode();

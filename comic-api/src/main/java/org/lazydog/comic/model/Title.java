@@ -6,6 +6,8 @@ import java.util.Calendar;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.validation.Valid;
@@ -36,6 +38,8 @@ public class Title
     @Valid @NotNull(message="Title type is required.")
     private TitleType type;
     @NotNull(message="Volume is required.")
+    @Min(value=1, message="Volume must be at least 1.")
+    @Max(value=99, message="Volume must be at most 99.")
     private Integer volume = new Integer(1);
 
     /**
@@ -68,17 +72,17 @@ public class Title
 
         // Initialize.
         lastCompare = 0;
-        thatName = normalize(that.getName(), String.class);
-        thatPublishEndDate = normalize(that.getPublishEndDate(), Date.class);
-        thatPublishStartDate = normalize(that.getPublishStartDate(), Date.class);
+        thatName = replaceNull(that.getName(), "");
+        thatPublishEndDate = replaceNull(that.getPublishEndDate(), epoch());
+        thatPublishStartDate = replaceNull(that.getPublishStartDate(), epoch());
         thatPublishers = that.getPublishers();
-        thatType = normalize(that.getType(), TitleType.class);
+        thatType = replaceNull(that.getType(), new TitleType());
         thatVolume = that.getVolume();
-        thisName = normalize(this.getName(), String.class);
-        thisPublishEndDate = normalize(this.getPublishEndDate(), Date.class);
-        thisPublishStartDate = normalize(this.getPublishStartDate(), Date.class);
+        thisName = replaceNull(this.getName(), "");
+        thisPublishEndDate = replaceNull(this.getPublishEndDate(), epoch());
+        thisPublishStartDate = replaceNull(this.getPublishStartDate(), epoch());
         thisPublishers = this.getPublishers();
-        thisType = normalize(this.getType(), TitleType.class);
+        thisType = replaceNull(this.getType(), new TitleType());
         thisVolume = this.getVolume();
         
         // Compare this object to the object.
@@ -257,11 +261,11 @@ public class Title
         Integer thisVolume;
         
         // Initialize.
-        thisName = normalize(this.getName(), String.class);
-        thisPublishEndDate = normalize(this.getPublishEndDate(), Date.class);
-        thisPublishStartDate = normalize(this.getPublishStartDate(), Date.class);
+        thisName = replaceNull(this.getName(), "");
+        thisPublishEndDate = replaceNull(this.getPublishEndDate(), epoch());
+        thisPublishStartDate = replaceNull(this.getPublishStartDate(), epoch());
         thisPublishers = this.getPublishers();
-        thisType = normalize(this.getType(), TitleType.class);
+        thisType = replaceNull(this.getType(), new TitleType());
         thisVolume = this.getVolume();
         
         return thisName.hashCode()*7^5
@@ -278,13 +282,7 @@ public class Title
      * @param  categories  the categories.
      */
     public void setCategories(List<Category> categories) {
-        
-        if (categories == null) {
-            this.categories = new ArrayList<Category>();
-        }
-        else {
-            this.categories = categories;
-        }
+        this.categories = replaceNull(categories, new ArrayList<Category>());
     }
                   
     /**
@@ -293,13 +291,7 @@ public class Title
      * @param  comics  the comics.
      */
     public void setComics(List<Comic> comics) {
-        
-        if (comics == null) {
-            this.comics = new ArrayList<Comic>();
-        }
-        else {
-            this.comics = comics;
-        }
+        this.comics = replaceNull(comics, new ArrayList<Comic>());
     }
            
     /**
@@ -356,13 +348,7 @@ public class Title
      * @param  publishers  the publishers.
      */
     public void setPublishers(List<Publisher> publishers) {
-        
-        if (publishers == null) {
-            this.publishers = new ArrayList<Publisher>();
-        }
-        else {
-            this.publishers = publishers;
-        }
+        this.publishers = replaceNull(publishers, new ArrayList<Publisher>());
     }
       
     /**
@@ -401,7 +387,6 @@ public class Title
      * @param  type  the type.
      */
     public void setType(TitleType type) {
-        
         this.type = type;
     }
        
@@ -411,13 +396,7 @@ public class Title
      * @param  volume  the volume.
      */
     public void setVolume(Integer volume) {
-        
-        if (volume == null || volume.intValue() < 1) {
-            this.volume = new Integer(1);
-        }
-        else {
-            this.volume = volume;
-        }
+        this.volume = replaceNull(volume, new Integer(1));
     }
     
     /**

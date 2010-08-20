@@ -41,8 +41,8 @@ public class ComicType
 
         // Initialize.
         lastCompare = 0;
-        thatValue = normalize(that.getValue(), String.class);
-        thisValue = normalize(this.getValue(), String.class);
+        thatValue = replaceNull(that.getValue(), "");
+        thisValue = replaceNull(this.getValue(), "");
         
         // Compare this object to the object.
         lastCompare = thisValue.compareTo(thatValue);
@@ -115,7 +115,7 @@ public class ComicType
         String thisValue;
         
         // Initialize.
-        thisValue = normalize(this.getValue(), String.class);
+        thisValue = replaceNull(this.getValue(), "");
         
         return thisValue.hashCode();
     }
