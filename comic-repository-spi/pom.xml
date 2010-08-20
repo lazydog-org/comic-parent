@@ -11,9 +11,9 @@
     <name>Comic Repository SPI</name>
     <dependencies>
         <dependency>
-            <groupId>${project.groupId}</groupId>
-            <artifactId>comic-criteria</artifactId>
-            <version>${project.version}</version>
+            <groupId>org.lazydog.data.access</groupId>
+            <artifactId>data-access-api</artifactId>
+            <version>1.0-SNAPSHOT</version>
         </dependency>
     </dependencies>
 </project>
