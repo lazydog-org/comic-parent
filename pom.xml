@@ -71,7 +71,6 @@
     </distributionManagement>
     <modules>
         <module>comic-api</module>
-        <module>comic-criteria</module>
         <module>comic-repository-spi</module>
         <module>comic-repository</module>
         <module>comic-repository-ear</module>

@@ -18,6 +18,8 @@ import java.util.Map;
 public class FormButtonController
        implements Serializable {
 
+    private static final long serialVersionUID = 1L;
+    
     /**
      * Enumeration for perspective buttons.
      */
@@ -83,6 +85,9 @@ public class FormButtonController
     }
 
     private static final List<String> perspectiveButtons = new ArrayList<String>() {
+
+        private static final long serialVersionUID = 1L;
+
         {
             add(PerspectiveButton.FIRST.getLabel());
             add(PerspectiveButton.PREVIOUS.getLabel());
@@ -97,6 +102,9 @@ public class FormButtonController
     };
 
     private static final List<String> formButtons = new ArrayList<String>() {
+
+        private static final long serialVersionUID = 1L;
+
         {
             add(FormButton.RESET.getLabel());
             add(FormButton.CANCEL.getLabel());
@@ -118,6 +126,9 @@ public class FormButtonController
 
         // Initialize button disabled map.
         this.buttonDisabledMap = new HashMap<String, Boolean>() {
+
+            private static final long serialVersionUID = 1L;
+
             {
                 // Loop through the perspective buttons.
                 for (String actionButton : FormButtonController.perspectiveButtons) {
@@ -137,6 +148,9 @@ public class FormButtonController
 
         // Initialize button rendered map.
         this.buttonRenderedMap = new HashMap<String, Boolean>() {
+
+            private static final long serialVersionUID = 1L;
+            
             {
                 // Loop through the perspective buttons.
                 for (String actionButton : FormButtonController.perspectiveButtons) {

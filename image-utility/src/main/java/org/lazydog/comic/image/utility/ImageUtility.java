@@ -1,13 +1,13 @@
 package org.lazydog.comic.image.utility;
 
-import org.lazydog.comic.criteria.criterion.ComparisonOperation;
-import org.lazydog.comic.criteria.criterion.LogicalOperation;
-import org.lazydog.comic.criteria.Criteria;
-import org.lazydog.comic.criteria.CriteriaFactory;
 import org.lazydog.comic.model.Image;
 import org.lazydog.comic.model.ImageType;
 import org.lazydog.comic.model.User;
 import org.lazydog.comic.service.ComicService;
+import org.lazydog.data.access.criterion.ComparisonOperation;
+import org.lazydog.data.access.criterion.LogicalOperation;
+import org.lazydog.data.access.Criteria;
+import org.lazydog.data.access.CriteriaFactory;
 import java.io.File;
 import java.io.PrintStream;
 import javax.naming.Context;

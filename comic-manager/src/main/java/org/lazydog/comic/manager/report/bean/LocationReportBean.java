@@ -1,16 +1,16 @@
 package org.lazydog.comic.manager.report.bean;
 
-import org.lazydog.comic.criteria.criterion.ComparisonOperation;
-import org.lazydog.comic.criteria.criterion.LogicalOperation;
-import org.lazydog.comic.criteria.criterion.Order;
-import org.lazydog.comic.criteria.Criteria;
-import org.lazydog.comic.criteria.CriteriaFactory;
 import org.lazydog.comic.model.Have;
 import org.lazydog.comic.model.Location;
 import org.lazydog.comic.model.User;
 import org.lazydog.comic.service.ComicService;
 import org.lazydog.comic.manager.utility.SessionKey;
 import org.lazydog.comic.manager.utility.SessionUtility;
+import org.lazydog.data.access.criterion.ComparisonOperation;
+import org.lazydog.data.access.criterion.LogicalOperation;
+import org.lazydog.data.access.criterion.Order;
+import org.lazydog.data.access.Criteria;
+import org.lazydog.data.access.CriteriaFactory;
 import java.io.Serializable;
 import java.util.List;
 import javax.annotation.PostConstruct;
@@ -27,6 +27,8 @@ import javax.faces.event.ActionEvent;
  */
 public class LocationReportBean
        implements Serializable {
+
+    private static final long serialVersionUID = 1L;
 
     protected ComicService comicService;
     private List<Have> haves;

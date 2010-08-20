@@ -1,10 +1,5 @@
 package org.lazydog.comic.manager.bean;
 
-import org.lazydog.comic.criteria.criterion.ComparisonOperation;
-import org.lazydog.comic.criteria.criterion.LogicalOperation;
-import org.lazydog.comic.criteria.criterion.Order;
-import org.lazydog.comic.criteria.Criteria;
-import org.lazydog.comic.criteria.CriteriaFactory;
 import org.lazydog.comic.model.Character;
 import org.lazydog.comic.model.Comic;
 import org.lazydog.comic.model.Title;
@@ -17,6 +12,11 @@ import org.lazydog.comic.manager.utility.FormButtonController;
 import org.lazydog.comic.manager.utility.Perspective;
 import org.lazydog.comic.manager.utility.SessionKey;
 import org.lazydog.comic.manager.utility.SessionUtility;
+import org.lazydog.data.access.criterion.ComparisonOperation;
+import org.lazydog.data.access.criterion.LogicalOperation;
+import org.lazydog.data.access.criterion.Order;
+import org.lazydog.data.access.Criteria;
+import org.lazydog.data.access.CriteriaFactory;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -38,6 +38,8 @@ public class ComicBean
        extends AbstractDataAccessBean<Comic>
        implements Serializable {
 
+    private static final long serialVersionUID = 1L;
+    
     private Integer endNumber;
     private Boolean listLinkDisabled;
 

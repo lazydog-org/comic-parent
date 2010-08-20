@@ -1,10 +1,10 @@
 package org.lazydog.comic.manager.servlet;
 
-import org.lazydog.comic.criteria.criterion.ComparisonOperation;
-import org.lazydog.comic.criteria.Criteria;
-import org.lazydog.comic.criteria.CriteriaFactory;
 import org.lazydog.comic.model.ImageType;
 import org.lazydog.comic.service.ComicService;
+import org.lazydog.data.access.criterion.ComparisonOperation;
+import org.lazydog.data.access.Criteria;
+import org.lazydog.data.access.CriteriaFactory;
 import java.awt.AlphaComposite;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
@@ -25,6 +25,8 @@ import javax.servlet.http.HttpServletResponse;
  */
 public class GetImageServlet 
        extends HttpServlet {
+
+    private static final long serialVersionUID = 1L;
 
     private static final String ADMIN_DIRECTORY_NAME = "/image/admin";
     private static final String NO_IMAGE_FILE_NAME = "noImage.jpg";

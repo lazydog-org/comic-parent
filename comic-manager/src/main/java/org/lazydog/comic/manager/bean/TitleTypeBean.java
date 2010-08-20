@@ -1,9 +1,9 @@
 package org.lazydog.comic.manager.bean;
 
-import org.lazydog.comic.criteria.criterion.Order;
-import org.lazydog.comic.criteria.Criteria;
-import org.lazydog.comic.criteria.CriteriaFactory;
 import org.lazydog.comic.model.TitleType;
+import org.lazydog.data.access.criterion.Order;
+import org.lazydog.data.access.Criteria;
+import org.lazydog.data.access.CriteriaFactory;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -22,6 +22,8 @@ public class TitleTypeBean
        extends AbstractDataAccessBean<TitleType>
        implements Serializable {
 
+    private static final long serialVersionUID = 1L;
+    
     /**
      * Get the criteria.
      *

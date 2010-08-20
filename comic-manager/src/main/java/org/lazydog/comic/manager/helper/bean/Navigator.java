@@ -15,6 +15,7 @@ import java.io.Serializable;
 public class Navigator
        implements Serializable {
 
+    private static final long serialVersionUID = 1L;
     private static final Topic DEFAULT_TOPIC = Topic.HOME;
 
     /**

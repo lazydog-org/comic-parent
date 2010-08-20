@@ -15,6 +15,8 @@ public class TitleTypeFilter
        extends AbstractTypeFilter<TitleType>
        implements Serializable {
 
+    private static final long serialVersionUID = 1L;
+
     /**
      * Get the entity class.
      *

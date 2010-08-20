@@ -15,6 +15,8 @@ public class ComicTypeFilter
        extends AbstractTypeFilter<ComicType>
        implements Serializable {
 
+    private static final long serialVersionUID = 1L;
+    
     /**
      * Get the entity class.
      *

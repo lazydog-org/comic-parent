@@ -1,9 +1,5 @@
 package org.lazydog.comic.manager.helper.bean;
 
-import org.lazydog.comic.criteria.criterion.ComparisonOperation;
-import org.lazydog.comic.criteria.Criteria;
-import org.lazydog.comic.criteria.CriteriaFactory;
-import org.lazydog.comic.criteria.CriteriaFactoryException;
 import org.lazydog.comic.model.Category;
 import org.lazydog.comic.model.Publisher;
 import org.lazydog.comic.model.Title;
@@ -11,6 +7,9 @@ import org.lazydog.comic.manager.utility.SessionKey;
 import org.lazydog.comic.manager.utility.SessionUtility;
 import org.lazydog.comic.manager.utility.Subtopic;
 import org.lazydog.comic.manager.utility.TitleSearchBy;
+import org.lazydog.data.access.criterion.ComparisonOperation;
+import org.lazydog.data.access.Criteria;
+import org.lazydog.data.access.CriteriaFactory;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -24,7 +23,9 @@ import javax.faces.model.SelectItem;
  */
 public class TitleSearcher 
        implements Serializable {
-    
+
+    private static final long serialVersionUID = 1L;
+
     /**
      * Get the criteria.
      *
@@ -38,47 +39,37 @@ public class TitleSearcher
 
         // Declare.
         Criteria<Title> criteria;
+        CriteriaFactory criteriaFactory;
 
         // Initialize.
         criteria = null;
+        criteriaFactory = CriteriaFactory.instance();
 
-        try {
+        // Get a new criteria.
+        criteria = criteriaFactory.createCriteria(Title.class);
 
-            // Declare.
-            CriteriaFactory criteriaFactory;
+        switch(searchBy) {
 
-            // Initialize criteria factory.
-            criteriaFactory = CriteriaFactory.instance();
+            case CATEGORY_NAME:
 
-            // Get a new criteria.
-            criteria = criteriaFactory.createCriteria(Title.class);
+                // Modify the criteria.
+                criteria.add(ComparisonOperation.memberOf(
+                        "categories", (Category)searchFor));
+                break;
 
-            switch(searchBy) {
+            case PUBLISHER_NAME:
 
-                case CATEGORY_NAME:
+                // Modify the criteria.
+                criteria.add(ComparisonOperation.memberOf(
+                        "publishers", (Publisher)searchFor));
+                break;
 
-                    // Modify the criteria.
-                    criteria.add(ComparisonOperation.memberOf(
-                            "categories", (Category)searchFor));
-                    break;
+            case TITLE_NAME:
 
-                case PUBLISHER_NAME:
-
-                    // Modify the criteria.
-                    criteria.add(ComparisonOperation.memberOf(
-                            "publishers", (Publisher)searchFor));
-                    break;
-
-                case TITLE_NAME:
-
-                    // Modify the criteria.
-                    criteria.add(ComparisonOperation.like(
-                            "name", "%" + (String)searchFor + "%"));
-                    break;
-            }
-        }
-        catch(CriteriaFactoryException e) {
-            // Ignore.
+                // Modify the criteria.
+                criteria.add(ComparisonOperation.like(
+                        "name", "%" + (String)searchFor + "%"));
+                break;
         }
 
         return criteria;

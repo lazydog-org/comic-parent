@@ -1,6 +1,5 @@
 package org.lazydog.comic.manager.bean;
 
-import org.lazydog.comic.criteria.Criteria;
 import org.lazydog.comic.model.Entity;
 import org.lazydog.comic.model.User;
 import org.lazydog.comic.service.ComicService;
@@ -8,6 +7,7 @@ import org.lazydog.comic.manager.utility.FormButtonController;
 import org.lazydog.comic.manager.utility.Perspective;
 import org.lazydog.comic.manager.utility.SessionKey;
 import org.lazydog.comic.manager.utility.SessionUtility;
+import org.lazydog.data.access.Criteria;
 import java.io.Serializable;
 import java.util.List;
 import javax.ejb.EJB;
@@ -26,6 +26,8 @@ import org.richfaces.component.html.HtmlDataTable;
 public abstract class AbstractDataAccessBean<T extends Entity<T>>
        implements Serializable {
 
+    private static final long serialVersionUID = 1L;
+    
     /**
      * Enumeration for a find type.
      */

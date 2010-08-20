@@ -1,12 +1,12 @@
 package org.lazydog.comic.manager.bean;
 
-import org.lazydog.comic.criteria.criterion.ComparisonOperation;
-import org.lazydog.comic.criteria.Criteria;
-import org.lazydog.comic.criteria.CriteriaFactory;
 import org.lazydog.comic.model.User;
 import org.lazydog.comic.service.ComicService;
 import org.lazydog.comic.manager.utility.SessionKey;
 import org.lazydog.comic.manager.utility.SessionUtility;
+import org.lazydog.data.access.criterion.ComparisonOperation;
+import org.lazydog.data.access.Criteria;
+import org.lazydog.data.access.CriteriaFactory;
 import java.io.Serializable;
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
@@ -27,6 +27,7 @@ import javax.servlet.RequestDispatcher;
 public class UserBean
        implements Serializable {
 
+    private static final long serialVersionUID = 1L;
     private static final String SUCCESS = "success";
 
     private String name;

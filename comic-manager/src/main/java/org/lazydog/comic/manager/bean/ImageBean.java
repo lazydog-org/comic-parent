@@ -1,10 +1,5 @@
 package org.lazydog.comic.manager.bean;
 
-import org.lazydog.comic.criteria.criterion.ComparisonOperation;
-import org.lazydog.comic.criteria.criterion.LogicalOperation;
-import org.lazydog.comic.criteria.criterion.Order;
-import org.lazydog.comic.criteria.Criteria;
-import org.lazydog.comic.criteria.CriteriaFactory;
 import org.lazydog.comic.model.Image;
 import org.lazydog.comic.model.Title;
 import org.lazydog.comic.model.User;
@@ -16,6 +11,11 @@ import org.lazydog.comic.manager.utility.ImageSearchBy;
 import org.lazydog.comic.manager.utility.Perspective;
 import org.lazydog.comic.manager.utility.SessionKey;
 import org.lazydog.comic.manager.utility.SessionUtility;
+import org.lazydog.data.access.criterion.ComparisonOperation;
+import org.lazydog.data.access.criterion.LogicalOperation;
+import org.lazydog.data.access.criterion.Order;
+import org.lazydog.data.access.Criteria;
+import org.lazydog.data.access.CriteriaFactory;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -37,6 +37,8 @@ public class ImageBean
        extends AbstractDataAccessBean<Image>
        implements Serializable {
 
+    private static final long serialVersionUID = 1L;
+    
     /**
      * Generate the label.
      *

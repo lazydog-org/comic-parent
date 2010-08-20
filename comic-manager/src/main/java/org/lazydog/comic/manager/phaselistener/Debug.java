@@ -13,6 +13,8 @@ import javax.faces.event.PhaseListener;
 public class Debug
        implements PhaseListener {
 
+    private static final long serialVersionUID = 1L;
+    
     /**
      * Process after the phase.
      * 

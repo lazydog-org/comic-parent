@@ -1,14 +1,13 @@
 package org.lazydog.comic.manager.helper.bean;
 
-import org.lazydog.comic.criteria.criterion.ComparisonOperation;
-import org.lazydog.comic.criteria.Criteria;
-import org.lazydog.comic.criteria.CriteriaFactory;
-import org.lazydog.comic.criteria.CriteriaFactoryException;
 import org.lazydog.comic.model.Image;
 import org.lazydog.comic.manager.utility.ImageSearchBy;
 import org.lazydog.comic.manager.utility.SessionKey;
 import org.lazydog.comic.manager.utility.SessionUtility;
 import org.lazydog.comic.manager.utility.Subtopic;
+import org.lazydog.data.access.criterion.ComparisonOperation;
+import org.lazydog.data.access.Criteria;
+import org.lazydog.data.access.CriteriaFactory;
 import java.io.Serializable;
 
 
@@ -19,6 +18,8 @@ import java.io.Serializable;
  */
 public class ImageSearcher 
        implements Serializable {
+
+    private static final long serialVersionUID = 1L;
 
     /**
      * Get the criteria.
@@ -33,33 +34,23 @@ public class ImageSearcher
 
         // Declare.
         Criteria<Image> criteria;
+        CriteriaFactory criteriaFactory;
 
         // Initialize.
         criteria = null;
+        criteriaFactory = CriteriaFactory.instance();
 
-        try {
+        // Get a new criteria.
+        criteria = criteriaFactory.createCriteria(Image.class);
 
-            // Declare.
-            CriteriaFactory criteriaFactory;
+        switch(searchBy) {
 
-            // Initialize criteria factory.
-            criteriaFactory = CriteriaFactory.instance();
+            case IMAGE_FILE_NAME:
 
-            // Get a new criteria.
-            criteria = criteriaFactory.createCriteria(Image.class);
-
-            switch(searchBy) {
-
-                case IMAGE_FILE_NAME:
-
-                    // Modify the criteria.
-                    criteria.add(ComparisonOperation.like(
-                            "fileName", "%" + (String)searchFor + "%"));
-                    break;
-            }
-        }
-        catch(CriteriaFactoryException e) {
-            // Ignore.
+                // Modify the criteria.
+                criteria.add(ComparisonOperation.like(
+                        "fileName", "%" + (String)searchFor + "%"));
+                break;
         }
 
         return criteria;
