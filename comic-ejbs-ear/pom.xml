@@ -6,15 +6,14 @@
         <artifactId>comic-parent</artifactId>
         <version>1.1-SNAPSHOT</version>
     </parent>
-    <artifactId>comic-service-ear</artifactId>
+    <artifactId>comic-ejbs-ear</artifactId>
     <packaging>ear</packaging>
-    <name>Comic Service EAR</name>
+    <name>Comic EJBs EAR</name>
     <build>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-ear-plugin</artifactId>
-                <version>2.4.1</version>
                 <configuration>
                     <generateApplicationXml>true</generateApplicationXml>
                     <defaultLibBundleDir>lib</defaultLibBundleDir>
@@ -22,7 +21,11 @@
                     <modules>
                         <ejbModule>
                             <groupId>${project.groupId}</groupId>
-                            <artifactId>comic-service</artifactId>
+                            <artifactId>comic-data-access-ejb</artifactId>
+                        </ejbModule>
+                        <ejbModule>
+                            <groupId>${project.groupId}</groupId>
+                            <artifactId>comic-service-ejb</artifactId>
                         </ejbModule>
                     </modules>
                 </configuration>
@@ -32,7 +35,13 @@
     <dependencies>
         <dependency>
             <groupId>${project.groupId}</groupId>
-            <artifactId>comic-service</artifactId>
+            <artifactId>comic-data-access-ejb</artifactId>
+            <version>${project.version}</version>
+            <type>ejb</type>
+        </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>comic-service-ejb</artifactId>
             <version>${project.version}</version>
             <type>ejb</type>
         </dependency>
