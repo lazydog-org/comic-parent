@@ -7,10 +7,10 @@ import javax.ejb.EJBException;
 import javax.ejb.Remote;
 import javax.ejb.Stateless;
 import javax.interceptor.Interceptors;
+import org.lazydog.comic.ComicDataAccess;
+import org.lazydog.comic.ComicService;
 import org.lazydog.comic.model.Entity;
 import org.lazydog.comic.model.User;
-import org.lazydog.comic.service.ComicService;
-import org.lazydog.comic.spi.repository.ComicRepository;
 import org.lazydog.data.access.Criteria;
 import org.lazydog.utilities.ejbmonitor.interceptor.EJBMonitor;
 
@@ -26,7 +26,8 @@ import org.lazydog.utilities.ejbmonitor.interceptor.EJBMonitor;
 public class ComicServiceImpl
        implements ComicService {
 
-    private ComicRepository comicRepository;
+    @EJB(mappedName="ejb/ComicDataAccess", beanInterface=ComicDataAccess.class)
+    private ComicDataAccess comicDataAccess;
 
     /**
      * Find the entity.
@@ -39,7 +40,7 @@ public class ComicServiceImpl
     @Override
     public <T extends Entity<T>> T find(Class<T> entityClass,
                                         Integer id) {
-        return this.comicRepository.find(entityClass, id);
+        return this.comicDataAccess.find(entityClass, id);
     }
 
     /**
@@ -51,7 +52,7 @@ public class ComicServiceImpl
      */
     @Override
     public <T extends Entity<T>> T find(Criteria<T> criteria) {
-        return this.comicRepository.find(criteria);
+        return this.comicDataAccess.find(criteria);
     }
 
     /**
@@ -161,7 +162,7 @@ public class ComicServiceImpl
      */
     @Override
     public <T extends Entity<T>> List<T> findList(Class<T> entityClass) {
-        return this.comicRepository.findList(entityClass);
+        return this.comicDataAccess.findList(entityClass);
     }
 
     /**
@@ -173,7 +174,7 @@ public class ComicServiceImpl
      */
     @Override
     public <T extends Entity<T>> List<T> findList(Criteria<T> criteria) {
-        return this.comicRepository.findList(criteria);
+        return this.comicDataAccess.findList(criteria);
     }
 
     /**
@@ -365,7 +366,7 @@ public class ComicServiceImpl
     @Override
     public <T extends Entity<T>> void remove(Class<T> entityClass,
                                              Integer id) {
-        this.comicRepository.remove(entityClass, id);
+        this.comicDataAccess.remove(entityClass, id);
     }
     
     /**
@@ -384,7 +385,7 @@ public class ComicServiceImpl
         entity = this.prepEntityForSave(entity, user);
 
         // Save the entity.
-        return this.comicRepository.persist(entity);
+        return this.comicDataAccess.persist(entity);
     }
 
     /**
@@ -407,7 +408,7 @@ public class ComicServiceImpl
         }
 
         // Save the entities.
-        return this.comicRepository.persistList(entities);
+        return this.comicDataAccess.persistList(entities);
     }
 
     /**
@@ -415,9 +416,11 @@ public class ComicServiceImpl
      *
      * @param  comicRepository  the comic repository.
      */
+    /*
     @EJB(mappedName="ejb/ComicRepository", beanInterface=ComicRepository.class)
     protected void setComicRepository(ComicRepository comicRepository) {
-        this.comicRepository = comicRepository;
+        this.comicDataAccess = comicDataAccess;
     }
+    */
 
 }

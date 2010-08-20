@@ -6,21 +6,9 @@
         <artifactId>comic-parent</artifactId>
         <version>1.1-SNAPSHOT</version>
     </parent>
-    <artifactId>comic-service</artifactId>
+    <artifactId>comic-service-ejb</artifactId>
     <packaging>ejb</packaging>
-    <name>Comic Service</name>
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-ejb-plugin</artifactId>
-                <version>2.2.1</version>
-                <configuration>
-                    <ejbVersion>3.0</ejbVersion>
-                </configuration>
-            </plugin>
-        </plugins>
-    </build>
+    <name>Comic Service EJB</name>
     <dependencies>
         <dependency>
             <groupId>com.sun.appserver</groupId>
@@ -67,7 +55,7 @@
         <dependency>
             <groupId>org.lazydog.data.access</groupId>
             <artifactId>data-access</artifactId>
-            <version>1.0-SNAPSHOT</version>
+            <version>1.0</version>
         </dependency>
         <dependency>
             <groupId>org.lazydog.utilities</groupId>
@@ -77,11 +65,6 @@
         <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>comic-api</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>${project.groupId}</groupId>
-            <artifactId>comic-repository-spi</artifactId>
             <version>${project.version}</version>
         </dependency>
     </dependencies>

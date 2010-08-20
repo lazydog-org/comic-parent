@@ -1,4 +1,4 @@
-package org.lazydog.comic.internal.repository;
+package org.lazydog.comic.internal.data.access;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -7,6 +7,7 @@ import java.util.List;
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
+import org.lazydog.comic.ComicDataAccess;
 import org.lazydog.comic.model.Category;
 import org.lazydog.comic.model.Character;
 import org.lazydog.comic.model.Comic;
@@ -28,7 +29,6 @@ import org.lazydog.comic.model.Trait;
 import org.lazydog.comic.model.User;
 import org.lazydog.comic.model.UserPreference;
 import org.lazydog.comic.model.Want;
-import org.lazydog.comic.spi.repository.ComicRepository;
 import org.lazydog.data.access.Criteria;
 import org.lazydog.data.access.CriteriaFactory;
 import org.lazydog.data.access.criterion.ComparisonOperation;
@@ -39,11 +39,11 @@ import org.junit.Test;
 
 
 /**
- * Unit tests for ComicRepositoryImpl class.
+ * Unit tests for ComicDataAccessImpl class.
  *
  * @author  Ron Rickard
  */
-public class ComicRepositoryTest {
+public class ComicDataAccessTest {
 
     private Criteria<Category> categoryCriteria;
     private Criteria<Character> characterCriteria;
@@ -66,7 +66,7 @@ public class ComicRepositoryTest {
     private Criteria<User> userCriteria;
     private Criteria<Want> wantCriteria;
     private Criteria<UserPreference> userPreferenceCriteria;
-    private ComicRepository comicRepository;
+    private ComicDataAccess comicDataAccess;
     private SimpleDateFormat sdf;
 
     @Before
@@ -83,8 +83,8 @@ public class ComicRepositoryTest {
             // Initialize the context.
             context = new InitialContext();
 
-            // Get the comic repository.
-            comicRepository = (ComicRepository)context.lookup("ejb/ComicRepository");
+            // Get the comic data access.
+            comicDataAccess = (ComicDataAccess)context.lookup("ejb/ComicDataAccess");
         }
         catch(NamingException e) {
             // Ignore.
@@ -124,8 +124,8 @@ public class ComicRepositoryTest {
     @Test
     public void findListComic() throws Exception {
 
-        // Check if the comic repository is accessible.
-        if (comicRepository != null) {
+        // Check if the comic data access is accessible.
+        if (comicDataAccess != null) {
 
             List<Comic> comics;
             Date endTime;
@@ -136,7 +136,7 @@ public class ComicRepositoryTest {
                 startTime = new Date();
                 System.out.print("Fetching all comics ... ");
 
-                comics = comicRepository.findList(Comic.class);
+                comics = comicDataAccess.findList(Comic.class);
 
                 endTime = new Date();
                 System.out.println(comics.size() + " retrieved in "
@@ -150,8 +150,8 @@ public class ComicRepositoryTest {
     @Test
     public void findListComicByCriteria() throws Exception {
 
-        // Check if the comic repository is accessible.
-        if (comicRepository != null) {
+        // Check if the comic data access is accessible.
+        if (comicDataAccess != null) {
 
             List<Comic> comics;
             Date endTime;
@@ -162,7 +162,7 @@ public class ComicRepositoryTest {
                 startTime = new Date();
                 System.out.print("Fetching all comics by criteria ... ");
 
-                comics = comicRepository.findList(comicCriteria);
+                comics = comicDataAccess.findList(comicCriteria);
 
                 endTime = new Date();
                 System.out.println(comics.size() + " retrieved in "
@@ -175,8 +175,8 @@ public class ComicRepositoryTest {
     @Test
     public void findListHave() throws Exception {
 
-        // Check if the comic repository is accessible.
-        if (comicRepository != null) {
+        // Check if the comic data access is accessible.
+        if (comicDataAccess != null) {
 
             List<Have> haves;
             Date endTime;
@@ -187,7 +187,7 @@ public class ComicRepositoryTest {
                 startTime = new Date();
                 System.out.print("Fetching all haves ... ");
 
-                haves = comicRepository.findList(Have.class);
+                haves = comicDataAccess.findList(Have.class);
 
                 endTime = new Date();
                 System.out.println(haves.size() + " retrieved in "
@@ -200,8 +200,8 @@ public class ComicRepositoryTest {
     @Test
     public void findListHaveByCriteria() throws Exception {
 
-        // Check if the comic repository is accessible.
-        if (comicRepository != null) {
+        // Check if the comic data access is accessible.
+        if (comicDataAccess != null) {
 
             List<Have> haves;
             Date endTime;
@@ -212,7 +212,7 @@ public class ComicRepositoryTest {
                 startTime = new Date();
                 System.out.print("Fetching all haves by criteria ... ");
 
-                haves = comicRepository.findList(haveCriteria);
+                haves = comicDataAccess.findList(haveCriteria);
 
                 endTime = new Date();
                 System.out.println(haves.size() + " retrieved in "
@@ -226,8 +226,8 @@ public class ComicRepositoryTest {
     @Test
     public void findListHaveBySpecificCriteria() throws Exception {
 
-        // Check if the comic repository is accessible.
-        if (comicRepository != null) {
+        // Check if the comic data access is accessible.
+        if (comicDataAccess != null) {
 
             List<Have> haves;
             List<Title> titles;
@@ -243,12 +243,12 @@ public class ComicRepositoryTest {
                 System.out.print("Fetching all haves ... ");
 
                 userCriteria.add(ComparisonOperation.eq("name", "rjrjr"));
-                user = comicRepository.find(userCriteria);
+                user = comicDataAccess.find(userCriteria);
 
                 haveCriteria.add(ComparisonOperation.eq("createUser", user));
                 //haveCriteria.addOrder(Order.asc("comic.title.name"));
 
-                haves = comicRepository.findList(haveCriteria);
+                haves = comicDataAccess.findList(haveCriteria);
 
                 endTime = new Date();
                 System.out.println(haves.size() + " retrieved in "
@@ -280,8 +280,8 @@ public class ComicRepositoryTest {
     @Test
     public void findListTitle() throws Exception {
 
-        // Check if the comic repository is accessible.
-        if (comicRepository != null) {
+        // Check if the comic data access is accessible.
+        if (comicDataAccess != null) {
 
             List<Title> titles;
             Date endTime;
@@ -290,7 +290,7 @@ public class ComicRepositoryTest {
             startTime = new Date();
             System.out.print("Fetching all titles ... ");
 
-            titles = comicRepository.findList(Title.class);
+            titles = comicDataAccess.findList(Title.class);
 
             endTime = new Date();
             System.out.println(titles.size() + " retrieved in "
@@ -303,8 +303,8 @@ public class ComicRepositoryTest {
     @Test
     public void findListTitleByCriteria() throws Exception {
 
-        // Check if the comic repository is accessible.
-        if (comicRepository != null) {
+        // Check if the comic data access is accessible.
+        if (comicDataAccess != null) {
 
             List<Title> titles;
             Date endTime;
@@ -313,7 +313,7 @@ public class ComicRepositoryTest {
             startTime = new Date();
             System.out.print("Fetching all titles by criteria ... ");
 
-            titles = comicRepository.findList(titleCriteria);
+            titles = comicDataAccess.findList(titleCriteria);
 
             endTime = new Date();
             System.out.println(titles.size() + " retrieved in "
@@ -326,29 +326,29 @@ public class ComicRepositoryTest {
     @Test
     public void findList() throws Exception {
 
-        // Check if the comic repository is accessible.
-        if (comicRepository != null) {
+        // Check if the comic data access is accessible.
+        if (comicDataAccess != null) {
 
             System.out.println(sdf.format(new Date()) + " Fetching all objects ...");
 
-            List<Category> categories = comicRepository.findList(Category.class);
-            List<Character> characters = comicRepository.findList(Character.class);
-            List<ComicGrade> comicGrades = comicRepository.findList(ComicGrade.class);
-            List<ComicType> comicTypes = comicRepository.findList(ComicType.class);
-            List<Creator> creators = comicRepository.findList(Creator.class);
-            List<Distribution> distributions = comicRepository.findList(Distribution.class);
-            List<Image> images = comicRepository.findList(Image.class);
-            List<ImageType> imageTypes = comicRepository.findList(ImageType.class);
-            List<Imprint> imprints = comicRepository.findList(Imprint.class);
-            List<Location> locations = comicRepository.findList(Location.class);
-            List<Person> persons = comicRepository.findList(Person.class);
-            List<Profession> professions = comicRepository.findList(Profession.class);
-            List<Publisher> publishers = comicRepository.findList(Publisher.class);
-            List<TitleType> titleTypes = comicRepository.findList(TitleType.class);
-            List<Trait> traits = comicRepository.findList(Trait.class);
-            List<User> users = comicRepository.findList(User.class);
-            List<UserPreference> userPreferences = comicRepository.findList(UserPreference.class);
-            List<Want> wants = comicRepository.findList(Want.class);
+            List<Category> categories = comicDataAccess.findList(Category.class);
+            List<Character> characters = comicDataAccess.findList(Character.class);
+            List<ComicGrade> comicGrades = comicDataAccess.findList(ComicGrade.class);
+            List<ComicType> comicTypes = comicDataAccess.findList(ComicType.class);
+            List<Creator> creators = comicDataAccess.findList(Creator.class);
+            List<Distribution> distributions = comicDataAccess.findList(Distribution.class);
+            List<Image> images = comicDataAccess.findList(Image.class);
+            List<ImageType> imageTypes = comicDataAccess.findList(ImageType.class);
+            List<Imprint> imprints = comicDataAccess.findList(Imprint.class);
+            List<Location> locations = comicDataAccess.findList(Location.class);
+            List<Person> persons = comicDataAccess.findList(Person.class);
+            List<Profession> professions = comicDataAccess.findList(Profession.class);
+            List<Publisher> publishers = comicDataAccess.findList(Publisher.class);
+            List<TitleType> titleTypes = comicDataAccess.findList(TitleType.class);
+            List<Trait> traits = comicDataAccess.findList(Trait.class);
+            List<User> users = comicDataAccess.findList(User.class);
+            List<UserPreference> userPreferences = comicDataAccess.findList(UserPreference.class);
+            List<Want> wants = comicDataAccess.findList(Want.class);
 
             System.out.println("number of categories = " + categories.size());
             System.out.println("number of characters = " + characters.size());
@@ -377,29 +377,29 @@ public class ComicRepositoryTest {
     @Test
     public void findListByCriteria() throws Exception {
 
-        // Check if the comic repository is accessible.
-        if (comicRepository != null) {
+        // Check if the comic data access is accessible.
+        if (comicDataAccess != null) {
 
             System.out.println(sdf.format(new Date()) + " Fetching all objects ...");
 
-            List<Category> categories = comicRepository.findList(categoryCriteria);
-            List<Character> characters = comicRepository.findList(characterCriteria);
-            List<ComicGrade> comicGrades = comicRepository.findList(comicGradeCriteria);
-            List<ComicType> comicTypes = comicRepository.findList(comicTypeCriteria);
-            List<Creator> creators = comicRepository.findList(creatorCriteria);
-            List<Distribution> distributions = comicRepository.findList(distributionCriteria);
-            List<Image> images = comicRepository.findList(imageCriteria);
-            List<ImageType> imageTypes = comicRepository.findList(imageTypeCriteria);
-            List<Imprint> imprints = comicRepository.findList(imprintCriteria);
-            List<Location> locations = comicRepository.findList(locationCriteria);
-            List<Person> persons = comicRepository.findList(personCriteria);
-            List<Profession> professions = comicRepository.findList(professionCriteria);
-            List<Publisher> publishers = comicRepository.findList(publisherCriteria);
-            List<TitleType> titleTypes = comicRepository.findList(titleTypeCriteria);
-            List<Trait> traits = comicRepository.findList(traitCriteria);
-            List<User> users = comicRepository.findList(userCriteria);
-            List<UserPreference> userPreferences = comicRepository.findList(userPreferenceCriteria);
-            List<Want> wants = comicRepository.findList(wantCriteria);
+            List<Category> categories = comicDataAccess.findList(categoryCriteria);
+            List<Character> characters = comicDataAccess.findList(characterCriteria);
+            List<ComicGrade> comicGrades = comicDataAccess.findList(comicGradeCriteria);
+            List<ComicType> comicTypes = comicDataAccess.findList(comicTypeCriteria);
+            List<Creator> creators = comicDataAccess.findList(creatorCriteria);
+            List<Distribution> distributions = comicDataAccess.findList(distributionCriteria);
+            List<Image> images = comicDataAccess.findList(imageCriteria);
+            List<ImageType> imageTypes = comicDataAccess.findList(imageTypeCriteria);
+            List<Imprint> imprints = comicDataAccess.findList(imprintCriteria);
+            List<Location> locations = comicDataAccess.findList(locationCriteria);
+            List<Person> persons = comicDataAccess.findList(personCriteria);
+            List<Profession> professions = comicDataAccess.findList(professionCriteria);
+            List<Publisher> publishers = comicDataAccess.findList(publisherCriteria);
+            List<TitleType> titleTypes = comicDataAccess.findList(titleTypeCriteria);
+            List<Trait> traits = comicDataAccess.findList(traitCriteria);
+            List<User> users = comicDataAccess.findList(userCriteria);
+            List<UserPreference> userPreferences = comicDataAccess.findList(userPreferenceCriteria);
+            List<Want> wants = comicDataAccess.findList(wantCriteria);
 
             System.out.println("number of categories = " + categories.size());
             System.out.println("number of characters = " + characters.size());

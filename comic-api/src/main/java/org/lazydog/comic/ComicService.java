@@ -1,4 +1,4 @@
-package org.lazydog.comic.service;
+package org.lazydog.comic;
 
 import java.util.List;
 import org.lazydog.comic.model.Entity;
