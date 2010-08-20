@@ -20,9 +20,10 @@ public class Comic
        implements Comparable<Comic>,
                   Serializable {
 
-    // Declare.
+    private static final long serialVersionUID = 1L;
+
     private List<Character> characters = new ArrayList<Character>();
-    private Double coverPrice;
+    private Double coverPrice = new Double(0.0);
     private List<Creator> creators = new ArrayList<Creator>();
     private String description;
     @Valid @NotNull(message="Distribution is required.")
@@ -30,7 +31,7 @@ public class Comic
     private Image image;
     private Integer number;
     @NotNull(message="Print is required.") 
-    private Integer print;
+    private Integer print = new Integer(1);
     private Date publishDate;
     @Valid @NotNull(message="Title is required.")
     private Title title;
@@ -44,7 +45,7 @@ public class Comic
     /**
      * Compare this object to the specified object.
      *
-     * @param  object  the object to compare this object against.
+     * @param  that  the object to compare this object against.
      *
      * @return  the value 0 if this object is equal to the object;
      *          a value less than 0 if this object is less than the object;
@@ -52,7 +53,7 @@ public class Comic
      *          object.
      */
     @Override
-    public int compareTo(Comic object) {
+    public int compareTo(Comic that) {
         
         // Declare.
         int lastCompare;
@@ -77,24 +78,24 @@ public class Comic
         
         // Initialize.
         lastCompare = 0;
-        thatCoverPrice = object.getCoverPrice();
-        thatDescription = (object.getDescription() == null) ? "" : object.getDescription();
-        thatDistribution = (object.getDistribution() == null) ? new Distribution() : object.getDistribution();
-        thatNumber = (object.getNumber() == null) ? new Integer(0) : object.getNumber();
-        thatPrint = object.getPrint();
-        thatPublishDate = (object.getPublishDate() == null) ? getEpoch() : object.getPublishDate();
-        thatTitle = (object.getTitle() == null) ? new Title() : object.getTitle();
-        thatType = (object.getType() == null) ? new ComicType() : object.getType();
-        thatVariant = (object.getVariant() == null) ? "" : object.getVariant();
+        thatCoverPrice = that.getCoverPrice();
+        thatDescription = normalize(that.getDescription(), String.class);
+        thatDistribution = normalize(that.getDistribution(), Distribution.class);
+        thatNumber = normalize(that.getNumber(), Integer.class);
+        thatPrint = that.getPrint();
+        thatPublishDate = normalize(that.getPublishDate(), Date.class);
+        thatTitle = normalize(that.getTitle(), Title.class);
+        thatType = normalize(that.getType(), ComicType.class);
+        thatVariant = normalize(that.getVariant(), String.class);
         thisCoverPrice = this.getCoverPrice();
-        thisDescription = (this.getDescription() == null) ? "" : this.getDescription();
-        thisDistribution = (this.getDistribution() == null) ? new Distribution() : this.getDistribution();
-        thisNumber = (this.getNumber() == null) ? new Integer(0) : this.getNumber();
+        thisDescription = normalize(this.getDescription(), String.class);
+        thisDistribution = normalize(this.getDistribution(), Distribution.class);
+        thisNumber = normalize(this.getNumber(), Integer.class);
         thisPrint = this.getPrint();
-        thisPublishDate = (this.getPublishDate() == null) ? getEpoch() : this.getPublishDate();
-        thisTitle = (this.getTitle() == null) ? new Title() : this.getTitle();
-        thisType = (this.getType() == null) ? new ComicType() : this.getType();
-        thisVariant = (this.getVariant() == null) ? "" : this.getVariant();
+        thisPublishDate = normalize(this.getPublishDate(), Date.class);
+        thisTitle = normalize(this.getTitle(), Title.class);
+        thisType = normalize(this.getType(), ComicType.class);
+        thisVariant = normalize(this.getVariant(), String.class);
         
         // Compare this object to the object.
         lastCompare = thisTitle.compareTo(thatTitle);
@@ -304,14 +305,14 @@ public class Comic
         
         // Initialize.
         thisCoverPrice = this.getCoverPrice();
-        thisDescription = (this.getDescription() == null) ? "" : this.getDescription();
-        thisDistribution = (this.getDistribution() == null) ? new Distribution() : this.getDistribution();
-        thisNumber = (this.getNumber() == null) ? new Integer(0) : this.getNumber();
+        thisDescription = normalize(this.getDescription(), String.class);
+        thisDistribution = normalize(this.getDistribution(), Distribution.class);
+        thisNumber = normalize(this.getNumber(), Integer.class);
         thisPrint = this.getPrint();
-        thisPublishDate = (this.getPublishDate() == null) ? getEpoch() : this.getPublishDate();
-        thisTitle = (this.getTitle() == null) ? new Title() : this.getTitle();
-        thisType = (this.getType() == null) ? new ComicType() : this.getType();
-        thisVariant = (this.getVariant() == null) ? "" : this.getVariant();
+        thisPublishDate = normalize(this.getPublishDate(), Date.class);
+        thisTitle = normalize(this.getTitle(), Title.class);
+        thisType = normalize(this.getType(), ComicType.class);
+        thisVariant = normalize(this.getVariant(), String.class);
         
         return thisTitle.hashCode()*7^8
              + thisType.hashCode()*7^7

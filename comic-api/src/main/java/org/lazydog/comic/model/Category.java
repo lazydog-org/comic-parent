@@ -15,7 +15,8 @@ public class Category
        implements Comparable<Category>,
                   Serializable {
     
-    // Declare.
+    private static final long serialVersionUID = 1L;
+
     @NotNull(message="Name is required.") 
     @Size(max=50, message="Name cannot contain more than 50 characters.")
     private String name;
@@ -23,7 +24,7 @@ public class Category
     /**
      * Compare this object to the specified object.
      *
-     * @param  object  the object to compare this object against.
+     * @param  that  the object to compare this object against.
      *
      * @return  the value 0 if this object is equal to the object;
      *          a value less than 0 if this object is less than the object;
@@ -31,7 +32,7 @@ public class Category
      *          object.
      */
     @Override
-    public int compareTo(Category object) {
+    public int compareTo(Category that) {
         
         // Declare.
         int lastCompare;
@@ -40,8 +41,8 @@ public class Category
 
         // Initialize.
         lastCompare = 0;
-        thatName = (object.getName() == null) ? "" : object.getName();
-        thisName = (this.getName() == null) ? "" : this.getName();
+        thatName = normalize(that.getName(), String.class);
+        thisName = normalize(this.getName(), String.class);
         
         // Compare this object to the object.
         lastCompare = thisName.compareTo(thatName);
@@ -114,7 +115,7 @@ public class Category
         String thisName;
         
         // Initialize.
-        thisName = (this.getName() == null) ? "" : this.getName();
+        thisName = normalize(this.getName(), String.class);
         
         return thisName.hashCode();
     }

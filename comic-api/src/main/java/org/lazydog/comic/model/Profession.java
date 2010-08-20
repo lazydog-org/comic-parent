@@ -15,7 +15,8 @@ public class Profession
        implements Comparable<Profession>,
                   Serializable {
     
-    // Declare.
+    private static final long serialVersionUID = 1L;
+
     @NotNull(message="Value is required.")
     @Size(max=50, message="Value cannot contain more than 50 characters.")
     private String value;
@@ -23,7 +24,7 @@ public class Profession
     /**
      * Compare this object to the specified object.
      *
-     * @param  object  the object to compare this object against.
+     * @param  that  the object to compare this object against.
      *
      * @return  the value 0 if this object is equal to the object;
      *          a value less than 0 if this object is less than the object;
@@ -31,7 +32,7 @@ public class Profession
      *          object.
      */
     @Override
-    public int compareTo(Profession object) {
+    public int compareTo(Profession that) {
         
         // Declare.
         int lastCompare;
@@ -40,8 +41,8 @@ public class Profession
 
         // Initialize.
         lastCompare = 0;
-        thatValue = (object.getValue() == null) ? "" : object.getValue();
-        thisValue = (this.getValue() == null) ? "" : this.getValue();
+        thatValue = normalize(that.getValue(), String.class);
+        thisValue = normalize(this.getValue(), String.class);
         
         // Compare this object to the object.
         lastCompare = thisValue.compareTo(thatValue);
@@ -114,7 +115,7 @@ public class Profession
         String thisValue;
         
         // Initialize.
-        thisValue = (this.getValue() == null) ? "" : this.getValue();
+        thisValue = normalize(this.getValue(), String.class);
         
         return thisValue.hashCode();
     }

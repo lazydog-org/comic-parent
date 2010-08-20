@@ -11,6 +11,8 @@ import java.io.Serializable;
 public class Criterion
        implements Serializable {
 
+    private static final long serialVersionUID = 1L;
+    
     private ComparisonOperator comparisonOperator;
     private LogicalOperator logicalOperator;
     private String operand;

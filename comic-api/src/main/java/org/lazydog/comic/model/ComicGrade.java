@@ -15,7 +15,8 @@ public class ComicGrade
        implements Comparable<ComicGrade>,
                   Serializable {
     
-    // Declare.
+    private static final long serialVersionUID = 1L;
+
     @NotNull(message="Code is required.")
     @Size(max=5, message="Code cannot contain more than 5 characters.")
     private String code;
@@ -23,12 +24,12 @@ public class ComicGrade
     @Size(max=20, message="Name cannot contain more than 20 characters.")
     private String name;
     @NotNull(message="Scale is required.")
-    private Double scale;
+    private Double scale = new Double(0.0);
 
     /**
      * Compare this object to the specified object.
      *
-     * @param  object  the object to compare this object against.
+     * @param  that  the object to compare this object against.
      *
      * @return  the value 0 if this object is equal to the object;
      *          a value less than 0 if this object is less than the object;
@@ -36,7 +37,7 @@ public class ComicGrade
      *          object.
      */
     @Override
-    public int compareTo(ComicGrade object) {
+    public int compareTo(ComicGrade that) {
         
         // Declare.
         int lastCompare;
@@ -45,7 +46,7 @@ public class ComicGrade
 
         // Initialize.
         lastCompare = 0;
-        thatScale = object.getScale();
+        thatScale = that.getScale();
         thisScale = this.getScale();
         
         // Compare this object to the object.

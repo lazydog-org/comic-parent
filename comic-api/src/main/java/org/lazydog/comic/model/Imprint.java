@@ -16,7 +16,8 @@ public class Imprint
        implements Comparable<Imprint>,
                   Serializable {
     
-    // Declare.      
+    private static final long serialVersionUID = 1L;
+    
     private Image image;
     @NotNull(message="Name is required.") 
     @Size(max=50, message="Name cannot contain more than 50 characters.")
@@ -27,7 +28,7 @@ public class Imprint
     /**
      * Compare this object to the specified object.
      *
-     * @param  object  the object to compare this object against.
+     * @param  that  the object to compare this object against.
      *
      * @return  the value 0 if this object is equal to the object;
      *          a value less than 0 if this object is less than the object;
@@ -35,7 +36,7 @@ public class Imprint
      *          object.
      */
     @Override
-    public int compareTo(Imprint object) {
+    public int compareTo(Imprint that) {
         
         // Declare.
         int lastCompare;
@@ -46,10 +47,10 @@ public class Imprint
 
         // Initialize.
         lastCompare = 0;
-        thatName = (object.getName() == null) ? "" : object.getName();
-        thatPublisher = (object.getPublisher() == null) ? new Publisher() : object.getPublisher();
-        thisName = (this.getName() == null) ? "" : this.getName();
-        thisPublisher = (this.getPublisher() == null) ? new Publisher() : this.getPublisher();
+        thatName = normalize(that.getName(), String.class);
+        thatPublisher = normalize(that.getPublisher(), Publisher.class);
+        thisName = normalize(this.getName(), String.class);
+        thisPublisher = normalize(this.getPublisher(), Publisher.class);
 
         // Compare this object to the object.
         lastCompare = thisPublisher.compareTo(thatPublisher);
@@ -144,8 +145,8 @@ public class Imprint
         Publisher thisPublisher;
         
         // Initialize.
-        thisName = (this.getName() == null) ? "" : this.getName();
-        thisPublisher = (this.getPublisher() == null) ? new Publisher() : this.getPublisher();
+        thisName = normalize(this.getName(), String.class);
+        thisPublisher = normalize(this.getPublisher(), Publisher.class);
         
         return thisPublisher.hashCode()*31
              + thisName.hashCode();

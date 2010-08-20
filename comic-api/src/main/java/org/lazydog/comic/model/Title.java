@@ -21,7 +21,8 @@ public class Title
        implements Comparable<Title>,
                   Serializable {
 
-    // Declare.
+    private static final long serialVersionUID = 1L;
+
     private List<Category> categories = new ArrayList<Category>();
     private List<Comic> comics = new ArrayList<Comic>();
     private Image image;
@@ -35,12 +36,12 @@ public class Title
     @Valid @NotNull(message="Title type is required.")
     private TitleType type;
     @NotNull(message="Volume is required.")
-    private Integer volume;
+    private Integer volume = new Integer(1);
 
     /**
      * Compare this object to the specified object.
      *
-     * @param  object  the object to compare this object against.
+     * @param  that  the object to compare this object against.
      *
      * @return  the value 0 if this object is equal to the object;
      *          a value less than 0 if this object is less than the object;
@@ -48,7 +49,7 @@ public class Title
      *          object.
      */
     @Override
-    public int compareTo(Title object) {
+    public int compareTo(Title that) {
         
         // Declare.
         int lastCompare;
@@ -67,17 +68,17 @@ public class Title
 
         // Initialize.
         lastCompare = 0;
-        thatName = (object.getName() == null) ? "" : object.getName();
-        thatPublishEndDate = (object.getPublishEndDate() == null) ? getEpoch() : object.getPublishEndDate();
-        thatPublishStartDate = (object.getPublishStartDate() == null) ? getEpoch() : object.getPublishStartDate();
-        thatPublishers = (object.getPublishers() == null) ? new ArrayList<Publisher>() : object.getPublishers();
-        thatType = (object.getType() == null) ? new TitleType() : object.getType();
-        thatVolume = object.getVolume();
-        thisName = (this.getName() == null) ? "" : this.getName();
-        thisPublishEndDate = (this.getPublishEndDate() == null) ? getEpoch() : this.getPublishEndDate();
-        thisPublishStartDate = (this.getPublishStartDate() == null) ? getEpoch() : this.getPublishStartDate();
-        thisPublishers = (this.getPublishers() == null) ? new ArrayList<Publisher>() : this.getPublishers();
-        thisType = (this.getType() == null) ? new TitleType() : this.getType();
+        thatName = normalize(that.getName(), String.class);
+        thatPublishEndDate = normalize(that.getPublishEndDate(), Date.class);
+        thatPublishStartDate = normalize(that.getPublishStartDate(), Date.class);
+        thatPublishers = that.getPublishers();
+        thatType = normalize(that.getType(), TitleType.class);
+        thatVolume = that.getVolume();
+        thisName = normalize(this.getName(), String.class);
+        thisPublishEndDate = normalize(this.getPublishEndDate(), Date.class);
+        thisPublishStartDate = normalize(this.getPublishStartDate(), Date.class);
+        thisPublishers = this.getPublishers();
+        thisType = normalize(this.getType(), TitleType.class);
         thisVolume = this.getVolume();
         
         // Compare this object to the object.
@@ -256,11 +257,11 @@ public class Title
         Integer thisVolume;
         
         // Initialize.
-        thisName = (this.getName() == null) ? "" : this.getName();
-        thisPublishEndDate = (this.getPublishEndDate() == null) ? getEpoch() : this.getPublishEndDate();
-        thisPublishStartDate = (this.getPublishStartDate() == null) ? getEpoch() : this.getPublishStartDate();
-        thisPublishers = (this.getPublishers() == null) ? new ArrayList<Publisher>() : this.getPublishers();
-        thisType = (this.getType() == null) ? new TitleType() : this.getType();
+        thisName = normalize(this.getName(), String.class);
+        thisPublishEndDate = normalize(this.getPublishEndDate(), Date.class);
+        thisPublishStartDate = normalize(this.getPublishStartDate(), Date.class);
+        thisPublishers = this.getPublishers();
+        thisType = normalize(this.getType(), TitleType.class);
         thisVolume = this.getVolume();
         
         return thisName.hashCode()*7^5

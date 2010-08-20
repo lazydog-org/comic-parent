@@ -15,7 +15,8 @@ public class Person
        implements Comparable<Person>,
                   Serializable {
     
-    // Declare.  
+    private static final long serialVersionUID = 1L;
+
     @NotNull(message="First name is required.")
     @Size(max=50, message="First name cannot contain more than 50 characters.")
     private String firstName;
@@ -26,7 +27,7 @@ public class Person
     /**
      * Compare this object to the specified object.
      *
-     * @param  object  the object to compare this object against.
+     * @param  that  the object to compare this object against.
      *
      * @return  the value 0 if this object is equal to the object;
      *          a value less than 0 if this object is less than the object;
@@ -34,7 +35,7 @@ public class Person
      *          object.
      */
     @Override
-    public int compareTo(Person object) {
+    public int compareTo(Person that) {
         
         // Declare.
         int lastCompare;
@@ -45,10 +46,10 @@ public class Person
 
         // Initialize.
         lastCompare = 0;
-        thatFirstName = (object.getFirstName() == null) ? "" : object.getFirstName();
-        thatLastName = (object.getLastName() == null) ? "" : object.getLastName();
-        thisFirstName = (this.getFirstName() == null) ? "" : this.getFirstName();
-        thisLastName = (this.getLastName() == null) ? "" : this.getLastName();
+        thatFirstName = normalize(that.getFirstName(), String.class);
+        thatLastName = normalize(that.getLastName(), String.class);
+        thisFirstName = normalize(this.getFirstName(), String.class);
+        thisLastName = normalize(this.getLastName(), String.class);
         
         // Compare this object to the object.
         lastCompare = thisLastName.compareTo(thatLastName);
@@ -133,8 +134,8 @@ public class Person
         String thisLastName;
         
         // Initialize.
-        thisFirstName = (this.getFirstName() == null) ? "" : this.getFirstName();
-        thisLastName = (this.getLastName() == null) ? "" : this.getLastName();
+        thisFirstName = normalize(this.getFirstName(), String.class);
+        thisLastName = normalize(this.getLastName(), String.class);
         
         return thisLastName.hashCode()*31
              + thisFirstName.hashCode();

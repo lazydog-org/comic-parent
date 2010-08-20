@@ -15,7 +15,8 @@ public class ImageType
        implements Comparable<ImageType>,
                   Serializable {
     
-    // Declare.
+    private static final long serialVersionUID = 1L;
+
     @NotNull(message="Directory path is required.")
     @Size(max=100, message="Directory path cannot contain more than 100 characters.")
     private String directoryPath;
@@ -26,7 +27,7 @@ public class ImageType
     /**
      * Compare this object to the specified object.
      *
-     * @param  object  the object to compare this object against.
+     * @param  that  the object to compare this object against.
      *
      * @return  the value 0 if this object is equal to the object;
      *          a value less than 0 if this object is less than the object;
@@ -34,7 +35,7 @@ public class ImageType
      *          object.
      */
     @Override
-    public int compareTo(ImageType object) {
+    public int compareTo(ImageType that) {
         
         // Declare.
         int lastCompare;
@@ -45,10 +46,10 @@ public class ImageType
 
         // Initialize.
         lastCompare = 0;
-        thatDirectoryPath = (object.getDirectoryPath() == null) ? "" : object.getDirectoryPath();
-        thatValue = (object.getValue() == null) ? "" : object.getValue();
-        thisDirectoryPath = (this.getDirectoryPath() == null) ? "" : this.getDirectoryPath();
-        thisValue = (this.getValue() == null) ? "" : this.getValue();
+        thatDirectoryPath = normalize(that.getDirectoryPath(),String.class);
+        thatValue = normalize(that.getValue(), String.class);
+        thisDirectoryPath = normalize(this.getDirectoryPath(), String.class);
+        thisValue = normalize(this.getValue(), String.class);
         
         // Compare this object to the object.
         lastCompare = thisValue.compareTo(thatValue);
@@ -133,8 +134,8 @@ public class ImageType
         String thisValue;
         
         // Initialize.
-        thisDirectoryPath = (this.getDirectoryPath() == null) ? "" : this.getDirectoryPath();
-        thisValue = (this.getValue() == null) ? "" : this.getValue();
+        thisDirectoryPath = normalize(this.getDirectoryPath(), String.class);
+        thisValue = normalize(this.getValue(), String.class);
         
         return thisValue.hashCode()*31
              + thisDirectoryPath.hashCode();

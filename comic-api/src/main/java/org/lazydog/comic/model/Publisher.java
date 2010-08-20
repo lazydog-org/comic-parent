@@ -17,7 +17,8 @@ public class Publisher
        implements Comparable<Publisher>,
                   Serializable {
     
-    // Declare.      
+    private static final long serialVersionUID = 1L;
+    
     private Image image;
     private List<Imprint> imprints = new ArrayList<Imprint>();
     @NotNull(message="Name is required.") 
@@ -27,7 +28,7 @@ public class Publisher
     /**
      * Compare this object to the specified object.
      *
-     * @param  object  the object to compare this object against.
+     * @param  that  the object to compare this object against.
      *
      * @return  the value 0 if this object is equal to the object;
      *          a value less than 0 if this object is less than the object;
@@ -35,7 +36,7 @@ public class Publisher
      *          object.
      */
     @Override
-    public int compareTo(Publisher object) {
+    public int compareTo(Publisher that) {
         
         // Declare.
         int lastCompare;
@@ -44,8 +45,8 @@ public class Publisher
 
         // Initialize.
         lastCompare = 0;
-        thatName = (object.getName() == null) ? "" : object.getName();
-        thisName = (this.getName() == null) ? "" : this.getName();
+        thatName = normalize(that.getName(), String.class);
+        thisName = normalize(this.getName(), String.class);
 
         // Compare this object to the object.
         lastCompare = thisName.compareTo(thatName);
@@ -138,7 +139,7 @@ public class Publisher
         String thisName;
         
         // Initialize.
-        thisName = (this.getName() == null) ? "" : this.getName();
+        thisName = normalize(this.getName(), String.class);
         
         return thisName.hashCode();
     }

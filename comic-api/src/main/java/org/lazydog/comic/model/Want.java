@@ -15,14 +15,15 @@ public class Want
        implements Comparable<Want>,
                   Serializable {
 
-    // Declare.
+    private static final long serialVersionUID = 1L;
+    
     @Valid @NotNull(message="Comic is required.")
     private Comic comic;
 
     /**
      * Compare this object to the specified object.
      *
-     * @param  object  the object to compare this object against.
+     * @param  that  the object to compare this object against.
      *
      * @return  the value 0 if this object is equal to the object;
      *          a value less than 0 if this object is less than the object;
@@ -30,7 +31,7 @@ public class Want
      *          object.
      */
     @Override
-    public int compareTo(Want object) {
+    public int compareTo(Want that) {
         
         // Declare.
         int lastCompare;
@@ -41,10 +42,10 @@ public class Want
 
         // Initialize.
         lastCompare = 0;
-        thatComic = (object.getComic() == null) ? new Comic() : object.getComic();
-        thatCreateUser = (object.getCreateUser() == null) ? new User() : object.getCreateUser();
-        thisComic = (this.getComic() == null) ? new Comic() : this.getComic();
-        thisCreateUser = (this.getCreateUser() == null) ? new User() : this.getCreateUser();
+        thatComic = normalize(that.getComic(), Comic.class);
+        thatCreateUser = normalize(that.getCreateUser(), User.class);
+        thisComic = normalize(this.getComic(), Comic.class);
+        thisCreateUser = normalize(this.getCreateUser(), User.class);
         
         // Compare this object to the object.
         lastCompare = thisCreateUser.compareTo(thatCreateUser);
@@ -119,8 +120,8 @@ public class Want
         User thisCreateUser;
         
         // Initialize.
-        thisComic = (this.getComic() == null) ? new Comic() : this.getComic();
-        thisCreateUser = (this.getCreateUser() == null) ? new User() : this.getCreateUser();
+        thisComic = normalize(this.getComic(), Comic.class);
+        thisCreateUser = normalize(this.getCreateUser(), User.class);
         
         return thisCreateUser.hashCode()*31
              + thisComic.hashCode();

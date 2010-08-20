@@ -15,21 +15,22 @@ public class Have
        implements Comparable<Have>,
                   Serializable {
 
-    // Declare.
+    private static final long serialVersionUID = 1L;
+
     @Valid @NotNull(message="Comic is required.")
     private Comic comic;
     @Valid @NotNull(message="Comic grade is required.")
     private ComicGrade comicGrade;
     @Valid @NotNull(message="Location is required.")
     private Location location;
-    private Double purchasePrice;
+    private Double purchasePrice = new Double(0.0);
     @NotNull(message="Quantity is required.")
-    private Integer quantity;
+    private Integer quantity = new Integer(1);
 
     /**
      * Compare this object to the specified object.
      *
-     * @param  object  the object to compare this object against.
+     * @param  that  the object to compare this object against.
      *
      * @return  the value 0 if this object is equal to the object;
      *          a value less than 0 if this object is less than the object;
@@ -37,7 +38,7 @@ public class Have
      *          object.
      */
     @Override
-    public int compareTo(Have object) {
+    public int compareTo(Have that) {
         
         // Declare.
         int lastCompare;
@@ -54,15 +55,15 @@ public class Have
 
         // Initialize.
         lastCompare = 0;
-        thatComic = (object.getComic() == null) ? new Comic() : object.getComic();
-        thatComicGrade = (object.getComicGrade() == null) ? new ComicGrade() : object.getComicGrade();
-        thatCreateUser = (object.getCreateUser() == null) ? new User() : object.getCreateUser();
-        thatLocation = (object.getLocation() == null) ? new Location() : object.getLocation();
-        thatPurchasePrice = object.getPurchasePrice();
-        thisComic = (this.getComic() == null) ? new Comic() : this.getComic();
-        thisComicGrade = (this.getComicGrade() == null) ? new ComicGrade() : this.getComicGrade();
-        thisCreateUser = (this.getCreateUser() == null) ? new User() : this.getCreateUser();
-        thisLocation = (this.getLocation() == null) ? new Location() : this.getLocation();
+        thatComic = normalize(that.getComic(), Comic.class);
+        thatComicGrade = normalize(that.getComicGrade(), ComicGrade.class);
+        thatCreateUser = normalize(that.getCreateUser(), User.class);
+        thatLocation = normalize(that.getLocation(), Location.class);
+        thatPurchasePrice = that.getPurchasePrice();
+        thisComic = normalize(this.getComic(), Comic.class);
+        thisComicGrade = normalize(this.getComicGrade(), ComicGrade.class);
+        thisCreateUser = normalize(this.getCreateUser(), User.class);
+        thisLocation = normalize(this.getLocation(), Location.class);
         thisPurchasePrice = this.getPurchasePrice();
         
         // Compare this object to the object.
@@ -181,22 +182,19 @@ public class Have
         User thisCreateUser;
         Location thisLocation;
         Double thisPurchasePrice;
-        Integer thisQuantity;
         
         // Initialize.
-        thisComic = (this.getComic() == null) ? new Comic() : this.getComic();
-        thisComicGrade = (this.getComicGrade() == null) ? new ComicGrade() : this.getComicGrade();
-        thisCreateUser = (this.getCreateUser() == null) ? new User() : this.getCreateUser();
-        thisLocation = (this.getLocation() == null) ? new Location() : this.getLocation();
+        thisComic = normalize(this.getComic(), Comic.class);
+        thisComicGrade = normalize(this.getComicGrade(), ComicGrade.class);
+        thisCreateUser = normalize(this.getCreateUser(), User.class);
+        thisLocation = normalize(this.getLocation(), Location.class);
         thisPurchasePrice = this.getPurchasePrice();
-        thisQuantity = this.getQuantity();
 
-        return thisCreateUser.hashCode()*7^5
-             + thisComic.hashCode()*7^4
-             + thisComicGrade.hashCode()*7^3
-             + thisLocation.hashCode()*7^2
-             + thisPurchasePrice.hashCode()*7
-             + thisQuantity.hashCode();
+        return thisCreateUser.hashCode()*7^4
+             + thisComic.hashCode()*7^3
+             + thisComicGrade.hashCode()*7^2
+             + thisLocation.hashCode()*7
+             + thisPurchasePrice.hashCode();
     }
   
     /**

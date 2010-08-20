@@ -16,7 +16,8 @@ public class Image
        implements Comparable<Image>,
                   Serializable {
     
-    // Declare.
+    private static final long serialVersionUID = 1L;
+
     @NotNull(message="File name is required.") 
     @Size(max=100, message="File name cannot contain more than 100 character.")
     private String fileName;
@@ -28,7 +29,7 @@ public class Image
     /**
      * Compare this object to the specified object.
      *
-     * @param  object  the object to compare this object against.
+     * @param  that  the object to compare this object against.
      *
      * @return  the value 0 if this object is equal to the object;
      *          a value less than 0 if this object is less than the object;
@@ -36,7 +37,7 @@ public class Image
      *          object.
      */
     @Override
-    public int compareTo(Image object) {
+    public int compareTo(Image that) {
         
         // Declare.
         int lastCompare;
@@ -49,12 +50,12 @@ public class Image
 
         // Initialize.
         lastCompare = 0;
-        thatFileName = (object.getFileName() == null) ? "" : object.getFileName();
-        thatLabel = (object.getLabel() == null) ? "" : object.getLabel();
-        thatType = (object.getType() == null) ? new ImageType() : object.getType();
-        thisFileName = (this.getFileName() == null) ? "" : this.getFileName();
-        thisLabel = (this.getLabel() == null) ? "" : this.getLabel();
-        thisType = (this.getType() == null) ? new ImageType() : this.getType();
+        thatFileName = normalize(that.getFileName(), String.class);
+        thatLabel = normalize(that.getLabel(), String.class);
+        thatType = normalize(that.getType(), ImageType.class);
+        thisFileName = normalize(this.getFileName(), String.class);
+        thisLabel = normalize(this.getLabel(), String.class);
+        thisType = normalize(this.getType(), ImageType.class);
         
         // Compare this object to the object.
         lastCompare = thisType.compareTo(thatType);
@@ -151,9 +152,9 @@ public class Image
         ImageType thisType;
         
         // Initialize.
-        thisFileName = (this.getFileName() == null) ? "" : this.getFileName();
-        thisLabel = (this.getLabel() == null) ? "" : this.getLabel();
-        thisType = (this.getType() == null) ? new ImageType() : this.getType();
+        thisFileName = normalize(this.getFileName(), String.class);
+        thisLabel = normalize(this.getLabel(), String.class);
+        thisType = normalize(this.getType(), ImageType.class);
         
         return thisType.hashCode()*7^2 +
                thisLabel.hashCode()*7 +

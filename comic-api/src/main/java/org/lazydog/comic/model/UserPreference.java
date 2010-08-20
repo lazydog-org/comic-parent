@@ -17,7 +17,8 @@ public class UserPreference
        implements Comparable<UserPreference>,
                   Serializable {
 
-    // Declare.
+    private static final long serialVersionUID = 1L;
+
     @Valid @NotNull(message="Comic grade is required.")
     private ComicGrade comicGrade;
     @Valid @NotNull(message="Comic type is required.")
@@ -36,7 +37,7 @@ public class UserPreference
     /**
      * Compare this object to the specified object.
      *
-     * @param  object  the object to compare this object against.
+     * @param  that  the object to compare this object against.
      *
      * @return  the value 0 if this object is equal to the object;
      *          a value less than 0 if this object is less than the object;
@@ -44,7 +45,7 @@ public class UserPreference
      *          object.
      */
     @Override
-    public int compareTo(UserPreference object) {
+    public int compareTo(UserPreference that) {
 
         // Declare.
         int lastCompare;
@@ -67,22 +68,22 @@ public class UserPreference
 
         // Initialize.
         lastCompare = 0;
-        thatComicGrade = (object.getComicGrade() == null) ? new ComicGrade() : object.getComicGrade();
-        thatComicType = (object.getComicType() == null) ? new ComicType() : object.getComicType();
-        thatCreateUser = (object.getCreateUser() == null) ? new User() : object.getCreateUser();
-        thatDistribution = (object.getDistribution() == null) ? new Distribution() : object.getDistribution();
-        thatImageType = (object.getImageType() == null) ? new ImageType() : object.getImageType();
-        thatMinimumPublishDate = (object.getMinimumPublishDate() == null) ? getEpoch() : object.getMinimumPublishDate();
-        thatPublisher = (object.getPublisher() == null) ? new Publisher() : object.getPublisher();
-        thatTitleType = (object.getTitleType() == null) ? new TitleType() : object.getTitleType();
-        thisComicGrade = (this.getComicGrade() == null) ? new ComicGrade() : this.getComicGrade();
-        thisComicType = (this.getComicType() == null) ? new ComicType() : this.getComicType();
-        thisCreateUser = (this.getCreateUser() == null) ? new User() : this.getCreateUser();
-        thisDistribution = (this.getDistribution() == null) ? new Distribution() : this.getDistribution();
-        thisImageType = (this.getImageType() == null) ? new ImageType() : this.getImageType();
-        thisMinimumPublishDate = (this.getMinimumPublishDate() == null) ? getEpoch() : this.getMinimumPublishDate();
-        thisPublisher = (this.getPublisher() == null) ? new Publisher() : this.getPublisher();
-        thisTitleType = (this.getTitleType() == null) ? new TitleType() : this.getTitleType();
+        thatComicGrade = normalize(that.getComicGrade(), ComicGrade.class);
+        thatComicType = normalize(that.getComicType(), ComicType.class);
+        thatCreateUser = normalize(that.getCreateUser(), User.class);
+        thatDistribution = normalize(that.getDistribution(), Distribution.class);
+        thatImageType = normalize(that.getImageType(), ImageType.class);
+        thatMinimumPublishDate = normalize(that.getMinimumPublishDate(), Date.class);
+        thatPublisher = normalize(that.getPublisher(), Publisher.class);
+        thatTitleType = normalize(that.getTitleType(), TitleType.class);
+        thisComicGrade = normalize(this.getComicGrade(), ComicGrade.class);
+        thisComicType = normalize(this.getComicType(), ComicType.class);
+        thisCreateUser = normalize(this.getCreateUser(), User.class);
+        thisDistribution = normalize(this.getDistribution(), Distribution.class);
+        thisImageType = normalize(this.getImageType(), ImageType.class);
+        thisMinimumPublishDate = normalize(this.getMinimumPublishDate(), Date.class);
+        thisPublisher = normalize(this.getPublisher(), Publisher.class);
+        thisTitleType = normalize(this.getTitleType(), TitleType.class);
         
 
         // Compare this object to the object.
@@ -231,14 +232,14 @@ public class UserPreference
         TitleType thisTitleType;
 
         // Initialize.
-        thisComicGrade = (this.getComicGrade() == null) ? new ComicGrade() : this.getComicGrade();
-        thisComicType = (this.getComicType() == null) ? new ComicType() : this.getComicType();
-        thisCreateUser = (this.getCreateUser() == null) ? new User() : this.getCreateUser();
-        thisDistribution = (this.getDistribution() == null) ? new Distribution() : this.getDistribution();
-        thisImageType = (this.getImageType() == null) ? new ImageType() : this.getImageType();
-        thisMinimumPublishDate = (this.getMinimumPublishDate() == null) ? getEpoch() : this.getMinimumPublishDate();
-        thisPublisher = (this.getPublisher() == null) ? new Publisher() : this.getPublisher();
-        thisTitleType = (this.getTitleType() == null) ? new TitleType() : this.getTitleType();
+        thisComicGrade = normalize(this.getComicGrade(), ComicGrade.class);
+        thisComicType = normalize(this.getComicType(), ComicType.class);
+        thisCreateUser = normalize(this.getCreateUser(), User.class);
+        thisDistribution = normalize(this.getDistribution(), Distribution.class);
+        thisImageType = normalize(this.getImageType(), ImageType.class);
+        thisMinimumPublishDate = normalize(this.getMinimumPublishDate(), Date.class);
+        thisPublisher = normalize(this.getPublisher(), Publisher.class);
+        thisTitleType = normalize(this.getTitleType(), TitleType.class);
 
         return thisCreateUser.hashCode()*7^7
              + thisComicGrade.hashCode()*7^6

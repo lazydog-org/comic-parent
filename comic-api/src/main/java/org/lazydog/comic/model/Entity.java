@@ -23,10 +23,10 @@ import javax.validation.ValidatorFactory;
 public abstract class Entity<T extends Entity<T>>
        implements Serializable {
 
+    private static final long serialVersionUID = 1L;
     private static final String EPOCH = "01/01/1900";
-    private static final DateFormat df = new SimpleDateFormat("MM/dd/yyyy");
-    
-    // Declare.
+    private static final DateFormat DATE_FORMAT = new SimpleDateFormat("MM/dd/yyyy");
+
     @NotNull(message="Create time is required.")
     private Date createTime;
     @Valid @NotNull(message="Create user is required.")
@@ -117,7 +117,7 @@ public abstract class Entity<T extends Entity<T>>
         try {
             
             // Get the epoch.
-            epoch = df.parse(EPOCH);
+            epoch = DATE_FORMAT.parse(EPOCH);
         }
         catch(ParseException e) {
             // Ignore.
@@ -151,6 +151,74 @@ public abstract class Entity<T extends Entity<T>>
      */
     public User getModifyUser() {
         return this.modifyUser;
+    }
+
+    /**
+     * Normalize the specified object of the specified class.
+     * If an object is not null, the object is already normalized and returned.
+     * If an object is null, the returned value is an instance of the "normal"
+     * object class.
+     *
+     * @param  object       the object.
+     * @param  objectClass  the object class.
+     *
+     * @return  the object, normalized.
+     *
+     * @throws  IllegalArgumentException  if the object cannot be normalized.
+     */
+    @SuppressWarnings("unchecked")
+    protected static <U> U normalize(U object, Class<U> objectClass) {
+
+        // Declare.
+        U normalizedObject;
+
+        // Initialize.
+        normalizedObject = null;
+
+        // Check if the object is null.
+        if (object == null) {
+
+            // Check if the object class is a Date.
+            if (Date.class.equals(objectClass)) {
+
+                // A normalized Date has a value of the epoch.
+                normalizedObject = (U)getEpoch();
+            }
+
+            // Check if the object class is an Integer.
+            else if (Integer.class.equals(objectClass)) {
+
+                // A normalized Integer has a value of zero.
+                normalizedObject = (U)new Integer(0);
+            }
+
+            // Check if the object class is a String.
+            else if (String.class.equals(objectClass)) {
+
+                // A normalized String is an empty string.
+                normalizedObject = (U)"";
+            }
+
+            else {
+                try {
+
+                    // Get an instance of the object class.
+                    normalizedObject = objectClass.newInstance();
+                }
+                catch(Exception e) {
+                    throw new IllegalArgumentException(
+                            "Unable to instantiate a normalized object of type "
+                            + objectClass.getName() + ".", e);
+                }
+            }
+        }
+        else {
+
+            // The object is already normalized.
+            normalizedObject = object;
+        }
+
+        return normalizedObject;
     }
 
     /**

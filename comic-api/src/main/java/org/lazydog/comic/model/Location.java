@@ -15,7 +15,8 @@ public class Location
        implements Comparable<Location>,
                   Serializable {
     
-    // Declare.       
+    private static final long serialVersionUID = 1L;
+    
     @NotNull(message="Name is required.") 
     @Size(max=50, message="Name cannot contain more than 50 characters.")
     private String name;
@@ -23,7 +24,7 @@ public class Location
     /**
      * Compare this object to the specified object.
      *
-     * @param  object  the object to compare this object against.
+     * @param  that  the object to compare this object against.
      *
      * @return  the value 0 if this object is equal to the object;
      *          a value less than 0 if this object is less than the object;
@@ -31,7 +32,7 @@ public class Location
      *          object.
      */
     @Override
-    public int compareTo(Location object) {
+    public int compareTo(Location that) {
         
         // Declare.
         int lastCompare;
@@ -42,10 +43,10 @@ public class Location
 
         // Initialize.
         lastCompare = 0;
-        thatCreateUser = (object.getCreateUser() == null) ? new User() : object.getCreateUser();
-        thatName = (object.getName() == null) ? "" : object.getName();
-        thisCreateUser = (this.getCreateUser() == null) ? new User() : this.getCreateUser();
-        thisName = (this.getName() == null) ? "" : this.getName();
+        thatCreateUser = normalize(that.getCreateUser(), User.class);
+        thatName = normalize(that.getName(), String.class);
+        thisCreateUser = normalize(this.getCreateUser(), User.class);
+        thisName = normalize(this.getName(), String.class);
         
         // Compare this object to the object.
         lastCompare = thisCreateUser.compareTo(thatCreateUser);
@@ -120,8 +121,8 @@ public class Location
         String thisName;
         
         // Initialize.
-        thisCreateUser = (this.getCreateUser() == null) ? new User() : this.getCreateUser();
-        thisName = (this.getName() == null) ? "" : this.getName();
+        thisCreateUser = normalize(this.getCreateUser(), User.class);
+        thisName = normalize(this.getName(), String.class);
         
         return thisCreateUser.hashCode()*31
              + thisName.hashCode();

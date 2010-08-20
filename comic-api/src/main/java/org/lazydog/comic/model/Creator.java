@@ -15,7 +15,8 @@ public class Creator
        implements Comparable<Creator>,
                   Serializable {
 
-    // Declare.
+    private static final long serialVersionUID = 1L;
+
     @Valid @NotNull(message="Person is required.")
     private Person person;
     @Valid @NotNull(message="Profession is required.")
@@ -24,7 +25,7 @@ public class Creator
     /**
      * Compare this object to the specified object.
      *
-     * @param  object  the object to compare this object against.
+     * @param  that  the object to compare this object against.
      *
      * @return  the value 0 if this object is equal to the object;
      *          a value less than 0 if this object is less than the object;
@@ -32,7 +33,7 @@ public class Creator
      *          object.
      */
     @Override
-    public int compareTo(Creator object) {
+    public int compareTo(Creator that) {
         
         // Declare.
         int lastCompare;
@@ -43,10 +44,10 @@ public class Creator
 
         // Initialize.
         lastCompare = 0;
-        thatPerson = (object.getPerson() == null) ? new Person() : object.getPerson();
-        thatProfession = (object.getProfession() == null) ? new Profession() : object.getProfession();
-        thisPerson = (this.getPerson() == null) ? new Person() : this.getPerson();
-        thisProfession = (this.getProfession() == null) ? new Profession() : this.getProfession();
+        thatPerson = normalize(that.getPerson(), Person.class);
+        thatProfession = normalize(that.getProfession(), Profession.class);
+        thisPerson = normalize(this.getPerson(), Person.class);
+        thisProfession = normalize(this.getProfession(), Profession.class);
         
         // Compare this object to the object.
         lastCompare = thisPerson.compareTo(thatPerson);
@@ -131,8 +132,8 @@ public class Creator
         Profession thisProfession;
         
         // Initialize.
-        thisPerson = (this.getPerson() == null) ? new Person() : this.getPerson();
-        thisProfession = (this.getProfession() == null) ? new Profession() : this.getProfession();
+        thisPerson = normalize(this.getPerson(), Person.class);
+        thisProfession = normalize(this.getProfession(), Profession.class);
         
         return thisPerson.hashCode()*31
              + thisProfession.hashCode();
