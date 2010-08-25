@@ -53,6 +53,8 @@
         <class>org.lazydog.comic.model.User</class>
         <class>org.lazydog.comic.model.UserPreference</class>
         <class>org.lazydog.comic.model.Want</class>
-        <property name="eclipselink.logging.level" value="OFF"/>
+        <properties>
+            <property name="eclipselink.logging.level" value="OFF"/>
+        </properties>
     </persistence-unit>
 </persistence>
