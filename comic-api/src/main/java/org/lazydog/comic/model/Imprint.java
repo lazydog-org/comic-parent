@@ -22,8 +22,6 @@ public class Imprint
     @NotNull(message="Name is required.") 
     @Size(max=50, message="Name cannot contain more than 50 characters.")
     private String name;
-    @Valid @NotNull(message="Publisher is required.")
-    private Publisher publisher;
 
     /**
      * Compare this object to the specified object.
@@ -41,20 +39,15 @@ public class Imprint
         // Declare.
         int lastCompare;
         String thatName;
-        Publisher thatPublisher;
         String thisName;
-        Publisher thisPublisher;
 
         // Initialize.
         lastCompare = 0;
         thatName = replaceNull(that.getName(), "");
-        thatPublisher = replaceNull(that.getPublisher(), new Publisher());
         thisName = replaceNull(this.getName(), "");
-        thisPublisher = replaceNull(this.getPublisher(), new Publisher());
 
         // Compare this object to the object.
-        lastCompare = thisPublisher.compareTo(thatPublisher);
-        lastCompare = (lastCompare != 0) ? lastCompare : thisName.compareTo(thatName);
+        lastCompare = thisName.compareTo(thatName);
 
         return lastCompare;
     }
@@ -74,7 +67,6 @@ public class Imprint
         copy = super.copy();
         copy.setImage(this.getImage());
         copy.setName(this.getName());
-        copy.setPublisher(this.getPublisher());
         
         return copy;
     }
@@ -124,15 +116,6 @@ public class Imprint
     }
 
     /**
-     * Get the publisher.
-     * 
-     * @return  the publisher.
-     */
-    public Publisher getPublisher() {
-        return this.publisher;
-    }
-
-    /**
      * Returns a hash code for this object.
      *
      * @return  a hash code for this object.
@@ -142,14 +125,11 @@ public class Imprint
         
         // Declare.
         String thisName;
-        Publisher thisPublisher;
         
         // Initialize.
         thisName = replaceNull(this.getName(), "");
-        thisPublisher = replaceNull(this.getPublisher(), new Publisher());
         
-        return thisPublisher.hashCode()*31
-             + thisName.hashCode();
+        return thisName.hashCode();
     }
   
     /**
@@ -171,15 +151,6 @@ public class Imprint
     }
 
     /**
-     * Set the publisher.
-     * 
-     * @param  publisher  the publisher.
-     */
-    public void setPublisher(Publisher publisher) {
-        this.publisher = publisher;
-    }
-
-    /**
      * Get this object as a String.
      *
      * @return  this object as a String.
@@ -196,7 +167,6 @@ public class Imprint
         toString.append("Imprint [");
         toString.append("image = ").append(this.getImage());
         toString.append(", name = ").append(this.getName());
-        toString.append(", publisher = ").append(this.getPublisher());
         toString.append("]");
         
         return toString.toString();
