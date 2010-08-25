@@ -20,11 +20,11 @@
                 <configuration>
                     <generateApplicationXml>true</generateApplicationXml>
                     <defaultLibBundleDir>lib</defaultLibBundleDir>
-                    <version>5</version>
+                    <version>6</version>
                     <modules>
                         <ejbModule>
                             <groupId>${project.groupId}</groupId>
-                            <artifactId>comic-data-access-ejb</artifactId>
+                            <artifactId>comic-repository-ejb</artifactId>
                         </ejbModule>
                         <ejbModule>
                             <groupId>${project.groupId}</groupId>
@@ -38,7 +38,7 @@
     <dependencies>
         <dependency>
             <groupId>${project.groupId}</groupId>
-            <artifactId>comic-data-access-ejb</artifactId>
+            <artifactId>comic-repository-ejb</artifactId>
             <version>${project.version}</version>
             <type>ejb</type>
         </dependency>

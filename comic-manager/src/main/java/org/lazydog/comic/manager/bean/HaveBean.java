@@ -6,11 +6,10 @@ import org.lazydog.comic.model.User;
 import org.lazydog.comic.model.UserPreference;
 import org.lazydog.comic.manager.utility.SessionKey;
 import org.lazydog.comic.manager.utility.SessionUtility;
-import org.lazydog.data.access.criterion.ComparisonOperation;
-import org.lazydog.data.access.criterion.LogicalOperation;
-import org.lazydog.data.access.criterion.Order;
-import org.lazydog.data.access.Criteria;
-import org.lazydog.data.access.CriteriaFactory;
+import org.lazydog.repository.criterion.ComparisonOperation;
+import org.lazydog.repository.criterion.LogicalOperation;
+import org.lazydog.repository.criterion.Order;
+import org.lazydog.repository.Criteria;;
 import java.io.Serializable;
 import java.util.List;
 import javax.annotation.PostConstruct;
@@ -50,14 +49,8 @@ public class HaveBean
             if (SessionUtility.valueExists(SessionKey.COMIC) &&
                 SessionUtility.valueExists(SessionKey.USER)) {
 
-                // Declare.
-                CriteriaFactory criteriaFactory;
-
-                // Initialize criteria factory.
-                criteriaFactory = CriteriaFactory.instance();
-
                 // Create a new criteria.
-                criteria = criteriaFactory.createCriteria(Have.class);
+                criteria = this.comicService.getCriteria(Have.class);
 
                 // Modify the criteria.
                 criteria.add(ComparisonOperation.eq(

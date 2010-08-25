@@ -54,9 +54,9 @@
             <scope>provided</scope>
         </dependency>
         <dependency>
-            <groupId>org.lazydog.data.access</groupId>
-            <artifactId>data-access</artifactId>
-            <version>1.0</version>
+            <groupId>org.lazydog.repository</groupId>
+            <artifactId>repository</artifactId>
+            <version>1.1</version>
         </dependency>
         <dependency>
             <groupId>org.richfaces.ui</groupId>

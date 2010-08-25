@@ -7,7 +7,7 @@ import org.lazydog.comic.manager.utility.FormButtonController;
 import org.lazydog.comic.manager.utility.Perspective;
 import org.lazydog.comic.manager.utility.SessionKey;
 import org.lazydog.comic.manager.utility.SessionUtility;
-import org.lazydog.data.access.Criteria;
+import org.lazydog.repository.Criteria;
 import java.io.Serializable;
 import java.util.List;
 import javax.ejb.EJB;
@@ -67,26 +67,30 @@ public abstract class AbstractDataAccessBean<T extends Entity<T>>
                 case FIRST:
 
                     // Get the first entity.
-                    entity = this.comicService.findFirst(this.getCriteria());
+                    entity = this.comicService.findFirst(
+                            this.getEntityClass(), this.getCriteria());
                     break;
                 case LAST:
 
                     // Get the last entity.
-                    entity = this.comicService.findLast(this.getCriteria());
+                    entity = this.comicService.findLast(
+                            this.getEntityClass(), this.getCriteria());
                     break;
 
                 case NEXT:
 
                     // Get the next entity.
                     entity = this.comicService.findNext(
-                            this.entity, this.getCriteria());
+                            this.entity, this.getEntityClass(),
+                            this.getCriteria());
                     break;
 
                 case PREVIOUS:
 
                     // Get the previous entity.
                     entity = this.comicService.findPrevious(
-                            this.entity, this.getCriteria());
+                            this.entity, this.getEntityClass(),
+                            this.getCriteria());
                     break;
             }
 
@@ -161,7 +165,7 @@ public abstract class AbstractDataAccessBean<T extends Entity<T>>
 
                     // Get the entities.
                     this.entities = this.comicService.findList(
-                            this.getCriteria());
+                            this.getEntityClass(), this.getCriteria());
                 }
             }
             catch(Exception e) {
@@ -320,14 +324,14 @@ public abstract class AbstractDataAccessBean<T extends Entity<T>>
 
             // Get the next entity.
             newEntity = this.comicService.findNext(
-                    this.entity, this.getCriteria());
+                    this.entity, this.getEntityClass(), this.getCriteria());
 
             // Check if the next entity does not exist.
             if (this.entity.equals(newEntity)) {
 
                 // Get the previous entity.
                 newEntity = this.comicService.findPrevious(
-                        this.entity, this.getCriteria());
+                        this.entity, this.getEntityClass(), this.getCriteria());
             }
 
             // Delete the entity.

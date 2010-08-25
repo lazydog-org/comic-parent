@@ -4,9 +4,8 @@ import org.lazydog.comic.ComicService;
 import org.lazydog.comic.model.User;
 import org.lazydog.comic.manager.utility.SessionKey;
 import org.lazydog.comic.manager.utility.SessionUtility;
-import org.lazydog.data.access.criterion.ComparisonOperation;
-import org.lazydog.data.access.Criteria;
-import org.lazydog.data.access.CriteriaFactory;
+import org.lazydog.repository.criterion.ComparisonOperation;
+import org.lazydog.repository.Criteria;
 import java.io.Serializable;
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
@@ -134,20 +133,16 @@ public class UserBean
 
             // Declare.
             Criteria<User> criteria;
-            CriteriaFactory criteriaFactory;
             User user;
 
-            // Initialize the criteria factory.
-            criteriaFactory = CriteriaFactory.instance();
-
             // Create a new criteria.
-            criteria = criteriaFactory.createCriteria(User.class);
+            criteria = this.comicService.getCriteria(User.class);
 
             // Modify the criteria.
             criteria.add(ComparisonOperation.eq("name", this.name));
 
             // Get the user.
-            user = this.comicService.find(criteria);
+            user = this.comicService.find(User.class, criteria);
 
             // Check if the user exists.
             if (user != null) {

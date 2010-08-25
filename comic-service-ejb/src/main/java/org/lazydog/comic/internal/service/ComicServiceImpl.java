@@ -7,11 +7,11 @@ import javax.ejb.EJBException;
 import javax.ejb.Remote;
 import javax.ejb.Stateless;
 import javax.interceptor.Interceptors;
-import org.lazydog.comic.ComicDataAccess;
+import org.lazydog.comic.ComicRepository;
 import org.lazydog.comic.ComicService;
 import org.lazydog.comic.model.Entity;
 import org.lazydog.comic.model.User;
-import org.lazydog.data.access.Criteria;
+import org.lazydog.repository.Criteria;
 import org.lazydog.utilities.ejbmonitor.interceptor.EJBMonitor;
 
 
@@ -26,8 +26,8 @@ import org.lazydog.utilities.ejbmonitor.interceptor.EJBMonitor;
 public class ComicServiceImpl
        implements ComicService {
 
-    @EJB(mappedName="ejb/ComicDataAccess", beanInterface=ComicDataAccess.class)
-    private ComicDataAccess comicDataAccess;
+    @EJB(mappedName="ejb/ComicRepository", beanInterface=ComicRepository.class)
+    private ComicRepository comicRepository;
 
     /**
      * Find the entity.
@@ -38,21 +38,21 @@ public class ComicServiceImpl
      * @return  the entity.
      */
     @Override
-    public <T extends Entity<T>> T find(Class<T> entityClass,
-                                        Integer id) {
-        return this.comicDataAccess.find(entityClass, id);
+    public <T extends Entity<T>> T find(Class<T> entityClass, Integer id) {
+        return this.comicRepository.find(entityClass, id);
     }
 
     /**
      * Find the entity.
      *
-     * @param  criteria  the criteria.
+     * @param  entityClass  the entity class.
+     * @param  criteria     the criteria.
      *
      * @return  the entity.
      */
     @Override
-    public <T extends Entity<T>> T find(Criteria<T> criteria) {
-        return this.comicDataAccess.find(criteria);
+    public <T extends Entity<T>> T find(Class<T> entityClass, Criteria<T> criteria) {
+        return this.comicRepository.find(entityClass, criteria);
     }
 
     /**
@@ -70,13 +70,14 @@ public class ComicServiceImpl
     /**
      * Find the first entity.
      *
-     * @param  criteria  the criteria.
+     * @param  entityClass  the entity class.
+     * @param  criteria     the criteria.
      *
      * @return  the first entity.
      */
     @Override
-    public <T extends Entity<T>> T findFirst(Criteria<T> criteria) {
-        return this.findFirst(this.findList(criteria));
+    public <T extends Entity<T>> T findFirst(Class<T> entityClass, Criteria<T> criteria) {
+        return this.findFirst(this.findList(entityClass, criteria));
     }
 
     /**
@@ -119,13 +120,14 @@ public class ComicServiceImpl
     /**
      * Find the last entity.
      *
-     * @param  criteria  the criteria.
+     * @param  entityClass  the entity class.
+     * @param  criteria     the criteria.
      *
      * @return  the last entity.
      */
     @Override
-    public <T extends Entity<T>> T findLast(Criteria<T> criteria) {
-        return this.findLast(this.findList(criteria));
+    public <T extends Entity<T>> T findLast(Class<T> entityClass, Criteria<T> criteria) {
+        return this.findLast(this.findList(entityClass, criteria));
     }
 
     /**
@@ -162,19 +164,20 @@ public class ComicServiceImpl
      */
     @Override
     public <T extends Entity<T>> List<T> findList(Class<T> entityClass) {
-        return this.comicDataAccess.findList(entityClass);
+        return this.comicRepository.findList(entityClass);
     }
 
     /**
      * Find the list of entities.
      *
-     * @param  criteria  the criteria.
+     * @param  entityClass  the entity class.
+     * @param  criteria     the criteria.
      *
      * @return  the list of entities.
      */
     @Override
-    public <T extends Entity<T>> List<T> findList(Criteria<T> criteria) {
-        return this.comicDataAccess.findList(criteria);
+    public <T extends Entity<T>> List<T> findList(Class<T> entityClass, Criteria<T> criteria) {
+        return this.comicRepository.findList(entityClass, criteria);
     }
 
     /**
@@ -186,8 +189,7 @@ public class ComicServiceImpl
      * @return  the next entity.
      */
     @Override
-    public <T extends Entity<T>> T findNext(T current,
-                                            Class<T> entityClass) {
+    public <T extends Entity<T>> T findNext(T current, Class<T> entityClass) {
         return this.findNext(current, this.findList(entityClass));
     }
 
@@ -195,14 +197,14 @@ public class ComicServiceImpl
      * Find the next entity.
      *
      * @param  current      the current entity.
+     * @param  entityClass  the entity class.
      * @param  criteria     the criteria.
      *
      * @return  the next entity.
      */
     @Override
-    public <T extends Entity<T>> T findNext(T current,
-                                            Criteria<T> criteria) {
-        return this.findNext(current, this.findList(criteria));
+    public <T extends Entity<T>> T findNext(T current, Class<T> entityClass, Criteria<T> criteria) {
+        return this.findNext(current, this.findList(entityClass, criteria));
     }
 
     /**
@@ -213,8 +215,7 @@ public class ComicServiceImpl
      * 
      * @return  the next entity.
      */
-    private <T extends Entity<T>> T findNext(T current,
-                                             List<T> entities) {
+    private <T extends Entity<T>> T findNext(T current, List<T> entities) {
         
         // Declare.
         T nextEntity;
@@ -260,8 +261,7 @@ public class ComicServiceImpl
      * @return  the previous entity.
      */
     @Override
-    public <T extends Entity<T>> T findPrevious(T current,
-                                                Class<T> entityClass) {
+    public <T extends Entity<T>> T findPrevious(T current, Class<T> entityClass) {
         return this.findPrevious(current, this.findList(entityClass));
     }
 
@@ -269,14 +269,14 @@ public class ComicServiceImpl
      * Find the previous entity.
      *
      * @param  current      the current entity.
+     * @param  entityClass  the entity class.
      * @param  criteria     the criteria.
      *
      * @return  the next entity.
      */
     @Override
-    public <T extends Entity<T>> T findPrevious(T current,
-                                                Criteria<T> criteria) {
-        return this.findPrevious(current, this.findList(criteria));
+    public <T extends Entity<T>> T findPrevious(T current, Class<T> entityClass, Criteria<T> criteria) {
+        return this.findPrevious(current, this.findList(entityClass, criteria));
     }
 
     /**
@@ -287,8 +287,7 @@ public class ComicServiceImpl
      * 
      * @return  the previous entity.
      */
-    private <T extends Entity<T>> T findPrevious(T current,
-                                                 List<T> entities) {
+    private <T extends Entity<T>> T findPrevious(T current, List<T> entities) {
         
         // Declare.
         T previousEntity;
@@ -323,6 +322,18 @@ public class ComicServiceImpl
     }
 
     /**
+     * Get the criteria.
+     *
+     * @param  entityClass  the entity class.
+     *
+     * @return  the criteria.
+     */
+    @Override
+    public <T extends Entity<T>> Criteria<T> getCriteria(Class<T> entityClass) {
+        return this.comicRepository.getCriteria(entityClass);
+    }
+    
+    /**
      * Prepare the entity for saving.
      *
      * @param  entity       the entity.
@@ -330,8 +341,7 @@ public class ComicServiceImpl
      *
      * @return  the prepared entity.
      */
-    private <T extends Entity<T>> T prepEntityForSave(T entity,
-                                                      User user) {
+    private <T extends Entity<T>> T prepEntityForSave(T entity, User user) {
 
         // Check to see if this is a new entity.
         if (entity.getId() == null) {
@@ -364,9 +374,8 @@ public class ComicServiceImpl
      * @param  id           the ID.
      */
     @Override
-    public <T extends Entity<T>> void remove(Class<T> entityClass,
-                                             Integer id) {
-        this.comicDataAccess.remove(entityClass, id);
+    public <T extends Entity<T>> void remove(Class<T> entityClass, Integer id) {
+        this.comicRepository.remove(entityClass, id);
     }
     
     /**
@@ -378,14 +387,13 @@ public class ComicServiceImpl
      * @return  the entity.
      */
     @Override
-    public <T extends Entity<T>> T save(T entity,
-                                        User user) {
+    public <T extends Entity<T>> T save(T entity, User user) {
 
         // Prepare the entity for saving.
         entity = this.prepEntityForSave(entity, user);
 
         // Save the entity.
-        return this.comicDataAccess.persist(entity);
+        return this.comicRepository.persist(entity);
     }
 
     /**
@@ -397,8 +405,7 @@ public class ComicServiceImpl
      * @return  the list of entities.
      */
     @Override
-    public <T extends Entity<T>> List<T> saveList(List<T> entities,
-                                                  User user) {
+    public <T extends Entity<T>> List<T> saveList(List<T> entities, User user) {
 
         // Loop through the entities.
         for (T entity : entities) {
@@ -408,6 +415,6 @@ public class ComicServiceImpl
         }
 
         // Save the entities.
-        return this.comicDataAccess.persistList(entities);
+        return this.comicRepository.persistList(entities);
     }
 }

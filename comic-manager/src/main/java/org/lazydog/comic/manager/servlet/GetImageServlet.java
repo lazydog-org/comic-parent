@@ -2,9 +2,8 @@ package org.lazydog.comic.manager.servlet;
 
 import org.lazydog.comic.ComicService;
 import org.lazydog.comic.model.ImageType;
-import org.lazydog.data.access.criterion.ComparisonOperation;
-import org.lazydog.data.access.Criteria;
-import org.lazydog.data.access.CriteriaFactory;
+import org.lazydog.repository.criterion.ComparisonOperation;
+import org.lazydog.repository.Criteria;
 import java.awt.AlphaComposite;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
@@ -183,20 +182,16 @@ public class GetImageServlet
 
                 // Declare.
                 Criteria<ImageType> criteria;
-                CriteriaFactory criteriaFactory;
                 ImageType imageType;
 
-                // Initialize criteria factory.
-                criteriaFactory = CriteriaFactory.instance();
-
                 // Create a new criteria.
-                criteria = criteriaFactory.createCriteria(ImageType.class);
+                criteria = this.comicService.getCriteria(ImageType.class);
 
                 // Modify the criteria.
                 criteria.add(ComparisonOperation.eq("value", typeValue));
 
                 // Get the image type.
-                imageType = this.comicService.find(criteria);
+                imageType = this.comicService.find(ImageType.class, criteria);
 
                 // Get the directory path.
                 directoryPath = imageType.getDirectoryPath();

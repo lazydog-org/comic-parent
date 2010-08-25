@@ -1,9 +1,8 @@
 package org.lazydog.comic.manager.bean;
 
 import org.lazydog.comic.model.Character;
-import org.lazydog.data.access.criterion.Order;
-import org.lazydog.data.access.Criteria;
-import org.lazydog.data.access.CriteriaFactory;
+import org.lazydog.repository.criterion.Order;
+import org.lazydog.repository.Criteria;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -40,14 +39,8 @@ public class CharacterBean
 
         try {
 
-            // Declare.
-            CriteriaFactory criteriaFactory;
-
-            // Initialize criteria factory.
-            criteriaFactory = CriteriaFactory.instance();
-
             // Create a new criteria.
-            criteria = criteriaFactory.createCriteria(Character.class);
+            criteria = this.comicService.getCriteria(Character.class);
 
             // Modify the criteria.
             criteria.addOrder(Order.asc("name"));

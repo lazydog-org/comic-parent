@@ -26,7 +26,6 @@ public class Title
     private static final long serialVersionUID = 1L;
 
     private List<Category> categories = new ArrayList<Category>();
-    private List<Comic> comics = new ArrayList<Comic>();
     private Image image;
     @NotNull(message="Name is required.") 
     @Size(max=100, message="Name cannot contain more than 100 characters.")
@@ -124,7 +123,6 @@ public class Title
         // Create a copy.
         copy = super.copy();
         copy.setCategories(this.getCategories());
-        copy.setComics(this.getComics());
         copy.setImage(this.getImage());
         copy.setName(this.getName());
         copy.setPublishEndDate(this.getPublishEndDate());
@@ -171,16 +169,7 @@ public class Title
     public List<Category> getCategories() {
         return this.categories;
     }
-           
-    /**
-     * Get the comics.
-     *
-     * @return  the comics.
-     */
-    public List<Comic> getComics() {
-        return this.comics;
-    }
- 
+
     /**
      * Get the image.
      *
@@ -284,16 +273,7 @@ public class Title
     public void setCategories(List<Category> categories) {
         this.categories = replaceNull(categories, new ArrayList<Category>());
     }
-                  
-    /**
-     * Set the comics.
-     *
-     * @param  comics  the comics.
-     */
-    public void setComics(List<Comic> comics) {
-        this.comics = replaceNull(comics, new ArrayList<Comic>());
-    }
-           
+      
     /**
      * Set the image.
      *

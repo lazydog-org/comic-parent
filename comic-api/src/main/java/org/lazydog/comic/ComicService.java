@@ -3,7 +3,7 @@ package org.lazydog.comic;
 import java.util.List;
 import org.lazydog.comic.model.Entity;
 import org.lazydog.comic.model.User;
-import org.lazydog.data.access.Criteria;
+import org.lazydog.repository.Criteria;
 
 
 /**
@@ -13,41 +13,159 @@ import org.lazydog.data.access.Criteria;
  */
 public interface ComicService {
 
-    public <T extends Entity<T>> T find(Class<T> entityClass,
-                                        Integer id);
+    /**
+     * Find the entity.
+     *
+     * @param  entityClass  the entity class.
+     * @param  id           the ID.
+     *
+     * @return  the entity.
+     */
+    public <T extends Entity<T>> T find(Class<T> entityClass, Integer id);
 
-    public <T extends Entity<T>> T find(Criteria<T> criteria);
+    /**
+     * Find the entity.
+     *
+     * @param  entityClass  the entity class.
+     * @param  criteria     the criteria.
+     *
+     * @return  the entity.
+     */
+    public <T extends Entity<T>> T find(Class<T> entityClass, Criteria<T> criteria);
 
+    /**
+     * Find the first entity.
+     *
+     * @param  entityClass  the entity class.
+     *
+     * @return  the first entity.
+     */
     public <T extends Entity<T>> T findFirst(Class<T> entityClass);
 
-    public <T extends Entity<T>> T findFirst(Criteria<T> criteria);
+    /**
+     * Find the first entity.
+     *
+     * @param  entityClass  the entity class.
+     * @param  criteria     the criteria.
+     *
+     * @return  the first entity.
+     */
+    public <T extends Entity<T>> T findFirst(Class<T> entityClass, Criteria<T> criteria);
 
+    /**
+     * Find the last entity.
+     *
+     * @param  entityClass  the entity class.
+     *
+     * @return  the last entity.
+     */
     public <T extends Entity<T>> T findLast(Class<T> entityClass);
 
-    public <T extends Entity<T>> T findLast(Criteria<T> criteria);
+    /**
+     * Find the last entity.
+     *
+     * @param  entityClass  the entity class.
+     * @param  criteria     the criteria.
+     *
+     * @return  the last entity.
+     */
+    public <T extends Entity<T>> T findLast(Class<T> entityClass, Criteria<T> criteria);
 
+    /**
+     * Find the list of entities.
+     *
+     * @param  entityClass  the entity class.
+     *
+     * @return  the list of entities.
+     */
     public <T extends Entity<T>> List<T> findList(Class<T> entityClass);
 
-    public <T extends Entity<T>> List<T> findList(Criteria<T> criteria);
+    /**
+     * Find the list of entities.
+     *
+     * @param  entityClass  the entity class.
+     * @param  criteria     the criteria.
+     *
+     * @return  the list of entities.
+     */
+    public <T extends Entity<T>> List<T> findList(Class<T> entityClass, Criteria<T> criteria);
 
-    public <T extends Entity<T>> T findNext(T current,
-                                            Class<T> entityClass);
+    /**
+     * Find the next entity.
+     *
+     * @param  current      the current entity.
+     * @param  entityClass  the entity class.
+     *
+     * @return  the next entity.
+     */
+    public <T extends Entity<T>> T findNext(T current, Class<T> entityClass);
 
-    public <T extends Entity<T>> T findNext(T current,
-                                            Criteria<T> criteria);
+    /**
+     * Find the next entity.
+     *
+     * @param  current      the current entity.
+     * @param  entityClass  the entity class.
+     * @param  criteria     the criteria.
+     *
+     * @return  the next entity.
+     */
+    public <T extends Entity<T>> T findNext(T current, Class<T> entityClass, Criteria<T> criteria);
 
-    public <T extends Entity<T>> T findPrevious(T current,
-                                                Class<T> entityClass);
+    /**
+     * Find the previous entity.
+     *
+     * @param  current      the current entity.
+     * @param  entityClass  the entity class.
+     *
+     * @return  the previous entity.
+     */
+    public <T extends Entity<T>> T findPrevious(T current, Class<T> entityClass);
 
-    public <T extends Entity<T>> T findPrevious(T current,
-                                                Criteria<T> criteria);
+    /**
+     * Find the previous entity.
+     *
+     * @param  current      the current entity.
+     * @param  entityClass  the entity class.
+     * @param  criteria     the criteria.
+     *
+     * @return  the next entity.
+     */
+    public <T extends Entity<T>> T findPrevious(T current, Class<T> entityClass, Criteria<T> criteria);
 
-    public <T extends Entity<T>> void remove(Class<T> entityClass,
-                                             Integer id);
-    
-    public <T extends Entity<T>> T save(T entity,
-                                        User user);
-    
-    public <T extends Entity<T>> List<T> saveList(List<T> entities,
-                                                  User user);
+    /**
+     * Get the criteria.
+     *
+     * @param  entityClass  the entity class.
+     *
+     * @return  the criteria.
+     */
+    public <T extends Entity<T>> Criteria<T> getCriteria(Class<T> entityClass);
+
+    /**
+     * Remove the entity.
+     *
+     * @param  entityClass  the entity class.
+     * @param  id           the ID.
+     */
+    public <T extends Entity<T>> void remove(Class<T> entityClass, Integer id);
+
+    /**
+     * Save the entity.
+     *
+     * @param  entity  the entity.
+     * @param  user    the user.
+     *
+     * @return  the entity.
+     */
+    public <T extends Entity<T>> T save(T entity, User user);
+
+    /**
+     * Save the list of entities.
+     *
+     * @param  entities  the list of entities.
+     * @param  user      the user.
+     *
+     * @return  the list of entities.
+     */
+    public <T extends Entity<T>> List<T> saveList(List<T> entities, User user);
 }

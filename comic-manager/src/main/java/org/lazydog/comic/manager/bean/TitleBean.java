@@ -12,10 +12,10 @@ import org.lazydog.comic.manager.utility.Perspective;
 import org.lazydog.comic.manager.utility.SessionKey;
 import org.lazydog.comic.manager.utility.SessionUtility;
 import org.lazydog.comic.manager.utility.TitleSearchBy;
-import org.lazydog.data.access.criterion.ComparisonOperation;
-import org.lazydog.data.access.criterion.LogicalOperation;
-import org.lazydog.data.access.criterion.Order;
-import org.lazydog.data.access.Criteria;
+import org.lazydog.repository.criterion.ComparisonOperation;
+import org.lazydog.repository.criterion.LogicalOperation;
+import org.lazydog.repository.criterion.Order;
+import org.lazydog.repository.Criteria;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -99,7 +99,7 @@ public class TitleBean
             filter = new TitleTypeFilter();
 
             // Get the criteria for the title searcher.
-            criteria = TitleSearcher.getCriteria(
+            criteria = this.getCriteria(
                     SessionUtility.getValue(
                     SessionKey.TITLE_SEARCH_BY, TitleSearchBy.class),
                     SessionUtility.getValue(
@@ -114,6 +114,53 @@ public class TitleBean
 
             FacesContext.getCurrentInstance().addMessage(null,
                     new FacesMessage("Cannot get criteria."));
+        }
+
+        return criteria;
+    }
+
+    /**
+     * Get the criteria.
+     *
+     * @param  searchBy   the search by.
+     * @param  searchFor  the search for.
+     *
+     * @return  the criteria.
+     */
+    public Criteria<Title> getCriteria(TitleSearchBy searchBy,
+                                       Object searchFor) {
+
+        // Declare.
+        Criteria<Title> criteria;
+
+        // Initialize.
+        criteria = null;
+
+        // Get a new criteria.
+        criteria = this.comicService.getCriteria(Title.class);
+
+        switch(searchBy) {
+
+            case CATEGORY_NAME:
+
+                // Modify the criteria.
+                criteria.add(ComparisonOperation.memberOf(
+                        "categories", (Category)searchFor));
+                break;
+
+            case PUBLISHER_NAME:
+
+                // Modify the criteria.
+                criteria.add(ComparisonOperation.memberOf(
+                        "publishers", (Publisher)searchFor));
+                break;
+
+            case TITLE_NAME:
+
+                // Modify the criteria.
+                criteria.add(ComparisonOperation.like(
+                        "name", "%" + (String)searchFor + "%"));
+                break;
         }
 
         return criteria;
@@ -355,14 +402,14 @@ public class TitleBean
 
                 // Get the next entity.
                 newEntity = this.comicService.findNext(
-                        this.entity, this.getCriteria());
+                        this.entity, this.getEntityClass(), this.getCriteria());
 
                 // Check if the next entity does not exist.
                 if (newEntity == null) {
 
                     // Get the previous entity.
                     newEntity = this.comicService.findPrevious(
-                            this.entity, this.getCriteria());
+                            this.entity, this.getEntityClass(), this.getCriteria());
 
                     // Check if the previous entity does not exist.
                     if (newEntity == null) {

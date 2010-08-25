@@ -5,10 +5,9 @@ import org.lazydog.comic.model.Entity;
 import org.lazydog.comic.model.UserPreference;
 import org.lazydog.comic.manager.utility.SessionKey;
 import org.lazydog.comic.manager.utility.SessionUtility;
-import org.lazydog.data.access.criterion.ComparisonOperation;
-import org.lazydog.data.access.criterion.Order;
-import org.lazydog.data.access.Criteria;
-import org.lazydog.data.access.CriteriaFactory;
+import org.lazydog.repository.criterion.ComparisonOperation;
+import org.lazydog.repository.criterion.Order;
+import org.lazydog.repository.Criteria;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -45,25 +44,21 @@ public abstract class AbstractTypeFilter<T extends Entity<T>>
 
             // Declare.
             Criteria<T> criteria;
-            CriteriaFactory criteriaFactory;
             T type;
             String typeValue;
-
-            // Initialize criteria factory.
-            criteriaFactory = CriteriaFactory.instance();
 
             // Get the type value.
             typeValue = (String)((UICommand)actionEvent
                     .getComponent()).getValue();
 
             // Create a new criteria.
-            criteria = criteriaFactory.createCriteria(this.getEntityClass());
+            criteria = this.comicService.getCriteria(this.getEntityClass());
 
             // Modify the criteria.
             criteria.add(ComparisonOperation.eq("value", typeValue));
 
             // Get the type.
-            type = comicService.find(criteria);
+            type = comicService.find(this.getEntityClass(), criteria);
 
             // Put the type on the session.
             SessionUtility.putValue(this.getTypeSessionKey(), type);
@@ -92,20 +87,16 @@ public abstract class AbstractTypeFilter<T extends Entity<T>>
 
                 // Declare.
                 Criteria<T> criteria;
-                CriteriaFactory criteriaFactory;
                 List<T> types;
 
-                // Initialize criteria factory.
-                criteriaFactory = CriteriaFactory.instance();
-
                 // Create a new criteria.
-                criteria = criteriaFactory.createCriteria(this.getEntityClass());
+                criteria = this.comicService.getCriteria(this.getEntityClass());
 
                 // Modify the criteria.
                 criteria.addOrder(Order.asc("value"));
 
                 // Get the types.
-                types = this.comicService.findList(criteria);
+                types = this.comicService.findList(this.getEntityClass(), criteria);
 
                 // Loop through the types.
                 for (T type : types) {

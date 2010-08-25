@@ -1,9 +1,8 @@
 package org.lazydog.comic.manager.bean;
 
 import org.lazydog.comic.model.TitleType;
-import org.lazydog.data.access.criterion.Order;
-import org.lazydog.data.access.Criteria;
-import org.lazydog.data.access.CriteriaFactory;
+import org.lazydog.repository.criterion.Order;
+import org.lazydog.repository.Criteria;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -40,14 +39,8 @@ public class TitleTypeBean
 
         try {
 
-            // Declare.
-            CriteriaFactory criteriaFactory;
-
-            // Initialize criteria factory.
-            criteriaFactory = CriteriaFactory.instance();
-
             // Create a new criteria.
-            criteria = criteriaFactory.createCriteria(TitleType.class);
+            criteria = this.comicService.getCriteria(TitleType.class);
 
             // Modify the criteria.
             criteria.addOrder(Order.asc("value"));

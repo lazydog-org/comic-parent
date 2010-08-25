@@ -1,13 +1,9 @@
 package org.lazydog.comic.manager.helper.bean;
 
-import org.lazydog.comic.model.Image;
 import org.lazydog.comic.manager.utility.ImageSearchBy;
 import org.lazydog.comic.manager.utility.SessionKey;
 import org.lazydog.comic.manager.utility.SessionUtility;
 import org.lazydog.comic.manager.utility.Subtopic;
-import org.lazydog.data.access.criterion.ComparisonOperation;
-import org.lazydog.data.access.Criteria;
-import org.lazydog.data.access.CriteriaFactory;
 import java.io.Serializable;
 
 
@@ -20,41 +16,6 @@ public class ImageSearcher
        implements Serializable {
 
     private static final long serialVersionUID = 1L;
-
-    /**
-     * Get the criteria.
-     *
-     * @param  searchBy   the search by.
-     * @param  searchFor  the search for.
-     *
-     * @return  the criteria.
-     */
-    public static Criteria<Image> getCriteria(ImageSearchBy searchBy,
-                                              Object searchFor) {
-
-        // Declare.
-        Criteria<Image> criteria;
-        CriteriaFactory criteriaFactory;
-
-        // Initialize.
-        criteria = null;
-        criteriaFactory = CriteriaFactory.instance();
-
-        // Get a new criteria.
-        criteria = criteriaFactory.createCriteria(Image.class);
-
-        switch(searchBy) {
-
-            case IMAGE_FILE_NAME:
-
-                // Modify the criteria.
-                criteria.add(ComparisonOperation.like(
-                        "fileName", "%" + (String)searchFor + "%"));
-                break;
-        }
-
-        return criteria;
-    }
 
     /**
      * Get the search by.

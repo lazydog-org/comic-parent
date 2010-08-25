@@ -11,11 +11,10 @@ import org.lazydog.comic.manager.utility.ImageSearchBy;
 import org.lazydog.comic.manager.utility.Perspective;
 import org.lazydog.comic.manager.utility.SessionKey;
 import org.lazydog.comic.manager.utility.SessionUtility;
-import org.lazydog.data.access.criterion.ComparisonOperation;
-import org.lazydog.data.access.criterion.LogicalOperation;
-import org.lazydog.data.access.criterion.Order;
-import org.lazydog.data.access.Criteria;
-import org.lazydog.data.access.CriteriaFactory;
+import org.lazydog.repository.criterion.ComparisonOperation;
+import org.lazydog.repository.criterion.LogicalOperation;
+import org.lazydog.repository.criterion.Order;
+import org.lazydog.repository.Criteria;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -70,14 +69,10 @@ public class ImageBean
 
                 // Declare.
                 Criteria<Image> criteria;
-                CriteriaFactory criteriaFactory;
                 String fileNamePrefix;
                 List<Image> images;
                 String numberVariant;
                 String year;
-
-                // Initialize criteria factory.
-                criteriaFactory = CriteriaFactory.instance();
 
                 // Get the file name prefix, number/variant, and year
                 // from the file name.
@@ -86,14 +81,14 @@ public class ImageBean
                 year = fileNameMatcher.group(3);
 
                 // Set the criteria.
-                criteria = criteriaFactory.createCriteria(Image.class);
+                criteria = this.comicService.getCriteria(Image.class);
                 criteria.add(ComparisonOperation.like(
                         "fileName", fileNamePrefix + "-%-" + year + ".jpg"));
                 criteria.add(LogicalOperation.and(
                         ComparisonOperation.isNotNull("label")));
 
                 // Get the images that matches the file name prefix.
-                images = this.comicService.findList(criteria);
+                images = this.comicService.findList(Image.class, criteria);
 
                 // Check if there are images.
                 if (images != null && images.size() > 0) {
@@ -146,18 +141,14 @@ public class ImageBean
          
             // Declare.
             Criteria<Image> criteria;
-            CriteriaFactory criteriaFactory;
             List<Image> images;
             String titleName;
-
-            // Initialize criteria factory.
-            criteriaFactory = CriteriaFactory.instance();
 
             // Get the title name.
             titleName = SessionUtility.getValue(SessionKey.TITLE, Title.class).getName();
 
             // Create a new criteria.
-            criteria = criteriaFactory.createCriteria(Image.class);
+            criteria = this.comicService.getCriteria(Image.class);
 
             // Modify the criteria.
             criteria.add(ComparisonOperation.eq("type.value", "Comic"));
@@ -166,7 +157,7 @@ public class ImageBean
             criteria.addOrder(Order.asc("label"));
 
             // Get the images.
-            images = this.comicService.findList(criteria);
+            images = this.comicService.findList(Image.class, criteria);
             
             // Add an empty image to the select items.
             comicImagesAsSelectItems.add(new SelectItem(null, ""));
@@ -211,12 +202,14 @@ public class ImageBean
             // Initialize.
             filter = new ImageTypeFilter();
 
+
             // Get the criteria for the image searcher.
-            criteria = ImageSearcher.getCriteria(
+            criteria = this.getCriteria(
                     SessionUtility.getValue(
                     SessionKey.IMAGE_SEARCH_BY, ImageSearchBy.class),
                     SessionUtility.getValue(
                     SessionKey.IMAGE_SEARCH_FOR, Object.class));
+
 
             // Modify the criteria.
             criteria.add(LogicalOperation.and(ComparisonOperation.eq(
@@ -227,6 +220,39 @@ public class ImageBean
 
             FacesContext.getCurrentInstance().addMessage(null,
                     new FacesMessage("Cannot get criteria."));
+        }
+
+        return criteria;
+    }
+
+    /**
+     * Get the criteria.
+     *
+     * @param  searchBy   the search by.
+     * @param  searchFor  the search for.
+     *
+     * @return  the criteria.
+     */
+    private Criteria<Image> getCriteria(ImageSearchBy searchBy,
+                                        Object searchFor) {
+
+        // Declare.
+        Criteria<Image> criteria;
+
+        // Initialize.
+        criteria = null;
+
+        // Get a new criteria.
+        criteria = this.comicService.getCriteria(Image.class);
+
+        switch(searchBy) {
+
+            case IMAGE_FILE_NAME:
+
+                // Modify the criteria.
+                criteria.add(ComparisonOperation.like(
+                        "fileName", "%" + (String)searchFor + "%"));
+                break;
         }
 
         return criteria;
@@ -299,14 +325,14 @@ public class ImageBean
 
             // Get the next entity.
             newEntity = this.comicService.findNext(
-                    this.entity, this.getCriteria());
+                    this.entity, this.getEntityClass(), this.getCriteria());
 
             // Check if the next entity does not exist.
             if (this.entity.equals(newEntity)) {
 
                 // Get the previous entity.
                 newEntity = this.comicService.findPrevious(
-                        this.entity, this.getCriteria());
+                        this.entity, this.getEntityClass(), this.getCriteria());
             }
 
             // Delete the entity.
@@ -418,14 +444,14 @@ public class ImageBean
 
                 // Get the next entity.
                 newEntity = this.comicService.findNext(
-                        this.entity, this.getCriteria());
+                        this.entity, this.getEntityClass(), this.getCriteria());
 
                 // Check if the next entity does not exist.
                 if (newEntity == null) {
 
                     // Get the previous entity.
                     newEntity = this.comicService.findPrevious(
-                            this.entity, this.getCriteria());
+                            this.entity, this.getEntityClass(), this.getCriteria());
 
                     // Check if the previous entity does not exist.
                     if (newEntity == null) {

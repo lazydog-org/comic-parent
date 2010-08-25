@@ -13,6 +13,7 @@
     <packaging>ejb</packaging>
     <name>Comic Service EJB</name>
     <dependencies>
+        <!--
         <dependency>
             <groupId>com.sun.appserver</groupId>
             <artifactId>appserv-admin</artifactId>
@@ -49,6 +50,13 @@
             <version>3.0</version>
             <scope>provided</scope>
         </dependency>
+        -->
+        <dependency>
+            <groupId>javax</groupId>
+            <artifactId>javaee-api</artifactId>
+            <version>6.0</version>
+            <scope>provided</scope>
+        </dependency>
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
@@ -56,9 +64,9 @@
             <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>org.lazydog.data.access</groupId>
-            <artifactId>data-access</artifactId>
-            <version>1.0</version>
+            <groupId>org.lazydog.repository</groupId>
+            <artifactId>repository</artifactId>
+            <version>1.1</version>
         </dependency>
         <dependency>
             <groupId>org.lazydog.utilities</groupId>

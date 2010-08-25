@@ -6,11 +6,10 @@ import org.lazydog.comic.model.Title;
 import org.lazydog.comic.model.User;
 import org.lazydog.comic.manager.utility.SessionKey;
 import org.lazydog.comic.manager.utility.SessionUtility;
-import org.lazydog.data.access.criterion.ComparisonOperation;
-import org.lazydog.data.access.criterion.LogicalOperation;
-import org.lazydog.data.access.criterion.Order;
-import org.lazydog.data.access.Criteria;
-import org.lazydog.data.access.CriteriaFactory;
+import org.lazydog.repository.criterion.ComparisonOperation;
+import org.lazydog.repository.criterion.LogicalOperation;
+import org.lazydog.repository.criterion.Order;
+import org.lazydog.repository.Criteria;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -78,20 +77,16 @@ public class TitleReportBean
 
                 // Declare.
                 Criteria<Have> criteria;
-                CriteriaFactory criteriaFactory;
                 List<Have> haves;
 
-                // Initialize criteria factory.
-                criteriaFactory = CriteriaFactory.instance();
-
                 // Create the criteria.
-                criteria = criteriaFactory.createCriteria(Have.class);
+                criteria = this.comicService.getCriteria(Have.class);
                 criteria.add(ComparisonOperation.eq("createUser",
                         SessionUtility.getValue(SessionKey.USER, User.class)));
                 criteria.addOrder(Order.asc("comic.title.name"));
 
                 // Get the haves.
-                haves = this.comicService.findList(criteria);
+                haves = this.comicService.findList(Have.class, criteria);
 
                 // Check if there are haves.
                 if (haves != null) {
@@ -166,13 +161,9 @@ public class TitleReportBean
 
             // Declare.
             Criteria<Have> criteria;
-            CriteriaFactory criteriaFactory;
-
-            // Initialize criteria factory.
-            criteriaFactory = CriteriaFactory.instance();
 
             // Create the criteria.
-            criteria = criteriaFactory.createCriteria(Have.class);
+            criteria = this.comicService.getCriteria(Have.class);
             criteria.add(ComparisonOperation.eq("comic.title", this.title));
             criteria.add(LogicalOperation.and(ComparisonOperation.eq("createUser",
                     SessionUtility.getValue(SessionKey.USER, User.class))));
@@ -184,7 +175,7 @@ public class TitleReportBean
             criteria.addOrder(Order.desc("comicGrade.scale"));
 
             // Get the haves.
-            this.haves = this.comicService.findList(criteria);
+            this.haves = this.comicService.findList(Have.class, criteria);
         }
         catch(Exception e) {
 

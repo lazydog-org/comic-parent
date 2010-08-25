@@ -4,10 +4,9 @@ import org.lazydog.comic.model.Location;
 import org.lazydog.comic.model.User;
 import org.lazydog.comic.manager.utility.SessionKey;
 import org.lazydog.comic.manager.utility.SessionUtility;
-import org.lazydog.data.access.criterion.ComparisonOperation;
-import org.lazydog.data.access.criterion.Order;
-import org.lazydog.data.access.Criteria;
-import org.lazydog.data.access.CriteriaFactory;
+import org.lazydog.repository.criterion.ComparisonOperation;
+import org.lazydog.repository.criterion.Order;
+import org.lazydog.repository.Criteria;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -47,14 +46,8 @@ public class LocationBean
             // Check if the user session values exist.
             if (SessionUtility.valueExists(SessionKey.USER)) {
 
-                // Declare.
-                CriteriaFactory criteriaFactory;
-
-                // Initialize criteria factory.
-                criteriaFactory = CriteriaFactory.instance();
-
                 // Create a new criteria.
-                criteria = criteriaFactory.createCriteria(Location.class);
+                criteria = this.comicService.getCriteria(Location.class);
 
                 // Modify the criteria.
                 criteria.add(ComparisonOperation.eq(

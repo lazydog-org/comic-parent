@@ -12,11 +12,10 @@ import org.lazydog.comic.manager.utility.FormButtonController;
 import org.lazydog.comic.manager.utility.Perspective;
 import org.lazydog.comic.manager.utility.SessionKey;
 import org.lazydog.comic.manager.utility.SessionUtility;
-import org.lazydog.data.access.criterion.ComparisonOperation;
-import org.lazydog.data.access.criterion.LogicalOperation;
-import org.lazydog.data.access.criterion.Order;
-import org.lazydog.data.access.Criteria;
-import org.lazydog.data.access.CriteriaFactory;
+import org.lazydog.repository.criterion.ComparisonOperation;
+import org.lazydog.repository.criterion.LogicalOperation;
+import org.lazydog.repository.criterion.Order;
+import org.lazydog.repository.Criteria;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -86,20 +85,16 @@ public class ComicBean
             // Declare.
             Want want;
             Criteria<Want> criteria;
-            CriteriaFactory criteriaFactory;
-
-            // Initialize criteria factory.
-            criteriaFactory = CriteriaFactory.instance();
 
             // Create the criteria.
-            criteria = criteriaFactory.createCriteria(Want.class);
+            criteria = this.comicService.getCriteria(Want.class);
             criteria.add(ComparisonOperation.eq("comic",
                     SessionUtility.getValue(SessionKey.COMIC, Comic.class)));
             criteria.add(LogicalOperation.and(ComparisonOperation.eq("createUser",
                     SessionUtility.getValue(SessionKey.USER, User.class))));
 
             // Get the want.
-            want = this.comicService.find(criteria);
+            want = this.comicService.find(Want.class, criteria);
 
             // Check if there is not already a want.
             if (want == null) {
@@ -137,17 +132,13 @@ public class ComicBean
             if (SessionUtility.valueExists(SessionKey.TITLE)) {
 
                 // Declare.
-                CriteriaFactory criteriaFactory;
                 ComicTypeFilter filter;
-
-                // Initialize criteria factory.
-                criteriaFactory = CriteriaFactory.instance();
 
                 // Initialize.
                 filter = new ComicTypeFilter();
 
                 // Create a new criteria.
-                criteria = criteriaFactory.createCriteria(Comic.class);
+                criteria = this.comicService.getCriteria(Comic.class);
 
                 // Modify the criteria.
                 criteria.add(ComparisonOperation.eq(
@@ -510,14 +501,14 @@ public class ComicBean
 
                     // Get the next entity.
                     newEntity = this.comicService.findNext(
-                            this.entity, this.getCriteria());
+                            this.entity, this.getEntityClass(), this.getCriteria());
 
                     // Check if the next entity does not exist.
                     if (newEntity == null) {
 
                         // Get the previous entity.
                         newEntity = this.comicService.findPrevious(
-                                this.entity, this.getCriteria());
+                                this.entity, this.getEntityClass(), this.getCriteria());
 
                         // Check if the previous entity does not exist.
                         if (newEntity == null) {
@@ -631,14 +622,14 @@ public class ComicBean
 
                             // Get the next entity.
                             newEntity = this.comicService.findNext(
-                                    this.entity, this.getCriteria());
+                                    this.entity, this.getEntityClass(), this.getCriteria());
 
                             // Check if the next entity does not exist.
                             if (newEntity == null) {
 
                                 // Get the previous entity.
                                 newEntity = this.comicService.findPrevious(
-                                        this.entity, this.getCriteria());
+                                        this.entity, this.getEntityClass(), this.getCriteria());
 
                                 // Check if the previous entity does not exist.
                                 if (newEntity == null) {
@@ -742,21 +733,17 @@ public class ComicBean
 
             // Declare.
             Criteria<Want> criteria;
-            CriteriaFactory criteriaFactory;
             Want want;
 
-            // Initialize criteria factory.
-            criteriaFactory = CriteriaFactory.instance();
-
             // Create the criteria.
-            criteria = criteriaFactory.createCriteria(Want.class);
+            criteria = this.comicService.getCriteria(Want.class);
             criteria.add(ComparisonOperation.eq("comic",
                     SessionUtility.getValue(SessionKey.COMIC, Comic.class)));
             criteria.add(LogicalOperation.and(ComparisonOperation.eq("createUser",
                     SessionUtility.getValue(SessionKey.USER, User.class))));
 
             // Get the want.
-            want = this.comicService.find(criteria);
+            want = this.comicService.find(Want.class, criteria);
 
             // Remove the want.
             this.comicService.remove(Want.class, want.getId());

@@ -1,15 +1,9 @@
 package org.lazydog.comic.manager.helper.bean;
 
-import org.lazydog.comic.model.Category;
-import org.lazydog.comic.model.Publisher;
-import org.lazydog.comic.model.Title;
 import org.lazydog.comic.manager.utility.SessionKey;
 import org.lazydog.comic.manager.utility.SessionUtility;
 import org.lazydog.comic.manager.utility.Subtopic;
 import org.lazydog.comic.manager.utility.TitleSearchBy;
-import org.lazydog.data.access.criterion.ComparisonOperation;
-import org.lazydog.data.access.Criteria;
-import org.lazydog.data.access.CriteriaFactory;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -25,55 +19,6 @@ public class TitleSearcher
        implements Serializable {
 
     private static final long serialVersionUID = 1L;
-
-    /**
-     * Get the criteria.
-     *
-     * @param  searchBy   the search by.
-     * @param  searchFor  the search for.
-     *
-     * @return  the criteria.
-     */
-    public static Criteria<Title> getCriteria(TitleSearchBy searchBy,
-                                              Object searchFor) {
-
-        // Declare.
-        Criteria<Title> criteria;
-        CriteriaFactory criteriaFactory;
-
-        // Initialize.
-        criteria = null;
-        criteriaFactory = CriteriaFactory.instance();
-
-        // Get a new criteria.
-        criteria = criteriaFactory.createCriteria(Title.class);
-
-        switch(searchBy) {
-
-            case CATEGORY_NAME:
-
-                // Modify the criteria.
-                criteria.add(ComparisonOperation.memberOf(
-                        "categories", (Category)searchFor));
-                break;
-
-            case PUBLISHER_NAME:
-
-                // Modify the criteria.
-                criteria.add(ComparisonOperation.memberOf(
-                        "publishers", (Publisher)searchFor));
-                break;
-
-            case TITLE_NAME:
-
-                // Modify the criteria.
-                criteria.add(ComparisonOperation.like(
-                        "name", "%" + (String)searchFor + "%"));
-                break;
-        }
-
-        return criteria;
-    }
 
     /**
      * Get the search by.
