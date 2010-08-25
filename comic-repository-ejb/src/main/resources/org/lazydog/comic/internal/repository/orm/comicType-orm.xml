@@ -7,15 +7,9 @@
     version="1.0">
 
     <package>org.lazydog.comic.model</package>
-    <entity class="ImageType" access="FIELD" metadata-complete="true">
-        <table name="image_type" schema="comic_collection"/>
-        <named-query name="ImageType.findAll">
-            <query>select i from ImageType i</query>
-        </named-query>
+    <entity class="ComicType" access="FIELD" metadata-complete="true">
+        <table name="comic_type" schema="comic_collection"/>
         <attributes>
-            <basic name="directoryPath">
-                <column name="directory_path" nullable="false" unique="true"/>
-            </basic>
             <basic name="value">
                 <column name="value" nullable="false" unique="true"/>
             </basic>

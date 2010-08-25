@@ -7,15 +7,15 @@
     version="1.0">
 
     <package>org.lazydog.comic.model</package>
-    <entity class="Profession" access="FIELD" metadata-complete="true">
-        <table name="profession" schema="comic_collection"/>
-        <named-query name="Profession.findAll">
-            <query>select p from Profession p</query>
-        </named-query>
+    <entity class="Creator" access="FIELD" metadata-complete="true">
+        <table name="creator" schema="comic_collection"/>
         <attributes>
-            <basic name="value">
-                <column name="value" nullable="false" unique="true"/>
-            </basic>
+            <many-to-one name="person">
+                <join-column name="person_id" nullable="false"/>
+            </many-to-one>
+            <many-to-one name="profession">
+                <join-column name="profession_id" nullable="false"/>
+            </many-to-one>
         </attributes>
     </entity>
 </entity-mappings>

@@ -9,9 +9,6 @@
     <package>org.lazydog.comic.model</package>
     <entity class="Title" access="FIELD" metadata-complete="true">
         <table name="title" schema="comic_collection"/>
-        <named-query name="Title.findAll">
-            <query>select t from Title t</query>
-        </named-query>
         <attributes>
             <basic name="name">
                 <column name="name" nullable="false"/>
@@ -27,22 +24,19 @@
             <basic name="volume">
                 <column name="volume" nullable="false"/>
             </basic>
-            <many-to-one name="image" fetch="EAGER">
+            <many-to-one name="image">
                 <join-column name="image_id"/>
             </many-to-one>
-            <many-to-one name="type" fetch="EAGER">
+            <many-to-one name="type">
                 <join-column name="title_type_id" nullable="false"/>
             </many-to-one>
-            <one-to-many name="comics" mapped-by="title" fetch="LAZY">
-                <cascade><cascade-remove/></cascade> 
-            </one-to-many>
-            <many-to-many name="categories" fetch="EAGER">
+            <many-to-many name="categories">
                 <join-table name="title_category">
                     <join-column name="title_id"/>
                     <inverse-join-column name="category_id"/>
                 </join-table>
             </many-to-many>
-            <many-to-many name="publishers" fetch="EAGER">
+            <many-to-many name="publishers">
                 <join-table name="title_publisher">
                     <join-column name="title_id"/>
                     <inverse-join-column name="publisher_id"/>

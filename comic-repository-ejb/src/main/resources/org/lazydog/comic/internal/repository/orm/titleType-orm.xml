@@ -9,9 +9,6 @@
     <package>org.lazydog.comic.model</package>
     <entity class="TitleType" access="FIELD" metadata-complete="true">
         <table name="title_type" schema="comic_collection"/>
-        <named-query name="TitleType.findAll">
-            <query>select t from TitleType t</query>
-        </named-query>
         <attributes>
             <basic name="value">
                 <column name="value" nullable="false" unique="true"/>

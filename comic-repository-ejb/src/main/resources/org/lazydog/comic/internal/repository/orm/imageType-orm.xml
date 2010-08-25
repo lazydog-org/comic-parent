@@ -7,16 +7,15 @@
     version="1.0">
 
     <package>org.lazydog.comic.model</package>
-    <entity class="User" access="FIELD" metadata-complete="true">
-        <table name="user" schema="comic_collection"/>
-        <named-query name="User.findAll">
-            <query>select u from User u</query>
-        </named-query>
+    <entity class="ImageType" access="FIELD" metadata-complete="true">
+        <table name="image_type" schema="comic_collection"/>
         <attributes>
-            <basic name="name">
-                <column name="name" nullable="false" unique="true"/>
+            <basic name="directoryPath">
+                <column name="directory_path" nullable="false" unique="true"/>
             </basic>
-            <one-to-one name="userPreference" mapped-by="createUser" fetch="EAGER"/>
+            <basic name="value">
+                <column name="value" nullable="false" unique="true"/>
+            </basic>
         </attributes>
     </entity>
 </entity-mappings>

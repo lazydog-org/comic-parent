@@ -9,14 +9,6 @@
     <package>org.lazydog.comic.model</package>
     <entity class="Have" access="FIELD" metadata-complete="true">
         <table name="have" schema="comic_collection"/>
-        <named-query name="Have.findAll">
-            <query>
-                select h from Have h
-                left join fetch h.comic
-                left join fetch h.comicGrade
-                left join fetch h.location
-            </query>
-        </named-query>
         <attributes>
             <basic name="purchasePrice">
                 <column name="purchase_price"/>
@@ -24,13 +16,13 @@
             <basic name="quantity">
                 <column name="quantity" nullable="false"/>
             </basic>
-            <many-to-one name="comic" fetch="EAGER">
+            <many-to-one name="comic">
                 <join-column name="comic_id" nullable="false"/>
             </many-to-one>
-            <many-to-one name="comicGrade" fetch="EAGER">
+            <many-to-one name="comicGrade">
                 <join-column name="comic_grade_id" nullable="false"/>
             </many-to-one>
-            <many-to-one name="location" fetch="EAGER">
+            <many-to-one name="location">
                 <join-column name="location_id" nullable="false"/>
             </many-to-one>
         </attributes>

@@ -7,17 +7,17 @@
     version="1.0">
 
     <package>org.lazydog.comic.model</package>
-    <entity class="Creator" access="FIELD" metadata-complete="true">
-        <table name="creator" schema="comic_collection"/>
-        <named-query name="Creator.findAll">
-            <query>select c from Creator c</query>
-        </named-query>
+    <entity class="Imprint" access="FIELD" metadata-complete="true">
+        <table name="imprint" schema="comic_collection"/>
         <attributes>
-            <many-to-one name="person" fetch="EAGER">
-                <join-column name="person_id" nullable="false"/>
+            <basic name="name">
+                <column name="name" nullable="false" unique="true"/>
+            </basic>
+            <many-to-one name="image">
+                <join-column name="image_id"/>
             </many-to-one>
-            <many-to-one name="profession" fetch="EAGER">
-                <join-column name="profession_id" nullable="false"/>
+            <many-to-one name="publisher">
+                <join-column name="publisher_id" nullable="false"/>
             </many-to-one>
         </attributes>
     </entity>

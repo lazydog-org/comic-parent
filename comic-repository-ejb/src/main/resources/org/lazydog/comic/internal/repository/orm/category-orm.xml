@@ -7,15 +7,12 @@
     version="1.0">
 
     <package>org.lazydog.comic.model</package>
-    <entity class="ComicType" access="FIELD" metadata-complete="true">
-        <table name="comic_type" schema="comic_collection"/>
-        <named-query name="ComicType.findAll">
-            <query>select c from ComicType c</query>
-        </named-query>
+    <entity class="Category" access="FIELD" metadata-complete="true">
+        <table name="category" schema="comic_collection"/>
         <attributes>
-            <basic name="value">
-                <column name="value" nullable="false" unique="true"/>
-            </basic>
+            <basic name="name">
+                <column name="name" nullable="false" unique="true"/>
+            </basic>       
         </attributes>
-    </entity>
+    </entity>   
 </entity-mappings>

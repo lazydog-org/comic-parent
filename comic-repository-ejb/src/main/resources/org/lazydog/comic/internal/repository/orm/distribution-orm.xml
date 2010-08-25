@@ -7,14 +7,11 @@
     version="1.0">
 
     <package>org.lazydog.comic.model</package>
-    <entity class="Location" access="FIELD" metadata-complete="true">
-        <table name="location" schema="comic_collection"/>
-        <named-query name="Location.findAll">
-            <query>select l from Location l</query>
-        </named-query>
+    <entity class="Distribution" access="FIELD" metadata-complete="true">
+        <table name="distribution" schema="comic_collection"/>
         <attributes>
-            <basic name="name">
-                <column name="name" nullable="false"/>
+            <basic name="value">
+                <column name="value" nullable="false" unique="true"/>
             </basic>
         </attributes>
     </entity>

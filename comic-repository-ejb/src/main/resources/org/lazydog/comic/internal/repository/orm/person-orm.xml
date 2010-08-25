@@ -14,9 +14,6 @@
                 <column-name>last_name</column-name>
         </unique-constraint> 
         </table>
-        <named-query name="Person.findAll">
-            <query>select p from Person p</query>
-        </named-query>
         <attributes>
             <basic name="firstName">
                 <column name="first_name" nullable="false"/>

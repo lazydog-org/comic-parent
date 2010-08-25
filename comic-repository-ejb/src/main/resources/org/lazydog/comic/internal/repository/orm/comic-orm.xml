@@ -9,26 +9,6 @@
     <package>org.lazydog.comic.model</package>
     <entity class="Comic" access="FIELD" metadata-complete="true">
         <table name="comic" schema="comic_collection"/>
-        <named-query name="Comic.findAll">
-            <query>
-                select c from Comic c
-                left join fetch c.characters
-                left join fetch c.creators
-                left join fetch c.distribution
-                left join fetch c.image
-                left join fetch c.title
-                left join fetch c.type
-                left join fetch c.traits
-            </query>
-            <!--
-            <hint name="eclipselink.left-join-fetch" value="c.image.type"/>
-            <hint name="eclipselink.left-join-fetch" value="c.title.image"/>
-            <hint name="eclipselink.left-join-fetch" value="c.title.image.type"/>
-            <hint name="eclipselink.left-join-fetch" value="c.title.type"/>
-            <hint name="eclipselink.left-join-fetch" value="c.title.categories"/>
-            <hint name="eclipselink.left-join-fetch" value="c.title.publishers"/>
-            -->
-        </named-query>
         <attributes>
             <basic name="coverPrice">
                 <column name="cover_price"/>
@@ -49,31 +29,31 @@
             <basic name="variant">
                 <column name="variant"/>
             </basic>
-            <many-to-one name="distribution" fetch="EAGER">
+            <many-to-one name="distribution">
                 <join-column name="distribution_id" nullable="false"/>
             </many-to-one>
-            <many-to-one name="image" fetch="EAGER">
+            <many-to-one name="image">
                 <join-column name="image_id"/>
             </many-to-one>
-            <many-to-one name="title" fetch="EAGER">
+            <many-to-one name="title">
                 <join-column name="title_id" nullable="false"/>
             </many-to-one>
-            <many-to-one name="type" fetch="EAGER">
+            <many-to-one name="type">
                 <join-column name="comic_type_id" nullable="false"/>
             </many-to-one>
-            <many-to-many name="characters" fetch="EAGER">
+            <many-to-many name="characters">
                 <join-table name="comic_character">
                     <join-column name="comic_id"/>
                     <inverse-join-column name="character_id"/>
                 </join-table>
             </many-to-many>
-            <many-to-many name="creators" fetch="EAGER">
+            <many-to-many name="creators">
                 <join-table name="comic_creator">
                     <join-column name="comic_id"/>
                     <inverse-join-column name="creator_id"/>
                 </join-table>
             </many-to-many>
-            <many-to-many name="traits" fetch="EAGER">
+            <many-to-many name="traits">
                 <join-table name="comic_trait">
                     <join-column name="comic_id"/>
                     <inverse-join-column name="trait_id"/>

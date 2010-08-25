@@ -7,19 +7,16 @@
     version="1.0">
 
     <package>org.lazydog.comic.model</package>
-    <!-- bug in eclipseLink requires fully-qualified class name here. -->
-    <entity class="org.lazydog.comic.model.Character" access="FIELD" metadata-complete="true">
-        <table name="character" schema="comic_collection"/>
-        <named-query name="Character.findAll">
-            <query>select c from Character c</query>
-        </named-query>
-        <attributes>  
+    <entity class="Publisher" access="FIELD" metadata-complete="true">
+        <table name="publisher" schema="comic_collection"/>
+        <attributes>
             <basic name="name">
                 <column name="name" nullable="false" unique="true"/>
             </basic>
-            <many-to-one name="image" fetch="EAGER">
+            <many-to-one name="image">
                 <join-column name="image_id"/>
-            </many-to-one> 
+            </many-to-one>
+            <one-to-many name="imprints" mapped-by="publisher"/>
         </attributes>
     </entity>
 </entity-mappings>

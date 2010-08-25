@@ -7,15 +7,18 @@
     version="1.0">
 
     <package>org.lazydog.comic.model</package>
-    <entity class="Trait" access="FIELD" metadata-complete="true">
-        <table name="trait" schema="comic_collection"/>
-        <named-query name="Trait.findAll">
-            <query>select t from Trait t</query>
-        </named-query>
+    <entity class="Image" access="FIELD" metadata-complete="true">
+        <table name="image" schema="comic_collection"/>
         <attributes>
-            <basic name="value">
-                <column name="value" nullable="false" unique="true"/>
+            <basic name="fileName">
+                <column name="file_name" nullable="false" unique="true"/>
             </basic>
+            <basic name="label">
+                <column name="label" unique="true"/>
+            </basic>
+            <many-to-one name="type">
+                <join-column name="image_type_id" nullable="false"/>
+            </many-to-one>
         </attributes>
     </entity>
 </entity-mappings>
