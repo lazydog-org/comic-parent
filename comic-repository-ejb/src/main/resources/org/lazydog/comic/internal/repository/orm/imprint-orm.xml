@@ -13,11 +13,8 @@
             <basic name="name">
                 <column name="name" nullable="false" unique="true"/>
             </basic>
-            <many-to-one name="image">
+            <many-to-one name="image" fetch="EAGER">
                 <join-column name="image_id"/>
-            </many-to-one>
-            <many-to-one name="publisher">
-                <join-column name="publisher_id" nullable="false"/>
             </many-to-one>
         </attributes>
     </entity>

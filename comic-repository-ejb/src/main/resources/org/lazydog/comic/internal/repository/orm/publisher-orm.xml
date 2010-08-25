@@ -13,10 +13,15 @@
             <basic name="name">
                 <column name="name" nullable="false" unique="true"/>
             </basic>
-            <many-to-one name="image">
+            <many-to-one name="image" fetch="EAGER">
                 <join-column name="image_id"/>
             </many-to-one>
-            <one-to-many name="imprints" mapped-by="publisher"/>
+            <one-to-many name="imprints" fetch="LAZY">
+                <join-table name="publisher_imprint">
+                    <join-column name="publisher_id"/>
+                    <inverse-join-column name="imprint_id"/>
+                </join-table>
+            </one-to-many>
         </attributes>
     </entity>
 </entity-mappings>

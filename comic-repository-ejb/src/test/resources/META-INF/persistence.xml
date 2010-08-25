@@ -57,7 +57,7 @@
             <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/comic_collection"/>
             <property name="javax.persistence.jdbc.user" value="comicuser"/>
             <property name="javax.persistence.jdbc.password" value="c0m1c4s3r"/>
-            <property name="eclipselink.logging.level" value="FINE"/>
+            <property name="eclipselink.logging.level" value="WARNING"/>
         </properties>
     </persistence-unit>
 </persistence>

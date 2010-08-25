@@ -10,10 +10,10 @@
     <entity class="Creator" access="FIELD" metadata-complete="true">
         <table name="creator" schema="comic_collection"/>
         <attributes>
-            <many-to-one name="person">
+            <many-to-one name="person" fetch="EAGER">
                 <join-column name="person_id" nullable="false"/>
             </many-to-one>
-            <many-to-one name="profession">
+            <many-to-one name="profession" fetch="EAGER">
                 <join-column name="profession_id" nullable="false"/>
             </many-to-one>
         </attributes>

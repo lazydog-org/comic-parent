@@ -14,7 +14,7 @@
             <basic name="name">
                 <column name="name" nullable="false" unique="true"/>
             </basic>
-            <many-to-one name="image">
+            <many-to-one name="image" fetch="EAGER">
                 <join-column name="image_id"/>
             </many-to-one> 
         </attributes>

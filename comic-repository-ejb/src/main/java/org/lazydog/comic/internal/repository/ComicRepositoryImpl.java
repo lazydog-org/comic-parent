@@ -22,10 +22,10 @@ import org.lazydog.utilities.ejbmonitor.interceptor.EJBMonitor;
 public class ComicRepositoryImpl extends AbstractRepository implements ComicRepository {
 
     @PersistenceContext
-    EntityManager entityManager;
+    private EntityManager entityManager;
 
     @PostConstruct
     private void initialize() {
-        this.setEntityManager(entityManager);
+        this.setEntityManager(this.entityManager);
     }
 }

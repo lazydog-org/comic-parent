@@ -29,6 +29,7 @@ import org.lazydog.comic.model.UserPreference;
 import org.lazydog.comic.model.Want;
 import org.lazydog.repository.Criteria;
 import org.lazydog.repository.criterion.ComparisonOperation;
+import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Ignore;
 import org.junit.Test;
@@ -95,66 +96,66 @@ public class ComicRepositoryImplTest {
         wantCriteria = repository.getCriteria(Want.class);
     }
 
+    @Before
+    public void beforeTest() throws Exception {
+System.out.println("new test");
+        repository = null;
+        System.gc();
+        Thread.sleep(1000);
+        repository = new ComicRepositoryWrapper();
+    }
+
     private static double duration(Date startTime, Date endTime) {
         return (endTime.getTime() - startTime.getTime()) / 1000d;
     }
 
+    private static <T> void findList(Class<T> entityClass) {
+
+        List<T> entities;
+        Date endTime;
+        Date startTime;
+
+        startTime = new Date();
+        entities = repository.findList(entityClass);
+        endTime = new Date();
+        System.out.println(entities.size() + " " + entityClass.getSimpleName()
+                + "s retrieved in " + duration(startTime, endTime)
+                + " seconds");
+    }
+
+    @Test
+    public void findListCategory() throws Exception {
+        findList(Category.class);
+    }
+
     @Test
     public void findListComic() throws Exception {
-
-        List<Comic> comics;
-        Date endTime;
-        Date startTime;
-
-        startTime = new Date();
-        comics = repository.findList(Comic.class);
-        endTime = new Date();
-        System.out.println(comics.size() + " retrieved in "
-                + duration(startTime, endTime) + " seconds");
+        findList(Comic.class);
     }
 
-    @Test
-    public void findListComicByCriteria() throws Exception {
-
-        List<Comic> comics;
-        Date endTime;
-        Date startTime;
-
-        startTime = new Date();
-        comics = repository.findList(Comic.class, comicCriteria);
-        endTime = new Date();
-        System.out.println(comics.size() + " retrieved in "
-                + duration(startTime, endTime) + " seconds");
-    }
-
-    @Ignore
     @Test
     public void findListHave() throws Exception {
-
-        List<Have> haves;
-        Date endTime;
-        Date startTime;
-
-        startTime = new Date();
-        haves = repository.findList(Have.class);
-        endTime = new Date();
-        System.out.println(haves.size() + " retrieved in "
-                + duration(startTime, endTime) + " seconds");
+        findList(Have.class);
     }
 
-    @Ignore
     @Test
-    public void findListHaveByCriteria() throws Exception {
+    public void findListImprint() throws Exception {
+        findList(Imprint.class);
+    }
 
-        List<Have> haves;
-        Date endTime;
-        Date startTime;
+    @Test
+    public void findListPublisher() throws Exception {
+        findList(Publisher.class);
+    }
 
-        startTime = new Date();
-        haves = repository.findList(Have.class, haveCriteria);
-        endTime = new Date();
-        System.out.println(haves.size() + " retrieved in "
-                + duration(startTime, endTime) + " seconds");
+    @Test
+    public void findListTitle() throws Exception {
+        findList(Title.class);
+    }
+
+    @Test
+    public void findListTrait() throws Exception {
+        findList(Trait.class);
     }
 
     @Ignore
@@ -200,49 +201,21 @@ public class ComicRepositoryImplTest {
                     + duration(startTime, endTime) + " seconds");
         }
     }
-    
-    @Ignore
-    @Test
-    public void findListTitle() throws Exception {
-
-        List<Title> titles;
-        Date endTime;
-        Date startTime;
-
-        startTime = new Date();
-        titles = repository.findList(Title.class);
-        endTime = new Date();
-        System.out.println(titles.size() + " retrieved in "
-                + duration(startTime, endTime) + " seconds");
-    }
 
     @Ignore
     @Test
-    public void findListTitleByCriteria() throws Exception {
-
-        List<Title> titles;
-        Date endTime;
-        Date startTime;
-
-        startTime = new Date();
-        titles = repository.findList(Title.class, titleCriteria);
-        endTime = new Date();
-        System.out.println(titles.size() + " retrieved in "
-                + duration(startTime, endTime) + " seconds");
-    }
-
-    @Ignore
-    @Test
-    public void findList() throws Exception {
+    public void findLists() throws Exception {
 
         System.out.println(sdf.format(new Date()) + " Fetching all objects ...");
 
         List<Category> categories = repository.findList(Category.class);
         List<Character> characters = repository.findList(Character.class);
+        List<Comic> comics = repository.findList(Comic.class);
         List<ComicGrade> comicGrades = repository.findList(ComicGrade.class);
         List<ComicType> comicTypes = repository.findList(ComicType.class);
         List<Creator> creators = repository.findList(Creator.class);
         List<Distribution> distributions = repository.findList(Distribution.class);
+        List<Have> haves = repository.findList(Have.class);
         List<Image> images = repository.findList(Image.class);
         List<ImageType> imageTypes = repository.findList(ImageType.class);
         List<Imprint> imprints = repository.findList(Imprint.class);
@@ -250,6 +223,7 @@ public class ComicRepositoryImplTest {
         List<Person> persons = repository.findList(Person.class);
         List<Profession> professions = repository.findList(Profession.class);
         List<Publisher> publishers = repository.findList(Publisher.class);
+        List<Title> titles = repository.findList(Title.class);
         List<TitleType> titleTypes = repository.findList(TitleType.class);
         List<Trait> traits = repository.findList(Trait.class);
         List<User> users = repository.findList(User.class);
@@ -258,17 +232,20 @@ public class ComicRepositoryImplTest {
 
         System.out.println("number of categories = " + categories.size());
         System.out.println("number of characters = " + characters.size());
+        System.out.println("number of comics = " + comics.size());
         System.out.println("number of comicGrades = " + comicGrades.size());
         System.out.println("number of comicTypes = " + comicTypes.size());
         System.out.println("number of creators = " + creators.size());
         System.out.println("number of distributions = " + distributions.size());
+        System.out.println("number of haves = " + haves.size());
         System.out.println("number of images = " + images.size());
         System.out.println("number of imageTypes = " + imageTypes.size());
-        System.out.println("number of imprint = " + imprints.size());
+        System.out.println("number of imprints = " + imprints.size());
         System.out.println("number of locations = " + locations.size());
         System.out.println("number of persons = " + persons.size());
         System.out.println("number of professions = " + professions.size());
         System.out.println("number of publishers = " + publishers.size());
+        System.out.println("number of titles = " + titles.size());
         System.out.println("number of titleTypes = " + titleTypes.size());
         System.out.println("number of traits = " + traits.size());
         System.out.println("number of users = " + users.size());

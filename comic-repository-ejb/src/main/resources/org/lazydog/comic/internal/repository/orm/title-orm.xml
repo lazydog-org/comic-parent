@@ -24,19 +24,19 @@
             <basic name="volume">
                 <column name="volume" nullable="false"/>
             </basic>
-            <many-to-one name="image">
+            <many-to-one name="image" fetch="EAGER">
                 <join-column name="image_id"/>
             </many-to-one>
-            <many-to-one name="type">
+            <many-to-one name="type" fetch="EAGER">
                 <join-column name="title_type_id" nullable="false"/>
             </many-to-one>
-            <many-to-many name="categories">
+            <many-to-many name="categories" fetch="LAZY">
                 <join-table name="title_category">
                     <join-column name="title_id"/>
                     <inverse-join-column name="category_id"/>
                 </join-table>
             </many-to-many>
-            <many-to-many name="publishers">
+            <many-to-many name="publishers" fetch="LAZY">
                 <join-table name="title_publisher">
                     <join-column name="title_id"/>
                     <inverse-join-column name="publisher_id"/>

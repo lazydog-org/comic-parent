@@ -16,13 +16,13 @@
             <basic name="quantity">
                 <column name="quantity" nullable="false"/>
             </basic>
-            <many-to-one name="comic">
+            <many-to-one name="comic" fetch="EAGER">
                 <join-column name="comic_id" nullable="false"/>
             </many-to-one>
-            <many-to-one name="comicGrade">
+            <many-to-one name="comicGrade" fetch="EAGER">
                 <join-column name="comic_grade_id" nullable="false"/>
             </many-to-one>
-            <many-to-one name="location">
+            <many-to-one name="location" fetch="EAGER">
                 <join-column name="location_id" nullable="false"/>
             </many-to-one>
         </attributes>

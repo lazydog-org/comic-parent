@@ -10,7 +10,7 @@
     <entity class="Want" access="FIELD" metadata-complete="true">
         <table name="want" schema="comic_collection"/>
         <attributes>
-            <many-to-one name="comic">
+            <many-to-one name="comic" fetch="EAGER">
                 <join-column name="comic_id" nullable="false"/>
             </many-to-one>
         </attributes>

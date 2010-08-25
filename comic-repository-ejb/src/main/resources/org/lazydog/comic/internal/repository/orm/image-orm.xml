@@ -16,7 +16,7 @@
             <basic name="label">
                 <column name="label" unique="true"/>
             </basic>
-            <many-to-one name="type">
+            <many-to-one name="type" fetch="EAGER">
                 <join-column name="image_type_id" nullable="false"/>
             </many-to-one>
         </attributes>
