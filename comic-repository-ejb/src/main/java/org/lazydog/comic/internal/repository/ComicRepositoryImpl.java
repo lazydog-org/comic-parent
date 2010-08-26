@@ -1,7 +1,7 @@
 package org.lazydog.comic.internal.repository;
 
 import javax.annotation.PostConstruct;
-import javax.ejb.Remote;
+import javax.ejb.Local;
 import javax.ejb.Singleton;
 import javax.interceptor.Interceptors;
 import javax.persistence.EntityManager;
@@ -16,8 +16,8 @@ import org.lazydog.utilities.ejbmonitor.interceptor.EJBMonitor;
  * 
  * @author  Ron Rickard
  */
-@Singleton(mappedName="ejb/ComicRepository")
-@Remote(ComicRepository.class)
+@Singleton(name="ejb/ComicRepository")
+@Local(ComicRepository.class)
 @Interceptors(EJBMonitor.class)
 public class ComicRepositoryImpl extends AbstractRepository implements ComicRepository {
 

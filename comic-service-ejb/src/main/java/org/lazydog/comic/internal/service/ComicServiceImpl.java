@@ -20,13 +20,13 @@ import org.lazydog.utilities.ejbmonitor.interceptor.EJBMonitor;
  * 
  * @author  Ron Rickard
  */
-@Stateless(mappedName="ejb/ComicService")
+@Stateless(name="ejb/ComicService", mappedName="ejb/ComicService")
 @Remote(ComicService.class)
 @Interceptors(EJBMonitor.class)
 public class ComicServiceImpl
        implements ComicService {
 
-    @EJB(mappedName="ejb/ComicRepository", beanInterface=ComicRepository.class)
+    @EJB(beanName="ejb/ComicRepository", beanInterface=ComicRepository.class)
     private ComicRepository comicRepository;
 
     /**
