@@ -36,34 +36,30 @@
     </build>
     <dependencies>
         <dependency>
-            <groupId>com.sun.appserver</groupId>
-            <artifactId>appserv-admin</artifactId>
-            <version>9.1</version>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>5.1.12</version>
         </dependency>
         <dependency>
-            <groupId>com.sun.appserver</groupId>
-            <artifactId>appserv-deployment-client</artifactId>
-            <version>9.1</version>
+            <groupId>org.glassfish.appclient</groupId>
+            <artifactId>gf-client</artifactId>
+            <version>3.0.1</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>com.sun.corba</groupId>
+                    <artifactId>glassfish-corba-orb</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
         <dependency>
-            <groupId>com.sun.appserver</groupId>
-            <artifactId>appserv-ext</artifactId>
-            <version>9.1</version>
+            <groupId>com.sun.corba</groupId>
+            <artifactId>glassfish-corba-orb</artifactId>
+            <version>3.0.1-b002</version>
         </dependency>
         <dependency>
-            <groupId>com.sun.appserver</groupId>
-            <artifactId>appserv-rt</artifactId>
-            <version>9.1</version>
-        </dependency>
-        <dependency>
-            <groupId>com.sun.appserver</groupId>
-            <artifactId>javaee</artifactId>
-            <version>9.1</version>
-        </dependency>
-        <dependency>
-            <groupId>org.lazydog.data.access</groupId>
-            <artifactId>data-access</artifactId>
-            <version>1.0</version>
+            <groupId>org.lazydog.repository</groupId>
+            <artifactId>repository</artifactId>
+            <version>1.2-SNAPSHOT</version>
         </dependency>
         <dependency>
             <groupId>${project.groupId}</groupId>

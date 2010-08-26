@@ -4,10 +4,9 @@ import org.lazydog.comic.ComicService;
 import org.lazydog.comic.model.Image;
 import org.lazydog.comic.model.ImageType;
 import org.lazydog.comic.model.User;
-import org.lazydog.data.access.criterion.ComparisonOperation;
-import org.lazydog.data.access.criterion.LogicalOperation;
-import org.lazydog.data.access.Criteria;
-import org.lazydog.data.access.CriteriaFactory;
+import org.lazydog.repository.criterion.ComparisonOperation;
+import org.lazydog.repository.criterion.LogicalOperation;
+import org.lazydog.repository.Criteria;
 import java.io.File;
 import java.io.PrintStream;
 import javax.naming.Context;
@@ -43,7 +42,7 @@ public class ImageUtility {
         context = new InitialContext();
 
         // Initialize the service.
-        comicService = (ComicService)context.lookup("ejb/ComicService");
+        this.comicService = (ComicService)context.lookup("ejb/ComicService");
     }
 
     /**
@@ -83,18 +82,14 @@ public class ImageUtility {
 
         // Declare.
         Criteria<User> criteria;
-        CriteriaFactory criteriaFactory;
         User user;
 
-        // Initialize criteria factory.
-        criteriaFactory = CriteriaFactory.instance();
-
         // Set the criteria.
-        criteria = criteriaFactory.createCriteria(User.class);
+        criteria = this.comicService.getCriteria(User.class);
         criteria.add(ComparisonOperation.eq("name", "admin"));
 
         // Find the user.
-        user = comicService.find(criteria);
+        user = this.comicService.find(User.class, criteria);
 
         return user;
     }
@@ -115,20 +110,16 @@ public class ImageUtility {
 
         // Declare.
         Criteria<Image> criteria;
-        CriteriaFactory criteriaFactory;
         Image image;
 
-        // Initialize criteria factory.
-        criteriaFactory = CriteriaFactory.instance();
-
         // Set the criteria.
-        criteria = criteriaFactory.createCriteria(Image.class);
+        criteria = this.comicService.getCriteria(Image.class);
         criteria.add(ComparisonOperation.eq("fileName", fileName));
         criteria.add(LogicalOperation.and(
                 ComparisonOperation.eq("type.directoryPath", directoryPath)));
 
         // Find the image.
-        image = comicService.find(criteria);
+        image = this.comicService.find(Image.class, criteria);
 
         return image;
     }
@@ -147,18 +138,14 @@ public class ImageUtility {
 
         // Declare.
         Criteria<ImageType> criteria;
-        CriteriaFactory criteriaFactory;
         ImageType imageType;
 
-        // Initialize criteria factory.
-        criteriaFactory = CriteriaFactory.instance();
-
         // Set the criteria.
-        criteria = criteriaFactory.createCriteria(ImageType.class);
+        criteria = this.comicService.getCriteria(ImageType.class);
         criteria.add(ComparisonOperation.eq("directoryPath", directoryPath));
 
         // Find the image type.
-        imageType = comicService.find(criteria);
+        imageType = this.comicService.find(ImageType.class, criteria);
 
         return imageType;
     }
