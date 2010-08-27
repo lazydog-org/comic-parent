@@ -10,6 +10,7 @@ import org.lazydog.comic.model.ComicGrade;
 import org.lazydog.comic.model.ComicType;
 import org.lazydog.comic.model.Creator;
 import org.lazydog.comic.model.Distribution;
+import org.lazydog.comic.model.Entity;
 import org.lazydog.comic.model.Have;
 import org.lazydog.comic.model.Image;
 import org.lazydog.comic.model.ImageType;
@@ -58,7 +59,7 @@ public class ComicServiceImplTest {
         return (endTime.getTime() - startTime.getTime()) / 1000d;
     }
 
-    private static <T> void findList(Class<T> entityClass) {
+    private static <T extends Entity<T>> void findList(Class<T> entityClass) {
 
         List<T> entities;
         Date endTime;

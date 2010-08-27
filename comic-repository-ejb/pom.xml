@@ -13,43 +13,6 @@
     <!-- packaging should be ejb, but there is an unknown bug lurking here -->
     <packaging>jar</packaging>
     <name>Comic Repository EJB</name>
-    <build>
-        <plugins>
-            <plugin>
-                <artifactId>maven-antrun-plugin</artifactId>
-                <executions>
-                    <execution>
-                        <id>copy-test-persistence</id>
-                        <phase>process-test-resources</phase>
-                        <configuration>
-                            <tasks>
-                                <!--backup the "proper" persistence.xml-->
-                                <move file="${project.build.outputDirectory}/META-INF/persistence.xml" tofile="${project.build.outputDirectory}/META-INF/persistence.xml.proper"/>
-                                <!--replace the "proper" persistence.xml with the "test" version-->
-                                <copy file="${project.build.testOutputDirectory}/META-INF/persistence.xml" tofile="${project.build.outputDirectory}/META-INF/persistence.xml"/>
-                            </tasks>
-                        </configuration>
-                        <goals>
-                            <goal>run</goal>
-                        </goals>
-                    </execution>
-                    <execution>
-                        <id>restore-persistence</id>
-                        <phase>prepare-package</phase>
-                        <configuration>
-                            <tasks overwite="true">
-                                <!--restore the "proper" persistence.xml-->
-                                <move file="${project.build.outputDirectory}/META-INF/persistence.xml.proper" tofile="${project.build.outputDirectory}/META-INF/persistence.xml"/>
-                            </tasks>
-                        </configuration>
-                        <goals>
-                            <goal>run</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
-        </plugins>
-    </build>
     <dependencies>
         <dependency>
             <groupId>junit</groupId>
