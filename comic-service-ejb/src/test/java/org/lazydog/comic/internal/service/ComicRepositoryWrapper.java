@@ -1,7 +1,8 @@
-package org.lazydog.comic.internal.repository;
+package org.lazydog.comic.internal.service;
 
 import javax.persistence.EntityManager;
 import javax.persistence.Persistence;
+import org.lazydog.comic.internal.repository.ComicRepositoryImpl;
 
 
 /**
@@ -19,7 +20,9 @@ public class ComicRepositoryWrapper extends ComicRepositoryImpl {
         // Declare.
         EntityManager entityManager;
 
-        // Get a entity manager.
+        /**
+         * Get a entity manager.
+         */
         entityManager = Persistence.createEntityManagerFactory("ComicCollectionPU").createEntityManager();
 
         // Inject the entity manager.

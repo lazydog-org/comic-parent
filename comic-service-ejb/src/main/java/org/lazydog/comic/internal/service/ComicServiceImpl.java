@@ -417,4 +417,13 @@ public class ComicServiceImpl
         // Save the entities.
         return this.comicRepository.persistList(entities);
     }
+
+    /**
+     * Set the comic repository.
+     *
+     * @param  comicRepository  the comic repository.
+     */
+    public void setComicRepository(ComicRepository comicRepository) {
+        this.comicRepository = comicRepository;
+    }
 }

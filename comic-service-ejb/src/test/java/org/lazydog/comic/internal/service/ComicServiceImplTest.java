@@ -1,8 +1,8 @@
-package org.lazydog.comic.internal.repository;
+package org.lazydog.comic.internal.service;
 
 import java.util.Date;
 import java.util.List;
-import org.lazydog.comic.ComicRepository;
+import org.lazydog.comic.ComicService;
 import org.lazydog.comic.model.Category;
 import org.lazydog.comic.model.Character;
 import org.lazydog.comic.model.Comic;
@@ -31,27 +31,27 @@ import org.junit.Test;
 
 
 /**
- * Unit tests for ComicRepositoryImpl class.
+ * Unit tests for ComicServiceImpl class.
  *
  * @author  Ron Rickard
  */
-public class ComicRepositoryImplTest {
+public class ComicServiceImplTest {
 
-    private static ComicRepository repository;
+    private static ComicService service;
 
     @BeforeClass
     public static void initialize() throws Exception {
 
-        // Get the comic repository.
-        repository = new ComicRepositoryWrapper();
+        // Get the comic service.
+        service = new ComicServiceWrapper();
     }
 
     @Before
     public void beforeTest() throws Exception {
-        repository = null;
+        service = null;
         System.gc();
         Thread.sleep(1000);
-        repository = new ComicRepositoryWrapper();
+        service = new ComicServiceWrapper();
     }
 
     private static double duration(Date startTime, Date endTime) {
@@ -65,7 +65,7 @@ public class ComicRepositoryImplTest {
         Date startTime;
 
         startTime = new Date();
-        entities = repository.findList(entityClass);
+        entities = service.findList(entityClass);
         endTime = new Date();
         System.out.println(entities.size() + " " + entityClass.getSimpleName()
                 + "s retrieved in " + duration(startTime, endTime)
