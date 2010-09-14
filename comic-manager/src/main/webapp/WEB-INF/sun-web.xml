@@ -4,7 +4,7 @@
   <context-root>/ComicManager</context-root>
   <security-role-mapping>
     <role-name>authorized</role-name>
-    <group-name>ComicManagerUser</group-name>
+    <group-name>comicmanageruser</group-name>
   </security-role-mapping>
   <class-loader delegate="true"/>
   <jsp-config>
