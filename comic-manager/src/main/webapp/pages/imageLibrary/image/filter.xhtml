@@ -8,7 +8,7 @@
     <head/>
     <body>
         <ui:composition>
-            <h:form id="cm-image-filter" class="cm-filter-buttons">
+            <h:form id="cm-image-filter" styleClass="cm-filter-buttons">
                 <ui:repeat value="#{imageTypeFilter.buttons}" var="button">
                     <h:commandButton value="#{button}"
                                      actionListener="#{imageBean.processFilterButton}"

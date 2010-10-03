@@ -8,7 +8,7 @@
     <head/>
     <body>
         <ui:composition>
-            <h:form id="cm-title-filter" class="cm-filter-buttons">
+            <h:form id="cm-title-filter" styleClass="cm-filter-buttons">
                 <ui:repeat value="#{titleTypeFilter.buttons}" var="button">
                     <h:commandButton value="#{button}"
                                      actionListener="#{titleBean.processFilterButton}"

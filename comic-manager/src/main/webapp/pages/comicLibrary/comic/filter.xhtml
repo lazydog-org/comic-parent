@@ -8,7 +8,7 @@
     <head/>
     <body>
         <ui:composition>
-            <h:form id="cm-comic-filter" class="cm-filter-buttons">
+            <h:form id="cm-comic-filter" styleClass="cm-filter-buttons">
                 <ui:repeat value="#{comicTypeFilter.buttons}" var="button">
                     <h:commandButton value="#{button}"
                                      actionListener="#{comicBean.processFilterButton}"
