@@ -115,7 +115,7 @@ public class TitleSearcher
      * @param  searchFor  the search for.
      */
     public void setSearchFor(Object searchFor) {
-        
+
         // Put the search for on the session.
         SessionUtility.putValue(SessionKey.TITLE_SEARCH_FOR, searchFor);
 

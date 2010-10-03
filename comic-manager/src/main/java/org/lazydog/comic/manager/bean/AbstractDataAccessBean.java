@@ -149,30 +149,20 @@ public abstract class AbstractDataAccessBean<T extends Entity<T>>
      */
     public List<T> getEntities() {
 
-        // Check if the entities exist.
-        if (this.entities == null) {
+        try {
 
-            try {
+            // Check if the criteria exists.
+            if (this.getCriteria() != null) {
 
-                // Declare.
-                Criteria<T> criteria;
-
-                // Get the criteria.
-                criteria = this.getCriteria();
-
-                // Check if the criteria exists.
-                if (criteria != null) {
-
-                    // Get the entities.
-                    this.entities = this.comicService.findList(
-                            this.getEntityClass(), this.getCriteria());
-                }
+                // Get the entities.
+                this.entities = this.comicService.findList(
+                        this.getEntityClass(), this.getCriteria());
             }
-            catch(Exception e) {
+        }
+        catch(Exception e) {
 
-                FacesContext.getCurrentInstance().addMessage(null,
-                        new FacesMessage("Cannot get the entities."));
-            }
+            FacesContext.getCurrentInstance().addMessage(null,
+                    new FacesMessage("Cannot get the entities."));
         }
 
         return entities;

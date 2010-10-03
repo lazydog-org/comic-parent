@@ -3,7 +3,6 @@ package org.lazydog.comic.manager.bean;
 import org.lazydog.comic.model.Image;
 import org.lazydog.comic.model.Title;
 import org.lazydog.comic.model.User;
-import org.lazydog.comic.manager.helper.bean.ImageSearcher;
 import org.lazydog.comic.manager.helper.bean.ImageTypeFilter;
 import org.lazydog.comic.manager.utility.FileUtility;
 import org.lazydog.comic.manager.utility.FormButtonController;

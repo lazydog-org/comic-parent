@@ -34,7 +34,7 @@ public abstract class AbstractTypeFilter<T extends Entity<T>>
     /**
      * Activate the filter.
      *
-     * @param  actionEvent        the action event.
+     * @param  actionEvent   the action event.
      * @param  comicService  the comic service.
      */
     public void activateFilter(ActionEvent actionEvent,
@@ -48,11 +48,10 @@ public abstract class AbstractTypeFilter<T extends Entity<T>>
             String typeValue;
 
             // Get the type value.
-            typeValue = (String)((UICommand)actionEvent
-                    .getComponent()).getValue();
+            typeValue = (String)((UICommand)actionEvent.getComponent()).getValue();
 
             // Create a new criteria.
-            criteria = this.comicService.getCriteria(this.getEntityClass());
+            criteria = comicService.getCriteria(this.getEntityClass());
 
             // Modify the criteria.
             criteria.add(ComparisonOperation.eq("value", typeValue));

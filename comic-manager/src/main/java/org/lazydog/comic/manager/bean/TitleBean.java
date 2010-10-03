@@ -5,7 +5,6 @@ import org.lazydog.comic.model.Publisher;
 import org.lazydog.comic.model.Title;
 import org.lazydog.comic.model.User;
 import org.lazydog.comic.model.UserPreference;
-import org.lazydog.comic.manager.helper.bean.TitleSearcher;
 import org.lazydog.comic.manager.helper.bean.TitleTypeFilter;
 import org.lazydog.comic.manager.utility.FormButtonController;
 import org.lazydog.comic.manager.utility.Perspective;
