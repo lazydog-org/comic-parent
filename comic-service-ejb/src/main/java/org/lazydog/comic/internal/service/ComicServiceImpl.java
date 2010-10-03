@@ -12,7 +12,7 @@ import org.lazydog.comic.ComicService;
 import org.lazydog.comic.model.Entity;
 import org.lazydog.comic.model.User;
 import org.lazydog.repository.Criteria;
-import org.lazydog.utilities.ejbmonitor.interceptor.EJBMonitor;
+import org.lazydog.ejbmonitor.interceptor.EJBMonitor;
 
 
 /**
