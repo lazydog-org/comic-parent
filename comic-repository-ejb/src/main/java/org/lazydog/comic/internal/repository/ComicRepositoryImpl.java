@@ -8,7 +8,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import org.lazydog.comic.ComicRepository;
 import org.lazydog.repository.AbstractRepository;
-import org.lazydog.utilities.ejbmonitor.interceptor.EJBMonitor;
+import org.lazydog.ejbmonitor.interceptor.EJBMonitor;
 
 
 /**
