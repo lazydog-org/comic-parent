@@ -347,7 +347,7 @@ public abstract class AbstractDataAccessBean<T extends Entity<T>>
             }
         }
         catch(Exception e) {
-
+e.printStackTrace();
             FacesContext.getCurrentInstance().addMessage(null,
                     new FacesMessage("Cannot delete the entity."));
         }
@@ -448,7 +448,7 @@ public abstract class AbstractDataAccessBean<T extends Entity<T>>
             this.perspective = Perspective.VIEW;
         }
         catch(Exception e) {
-
+e.printStackTrace();
             FacesContext.getCurrentInstance().addMessage(null,
                     new FacesMessage("Cannot save the entity."));
         }

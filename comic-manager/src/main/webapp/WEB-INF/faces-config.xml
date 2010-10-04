@@ -30,11 +30,9 @@
         <converter-id>publisherListConverter</converter-id>
         <converter-class>org.lazydog.comic.manager.converter.PublisherListConverter</converter-class>
     </converter>
-    <!--
     <lifecycle>
-        <phase-listener>comic.manager.phaselistener.Debug</phase-listener>
+        <phase-listener>org.lazydog.comic.manager.phaselistener.Debug</phase-listener>
     </lifecycle>
-    -->
 </faces-config>
 
 
