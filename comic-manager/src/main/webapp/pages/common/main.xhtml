@@ -15,7 +15,7 @@
                 <ui:include src="/pages/common/header.xhtml"/>
             </ui:define>
             <ui:define name="report">
-                <ui:include src="/pages/home/common/reports.xhtml"/>
+                <ui:include src="/pages/reports/common/reports.xhtml"/>
             </ui:define>
             <ui:define name="content">
                 <rich:tabPanel id="cm-tab-panel" selectedTab="#{navigator.topic}" switchType="server">
@@ -37,6 +37,13 @@
                         <f:attribute name="topic" value="IMAGE_LIBRARY"/>
                         <f:actionListener type="org.lazydog.comic.manager.actionlistener.ActivateTopic"/>
                         <c:if test="#{navigator.topic == 'IMAGE_LIBRARY'}">
+                            <ui:include src="#{navigator.subtopicContent}"/>
+                        </c:if>
+                    </rich:tab>
+                    <rich:tab name="REPORTS" label="Reports">
+                        <f:attribute name="topic" value="REPORTS"/>
+                        <f:actionListener type="org.lazydog.comic.manager.actionlistener.ActivateTopic"/>
+                        <c:if test="#{navigator.topic == 'REPORTS'}">
                             <ui:include src="#{navigator.subtopicContent}"/>
                         </c:if>
                     </rich:tab>

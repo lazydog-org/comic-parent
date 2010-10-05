@@ -10,6 +10,7 @@ public enum Subtopic {
     COMIC   ("/pages/comicLibrary/comic/subtopicContent.xhtml"),
     HOME    ("/pages/home/main.xhtml"),
     IMAGE   ("/pages/imageLibrary/image/subtopicContent.xhtml"),
+    REPORTS ("/pages/reports/reports.xhtml"),
     TITLE   ("/pages/comicLibrary/title/subtopicContent.xhtml");
 
     private String content;

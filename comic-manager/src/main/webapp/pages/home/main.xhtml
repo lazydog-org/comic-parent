@@ -10,46 +10,7 @@
     <head/>
     <body>
         <ui:component>
-            <h:form id="cm-locationreport-form">
-                <fieldset>
-                    <ol>
-                        <li>
-                            <label for="locationreport-location">Location Name: </label>
-                            <h:selectOneMenu id="locationreport-location"
-                                             value="#{locationReportBean.location}"
-                                             converter="objectHexConverter">
-                                <f:selectItems value="#{locationBean.entitiesAsSelectItems}"/>
-                            </h:selectOneMenu>
-                        </li>
-                        <li>
-                            <label style="background-color: #ffffff;"/>
-                            <a4j:commandButton value="Generate Report"
-                                               actionListener="#{locationReportBean.processReportButton}"
-                                               reRender="cm-locationreport-content"/>
-                        </li>
-                    </ol>
-                </fieldset>
-            </h:form>
-            <h:form id="cm-titlereport-form">
-                <fieldset>
-                    <ol>
-                        <li>
-                            <label for="titlereport-title">Title Name: </label>
-                            <h:selectOneMenu id="titlereport-title"
-                                             value="#{titleReportBean.title}"
-                                             converter="objectHexConverter">
-                                <f:selectItems value="#{titleReportBean.titlesAsSelectItems}"/>
-                            </h:selectOneMenu>
-                        </li>
-                        <li>
-                            <label style="background-color: #ffffff;"/>
-                            <a4j:commandButton value="Generate Report"
-                                               actionListener="#{titleReportBean.processReportButton}"
-                                               reRender="cm-titlereport-content"/>
-                        </li>
-                    </ol>
-                </fieldset>
-            </h:form>
+            Comic manager application.
         </ui:component>
     </body>
 </html>

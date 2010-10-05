@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+                      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:c="http://java.sun.com/jstl/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html">
+    <head/>
+    <body>
+        <ui:composition>
+            <h:panelGrid id="cm-locationreport-content">
+                <c:if test="#{locationReportBean.reportRendered}">
+                    <ui:include src="/pages/reports/report/locationreport.xhtml"/>
+                </c:if>
+            </h:panelGrid>
+            <h:panelGrid id="cm-titlereport-content">
+                <c:if test="#{titleReportBean.reportRendered}">
+                    <ui:include src="/pages/reports/report/titlereport.xhtml"/>
+                </c:if>
+            </h:panelGrid>
+        </ui:composition>
+    </body>
+</html>

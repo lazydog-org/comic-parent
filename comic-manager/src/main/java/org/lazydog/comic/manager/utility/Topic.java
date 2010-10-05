@@ -9,7 +9,8 @@ package org.lazydog.comic.manager.utility;
 public enum Topic {
     HOME            (Subtopic.HOME),
     COMIC_LIBRARY   (Subtopic.TITLE),
-    IMAGE_LIBRARY   (Subtopic.IMAGE);
+    IMAGE_LIBRARY   (Subtopic.IMAGE),
+    REPORTS         (Subtopic.REPORTS);
 
     private Subtopic defaultSubtopic;
 
