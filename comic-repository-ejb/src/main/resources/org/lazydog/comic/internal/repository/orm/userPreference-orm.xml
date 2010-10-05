@@ -14,22 +14,22 @@
                 <column name="minimum_publish_date"/>
                 <temporal>DATE</temporal>
             </basic>
-            <many-to-one name="comicGrade" fetch="EAGER">
+            <many-to-one name="comicGrade">
                 <join-column name="comic_grade_id" nullable="false"/>
             </many-to-one>
-            <many-to-one name="comicType" fetch="EAGER">
+            <many-to-one name="comicType">
                 <join-column name="comic_type_id" nullable="false"/>
             </many-to-one>
-            <many-to-one name="distribution" fetch="EAGER">
+            <many-to-one name="distribution">
                 <join-column name="distribution_id" nullable="false"/>
             </many-to-one>
-            <many-to-one name="imageType" fetch="EAGER">
+            <many-to-one name="imageType">
                 <join-column name="image_type_id" nullable="false"/>
             </many-to-one>
-            <many-to-one name="publisher" fetch="EAGER">
+            <many-to-one name="publisher">
                 <join-column name="publisher_id" nullable="false"/>
             </many-to-one>
-            <many-to-one name="titleType" fetch="EAGER">
+            <many-to-one name="titleType">
                 <join-column name="title_type_id" nullable="false"/>
             </many-to-one>
         </attributes>

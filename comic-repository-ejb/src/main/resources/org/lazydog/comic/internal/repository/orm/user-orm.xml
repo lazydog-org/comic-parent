@@ -13,7 +13,7 @@
             <basic name="name">
                 <column name="name" nullable="false" unique="true"/>
             </basic>
-            <one-to-one name="userPreference" mapped-by="createUser" fetch="EAGER"/>
+            <one-to-one name="userPreference" mapped-by="createUser"/>
         </attributes>
     </entity>
 </entity-mappings>

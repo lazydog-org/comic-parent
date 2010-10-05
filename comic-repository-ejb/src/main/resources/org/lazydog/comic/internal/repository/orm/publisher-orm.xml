@@ -16,7 +16,7 @@
             <many-to-one name="image" fetch="EAGER">
                 <join-column name="image_id"/>
             </many-to-one>
-            <one-to-many name="imprints" fetch="LAZY">
+            <one-to-many name="imprints" fetch="EAGER">
                 <join-table name="publisher_imprint">
                     <join-column name="publisher_id"/>
                     <inverse-join-column name="imprint_id"/>
