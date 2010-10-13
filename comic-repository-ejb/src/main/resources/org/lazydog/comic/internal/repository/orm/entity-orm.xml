@@ -9,7 +9,7 @@
     <package>org.lazydog.comic.model</package>
     <mapped-superclass class="Entity" access="FIELD" metadata-complete="true">
         <entity-listeners>
-            <entity-listener class="org.lazydog.history.table.HistoryTableListener">
+            <entity-listener class="org.lazydog.persistence.history.HistoryTableListener">
                 <post-persist method-name="postPersist"/>
                 <post-remove method-name="postRemove"/>
                 <post-update method-name="postUpdate"/>
