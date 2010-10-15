@@ -1,1 +1,1 @@
-drop table comic_collection.comic_grade;
+drop table comic.comic_grade;
