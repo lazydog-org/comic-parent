@@ -1,5 +1,5 @@
-alter table comic.publisher
+alter table comic.character
 	add index (image_id),
-	add constraint publisher__image__fk
+	add constraint character__image__fk
                 foreign key (image_id)
 		references image (id);

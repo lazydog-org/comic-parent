@@ -1,4 +1,4 @@
-alter table comic_collection.publisher_imprint
+alter table comic.publisher_imprint
 	add index (imprint_id),
 	add constraint publisher_imprint__imprint__fk
                 foreign key (imprint_id)

@@ -1,4 +1,4 @@
-alter table comic_collection.comic_trait
+alter table comic.comic_trait
 	add index (comic_id),
 	add constraint comic_trait__comic__fk
                 foreign key (comic_id)

@@ -1,4 +1,4 @@
-alter table comic_collection.title_category
+alter table comic.title_category
 	add index (category_id),
 	add constraint title_category__category__fk
                 foreign key (category_id)

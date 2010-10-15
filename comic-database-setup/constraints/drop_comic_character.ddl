@@ -1,4 +1,3 @@
-alter table comic_collection.comic_character
-	drop foreign key comic_character__image__fk,
-	drop foreign key comic_character__application_user__fk1,
-	drop foreign key comic_character__application_user__fk2;
+alter table comic.comic_character
+        drop foreign key comic_character__comic__fk,
+	drop foreign key comic_character__character__fk;
