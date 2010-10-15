@@ -1,1 +1,1 @@
-delete from comic_collection.distribution;
+delete from comic.distribution;

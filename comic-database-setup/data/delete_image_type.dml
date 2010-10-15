@@ -1,1 +1,1 @@
-delete from comic_collection.image_type;
+delete from comic.image_type;

@@ -1,6 +1,6 @@
-insert into comic_collection.comic_type
-		(id,value,create_time,create_user_id)
-	 values (null,'Regular',now(),1),
-	        (null,'Annual',now(),1),
-	        (null,'Special',now(),1),
-	        (null,'Giant-Sized',now(),1);
+insert into comic.comic_type
+		(id,value)
+	 values (null,'Regular'),
+	        (null,'Annual'),
+	        (null,'Special'),
+	        (null,'Giant-Sized');

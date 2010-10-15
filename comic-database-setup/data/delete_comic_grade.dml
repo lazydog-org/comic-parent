@@ -1,1 +1,1 @@
-delete from comic_collection.comic_grade;
+delete from comic.comic_grade;

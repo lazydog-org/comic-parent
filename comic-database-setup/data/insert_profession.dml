@@ -1,7 +1,7 @@
-insert into comic_collection.profession
-		(id,value,create_time,create_user_id)
-	 values (null,'Colorist',now(),1),
-	 	(null,'Editor',now(),1),
-	 	(null,'Inker',now(),1),
-	 	(null,'Penciller',now(),1),
-	 	(null,'Writer',now(),1);
+insert into comic.profession
+		(id,value)
+	 values (null,'Colorist'),
+	 	(null,'Editor'),
+	 	(null,'Inker'),
+	 	(null,'Penciller'),
+	 	(null,'Writer');

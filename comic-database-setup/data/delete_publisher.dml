@@ -1,1 +1,1 @@
-delete from comic_collection.publisher;
+delete from comic.publisher;

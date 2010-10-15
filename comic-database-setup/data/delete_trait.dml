@@ -1,1 +1,1 @@
-delete from comic_collection.trait;
+delete from comic.trait;

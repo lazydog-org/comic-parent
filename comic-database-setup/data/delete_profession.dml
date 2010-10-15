@@ -1,1 +1,1 @@
-delete from comic_collection.profession;
+delete from comic.profession;
