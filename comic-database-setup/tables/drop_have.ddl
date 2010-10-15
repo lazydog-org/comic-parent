@@ -1,1 +1,1 @@
-drop table comic_collection.have;
+drop table comic.have;

@@ -1,1 +1,1 @@
-drop table comic_collection.image;
+drop table comic.image;

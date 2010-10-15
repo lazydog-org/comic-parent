@@ -1,1 +1,1 @@
-drop table comic_collection.profession;
+drop table comic.profession;

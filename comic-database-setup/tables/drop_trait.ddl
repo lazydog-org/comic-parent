@@ -1,1 +1,1 @@
-drop table comic_collection.trait;
+drop table comic.trait;

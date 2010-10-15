@@ -1,1 +1,1 @@
-drop table comic_collection.publisher;
+drop table comic.publisher;

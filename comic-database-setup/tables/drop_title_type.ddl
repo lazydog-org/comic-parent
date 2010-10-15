@@ -1,1 +1,1 @@
-drop table comic_collection.title_type;
+drop table comic.title_type;
