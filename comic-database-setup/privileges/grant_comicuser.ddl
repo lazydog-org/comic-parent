@@ -1,3 +1,3 @@
-grant delete,insert,select,update on comic_collection.* to 'comicuser';
-grant delete,insert,select,update on comic_collection.* to 'comicuser'@'localhost';
+grant delete,insert,select,update on comic.* to 'comicuser';
+grant delete,insert,select,update on comic.* to 'comicuser'@'localhost';
 flush privileges;
