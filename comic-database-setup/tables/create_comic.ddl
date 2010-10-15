@@ -1,4 +1,4 @@
-create table comic_collection.comic
+create table comic.comic
 	(id			int(10) unsigned not null auto_increment,
 	 number			int(10),
 	 variant		varchar(1) not null,
@@ -10,9 +10,5 @@ create table comic_collection.comic
 	 distribution_id	int(10) unsigned not null,
 	 image_id		int(10) unsigned,
 	 title_id		int(10) unsigned not null,
-	 create_time		datetime not null,
-	 create_user_id		int(10) unsigned not null,
-	 modify_time		datetime,
-	 modify_user_id		int(10) unsigned,
 	 primary key (id)
 	) type = innodb;
