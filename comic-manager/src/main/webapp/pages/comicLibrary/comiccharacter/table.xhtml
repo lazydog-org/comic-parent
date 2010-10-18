@@ -11,22 +11,22 @@
     <head/>
     <body>
         <ui:composition>
-            <h:form id="cm-character-table">
+            <h:form id="cm-comiccharacter-table">
                 <rich:dataTable>
-                    <rich:column headerClass="cm-table-cell cm-table-character-name-cell">
+                    <rich:column headerClass="cm-table-cell cm-table-comiccharacter-name-cell">
                         <f:facet name="header">
                             <h:outputText value="Character Name"/>
                         </f:facet>
                     </rich:column>
                 </rich:dataTable>
-                <div id="cm-character-table-scroller" class="cm-table-scroller">
-                    <rich:dataTable id="cm-character-table-body"
-                                    value="#{characterBean.entities}" var="character"
-                                    binding="#{characterBean.dataTable}">
+                <div id="cm-comiccharacter-table-scroller" class="cm-table-scroller">
+                    <rich:dataTable id="cm-comiccharacter-table-body"
+                                    value="#{comicCharacterBean.entities}" var="character"
+                                    binding="#{comicCharacterBean.dataTable}">
                         <a4j:support event="onRowClick" 
-                                     actionListener="#{characterBean.processRowClick}"
-                                     reRender="cm-character-table-body,cm-character-form"/>
-                        <rich:column styleClass="cm-table-cell cm-table-character-name-cell #{(character.id == characterBean.entity.id) ? 'cm-character-table-selected-row' : ''}">
+                                     actionListener="#{comicCharacterBean.processRowClick}"
+                                     reRender="cm-comiccharacter-table-body,cm-comiccharacter-form"/>
+                        <rich:column styleClass="cm-table-cell cm-table-comiccharacter-name-cell #{(character.id == comicCharacterBean.entity.id) ? 'cm-comiccharacter-table-selected-row' : ''}">
                             <h:outputText value="#{character.name}"/>
                         </rich:column>
                     </rich:dataTable>
@@ -36,7 +36,7 @@
                     scroll();
 
                     function scroll() {
-                        getElementByClass('cm-character-table-selected-row').scrollIntoView(true);
+                        getElementByClass('cm-comiccharacter-table-selected-row').scrollIntoView(true);
                     }
 
                     function getElementByClass(theClass) {

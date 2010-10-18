@@ -1,9 +1,5 @@
 alter table comic.comic_character
-	add index (comic_id),
-	add constraint comic_character__comic__fk
-                foreign key (comic_id)
-		references comic (id),
-        add index (character_id),
-	add constraint comic_character__character__fk
-                foreign key (character_id)
-		references character (id);
+	add index (image_id),
+	add constraint comic_character__image__fk
+                foreign key (image_id)
+		references image (id);

@@ -24,7 +24,7 @@ public class Comic
 
     private static final long serialVersionUID = 1L;
 
-    private List<Character> characters = new ArrayList<Character>();
+    private List<ComicCharacter> characters = new ArrayList<ComicCharacter>();
     private Double coverPrice = new Double(0.0);
     private List<Creator> creators = new ArrayList<Creator>();
     private String description;
@@ -176,7 +176,7 @@ public class Comic
      * 
      * @return  the characters.
      */
-    public List<Character> getCharacters() {
+    public List<ComicCharacter> getCharacters() {
         return this.characters;
     }
     
@@ -334,8 +334,8 @@ public class Comic
      * 
      * @param  characters  the characters.
      */
-    public void setCharacters(List<Character> characters) {
-        this.characters = replaceNull(characters, new ArrayList<Character>());
+    public void setCharacters(List<ComicCharacter> characters) {
+        this.characters = replaceNull(characters, new ArrayList<ComicCharacter>());
     }
     
     /**

@@ -6,13 +6,13 @@ import javax.validation.constraints.Size;
 
 
 /**
- * Entity class used to represent a character.
+ * Entity class used to represent a comic character.
  *
  * @author  Ron Rickard
  */
-public class Character 
-       extends Entity<Character>
-       implements Comparable<Character>,
+public class ComicCharacter
+       extends Entity<ComicCharacter>
+       implements Comparable<ComicCharacter>,
                   Serializable {
     
     private static final long serialVersionUID = 1L;
@@ -33,7 +33,7 @@ public class Character
      *          object.
      */
     @Override
-    public int compareTo(Character that) {
+    public int compareTo(ComicCharacter that) {
         
         // Declare.
         int lastCompare;
@@ -57,10 +57,10 @@ public class Character
      * @return  a copy of this object.
      */
     @Override
-    public Character copy() {
+    public ComicCharacter copy() {
         
         // Declare.
-        Character copy;
+        ComicCharacter copy;
         
         // Create a copy.
         copy = super.copy();
@@ -88,8 +88,8 @@ public class Character
         
         // Check if the object is an instance of this class
         // and is equal to this object.
-        if (object instanceof Character &&
-            this.compareTo((Character)object) == 0) {
+        if (object instanceof ComicCharacter &&
+            this.compareTo((ComicCharacter)object) == 0) {
             equals = true;
         }
         

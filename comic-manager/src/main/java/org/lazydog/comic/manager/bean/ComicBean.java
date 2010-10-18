@@ -10,8 +10,8 @@ import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
 import javax.faces.model.SelectItem;
-import org.lazydog.comic.model.Character;
 import org.lazydog.comic.model.Comic;
+import org.lazydog.comic.model.ComicCharacter;
 import org.lazydog.comic.model.Title;
 import org.lazydog.comic.model.Trait;
 import org.lazydog.comic.model.UserPreference;
@@ -477,7 +477,7 @@ public class ComicBean
     public void processOkButton(ActionEvent actionEvent) {
 
         // Convert the java.utils.Arrays$ArrayList to java.utils.ArrayList.
-        this.entity.setCharacters(new ArrayList<Character>(this.entity.getCharacters()));
+        this.entity.setCharacters(new ArrayList<ComicCharacter>(this.entity.getCharacters()));
         this.entity.setTraits(new ArrayList<Trait>(this.entity.getTraits()));
 
         // Check if this is the add, duplicate, or edit perspective.

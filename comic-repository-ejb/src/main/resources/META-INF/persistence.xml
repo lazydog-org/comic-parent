@@ -10,8 +10,8 @@
         <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
         <jta-data-source>jdbc/ComicPool</jta-data-source>
         <mapping-file>org/lazydog/comic/internal/repository/orm/category-orm.xml</mapping-file>
-        <mapping-file>org/lazydog/comic/internal/repository/orm/character-orm.xml</mapping-file>
         <mapping-file>org/lazydog/comic/internal/repository/orm/comic-orm.xml</mapping-file>
+        <mapping-file>org/lazydog/comic/internal/repository/orm/comicCharacter-orm.xml</mapping-file>
         <mapping-file>org/lazydog/comic/internal/repository/orm/comicGrade-orm.xml</mapping-file>
         <mapping-file>org/lazydog/comic/internal/repository/orm/comicType-orm.xml</mapping-file>
         <mapping-file>org/lazydog/comic/internal/repository/orm/creator-orm.xml</mapping-file>
@@ -31,8 +31,8 @@
         <mapping-file>org/lazydog/comic/internal/repository/orm/userPreference-orm.xml</mapping-file>
         <mapping-file>org/lazydog/comic/internal/repository/orm/want-orm.xml</mapping-file>
         <class>org.lazydog.comic.model.Category</class>
-        <class>org.lazydog.comic.model.Character</class>
         <class>org.lazydog.comic.model.Comic</class>
+        <class>org.lazydog.comic.model.ComicCharacter</class>
         <class>org.lazydog.comic.model.ComicGrade</class>
         <class>org.lazydog.comic.model.ComicType</class>
         <class>org.lazydog.comic.model.Creator</class>

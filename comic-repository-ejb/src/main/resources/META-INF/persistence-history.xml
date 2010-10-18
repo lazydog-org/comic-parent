@@ -10,10 +10,10 @@
     <entity class="org.lazydog.comic.model.Category">
         <table id="id"/>
     </entity>
-    <entity class="org.lazydog.comic.model.Character">
+    <entity class="org.lazydog.comic.model.Comic">
         <table id="id"/>
     </entity>
-    <entity class="org.lazydog.comic.model.Comic">
+    <entity class="org.lazydog.comic.model.ComicCharacter">
         <table id="id"/>
     </entity>
     <entity class="org.lazydog.comic.model.ComicGrade">

@@ -7,18 +7,18 @@ import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.faces.model.SelectItem;
-import org.lazydog.comic.model.Character;
+import org.lazydog.comic.model.ComicCharacter;
 import org.lazydog.repository.criterion.Order;
 import org.lazydog.repository.Criteria;
 
 
 /**
- * Character managed bean.
+ * Comic character managed bean.
  * 
  * @author  Ron Rickard
  */
-public class CharacterBean
-       extends AbstractDataAccessBean<Character>
+public class ComicCharacterBean
+       extends AbstractDataAccessBean<ComicCharacter>
        implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -29,10 +29,10 @@ public class CharacterBean
      * @return  the criteria.
      */
     @Override
-    protected Criteria<Character> getCriteria() {
+    protected Criteria<ComicCharacter> getCriteria() {
 
         // Declare.
-        Criteria<Character> criteria;
+        Criteria<ComicCharacter> criteria;
 
         // Initialize.
         criteria = null;
@@ -40,7 +40,7 @@ public class CharacterBean
         try {
 
             // Create a new criteria.
-            criteria = this.comicService.getCriteria(Character.class);
+            criteria = this.comicService.getCriteria(ComicCharacter.class);
 
             // Modify the criteria.
             criteria.addOrder(Order.asc("name"));
@@ -69,7 +69,7 @@ public class CharacterBean
         entitiesAsSelectItems = new ArrayList<SelectItem>();
         
         // Loop through the entities.
-        for(Character entity : this.getEntities()) {
+        for(ComicCharacter entity : this.getEntities()) {
 
             // Add the entity to the select items.
             entitiesAsSelectItems.add(new SelectItem(
@@ -85,8 +85,8 @@ public class CharacterBean
      * @return  the entity class.
      */
     @Override
-    protected Class<Character> getEntityClass() {
-        return Character.class;
+    protected Class<ComicCharacter> getEntityClass() {
+        return ComicCharacter.class;
     }
 
     /**
@@ -95,8 +95,8 @@ public class CharacterBean
      * @return  a new entity.
      */
     @Override
-    protected Character getNewEntity() {
-        return new Character();
+    protected ComicCharacter getNewEntity() {
+        return new ComicCharacter();
     }
 
     /**
@@ -106,6 +106,6 @@ public class CharacterBean
     public void initialize() {
 
         // Create a new entity.
-        this.entity = new Character();
+        this.entity = new ComicCharacter();
     }
 }

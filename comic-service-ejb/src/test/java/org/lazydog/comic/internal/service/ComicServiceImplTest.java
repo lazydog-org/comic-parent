@@ -4,8 +4,8 @@ import java.util.Date;
 import java.util.List;
 import org.lazydog.comic.ComicService;
 import org.lazydog.comic.model.Category;
-import org.lazydog.comic.model.Character;
 import org.lazydog.comic.model.Comic;
+import org.lazydog.comic.model.ComicCharacter;
 import org.lazydog.comic.model.ComicGrade;
 import org.lazydog.comic.model.ComicType;
 import org.lazydog.comic.model.Creator;
@@ -78,13 +78,13 @@ public class ComicServiceImplTest {
     }
 
     @Test
-    public void findListCharacter() throws Exception {
-        findList(Character.class);
+    public void findListComic() throws Exception {
+        findList(Comic.class);
     }
 
     @Test
-    public void findListComic() throws Exception {
-        findList(Comic.class);
+    public void findListComicCharacter() throws Exception {
+        findList(ComicCharacter.class);
     }
 
     @Test

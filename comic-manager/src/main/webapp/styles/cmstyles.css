@@ -212,16 +212,16 @@ form select, form fieldset select {
     width: 200px;
 }
 
-/* Character Table */
-#cm-character-table-scroller {
+/* Comic Character Table */
+#cm-comiccharacter-table-scroller {
     width: 225px;
 }
 
-.cm-character-table-selected-row {
+.cm-comiccharacter-table-selected-row {
     background-color: #999999;
 }
 
-.cm-table-character-name-cell {
+.cm-table-comiccharacter-name-cell {
     width: 200px;
 }
 

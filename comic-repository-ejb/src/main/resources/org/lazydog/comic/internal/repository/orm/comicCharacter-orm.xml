@@ -7,9 +7,8 @@
     version="2.0">
 
     <package>org.lazydog.comic.model</package>
-    <!-- bug in eclipseLink requires fully-qualified class name here. -->
-    <entity class="org.lazydog.comic.model.Character" access="FIELD" metadata-complete="true">
-        <table name="character" schema="comic"/>
+    <entity class="ComicCharacter" access="FIELD" metadata-complete="true">
+        <table name="comic_character" schema="comic"/>
         <attributes>  
             <basic name="name">
                 <column name="name" nullable="false" unique="true"/>

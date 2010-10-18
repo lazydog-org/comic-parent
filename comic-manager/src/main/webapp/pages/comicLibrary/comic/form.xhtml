@@ -206,16 +206,16 @@
                                 <li>
                                     <label for="comic-characters">
                                         <a4j:commandLink value="Character"
-                                                         actionListener="#{characterBean.processFirstButton}"
-                                                         oncomplete="Richfaces.showModalPanel('cm-character-modal-panel');"
-                                                         reRender="cm-character-modal-panel-content"/>
+                                                         actionListener="#{comicCharacterBean.processFirstButton}"
+                                                         oncomplete="Richfaces.showModalPanel('cm-comiccharacter-modal-panel');"
+                                                         reRender="cm-comiccharacter-modal-panel-content"/>
                                         Name(s):
                                     </label>
                                     <h:selectManyListbox id="comic-characters"
                                                          value="#{comicBean.entity.characters}" size="6"
                                                          converter="objectHexConverter"
                                                          disabled="#{comicBean.formButtonController.formDisabled}">
-                                        <f:selectItems value="#{characterBean.entitiesAsSelectItems}"/>
+                                        <f:selectItems value="#{comicCharacterBean.entitiesAsSelectItems}"/>
                                     </h:selectManyListbox>
                                 </li>
                             </ol>

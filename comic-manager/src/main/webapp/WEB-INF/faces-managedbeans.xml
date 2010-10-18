@@ -11,12 +11,12 @@
         <managed-bean-class>org.lazydog.comic.manager.bean.CategoryBean</managed-bean-class>
         <managed-bean-scope>request</managed-bean-scope></managed-bean>
     <managed-bean>
-        <managed-bean-name>characterBean</managed-bean-name>
-        <managed-bean-class>org.lazydog.comic.manager.bean.CharacterBean</managed-bean-class>
-        <managed-bean-scope>request</managed-bean-scope></managed-bean>
-    <managed-bean>
         <managed-bean-name>comicBean</managed-bean-name>
         <managed-bean-class>org.lazydog.comic.manager.bean.ComicBean</managed-bean-class>
+        <managed-bean-scope>request</managed-bean-scope></managed-bean>
+    <managed-bean>
+        <managed-bean-name>comicCharacterBean</managed-bean-name>
+        <managed-bean-class>org.lazydog.comic.manager.bean.ComicCharacterBean</managed-bean-class>
         <managed-bean-scope>request</managed-bean-scope></managed-bean>
     <managed-bean>
         <managed-bean-name>comicGradeBean</managed-bean-name>
