@@ -21,7 +21,7 @@ public class ComicRepositoryWrapper extends ComicRepositoryImpl {
         EntityManager entityManager;
 
         // Get a entity manager.
-        entityManager = Persistence.createEntityManagerFactory("ComicCollectionPUTest").createEntityManager();
+        entityManager = Persistence.createEntityManagerFactory("ComicPUTest").createEntityManager();
 
         // Inject the entity manager.
         this.setEntityManager(entityManager);

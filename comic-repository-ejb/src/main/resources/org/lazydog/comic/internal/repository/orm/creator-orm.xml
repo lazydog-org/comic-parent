@@ -8,7 +8,7 @@
 
     <package>org.lazydog.comic.model</package>
     <entity class="Creator" access="FIELD" metadata-complete="true">
-        <table name="creator" schema="comic_collection"/>
+        <table name="creator" schema="comic"/>
         <attributes>
             <many-to-one name="person" fetch="EAGER">
                 <join-column name="person_id" nullable="false"/>

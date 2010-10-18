@@ -8,7 +8,7 @@
 
     <package>org.lazydog.comic.model</package>
     <entity class="UserPreference" access="FIELD" metadata-complete="true">
-        <table name="user_preference" schema="comic_collection"/>
+        <table name="user_preference" schema="comic"/>
         <attributes>
             <basic name="minimumPublishDate">
                 <column name="minimum_publish_date" nullable="false"/>

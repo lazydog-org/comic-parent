@@ -8,7 +8,7 @@
 
     <package>org.lazydog.comic.model</package>
     <entity class="Category" access="FIELD" metadata-complete="true">
-        <table name="category" schema="comic_collection"/>
+        <table name="category" schema="comic"/>
         <attributes>
             <basic name="name">
                 <column name="name" nullable="false" unique="true"/>

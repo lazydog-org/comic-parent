@@ -8,7 +8,7 @@
 
     <package>org.lazydog.comic.model</package>
     <entity class="ImageType" access="FIELD" metadata-complete="true">
-        <table name="image_type" schema="comic_collection"/>
+        <table name="image_type" schema="comic"/>
         <attributes>
             <basic name="directoryPath">
                 <column name="directory_path" nullable="false" unique="true"/>

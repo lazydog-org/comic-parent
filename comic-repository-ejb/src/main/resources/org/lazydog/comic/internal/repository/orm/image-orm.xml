@@ -8,7 +8,7 @@
 
     <package>org.lazydog.comic.model</package>
     <entity class="Image" access="FIELD" metadata-complete="true">
-        <table name="image" schema="comic_collection"/>
+        <table name="image" schema="comic"/>
         <attributes>
             <basic name="fileName">
                 <column name="file_name" nullable="false" unique="true"/>

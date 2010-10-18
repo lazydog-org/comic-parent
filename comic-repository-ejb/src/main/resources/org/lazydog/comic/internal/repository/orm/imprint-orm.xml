@@ -8,7 +8,7 @@
 
     <package>org.lazydog.comic.model</package>
     <entity class="Imprint" access="FIELD" metadata-complete="true">
-        <table name="imprint" schema="comic_collection"/>
+        <table name="imprint" schema="comic"/>
         <attributes>
             <basic name="name">
                 <column name="name" nullable="false" unique="true"/>

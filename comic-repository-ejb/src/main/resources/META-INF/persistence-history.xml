@@ -5,7 +5,7 @@
     xsi:schemaLocation="http://lazydog.org/xml/ns/persistence-history
                         http://lazydog.org/xml/ns/persistence-history/persistence-history.xsd">
 
-    <table-data-source>jdbc/ComicCollectionPool</table-data-source>
+    <table-data-source>jdbc/ComicPool</table-data-source>
     <history-table-data-source>jdbc/ComicHistoryPool</history-table-data-source>
     <entity class="org.lazydog.comic.model.Category">
         <table id="id"/>
