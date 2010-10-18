@@ -3,7 +3,6 @@ package org.lazydog.comic.manager.report.bean;
 import org.lazydog.comic.ComicService;
 import org.lazydog.comic.model.Have;
 import org.lazydog.comic.model.Title;
-import org.lazydog.comic.model.User;
 import org.lazydog.comic.manager.utility.SessionKey;
 import org.lazydog.comic.manager.utility.SessionUtility;
 import org.lazydog.repository.criterion.ComparisonOperation;
@@ -81,8 +80,8 @@ public class TitleReportBean
 
                 // Create the criteria.
                 criteria = this.comicService.getCriteria(Have.class);
-                criteria.add(ComparisonOperation.eq("createUser",
-                        SessionUtility.getValue(SessionKey.USER, User.class)));
+                criteria.add(ComparisonOperation.eq("uuid",
+                        SessionUtility.getValue(SessionKey.UUID, String.class)));
                 criteria.addOrder(Order.asc("comic.title.name"));
 
                 // Get the haves.
@@ -165,8 +164,8 @@ public class TitleReportBean
             // Create the criteria.
             criteria = this.comicService.getCriteria(Have.class);
             criteria.add(ComparisonOperation.eq("comic.title", this.title));
-            criteria.add(LogicalOperation.and(ComparisonOperation.eq("createUser",
-                    SessionUtility.getValue(SessionKey.USER, User.class))));
+            criteria.add(LogicalOperation.and(ComparisonOperation.eq("uuid",
+                    SessionUtility.getValue(SessionKey.UUID, String.class))));
             criteria.addOrder(Order.asc("comic.number"));
             criteria.addOrder(Order.asc("comic.variant"));
             criteria.addOrder(Order.asc("comic.type.value"));

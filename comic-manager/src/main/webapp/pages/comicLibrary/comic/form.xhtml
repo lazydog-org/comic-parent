@@ -138,10 +138,10 @@
                             </ol>
                         </fieldset>
                         <a id="comic-image"
-                           href="/ComicManager/getImage?fileName=#{comicBean.entity.image.fileName}&amp;typeValue=#{comicBean.entity.image.type.value}"
+                           href="#{request.contextPath}/getImage?fileName=#{comicBean.entity.image.fileName}&amp;typeValue=#{comicBean.entity.image.type.value}"
                            target="_blank">
                             <img id="image"
-                                 src="/ComicManager/getImage?fileName=#{comicBean.entity.image.fileName}&amp;typeValue=#{comicBean.entity.image.type.value}&amp;height=300"
+                                 src="#{request.contextPath}/getImage?fileName=#{comicBean.entity.image.fileName}&amp;typeValue=#{comicBean.entity.image.type.value}&amp;height=300"
                                  alt="Image Unavailable"/>
                         </a>
                         <script type="text/javascript">
@@ -150,15 +150,15 @@
                                 var selectImage = document.getElementById("cm-comic-form:selectImage");
                                 var selectedImage = selectImage.options[selectImage.selectedIndex].value;
                                 var selectedImageArray = selectedImage.split(";");
-                                var fileName = selectedImageArray[1];
+                                var fileName = selectedImageArray[0];
                                 var image = document.getElementById('image');
                                 if (image) {
-                                    image.src = "/ComicManager/getImage?fileName=" + fileName +
+                                    image.src = "#{request.contextPath}/getImage?fileName=" + fileName +
                                                 "&typeValue=comic&height=300";
                                 }
                                 var imageLink = document.getElementById('comic-image');
                                 if (imageLink) {
-                                    imageLink.href = "/ComicManager/getImage?fileName=" + fileName +
+                                    imageLink.href = "#{request.contextPath}/getImage?fileName=" + fileName +
                                                      "&typeValue=comic";
                                 }
                             }

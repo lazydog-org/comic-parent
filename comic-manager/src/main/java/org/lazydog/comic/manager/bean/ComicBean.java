@@ -4,7 +4,6 @@ import org.lazydog.comic.model.Character;
 import org.lazydog.comic.model.Comic;
 import org.lazydog.comic.model.Title;
 import org.lazydog.comic.model.Trait;
-import org.lazydog.comic.model.User;
 import org.lazydog.comic.model.UserPreference;
 import org.lazydog.comic.model.Want;
 import org.lazydog.comic.manager.helper.bean.ComicTypeFilter;
@@ -90,8 +89,8 @@ public class ComicBean
             criteria = this.comicService.getCriteria(Want.class);
             criteria.add(ComparisonOperation.eq("comic",
                     SessionUtility.getValue(SessionKey.COMIC, Comic.class)));
-            criteria.add(LogicalOperation.and(ComparisonOperation.eq("createUser",
-                    SessionUtility.getValue(SessionKey.USER, User.class))));
+            criteria.add(LogicalOperation.and(ComparisonOperation.eq("uuid",
+                    SessionUtility.getValue(SessionKey.UUID, String.class))));
 
             // Get the want.
             want = this.comicService.find(Want.class, criteria);
@@ -366,10 +365,10 @@ public class ComicBean
             // Get the want.
             want = new Want();
             want.setComic(SessionUtility.getValue(SessionKey.COMIC, Comic.class));
+            want.setUuid(SessionUtility.getValue(SessionKey.UUID, String.class));
 
             // Save the want.
-            want = this.comicService.save(
-                    want, SessionUtility.getValue(SessionKey.USER, User.class));
+            want = this.comicService.save(want);
         }
         catch(Exception e) {
 
@@ -520,9 +519,7 @@ public class ComicBean
                 }
 
                 // Save the entity.
-                this.entity = this.comicService.save(
-                        this.entity,
-                        SessionUtility.getValue(SessionKey.USER, User.class));
+                this.entity = this.comicService.save(this.entity);
 
                 // Modify the perspective.
                 this.perspective = Perspective.VIEW;
@@ -606,9 +603,7 @@ public class ComicBean
 
                             // Set the new entity.
                             addEntity = this.entity.copy();
-                            addEntity.setCreateTime(null);
                             addEntity.setId(null);
-                            addEntity.setModifyTime(null);
                             addEntity.setNumber(x);
 
                             // Add the new entity to the comics.
@@ -641,9 +636,7 @@ public class ComicBean
                         }
 
                         // Save the entities.
-                        entities = this.comicService.saveList(
-                                entities,
-                                SessionUtility.getValue(SessionKey.USER, User.class));
+                        entities = this.comicService.saveList(entities);
 
                         // Set the entity to the first saved entity.
                         this.entity = entities.get(0);
@@ -739,8 +732,8 @@ public class ComicBean
             criteria = this.comicService.getCriteria(Want.class);
             criteria.add(ComparisonOperation.eq("comic",
                     SessionUtility.getValue(SessionKey.COMIC, Comic.class)));
-            criteria.add(LogicalOperation.and(ComparisonOperation.eq("createUser",
-                    SessionUtility.getValue(SessionKey.USER, User.class))));
+            criteria.add(LogicalOperation.and(ComparisonOperation.eq("uuid",
+                    SessionUtility.getValue(SessionKey.UUID, String.class))));
 
             // Get the want.
             want = this.comicService.find(Want.class, criteria);
@@ -793,10 +786,8 @@ public class ComicBean
             // Get the entity.
             this.entity = this.oldEntity.copy();
 
-            // Clear the ID, create time, and modify time.
+            // Clear the identifier.
             this.entity.setId(null);
-            this.entity.setCreateTime(null);
-            this.entity.setModifyTime(null);
         }
 
         // Configure the form buttons.

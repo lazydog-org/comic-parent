@@ -13,6 +13,9 @@
             <basic name="name">
                 <column name="name" nullable="false"/>
             </basic>
+            <basic name="uuid">
+                <column name="uuid" nullable="false"/>
+            </basic>
         </attributes>
     </entity>
 </entity-mappings>

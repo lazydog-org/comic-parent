@@ -23,20 +23,6 @@
                 <column name="id"/>
                 <generated-value strategy="IDENTITY"/>
             </id>
-            <basic name="createTime">
-                <column name="create_time" nullable="false"/>
-                <temporal>TIMESTAMP</temporal>
-            </basic>
-            <basic name="modifyTime">
-                <column name="modify_time"/>
-                <temporal>TIMESTAMP</temporal>
-            </basic>
-            <many-to-one name="createUser" fetch="EAGER">
-                <join-column name="create_user_id" nullable="false"/>
-            </many-to-one>
-            <many-to-one name="modifyUser" fetch="EAGER">
-                <join-column name="modify_user_id"/>
-            </many-to-one>
             <transient name="entityClass"/>
         </attributes>
     </mapped-superclass>

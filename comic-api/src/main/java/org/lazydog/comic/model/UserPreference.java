@@ -33,6 +33,8 @@ public class UserPreference
     private Publisher publisher;
     @Valid @NotNull(message="Title type is required.")
     private TitleType titleType;
+    @NotNull(message="UUID is required.")
+    private String uuid;
 
     /**
      * Compare this object to the specified object.
@@ -49,53 +51,16 @@ public class UserPreference
 
         // Declare.
         int lastCompare;
-        ComicGrade thatComicGrade;
-        ComicType thatComicType;
-        User thatCreateUser;
-        Distribution thatDistribution;
-        ImageType thatImageType;
-        Date thatMinimumPublishDate;
-        Publisher thatPublisher;
-        TitleType thatTitleType;
-        ComicGrade thisComicGrade;
-        ComicType thisComicType;
-        User thisCreateUser;
-        Distribution thisDistribution;
-        ImageType thisImageType;
-        Date thisMinimumPublishDate;
-        Publisher thisPublisher;
-        TitleType thisTitleType;
+        String thatUuid;
+        String thisUuid;
 
         // Initialize.
         lastCompare = 0;
-        thatComicGrade = replaceNull(that.getComicGrade(), new ComicGrade());
-        thatComicType = replaceNull(that.getComicType(), new ComicType());
-        thatCreateUser = replaceNull(that.getCreateUser(), new User());
-        thatDistribution = replaceNull(that.getDistribution(), new Distribution());
-        thatImageType = replaceNull(that.getImageType(), new ImageType());
-        thatMinimumPublishDate = replaceNull(that.getMinimumPublishDate(), epoch());
-        thatPublisher = replaceNull(that.getPublisher(), new Publisher());
-        thatTitleType = replaceNull(that.getTitleType(), new TitleType());
-        thisComicGrade = replaceNull(this.getComicGrade(), new ComicGrade());
-        thisComicType = replaceNull(this.getComicType(), new ComicType());
-        thisCreateUser = replaceNull(this.getCreateUser(), new User());
-        thisDistribution = replaceNull(this.getDistribution(), new Distribution());
-        thisImageType = replaceNull(this.getImageType(), new ImageType());
-        thisMinimumPublishDate = replaceNull(this.getMinimumPublishDate(), epoch());
-        thisPublisher = replaceNull(this.getPublisher(), new Publisher());
-        thisTitleType = replaceNull(this.getTitleType(), new TitleType());
-        
+        thatUuid = replaceNull(that.getUuid(), nilUuid());
+        thisUuid = replaceNull(this.getUuid(), nilUuid());
 
         // Compare this object to the object.
-        lastCompare = thisCreateUser.compareTo(thatCreateUser);
-        lastCompare = (lastCompare != 0) ? lastCompare : thisComicGrade.compareTo(thatComicGrade);
-        lastCompare = (lastCompare != 0) ? lastCompare : thisComicType.compareTo(thatComicType);
-        lastCompare = (lastCompare != 0) ? lastCompare : thisDistribution.compareTo(thatDistribution);
-        lastCompare = (lastCompare != 0) ? lastCompare : thisImageType.compareTo(thatImageType);
-        lastCompare = (lastCompare != 0) ? lastCompare : thisMinimumPublishDate.compareTo(thatMinimumPublishDate);
-        lastCompare = (lastCompare != 0) ? lastCompare : thisPublisher.compareTo(thatPublisher);
-        lastCompare = (lastCompare != 0) ? lastCompare : thisTitleType.compareTo(thatTitleType);
-        
+        lastCompare = thisUuid.compareTo(thatUuid);
 
         return lastCompare;
     }
@@ -120,6 +85,7 @@ public class UserPreference
         copy.setMinimumPublishDate(this.getMinimumPublishDate());
         copy.setPublisher(this.getPublisher());
         copy.setTitleType(this.getTitleType());
+        copy.setUuid(this.getUuid());
 
         return copy;
     }
@@ -214,6 +180,15 @@ public class UserPreference
     }
 
     /**
+     * Get the universally unique identifier (UUID).
+     *
+     * @return  the universally unique identifier (UUID).
+     */
+    public String getUuid() {
+        return this.uuid;
+    }
+
+    /**
      * Returns a hash code for this object.
      *
      * @return  a hash code for this object.
@@ -222,33 +197,12 @@ public class UserPreference
     public int hashCode() {
 
         // Declare.
-        ComicGrade thisComicGrade;
-        ComicType  thisComicType;
-        User thisCreateUser;
-        Distribution thisDistribution;
-        ImageType thisImageType;
-        Date thisMinimumPublishDate;
-        Publisher thisPublisher;
-        TitleType thisTitleType;
+        String thisUuid;
 
         // Initialize.
-        thisComicGrade = replaceNull(this.getComicGrade(), new ComicGrade());
-        thisComicType = replaceNull(this.getComicType(), new ComicType());
-        thisCreateUser = replaceNull(this.getCreateUser(), new User());
-        thisDistribution = replaceNull(this.getDistribution(), new Distribution());
-        thisImageType = replaceNull(this.getImageType(), new ImageType());
-        thisMinimumPublishDate = replaceNull(this.getMinimumPublishDate(), epoch());
-        thisPublisher = replaceNull(this.getPublisher(), new Publisher());
-        thisTitleType = replaceNull(this.getTitleType(), new TitleType());
+        thisUuid = replaceNull(this.getUuid(), nilUuid());
 
-        return thisCreateUser.hashCode()*7^7
-             + thisComicGrade.hashCode()*7^6
-             + thisComicType.hashCode()*7^5
-             + thisDistribution.hashCode()*7^4
-             + thisImageType.hashCode()*7^3
-             + thisMinimumPublishDate.hashCode()*7^2
-             + thisPublisher.hashCode()*7
-             + thisTitleType.hashCode();
+        return thisUuid.hashCode();
     }
 
     /**
@@ -337,6 +291,15 @@ public class UserPreference
     }
 
     /**
+     * Set the universally unique identifier (UUID).
+     *
+     * @param  uuid  the universally unique identifier (UUID).
+     */
+    public void setUuid(String uuid) {
+        this.uuid = uuid;
+    }
+
+    /**
      * Get this object as a String.
      *
      * @return  this object as a String.
@@ -358,6 +321,7 @@ public class UserPreference
         toString.append(", minimumPublishDate = ").append(this.getMinimumPublishDate());
         toString.append(", publisher = ").append(this.getPublisher());
         toString.append(", titleType = ").append(this.getTitleType());
+        toString.append(", uuid = ").append(this.getUuid());
         toString.append("]");
         
         return toString.toString();

@@ -3,4 +3,4 @@
                       "http://www.w3.org/TR/html4/loose.dtd">
 
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<c:redirect url="/pages/common/intro.jsf"/>
+<c:redirect url="/pages/common/main.jsf"/>

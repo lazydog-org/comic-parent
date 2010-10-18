@@ -19,6 +19,8 @@ public class Want
     
     @Valid @NotNull(message="Comic is required.")
     private Comic comic;
+    @NotNull(message="UUID is required.")
+    private String uuid;
 
     /**
      * Compare this object to the specified object.
@@ -36,19 +38,19 @@ public class Want
         // Declare.
         int lastCompare;
         Comic thatComic;
-        User thatCreateUser;
+        String thatUuid;
         Comic thisComic;
-        User thisCreateUser;
+        String thisUuid;
 
         // Initialize.
         lastCompare = 0;
         thatComic = replaceNull(that.getComic(), new Comic());
-        thatCreateUser = replaceNull(that.getCreateUser(), new User());
+        thatUuid = replaceNull(that.getUuid(), nilUuid());
         thisComic = replaceNull(this.getComic(), new Comic());
-        thisCreateUser = replaceNull(this.getCreateUser(), new User());
+        thisUuid = replaceNull(this.getUuid(), nilUuid());
         
         // Compare this object to the object.
-        lastCompare = thisCreateUser.compareTo(thatCreateUser);
+        lastCompare = thisUuid.compareTo(thatUuid);
         lastCompare = (lastCompare != 0) ? lastCompare : thisComic.compareTo(thatComic);
         
         return lastCompare;
@@ -68,6 +70,7 @@ public class Want
         // Create a copy.
         copy = super.copy();
         copy.setComic(this.getComic());
+        copy.setUuid(this.getUuid());
 
         return copy;
     }
@@ -108,6 +111,15 @@ public class Want
     }
 
     /**
+     * Get the universally unique identifier (UUID).
+     *
+     * @return  the universally unique identifier (UUID).
+     */
+    public String getUuid() {
+        return this.uuid;
+    }
+
+    /**
      * Returns a hash code for this object.
      *
      * @return  a hash code for this object.
@@ -117,13 +129,13 @@ public class Want
         
         // Declare.
         Comic thisComic;
-        User thisCreateUser;
+        String thisUuid;
         
         // Initialize.
         thisComic = replaceNull(this.getComic(), new Comic());
-        thisCreateUser = replaceNull(this.getCreateUser(), new User());
+        thisUuid = replaceNull(this.getUuid(), nilUuid());
         
-        return thisCreateUser.hashCode()*31
+        return thisUuid.hashCode()*31
              + thisComic.hashCode();
     }
   
@@ -134,6 +146,15 @@ public class Want
      */
     public void setComic(Comic comic) {
         this.comic = comic;
+    }
+
+    /**
+     * Set the universally unique identifier (UUID).
+     *
+     * @param  uuid  the universally unique identifier (UUID).
+     */
+    public void setUuid(String uuid) {
+        this.uuid = uuid;
     }
 
     /**
@@ -152,6 +173,7 @@ public class Want
         
         toString.append("Want [");
         toString.append("comic = ").append(this.getComic());
+        toString.append(", uuid = ").append(this.getUuid());
         toString.append("]");
         
         return toString.toString();

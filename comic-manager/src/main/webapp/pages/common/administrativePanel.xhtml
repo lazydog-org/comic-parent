@@ -15,10 +15,6 @@
                 </c:when>
                 <c:otherwise>
                     <h:inputHidden value="#{managedBean.entity.id}"/>
-                    <h:inputHidden value="#{managedBean.entity.createTime}"/>
-                    <h:inputHidden value="#{managedBean.entity.createUser}" converter="objectHexConverter"/>
-                    <h:inputHidden value="#{managedBean.entity.modifyTime}"/>
-                    <h:inputHidden value="#{managedBean.entity.modifyUser}" converter="objectHexConverter"/>
                     <h:inputHidden value="#{managedBean.oldEntity}" converter="objectHexConverter"/>
                 </c:otherwise>
             </c:choose>
@@ -29,30 +25,6 @@
                         <label for="#{entityType}-id">ID: </label>
                         <h:inputText id="#{entityType}-id"
                                      value="#{managedBean.entity.id}"
-                                     disabled="true"/>
-                    </li>
-                    <li>
-                        <label for="#{entityType}-createtime">Create Time: </label>
-                        <h:inputText id="#{entityType}-createtime"
-                                     value="#{managedBean.entity.createTime}"
-                                     disabled="true"/>
-                    </li>
-                    <li>
-                        <label for="#{entityType}-createuser">Create User: </label>
-                        <h:inputText id="#{entityType}-createuser"
-                                     value="#{managedBean.entity.createUser.name}"
-                                     disabled="true"/>
-                    </li>
-                    <li>
-                        <label for="#{entityType}-modifytime">Modify Time: </label>
-                        <h:inputText id="#{entityType}-modifytime"
-                                     value="#{managedBean.entity.modifyTime}"
-                                     disabled="true"/>
-                    </li>
-                    <li>
-                        <label for="#{entityType}-modifyuser">Modify User: </label>
-                        <h:inputText id="#{entityType}-modifyuser"
-                                     value="#{managedBean.entity.modifyUser.name}"
                                      disabled="true"/>
                     </li>
                     <li>

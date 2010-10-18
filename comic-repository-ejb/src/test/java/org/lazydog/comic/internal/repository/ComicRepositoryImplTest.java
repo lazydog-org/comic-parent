@@ -21,7 +21,6 @@ import org.lazydog.comic.model.Publisher;
 import org.lazydog.comic.model.Title;
 import org.lazydog.comic.model.TitleType;
 import org.lazydog.comic.model.Trait;
-import org.lazydog.comic.model.User;
 import org.lazydog.comic.model.UserPreference;
 import org.lazydog.comic.model.Want;
 import org.junit.Before;
@@ -160,11 +159,6 @@ public class ComicRepositoryImplTest {
     @Test
     public void findListTrait() throws Exception {
         findList(Trait.class);
-    }
-
-    @Test
-    public void findListUser() throws Exception {
-        findList(User.class);
     }
 
     @Test

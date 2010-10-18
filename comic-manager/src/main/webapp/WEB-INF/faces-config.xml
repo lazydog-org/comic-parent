@@ -32,6 +32,7 @@
     </converter>
     <lifecycle>
         <phase-listener>org.lazydog.comic.manager.phaselistener.Debug</phase-listener>
+        <phase-listener>org.lazydog.comic.manager.phaselistener.Authenticate</phase-listener>
     </lifecycle>
 </faces-config>
 

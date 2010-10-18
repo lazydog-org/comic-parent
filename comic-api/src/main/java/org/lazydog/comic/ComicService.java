@@ -2,7 +2,6 @@ package org.lazydog.comic;
 
 import java.util.List;
 import org.lazydog.comic.model.Entity;
-import org.lazydog.comic.model.User;
 import org.lazydog.repository.Criteria;
 
 
@@ -153,19 +152,17 @@ public interface ComicService {
      * Save the entity.
      *
      * @param  entity  the entity.
-     * @param  user    the user.
      *
      * @return  the entity.
      */
-    public <T extends Entity<T>> T save(T entity, User user);
+    public <T extends Entity<T>> T save(T entity);
 
     /**
      * Save the list of entities.
      *
      * @param  entities  the list of entities.
-     * @param  user      the user.
      *
      * @return  the list of entities.
      */
-    public <T extends Entity<T>> List<T> saveList(List<T> entities, User user);
+    public <T extends Entity<T>> List<T> saveList(List<T> entities);
 }

@@ -52,9 +52,9 @@
                                 </li>
                             </ol>
                         </fieldset>
-                        <a href="/ComicManager/getImage?fileName=#{imageBean.entity.fileName}&amp;typeValue=#{imageBean.entity.type.value}"
+                        <a href="#{request.contextPath}/getImage?fileName=#{imageBean.entity.fileName}&amp;typeValue=#{imageBean.entity.type.value}"
                            target="_blank">
-                            <img src="/ComicManager/getImage?fileName=#{imageBean.entity.fileName}&amp;typeValue=#{imageBean.entity.type.value}&amp;height=300"
+                            <img src="#{request.contextPath}/getImage?fileName=#{imageBean.entity.fileName}&amp;typeValue=#{imageBean.entity.type.value}&amp;height=300"
                                  alt="Image Unavailable"/>
                         </a>
                     </rich:panelBarItem>

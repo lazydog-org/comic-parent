@@ -61,9 +61,6 @@
     <entity class="org.lazydog.comic.model.Trait">
         <table id="id"/>
     </entity>
-    <entity class="org.lazydog.comic.model.User">
-        <table id="id"/>
-    </entity>
     <entity class="org.lazydog.comic.model.UserPreference">
         <table id="id"/>
     </entity>

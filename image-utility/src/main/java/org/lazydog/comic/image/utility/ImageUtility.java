@@ -3,7 +3,6 @@ package org.lazydog.comic.image.utility;
 import org.lazydog.comic.ComicService;
 import org.lazydog.comic.model.Image;
 import org.lazydog.comic.model.ImageType;
-import org.lazydog.comic.model.User;
 import org.lazydog.repository.criterion.ComparisonOperation;
 import org.lazydog.repository.criterion.LogicalOperation;
 import org.lazydog.repository.Criteria;
@@ -68,30 +67,6 @@ public class ImageUtility {
     private String getNonExportDirectoryPath(String directoryPath) {
 
         return directoryPath.replace("/export", "");
-    }
-
-    /**
-     * Get the user.
-     * 
-     * @return  the user.
-     * 
-     * @throws  Exception  if unable to get the user.
-     */
-    private User getUser()
-            throws Exception {
-
-        // Declare.
-        Criteria<User> criteria;
-        User user;
-
-        // Set the criteria.
-        criteria = this.comicService.getCriteria(User.class);
-        criteria.add(ComparisonOperation.eq("name", "admin"));
-
-        // Find the user.
-        user = this.comicService.find(User.class, criteria);
-
-        return user;
     }
 
     /**
@@ -189,7 +164,7 @@ public class ImageUtility {
                 image.setType(imageType);
 
                 // Add the image to the database.
-                this.comicService.save(image, this.getUser());
+                this.comicService.save(image);
             }
         }
 

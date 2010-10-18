@@ -19,12 +19,13 @@
                 <artifactId>maven-ear-plugin</artifactId>
                 <configuration>
                     <generateApplicationXml>true</generateApplicationXml>
+                    <defaultLibBundleDir>lib</defaultLibBundleDir>
                     <version>5</version>
                     <modules>
                         <webModule>
                             <groupId>${project.groupId}</groupId>
                             <artifactId>comic-manager</artifactId>
-                            <contextRoot>ComicManager</contextRoot>
+                            <contextRoot>/comicmanager</contextRoot>
                         </webModule>
                     </modules>
                 </configuration>

@@ -2,11 +2,8 @@ package org.lazydog.comic.manager.bean;
 
 import org.lazydog.comic.ComicService;
 import org.lazydog.comic.model.Entity;
-import org.lazydog.comic.model.User;
 import org.lazydog.comic.manager.utility.FormButtonController;
 import org.lazydog.comic.manager.utility.Perspective;
-import org.lazydog.comic.manager.utility.SessionKey;
-import org.lazydog.comic.manager.utility.SessionUtility;
 import org.lazydog.repository.Criteria;
 import java.io.Serializable;
 import java.util.List;
@@ -370,11 +367,8 @@ e.printStackTrace();
         // Set the old entity to the entity.
         this.oldEntity = this.entity.copy();
 
-        // Clear the ID, create time, and modify time.
+        // Clear the identifier.
         this.entity.setId(null);
-        this.entity.setCreateTime(null);
-        this.entity.setModifyTime(null);
-
 
         // Modify the perspective.
         this.perspective = Perspective.DUPLICATE;
@@ -440,9 +434,7 @@ e.printStackTrace();
         try {
 
             // Save the entity.
-            this.entity = this.comicService.save(
-                    this.entity,
-                    SessionUtility.getValue(SessionKey.USER, User.class));
+            this.entity = this.comicService.save(this.entity);
 
             // Modify the perspective.
             this.perspective = Perspective.VIEW;

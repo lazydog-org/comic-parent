@@ -18,7 +18,7 @@ public enum SessionKey {
     TITLE_SEARCH_FOR,
     TITLE_TYPE,
     TOPIC,
-    USER,
-    USER_PREFERENCE;
+    USER_PREFERENCE,
+    UUID;
 };
 

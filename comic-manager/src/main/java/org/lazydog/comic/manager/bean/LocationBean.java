@@ -1,7 +1,6 @@
 package org.lazydog.comic.manager.bean;
 
 import org.lazydog.comic.model.Location;
-import org.lazydog.comic.model.User;
 import org.lazydog.comic.manager.utility.SessionKey;
 import org.lazydog.comic.manager.utility.SessionUtility;
 import org.lazydog.repository.criterion.ComparisonOperation;
@@ -43,16 +42,16 @@ public class LocationBean
 
         try {
 
-            // Check if the user session values exist.
-            if (SessionUtility.valueExists(SessionKey.USER)) {
+            // Check if the UUID session values exist.
+            if (SessionUtility.valueExists(SessionKey.UUID)) {
 
                 // Create a new criteria.
                 criteria = this.comicService.getCriteria(Location.class);
 
                 // Modify the criteria.
                 criteria.add(ComparisonOperation.eq(
-                        "createUser",
-                        SessionUtility.getValue(SessionKey.USER, User.class)));
+                        "uuid",
+                        SessionUtility.getValue(SessionKey.UUID, String.class)));
                 criteria.addOrder(Order.desc("name"));
             }
         }
@@ -107,7 +106,17 @@ public class LocationBean
      */
     @Override
     protected Location getNewEntity() {
-        return new Location();
+
+        // Declare.
+        Location newEntity;
+
+        // Create a new entity.
+        newEntity = new Location();
+
+        // Set the UUID in the new entity.
+        newEntity.setUuid(SessionUtility.getValue(SessionKey.UUID, String.class));
+
+        return newEntity;
     }
 
     /**

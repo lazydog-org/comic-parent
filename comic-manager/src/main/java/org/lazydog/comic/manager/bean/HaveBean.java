@@ -2,14 +2,13 @@ package org.lazydog.comic.manager.bean;
 
 import org.lazydog.comic.model.Comic;
 import org.lazydog.comic.model.Have;
-import org.lazydog.comic.model.User;
 import org.lazydog.comic.model.UserPreference;
 import org.lazydog.comic.manager.utility.SessionKey;
 import org.lazydog.comic.manager.utility.SessionUtility;
 import org.lazydog.repository.criterion.ComparisonOperation;
 import org.lazydog.repository.criterion.LogicalOperation;
 import org.lazydog.repository.criterion.Order;
-import org.lazydog.repository.Criteria;;
+import org.lazydog.repository.Criteria;
 import java.io.Serializable;
 import java.util.List;
 import javax.annotation.PostConstruct;
@@ -45,9 +44,9 @@ public class HaveBean
 
         try {
 
-            // Check if the comic and user session values exist.
+            // Check if the comic and UUID session values exist.
             if (SessionUtility.valueExists(SessionKey.COMIC) &&
-                SessionUtility.valueExists(SessionKey.USER)) {
+                SessionUtility.valueExists(SessionKey.UUID)) {
 
                 // Create a new criteria.
                 criteria = this.comicService.getCriteria(Have.class);
@@ -57,8 +56,8 @@ public class HaveBean
                         "comic",
                         SessionUtility.getValue(SessionKey.COMIC, Comic.class)));
                 criteria.add(LogicalOperation.and(ComparisonOperation.eq(
-                        "createUser",
-                        SessionUtility.getValue(SessionKey.USER, User.class))));
+                        "uuid",
+                        SessionUtility.getValue(SessionKey.UUID, String.class))));
                 criteria.addOrder(Order.desc("comicGrade.scale"));
                 criteria.addOrder(Order.asc("location.name"));
                 criteria.addOrder(Order.desc("purchasePrice"));
@@ -118,6 +117,9 @@ public class HaveBean
                     .getValue(SessionKey.USER_PREFERENCE, UserPreference.class)
                     .getComicGrade());
         }
+
+        // Set the UUID in the new entity.
+        newEntity.setUuid(SessionUtility.getValue(SessionKey.UUID, String.class));
 
         return newEntity;
     }

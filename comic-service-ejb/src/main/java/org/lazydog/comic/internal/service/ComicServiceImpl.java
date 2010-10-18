@@ -1,6 +1,5 @@
 package org.lazydog.comic.internal.service;
 
-import java.util.Date;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.ejb.EJBException;
@@ -10,7 +9,6 @@ import javax.interceptor.Interceptors;
 import org.lazydog.comic.ComicRepository;
 import org.lazydog.comic.ComicService;
 import org.lazydog.comic.model.Entity;
-import org.lazydog.comic.model.User;
 import org.lazydog.repository.Criteria;
 import org.lazydog.ejbmonitor.interceptor.EJBMonitor;
 
@@ -334,28 +332,13 @@ public class ComicServiceImpl
     }
     
     /**
-     * Prepare the entity for saving.
+     * Validate the entity.
      *
-     * @param  entity       the entity.
-     * @param  user         the user.
+     * @param  entity  the entity.
      *
-     * @return  the prepared entity.
+     * @return  the validated entity.
      */
-    private <T extends Entity<T>> T prepEntityForSave(T entity, User user) {
-
-        // Check to see if this is a new entity.
-        if (entity.getId() == null) {
-
-            // Set the create time and user.
-            entity.setCreateTime(new Date());
-            entity.setCreateUser(user);
-        }
-        else {
-
-            // Set the modify time.
-            entity.setModifyTime(new Date());
-            entity.setModifyUser(user);
-        }
+    private <T extends Entity<T>> T validateEntity(T entity) {
 
         // Check for a valid entity.
         if (entity.validate().size() > 0) {
@@ -382,15 +365,14 @@ public class ComicServiceImpl
      * Save the entity.
      * 
      * @param  entity  the entity.
-     * @param  user    the user.
      * 
      * @return  the entity.
      */
     @Override
-    public <T extends Entity<T>> T save(T entity, User user) {
+    public <T extends Entity<T>> T save(T entity) {
 
-        // Prepare the entity for saving.
-        entity = this.prepEntityForSave(entity, user);
+        // Validate the entity.
+        entity = this.validateEntity(entity);
 
         // Save the entity.
         return this.comicRepository.persist(entity);
@@ -400,18 +382,17 @@ public class ComicServiceImpl
      * Save the list of entities.
      *
      * @param  entities  the list of entities.
-     * @param  user      the user.
      * 
      * @return  the list of entities.
      */
     @Override
-    public <T extends Entity<T>> List<T> saveList(List<T> entities, User user) {
+    public <T extends Entity<T>> List<T> saveList(List<T> entities) {
 
         // Loop through the entities.
         for (T entity : entities) {
 
-            // Prepare the entity for saving.
-            entity = this.prepEntityForSave(entity, user);
+            // Validate the entity.
+            entity = this.validateEntity(entity);
         }
 
         // Save the entities.

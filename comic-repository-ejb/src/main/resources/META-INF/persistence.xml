@@ -28,7 +28,6 @@
         <mapping-file>org/lazydog/comic/internal/repository/orm/title-orm.xml</mapping-file>
         <mapping-file>org/lazydog/comic/internal/repository/orm/titleType-orm.xml</mapping-file>
         <mapping-file>org/lazydog/comic/internal/repository/orm/trait-orm.xml</mapping-file>
-        <mapping-file>org/lazydog/comic/internal/repository/orm/user-orm.xml</mapping-file>
         <mapping-file>org/lazydog/comic/internal/repository/orm/userPreference-orm.xml</mapping-file>
         <mapping-file>org/lazydog/comic/internal/repository/orm/want-orm.xml</mapping-file>
         <class>org.lazydog.comic.model.Category</class>
@@ -50,7 +49,6 @@
         <class>org.lazydog.comic.model.Title</class>
         <class>org.lazydog.comic.model.TitleType</class>
         <class>org.lazydog.comic.model.Trait</class>
-        <class>org.lazydog.comic.model.User</class>
         <class>org.lazydog.comic.model.UserPreference</class>
         <class>org.lazydog.comic.model.Want</class>
         <properties>

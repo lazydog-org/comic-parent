@@ -11,8 +11,11 @@
         <table name="user_preference" schema="comic_collection"/>
         <attributes>
             <basic name="minimumPublishDate">
-                <column name="minimum_publish_date"/>
+                <column name="minimum_publish_date" nullable="false"/>
                 <temporal>DATE</temporal>
+            </basic>
+            <basic name="uuid">
+                <column name="uuid" nullable="false"/>
             </basic>
             <many-to-one name="comicGrade">
                 <join-column name="comic_grade_id" nullable="false"/>

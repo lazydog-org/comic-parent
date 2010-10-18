@@ -3,7 +3,6 @@ package org.lazydog.comic.manager.bean;
 import org.lazydog.comic.model.Category;
 import org.lazydog.comic.model.Publisher;
 import org.lazydog.comic.model.Title;
-import org.lazydog.comic.model.User;
 import org.lazydog.comic.model.UserPreference;
 import org.lazydog.comic.manager.helper.bean.TitleTypeFilter;
 import org.lazydog.comic.manager.utility.FormButtonController;
@@ -420,9 +419,7 @@ public class TitleBean
             }
 
             // Save the entity.
-            this.entity = this.comicService.save(
-                    this.entity,
-                    SessionUtility.getValue(SessionKey.USER, User.class));
+            this.entity = this.comicService.save(this.entity);
 
             // Modify the perspective.
             this.perspective = Perspective.VIEW;

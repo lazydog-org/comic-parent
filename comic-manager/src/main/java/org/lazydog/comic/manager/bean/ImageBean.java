@@ -2,7 +2,6 @@ package org.lazydog.comic.manager.bean;
 
 import org.lazydog.comic.model.Image;
 import org.lazydog.comic.model.Title;
-import org.lazydog.comic.model.User;
 import org.lazydog.comic.manager.helper.bean.ImageTypeFilter;
 import org.lazydog.comic.manager.utility.FileUtility;
 import org.lazydog.comic.manager.utility.FormButtonController;
@@ -343,8 +342,7 @@ public class ImageBean
                     this.entity.getFileName())) {
 
                 // Restore the entity.
-                this.comicService.save(this.entity,
-                        SessionUtility.getValue(SessionKey.USER, User.class));
+                this.comicService.save(this.entity);
 
                 FacesContext.getCurrentInstance().addMessage(null,
                         new FacesMessage("Cannot delete the entity."));
@@ -462,9 +460,7 @@ public class ImageBean
             }
 
             // Save the entity.
-            this.entity = this.comicService.save(
-                    this.entity,
-                    SessionUtility.getValue(SessionKey.USER, User.class));
+            this.entity = this.comicService.save(this.entity);
 
             // Move the file and check the move.
             if (!FileUtility.moveFile(
@@ -474,8 +470,7 @@ public class ImageBean
                     this.entity.getFileName())) {
 
                 // Restore the entity.
-                this.comicService.save(this.oldEntity,
-                        SessionUtility.getValue(SessionKey.USER, User.class));
+                this.comicService.save(this.oldEntity);
 
                 FacesContext.getCurrentInstance().addMessage(null,
                         new FacesMessage("Cannot save the entity."));

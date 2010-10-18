@@ -28,6 +28,8 @@ public class Have
     @NotNull(message="Quantity is required.")
     @Min(value=1, message="Quantity must be at least 1.")
     private Integer quantity = new Integer(1);
+    @NotNull(message="UUID is required.")
+    private String uuid;
 
     /**
      * Compare this object to the specified object.
@@ -46,30 +48,30 @@ public class Have
         int lastCompare;
         Comic thatComic;
         ComicGrade thatComicGrade;
-        User thatCreateUser;
         Location thatLocation;
         Double thatPurchasePrice;
+        String thatUuid;
         Comic thisComic;
         ComicGrade thisComicGrade;
-        User thisCreateUser;
         Location thisLocation;
         Double thisPurchasePrice;
+        String thisUuid;
 
         // Initialize.
         lastCompare = 0;
         thatComic = replaceNull(that.getComic(), new Comic());
         thatComicGrade = replaceNull(that.getComicGrade(), new ComicGrade());
-        thatCreateUser = replaceNull(that.getCreateUser(), new User());
         thatLocation = replaceNull(that.getLocation(), new Location());
         thatPurchasePrice = that.getPurchasePrice();
+        thatUuid = replaceNull(that.getUuid(), nilUuid());
         thisComic = replaceNull(this.getComic(), new Comic());
         thisComicGrade = replaceNull(this.getComicGrade(), new ComicGrade());
-        thisCreateUser = replaceNull(this.getCreateUser(), new User());
         thisLocation = replaceNull(this.getLocation(), new Location());
         thisPurchasePrice = this.getPurchasePrice();
+        thisUuid = replaceNull(this.getUuid(), nilUuid());
         
         // Compare this object to the object.
-        lastCompare = thisCreateUser.compareTo(thatCreateUser);
+        lastCompare = thisUuid.compareTo(thatUuid);
         lastCompare = (lastCompare != 0) ? lastCompare : thisComic.compareTo(thatComic);
         lastCompare = (lastCompare != 0) ? lastCompare : thisComicGrade.compareTo(thatComicGrade);
         lastCompare = (lastCompare != 0) ? lastCompare : thisLocation.compareTo(thatLocation);
@@ -95,6 +97,8 @@ public class Have
         copy.setComicGrade(this.getComicGrade());
         copy.setLocation(this.getLocation());
         copy.setPurchasePrice(this.getPurchasePrice());
+        copy.setQuantity(this.getQuantity());
+        copy.setUuid(this.getUuid());
 
         return copy;
     }
@@ -171,6 +175,15 @@ public class Have
     }
 
     /**
+     * Get the universally unique identifier (UUID).
+     *
+     * @return  the universally unique identifier (UUID).
+     */
+    public String getUuid() {
+        return this.uuid;
+    }
+
+    /**
      * Returns a hash code for this object.
      *
      * @return  a hash code for this object.
@@ -181,18 +194,18 @@ public class Have
         // Declare.
         Comic thisComic;
         ComicGrade thisComicGrade;
-        User thisCreateUser;
         Location thisLocation;
         Double thisPurchasePrice;
+        String thisUuid;
         
         // Initialize.
         thisComic = replaceNull(this.getComic(), new Comic());
         thisComicGrade = replaceNull(this.getComicGrade(), new ComicGrade());
-        thisCreateUser = replaceNull(this.getCreateUser(), new User());
         thisLocation = replaceNull(this.getLocation(), new Location());
         thisPurchasePrice = this.getPurchasePrice();
+        thisUuid = replaceNull(this.getUuid(), nilUuid());
 
-        return thisCreateUser.hashCode()*7^4
+        return thisUuid.hashCode()*7^4
              + thisComic.hashCode()*7^3
              + thisComicGrade.hashCode()*7^2
              + thisLocation.hashCode()*7
@@ -251,6 +264,15 @@ public class Have
     }
 
     /**
+     * Set the universally unique identifier (UUID).
+     *
+     * @param  uuid  the universally unique identifier (UUID).
+     */
+    public void setUuid(String uuid) {
+        this.uuid = uuid;
+    }
+
+    /**
      * Get this object as a String.
      *
      * @return  this object as a String.
@@ -270,6 +292,7 @@ public class Have
         toString.append(", location = ").append(this.getLocation());
         toString.append(", purchasePrice = ").append(this.getPurchasePrice());
         toString.append(", quantity = ").append(this.getQuantity());
+        toString.append(", uuid = ").append(this.getUuid());
         toString.append("]");
         
         return toString.toString();

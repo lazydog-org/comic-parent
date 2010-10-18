@@ -16,6 +16,9 @@
             <basic name="quantity">
                 <column name="quantity" nullable="false"/>
             </basic>
+            <basic name="uuid">
+                <column name="uuid" nullable="false"/>
+            </basic>
             <many-to-one name="comic" fetch="EAGER">
                 <join-column name="comic_id" nullable="false"/>
             </many-to-one>

@@ -20,6 +20,8 @@ public class Location
     @NotNull(message="Name is required.") 
     @Size(max=50, message="Name cannot contain more than 50 characters.")
     private String name;
+    @NotNull(message="UUID is required.")
+    private String uuid;
 
     /**
      * Compare this object to the specified object.
@@ -36,20 +38,20 @@ public class Location
         
         // Declare.
         int lastCompare;
-        User thatCreateUser;
         String thatName;
-        User thisCreateUser;
+        String thatUuid;
         String thisName;
+        String thisUuid;
 
         // Initialize.
         lastCompare = 0;
-        thatCreateUser = replaceNull(that.getCreateUser(), new User());
         thatName = replaceNull(that.getName(), "");
-        thisCreateUser = replaceNull(this.getCreateUser(), new User());
+        thatUuid = replaceNull(that.getUuid(), nilUuid());
         thisName = replaceNull(this.getName(), "");
+        thisUuid = replaceNull(this.getUuid(), nilUuid());
         
         // Compare this object to the object.
-        lastCompare = thisCreateUser.compareTo(thatCreateUser);
+        lastCompare = thisUuid.compareTo(thatUuid);
         lastCompare = (lastCompare != 0) ? lastCompare : thisName.compareTo(thatName);
 
         return lastCompare;
@@ -69,6 +71,7 @@ public class Location
         // Create a copy.
         copy = super.copy();
         copy.setName(this.getName());
+        copy.setUuid(this.getUuid());
         
         return copy;
     }
@@ -109,6 +112,15 @@ public class Location
     }
 
     /**
+     * Get the universally unique identifier (UUID).
+     *
+     * @return  the universally unique identifier (UUID).
+     */
+    public String getUuid() {
+        return this.uuid;
+    }
+
+    /**
      * Returns a hash code for this object.
      *
      * @return  a hash code for this object.
@@ -117,14 +129,14 @@ public class Location
     public int hashCode() {
         
         // Declare.
-        User thisCreateUser;
         String thisName;
+        String thisUuid;
         
         // Initialize.
-        thisCreateUser = replaceNull(this.getCreateUser(), new User());
         thisName = replaceNull(this.getName(), "");
+        thisUuid = replaceNull(this.getUuid(), nilUuid());
         
-        return thisCreateUser.hashCode()*31
+        return thisUuid.hashCode()*31
              + thisName.hashCode();
     }
      
@@ -135,6 +147,15 @@ public class Location
      */
     public void setName(String name) {
         this.name = trimmed(name);
+    }
+
+    /**
+     * Set the universally unique identifier (UUID).
+     *
+     * @param  uuid  the universally unique identifier (UUID).
+     */
+    public void setUuid(String uuid) {
+        this.uuid = uuid;
     }
 
     /**
@@ -153,6 +174,7 @@ public class Location
         
         toString.append("Location [");
         toString.append("name = ").append(this.getName());
+        toString.append(", uuid = ").append(this.getUuid());
         toString.append("]");
         
         return toString.toString();
