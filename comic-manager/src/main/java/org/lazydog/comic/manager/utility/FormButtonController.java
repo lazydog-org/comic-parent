@@ -1,13 +1,13 @@
 package org.lazydog.comic.manager.utility;
 
-import org.lazydog.comic.model.Comic;
-import org.lazydog.comic.model.Image;
-import org.lazydog.comic.model.ImageType;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import org.lazydog.comic.model.Comic;
+import org.lazydog.comic.model.Image;
+import org.lazydog.comic.model.ImageType;
 
 
 /**

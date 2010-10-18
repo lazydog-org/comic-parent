@@ -1,8 +1,5 @@
 package org.lazydog.comic.manager.bean;
 
-import org.lazydog.comic.model.Distribution;
-import org.lazydog.repository.criterion.Order;
-import org.lazydog.repository.Criteria;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -10,6 +7,9 @@ import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.faces.model.SelectItem;
+import org.lazydog.comic.model.Distribution;
+import org.lazydog.repository.criterion.Order;
+import org.lazydog.repository.Criteria;
 
 
 /**

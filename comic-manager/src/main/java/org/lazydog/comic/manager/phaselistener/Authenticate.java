@@ -1,5 +1,12 @@
 package org.lazydog.comic.manager.phaselistener;
 
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
+import javax.faces.event.PhaseEvent;
+import javax.faces.event.PhaseId;
+import javax.faces.event.PhaseListener;
+import javax.naming.Context;
+import javax.naming.InitialContext;
 import org.lazydog.comic.ComicService;
 import org.lazydog.comic.model.UserPreference;
 import org.lazydog.comic.manager.utility.ImageSearchBy;
@@ -9,13 +16,6 @@ import org.lazydog.comic.manager.utility.TitleSearchBy;
 import org.lazydog.entry.EntryService;
 import org.lazydog.repository.criterion.ComparisonOperation;
 import org.lazydog.repository.Criteria;
-import javax.faces.application.FacesMessage;
-import javax.faces.context.FacesContext;
-import javax.faces.event.PhaseEvent;
-import javax.faces.event.PhaseId;
-import javax.faces.event.PhaseListener;
-import javax.naming.Context;
-import javax.naming.InitialContext;
 
 
 /**

@@ -1,5 +1,12 @@
 package org.lazydog.comic.manager.report.bean;
 
+import java.io.Serializable;
+import java.util.List;
+import javax.annotation.PostConstruct;
+import javax.ejb.EJB;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
+import javax.faces.event.ActionEvent;
 import org.lazydog.comic.ComicService;
 import org.lazydog.comic.model.Have;
 import org.lazydog.comic.model.Location;
@@ -8,14 +15,7 @@ import org.lazydog.comic.manager.utility.SessionUtility;
 import org.lazydog.repository.criterion.ComparisonOperation;
 import org.lazydog.repository.criterion.LogicalOperation;
 import org.lazydog.repository.criterion.Order;
-import org.lazydog.repository.Criteria;;
-import java.io.Serializable;
-import java.util.List;
-import javax.annotation.PostConstruct;
-import javax.ejb.EJB;
-import javax.faces.application.FacesMessage;
-import javax.faces.context.FacesContext;
-import javax.faces.event.ActionEvent;
+import org.lazydog.repository.Criteria;
 
 
 /**

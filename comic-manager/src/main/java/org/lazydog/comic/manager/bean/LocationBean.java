@@ -1,11 +1,5 @@
 package org.lazydog.comic.manager.bean;
 
-import org.lazydog.comic.model.Location;
-import org.lazydog.comic.manager.utility.SessionKey;
-import org.lazydog.comic.manager.utility.SessionUtility;
-import org.lazydog.repository.criterion.ComparisonOperation;
-import org.lazydog.repository.criterion.Order;
-import org.lazydog.repository.Criteria;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -13,6 +7,12 @@ import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.faces.model.SelectItem;
+import org.lazydog.comic.model.Location;
+import org.lazydog.comic.manager.utility.SessionKey;
+import org.lazydog.comic.manager.utility.SessionUtility;
+import org.lazydog.repository.criterion.ComparisonOperation;
+import org.lazydog.repository.criterion.Order;
+import org.lazydog.repository.Criteria;
 
 
 /**

@@ -1,9 +1,9 @@
 package org.lazydog.comic.manager.helper.bean;
 
+import java.io.Serializable;
 import org.lazydog.comic.model.ImageType;
 import org.lazydog.comic.model.UserPreference;
 import org.lazydog.comic.manager.utility.SessionKey;
-import java.io.Serializable;
 
 
 /**

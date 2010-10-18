@@ -1,10 +1,10 @@
 package org.lazydog.comic.manager.helper.bean;
 
+import java.io.Serializable;
 import org.lazydog.comic.manager.utility.SessionKey;
 import org.lazydog.comic.manager.utility.SessionUtility;
 import org.lazydog.comic.manager.utility.Subtopic;
 import org.lazydog.comic.manager.utility.Topic;
-import java.io.Serializable;
 
 
 /**

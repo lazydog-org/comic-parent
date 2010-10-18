@@ -1,13 +1,13 @@
 package org.lazydog.comic.manager.helper.bean;
 
-import org.lazydog.comic.manager.utility.SessionKey;
-import org.lazydog.comic.manager.utility.SessionUtility;
-import org.lazydog.comic.manager.utility.Subtopic;
-import org.lazydog.comic.manager.utility.TitleSearchBy;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import javax.faces.model.SelectItem;
+import org.lazydog.comic.manager.utility.SessionKey;
+import org.lazydog.comic.manager.utility.SessionUtility;
+import org.lazydog.comic.manager.utility.Subtopic;
+import org.lazydog.comic.manager.utility.TitleSearchBy;
 
 
 /**

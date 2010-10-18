@@ -1,10 +1,10 @@
 package org.lazydog.comic.manager.actionlistener;
 
+import javax.faces.event.ActionEvent;
+import javax.faces.event.ActionListener;
 import org.lazydog.comic.manager.utility.SessionKey;
 import org.lazydog.comic.manager.utility.SessionUtility;
 import org.lazydog.comic.manager.utility.Topic;
-import javax.faces.event.ActionEvent;
-import javax.faces.event.ActionListener;
 
 
 /**

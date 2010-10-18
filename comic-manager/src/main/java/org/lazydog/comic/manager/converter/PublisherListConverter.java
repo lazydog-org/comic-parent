@@ -1,10 +1,10 @@
 package org.lazydog.comic.manager.converter;
 
-import org.lazydog.comic.model.Publisher;
 import java.util.List;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
+import org.lazydog.comic.model.Publisher;
 
 
 /**

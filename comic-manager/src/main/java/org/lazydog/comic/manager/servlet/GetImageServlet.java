@@ -1,9 +1,5 @@
 package org.lazydog.comic.manager.servlet;
 
-import org.lazydog.comic.ComicService;
-import org.lazydog.comic.model.ImageType;
-import org.lazydog.repository.criterion.ComparisonOperation;
-import org.lazydog.repository.Criteria;
 import java.awt.AlphaComposite;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
@@ -15,6 +11,10 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import org.lazydog.comic.ComicService;
+import org.lazydog.comic.model.ImageType;
+import org.lazydog.repository.criterion.ComparisonOperation;
+import org.lazydog.repository.Criteria;
 
 
 /**
