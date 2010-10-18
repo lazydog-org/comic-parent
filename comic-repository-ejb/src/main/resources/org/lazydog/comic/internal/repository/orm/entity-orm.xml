@@ -13,9 +13,9 @@
                 <post-persist method-name="postPersist"/>
                 <post-remove method-name="postRemove"/>
                 <post-update method-name="postUpdate"/>
-                <pre-persist method-name="setupHistoryTable"/>
-                <pre-remove method-name="setupHistoryTable"/>
-                <pre-update method-name="setupHistoryTable"/>
+                <pre-persist method-name="createHistoryTable"/>
+                <pre-remove method-name="createHistoryTable"/>
+                <pre-update method-name="createHistoryTable"/>
             </entity-listener>
         </entity-listeners>
         <attributes> 
