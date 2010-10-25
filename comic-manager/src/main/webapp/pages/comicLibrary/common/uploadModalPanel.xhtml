@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+                      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:a4j="http://richfaces.org/a4j"
+      xmlns:rich="http://richfaces.org/rich">
+    <head/>
+    <body>
+        <ui:composition>
+            <rich:modalPanel id="cm-#{entityType}-modal-panel" minWidth="600" minHeight="200" autosized="true">
+                <f:facet name="header">
+                    <h:panelGroup>
+                        #{entityType}
+                    </h:panelGroup>
+                </f:facet>
+                <f:facet name="controls">
+                    <h:panelGroup id="cm-#{entityType}-close">
+                        <h:form>
+                            <a4j:commandLink value="close"
+                                             actionListener="#{parentManagedBean.processFirstButton}"
+                                             disabled="#{!managedBean.buttonDisabled}"
+                                             oncomplete="Richfaces.hideModalPanel('cm-#{entityType}-modal-panel');"
+                                             reRender="cm-#{parentEntityType}-filter,cm-#{parentEntityType}-table,cm-#{parentEntityType}-form"/>
+                        </h:form>
+                    </h:panelGroup>
+                </f:facet>
+                <h:form id="cm-#{entityType}-form">
+                    <h:panelGrid id="cm-#{entityType}-modal-panel-content" columns="2" columnClasses="cm-modal-panel-content, cm-modal-panel-content">
+                        <h:panelGroup id="#{entityType}-upload">
+                            <rich:fileUpload addControlLabel="Add Image"
+                                             autoclear="#{true}"
+                                             id="cm-#{entityType}-file-upload"
+                                             fileUploadListener="#{managedBean.uploadImage}"
+                                             immediateUpload="#{true}"
+                                             acceptedTypes="tif"
+                                             listHeight="70px"
+                                             listWidth="300px">
+                                <a4j:support event="onuploadcomplete" reRender="cm-#{entityType}-image,cm-#{entityType}-close,cm-#{entityType}-form-buttons"/>
+                            </rich:fileUpload>
+                            <h:panelGroup id="cm-#{entityType}-form-buttons" styleClass="cm-form-buttons">
+                                <a4j:commandButton value="Cancel"
+                                                   actionListener="#{managedBean.processCancelButton}"
+                                                   disabled="#{managedBean.buttonDisabled}"
+                                                   reRender="cm-#{entityType}-form,cm-#{entityType}-close"/>
+                                <rich:spacer width="20"/>
+                                <a4j:commandButton value="OK"
+                                                   actionListener="#{managedBean.processOkButton}"
+                                                   disabled="#{managedBean.buttonDisabled}"
+                                                   reRender="cm-#{entityType}-form,cm-#{entityType}-close"/>
+                            </h:panelGroup>
+                        </h:panelGroup>
+                        <h:panelGroup id="cm-#{entityType}-image">
+                            <a href="#{request.contextPath}/getImage?fileName=#{managedBean.image.fileName}&amp;typeValue=#{managedBean.image.type.value}"
+                               target="_blank">
+                                <img src="#{request.contextPath}/getImage?fileName=#{managedBean.image.fileName}&amp;typeValue=#{managedBean.image.type.value}&amp;height=300"
+                                     alt="Image Unavailable"/>
+                            </a>
+                        </h:panelGroup>
+                    </h:panelGrid>
+                </h:form>
+            </rich:modalPanel>
+        </ui:composition>
+    </body>
+</html>

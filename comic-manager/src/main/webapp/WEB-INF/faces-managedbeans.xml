@@ -31,6 +31,10 @@
         <managed-bean-class>org.lazydog.comic.manager.helper.bean.ComicTypeFilter</managed-bean-class>
         <managed-bean-scope>request</managed-bean-scope></managed-bean>
     <managed-bean>
+        <managed-bean-name>comicUploadBean</managed-bean-name>
+        <managed-bean-class>org.lazydog.comic.manager.bean.ComicUploadBean</managed-bean-class>
+        <managed-bean-scope>request</managed-bean-scope></managed-bean>
+    <managed-bean>
         <managed-bean-name>distributionBean</managed-bean-name>
         <managed-bean-class>org.lazydog.comic.manager.bean.DistributionBean</managed-bean-class>
         <managed-bean-scope>request</managed-bean-scope></managed-bean>

@@ -16,7 +16,12 @@
             <ui:include src="/pages/comicLibrary/common/modalPanels.xhtml"/>
             <h:form id="cm-comic-form">
                 <h:inputHidden value="#{comicBean.entity.title}" converter="objectHexConverter"/>
+                <h:inputHidden value="#{comicBean.entity.image}" converter="objectHexConverter"/>
                 <c:if test="#{!comicBean.listLinkDisabled}">
+                    <a4j:commandLink value="Upload Image"
+                                     oncomplete="Richfaces.showModalPanel('cm-comicupload-modal-panel');"
+                                     reRender="cm-comicupload-modal-panel-content"/>
+                    <rich:spacer width="5"/>
                     <a4j:commandLink value="Manage Collection"
                                      actionListener="#{haveBean.processFirstButton}"
                                      oncomplete="Richfaces.showModalPanel('cm-have-modal-panel');"
@@ -144,40 +149,6 @@
                                  src="#{request.contextPath}/getImage?fileName=#{comicBean.entity.image.fileName}&amp;typeValue=#{comicBean.entity.image.type.value}&amp;height=300"
                                  alt="Image Unavailable"/>
                         </a>
-                        <script type="text/javascript">
-                            //<![CDATA[
-                            function showImage() {
-                                var selectImage = document.getElementById("cm-comic-form:selectImage");
-                                var selectedImage = selectImage.options[selectImage.selectedIndex].value;
-                                var selectedImageArray = selectedImage.split(";");
-                                var fileName = selectedImageArray[0];
-                                var image = document.getElementById('image');
-                                if (image) {
-                                    image.src = "#{request.contextPath}/getImage?fileName=" + fileName +
-                                                "&typeValue=comic&height=300";
-                                }
-                                var imageLink = document.getElementById('comic-image');
-                                if (imageLink) {
-                                    imageLink.href = "#{request.contextPath}/getImage?fileName=" + fileName +
-                                                     "&typeValue=comic";
-                                }
-                            }
-                            //]]>
-                        </script>
-                        <fieldset>
-                            <ol>
-                                <li>
-                                    <label for="comic-image">Image Label: </label>
-                                    <h:selectOneMenu id="selectImage"
-                                                     value="#{comicBean.entity.image}"
-                                                     converter="imageParseableConverter"
-                                                     disabled="#{comicBean.formButtonController.formDisabled}"
-                                                     onchange="showImage();">
-                                        <f:selectItems value="#{imageBean.comicImagesAsSelectItems}"/>
-                                    </h:selectOneMenu>
-                                </li>
-                            </ol>
-                        </fieldset>
                     </rich:panelBarItem>
                     <rich:panelBarItem label="Trait">
                         <fieldset>

@@ -61,6 +61,12 @@
                 <ui:param name="parentEntityType" value="comic"/>
                 <ui:param name="parentManagedBean" value="#{comicBean}"/>
             </ui:include>
+            <ui:include src="/pages/comicLibrary/common/uploadModalPanel.xhtml">
+                <ui:param name="entityType" value="comicupload"/>
+                <ui:param name="managedBean" value="#{comicUploadBean}"/>
+                <ui:param name="parentEntityType" value="comic"/>
+                <ui:param name="parentManagedBean" value="#{comicBean}"/>
+            </ui:include>
         </ui:composition>
     </body>
 </html>

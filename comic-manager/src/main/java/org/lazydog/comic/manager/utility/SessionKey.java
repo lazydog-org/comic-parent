@@ -9,6 +9,8 @@ package org.lazydog.comic.manager.utility;
 public enum SessionKey {
     COMIC,
     COMIC_TYPE,
+    IMAGE,
+    IMAGE_BUTTON_DISABLED,
     IMAGE_SEARCH_BY,
     IMAGE_SEARCH_FOR,
     IMAGE_TYPE,

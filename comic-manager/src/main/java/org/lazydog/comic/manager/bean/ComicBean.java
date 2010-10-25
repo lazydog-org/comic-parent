@@ -12,6 +12,7 @@ import javax.faces.event.ActionEvent;
 import javax.faces.model.SelectItem;
 import org.lazydog.comic.model.Comic;
 import org.lazydog.comic.model.ComicCharacter;
+import org.lazydog.comic.model.Image;
 import org.lazydog.comic.model.Title;
 import org.lazydog.comic.model.Trait;
 import org.lazydog.comic.model.UserPreference;
@@ -56,6 +57,12 @@ public class ComicBean
 
             // Put the comic on the session.
             SessionUtility.putValue(SessionKey.COMIC, this.entity);
+
+            // Put the comic image on the session.
+            SessionUtility.putValue(SessionKey.IMAGE, this.entity.getImage());
+
+            // Put the image button disabled flag on the session.
+            SessionUtility.putValue(SessionKey.IMAGE_BUTTON_DISABLED, Boolean.TRUE);
         }
         else {
 
@@ -64,6 +71,12 @@ public class ComicBean
 
             // Remove the comic from the session.
             SessionUtility.removeValue(SessionKey.COMIC);
+
+            // Remove the comic image from the session.
+            SessionUtility.removeValue(SessionKey.IMAGE);
+
+            // Remove the image button disabled flag from the session.
+            SessionUtility.removeValue(SessionKey.IMAGE_BUTTON_DISABLED);
         }
     }
 
@@ -348,7 +361,6 @@ public class ComicBean
         // Create a new entity.
         this.entity = new Comic();
     }
-
 
     /**
      * Process the add to wishlist.
