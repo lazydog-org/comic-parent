@@ -5,6 +5,9 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.util.zip.Deflater;
+import java.util.zip.DeflaterOutputStream;
+import java.util.zip.InflaterInputStream;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
@@ -32,7 +35,7 @@ public class ObjectHexConverter
     public Object getAsObject(FacesContext context, 
                               UIComponent component, 
                               String objectAsString) {
-        
+
         // Declare.
         Object object;
         
@@ -48,6 +51,7 @@ public class ObjectHexConverter
                 // Declare.
                 ByteArrayInputStream byteArrayInputStream;
                 byte[] bytes;
+                InflaterInputStream inflaterInputStream;
                 ObjectInputStream objectInputStream;
 
                 // Decode the hex string to a byte array.
@@ -55,7 +59,8 @@ public class ObjectHexConverter
                 
                 // Get the byte array as an object.
                 byteArrayInputStream = new ByteArrayInputStream(bytes);
-                objectInputStream = new ObjectInputStream(byteArrayInputStream);
+                inflaterInputStream = new InflaterInputStream(byteArrayInputStream);
+                objectInputStream = new ObjectInputStream(inflaterInputStream);
                 object = objectInputStream.readObject();
                 
                 // Close the stream.
@@ -63,7 +68,7 @@ public class ObjectHexConverter
             }
         }
         catch(Exception e) {
-            // Ignore.
+e.printStackTrace();
         }
 
         return object;
@@ -82,7 +87,7 @@ public class ObjectHexConverter
     public String getAsString(FacesContext context, 
                               UIComponent component, 
                               Object object) {
-        
+
         // Declare.
         String objectAsString;
         
@@ -97,23 +102,33 @@ public class ObjectHexConverter
                 // Declare.
                 ByteArrayOutputStream byteArrayOutputStream;
                 byte[] bytes;
+                DeflaterOutputStream deflaterOutputStream;
                 ObjectOutputStream objectOutputStream;
 
                 // Get the object as a byte array.
-                byteArrayOutputStream = new ByteArrayOutputStream();
-                objectOutputStream = new ObjectOutputStream(byteArrayOutputStream);
+                byteArrayOutputStream = new ByteArrayOutputStream(512);
+                deflaterOutputStream = new DeflaterOutputStream(byteArrayOutputStream, new Deflater(Deflater.BEST_COMPRESSION));
+                objectOutputStream = new ObjectOutputStream(deflaterOutputStream);
                 objectOutputStream.writeObject(object);
+
+                // Flush and close the object output stream.
+                objectOutputStream.flush();
+                objectOutputStream.close();
+
+                // Finish compression and close the deflater output stream.
+                deflaterOutputStream.finish();
+                deflaterOutputStream.close();
+
                 bytes = byteArrayOutputStream.toByteArray();
+                byteArrayOutputStream.flush();
+                byteArrayOutputStream.close();
 
                 // Encode the byte array to a hex string.
                 objectAsString = new String(Hex.encodeHex(bytes));
-
-                // Close the stream.
-                objectOutputStream.close();
             }
         }
         catch(IOException e) {
-            // Ignore.
+e.printStackTrace();
         }
 
         return objectAsString;

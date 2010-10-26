@@ -9,11 +9,12 @@
     <head/>
     <body>
         <ui:composition>
-            <h:form id="cm-#{entityType}-filter" class="cm-filter-buttons">
+            <h:form id="cm-#{entityType}-filter" styleClass="cm-filter-buttons">
                 <a4j:repeat value="#{filterManagedBean.buttons}" var="button">
-                    <h:commandButton value="#{button}"
-                                     actionListener="#{managedBean.processFilterButton}"
-                                     disabled="#{filterManagedBean.buttonDisabledMap[button]}"/>
+                    <a4j:commandButton value="#{button}"
+                                       actionListener="#{managedBean.processFilterButton}"
+                                       disabled="#{filterManagedBean.buttonDisabledMap[button]}"
+                                       reRender="cm-#{entityType}-table,cm-#{entityType}-form"/>
                 </a4j:repeat>
             </h:form>
         </ui:composition>

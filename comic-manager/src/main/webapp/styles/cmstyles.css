@@ -175,6 +175,7 @@ form select, form fieldset select {
 }
 
 .cm-filter-buttons, .cm-form-buttons, .cm-perspective-buttons {
+    display: block;
     text-align: center;
     white-space: nowrap;
     margin: 15px 0;
