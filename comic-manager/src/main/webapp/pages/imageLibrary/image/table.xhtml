@@ -14,22 +14,11 @@
         <ui:composition>
             <h:form id="cm-image-table">
                 <rich:dataTable>
-                    <c:choose>
-                        <c:when test="#{imageTypeFilter.type.value == 'Incoming'}">
-                            <rich:column headerClass="cm-table-cell cm-table-image-filename-cell">
-                                <f:facet name="header">
-                                    <h:outputText value="File Name"/>
-                                </f:facet>
-                            </rich:column>
-                        </c:when>
-                        <c:otherwise>
-                            <rich:column headerClass="cm-table-cell cm-table-image-label-cell">
-                                <f:facet name="header">
-                                    <h:outputText value="Label"/>
-                                </f:facet>
-                            </rich:column>
-                        </c:otherwise>
-                    </c:choose>
+                    <rich:column headerClass="cm-table-cell cm-table-image-filename-cell">
+                        <f:facet name="header">
+                            <h:outputText value="File Name"/>
+                        </f:facet>
+                    </rich:column>
                 </rich:dataTable>
                 <div id="cm-image-table-scroller" class="cm-table-scroller">
                     <rich:dataTable id="cm-image-table-body"
@@ -38,18 +27,9 @@
                         <a4j:support event="onRowClick"
                                      actionListener="#{imageBean.processRowClick}"
                                      reRender="cm-image-table-body,cm-image-form"/>
-                        <c:choose>
-                            <c:when test="#{imageTypeFilter.type.value == 'Incoming'}">
-                                <rich:column styleClass="cm-table-cell cm-table-image-filename-cell #{(image.id == imageBean.entity.id) ? 'cm-image-table-selected-row' : ''}">
-                                    <h:outputText value="#{image.fileName}"/>
-                                </rich:column>
-                            </c:when>
-                            <c:otherwise>
-                                <rich:column styleClass="cm-table-cell cm-table-image-label-cell #{(image.id == imageBean.entity.id) ? 'cm-image-table-selected-row' : ''}">
-                                    <h:outputText value="#{image.label}"/>
-                                </rich:column>
-                            </c:otherwise>
-                        </c:choose>
+                        <rich:column styleClass="cm-table-cell cm-table-image-filename-cell #{(image.id == imageBean.entity.id) ? 'cm-image-table-selected-row' : ''}">
+                            <h:outputText value="#{image.fileName}"/>
+                        </rich:column>
                     </rich:dataTable>
                 </div>
                 <script type="text/javascript">

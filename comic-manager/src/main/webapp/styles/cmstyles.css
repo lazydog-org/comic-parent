@@ -317,10 +317,6 @@ form select, form fieldset select {
     width: 300px;
 }
 
-.cm-table-image-label-cell {
-    width: 300px;
-}
-
 /* Image Type Table */
 #cm-imagetype-table-scroller {
     width: 430px;
