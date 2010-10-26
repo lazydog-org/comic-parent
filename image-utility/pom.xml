@@ -4,7 +4,7 @@
     <parent>
         <groupId>org.lazydog.comic</groupId>
         <artifactId>comic-parent</artifactId>
-        <version>1.3-SNAPSHOT</version>
+        <version>1.3</version>
     </parent>
     <artifactId>image-utility</artifactId>
     <packaging>jar</packaging>
