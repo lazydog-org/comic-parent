@@ -4,7 +4,7 @@
     <parent>
         <groupId>org.lazydog.comic</groupId>
         <artifactId>comic-parent</artifactId>
-        <version>1.4-SNAPSHOT</version>
+        <version>1.4</version>
     </parent>
     <artifactId>comic-ejbs-ear</artifactId>
     <packaging>ear</packaging>
