@@ -43,7 +43,7 @@
         <dependency>
             <groupId>org.lazydog.persistence-history</groupId>
             <artifactId>persistence-history</artifactId>
-            <version>1.0</version>
+            <version>1.1-SNAPSHOT</version>
         </dependency>
         <dependency>
             <groupId>org.lazydog.repository</groupId>

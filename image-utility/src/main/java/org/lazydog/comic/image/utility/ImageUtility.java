@@ -276,6 +276,12 @@ public class ImageUtility {
                     count++;
                     System.out.println("moving " + oldJpgFile.getCanonicalPath() + " to " + newJpgFile.getCanonicalPath());
                     System.out.println("moving " + oldTifFile.getCanonicalPath() + " to " + newTifFile.getCanonicalPath());
+
+                    oldJpgFile.renameTo(newJpgFile);
+                    oldTifFile.renameTo(newTifFile);
+
+                    image.setFileName(newJpgFile.getName());
+                    this.comicService.save(image);
                 }
             }
         }
