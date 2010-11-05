@@ -22,13 +22,6 @@
                         <fieldset>
                             <ol>
                                 <li>
-                                    <label for="image-label">Label: </label>
-                                    <h:inputText id="image-label"
-                                                 value="#{imageBean.entity.label}"
-                                                 size="50" maxlength="100"
-                                                 disabled="#{imageBean.formButtonController.formDisabled}"/>
-                                </li>
-                                <li>
                                     <label for="image-filename">File Name: </label>
                                     <h:inputText id="image-filename"
                                                  value="#{imageBean.entity.fileName}"
@@ -65,10 +58,6 @@
                         </ui:include>
                     </rich:panelBarItem>
                 </rich:panelBar>
-                <ui:include src="/pages/common/formButtons.xhtml">
-                    <ui:param name="entityType" value="image"/>
-                    <ui:param name="managedBean" value="#{imageBean}"/>
-                </ui:include>
             </h:form>
         </ui:composition>
     </body>

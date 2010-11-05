@@ -71,14 +71,9 @@ public class ImageTypeBean
         // Loop through the entities.
         for(ImageType entity : this.getEntities()) {
 
-            // Check if the entity value is not Incoming and Trash.
-            if (!entity.getValue().equals("Incoming") &&
-                !entity.getValue().equals("Trash")) {
-                
-                // Add the entity to the select items.
-                entitiesAsSelectItems.add(new SelectItem(
-                    entity, entity.getValue()));
-            }
+            // Add the entity to the select items.
+            entitiesAsSelectItems.add(new SelectItem(
+                entity, entity.getValue()));
         }
         
         return entitiesAsSelectItems;

@@ -298,7 +298,11 @@ public class FormButtonController
             this.buttonRenderedMap.put(
                     PerspectiveButton.ADD_MANY.getLabel(), false);
             this.buttonRenderedMap.put(
+                    PerspectiveButton.DELETE.getLabel(), false);
+            this.buttonRenderedMap.put(
                     PerspectiveButton.DUPLICATE.getLabel(), false);
+            this.buttonRenderedMap.put(
+                    PerspectiveButton.EDIT.getLabel(), false);
         }
 
         // Check if the entity class is a ImageType class.
