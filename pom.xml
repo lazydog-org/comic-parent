@@ -4,15 +4,15 @@
     <groupId>org.lazydog.comic</groupId>
     <artifactId>comic-parent</artifactId>
     <packaging>pom</packaging>
-    <version>1.5-SNAPSHOT</version>
+    <version>1.5</version>
     <name>Comic Parent</name>
     <properties>
         <netbeans.hint.deploy.server>gfv3ee6</netbeans.hint.deploy.server>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
     <scm>
-        <connection>scm:svn:https://svn.home/svn/lazydog/trunk/comic-parent</connection>
-        <developerConnection>scm:svn:https://svn.home/svn/lazydog/trunk/comic-parent</developerConnection>
+        <connection>scm:svn:https://svn.home/svn/lazydog/tags/comic-parent-1.5</connection>
+        <developerConnection>scm:svn:https://svn.home/svn/lazydog/tags/comic-parent-1.5</developerConnection>
     </scm>
     <build>
         <pluginManagement>
