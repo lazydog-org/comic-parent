@@ -1,6 +1,7 @@
 package org.lazydog.comic.manager.utility;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.io.IOException;
@@ -19,71 +20,6 @@ public class ImageUtility {
     public static final String EXTENSION_SEPARATOR = ".";
     public static final String JPG_EXTENSION = "jpg";
     public static final String TIF_EXTENSION = "tif";
-
-    /**
-     * Get the base name of the file name.  A base name is a file name without
-     * the trailing suffix.
-     * 
-     * @param  fileName  the file name.
-     * @param  suffix    the suffix.
-     * 
-     * @return  the base name.
-     */
-    private static String getBaseName(String fileName, String suffix) {
-        return (fileName.endsWith(suffix)) 
-                ? fileName.substring(0, fileName.lastIndexOf(suffix) - 1)
-                : fileName;
-    }
-    
-    /**
-     * Get the file.
-     * 
-     * @param  directoryPath  the directory path.
-     * @param  baseName       the base name.
-     * @param  extension      the extension.
-     * 
-     * @return  the file.
-     */
-    private static File getFile(String directoryPath, String baseName, String extension) {
-        return new File(directoryPath, getFileName(baseName, extension));
-    }
-    
-    /**
-     * Get the file name.
-     * 
-     * @param  baseName   the base name.
-     * @param  extension  the extension.
-     * 
-     * @return  the file name.
-     */
-    private static String getFileName(String baseName, String extension) {
-        return new StringBuffer()
-                .append(baseName)
-                .append(EXTENSION_SEPARATOR)
-                .append(extension)
-                .toString();
-    }
-
-    /**
-     * Get a unique base name.
-     * 
-     * @return  a unique base name.
-     */
-    private static String getUniqueBaseName() {
-        return UUID.randomUUID().toString();
-    }
-
-    /**
-     * Get a unique file.
-     * 
-     * @param  directoryPath  the directory path.
-     * @param  extension      the extension.
-     * 
-     * @return  a unique file.
-     */
-    public static File getUniqueFile(String directoryPath, String extension) {
-        return getFile(directoryPath, getUniqueBaseName(), extension);
-    }
 
     /**
      * Close the process streams.
@@ -135,25 +71,70 @@ public class ImageUtility {
     }
 
     /**
-     * Get the JPG file name from the TIF file name.
-     * 
-     * @param  tifFileName  the TIF file name.
-     * 
-     * @return  the JPG file name.
+     * Copy the file.
+     *
+     * @param  file      the file.
+     * @param  fileCopy  the file copy.
+     *
+     * @return  the file copy.
      */
-    public static String getJpgFileName(String tifFileName) {
-        return getFileName(getBaseName(tifFileName, TIF_EXTENSION), JPG_EXTENSION);
-    }
+    public static File copyFile(File file, File fileCopy) {
 
-    /**
-     * Get the TIF file name from the JPG file.
-     *
-     * @param  jpgFileName  the JPG file name.
-     *
-     * @return  the TIF file name.
-     */
-    public static String getTifFileName(String jpgFileName) {
-        return getFileName(getBaseName(jpgFileName, JPG_EXTENSION), TIF_EXTENSION);
+        // Declare.
+        InputStream inputStream;
+        OutputStream outputStream;
+
+        // Initialize.
+        inputStream = null;
+        outputStream = null;
+
+        try {
+
+            // Declare.
+            PipeExecutor pipeExecutor;
+
+            // Initialize.
+            pipeExecutor = PipeExecutor.newInstance();
+
+            // Get the input and output streams for the file and the file copy.
+            inputStream = new FileInputStream(file);
+            outputStream = new FileOutputStream(fileCopy);
+
+            // Copy the file to the file copy.
+            pipeExecutor.join().execute(Pipe.newInstance(inputStream, outputStream));
+        }
+        catch(Exception e) {
+            // Ignore.
+        }
+        finally {
+
+            // Check if the input stream exists.
+            if (inputStream != null) {
+
+                try {
+
+                    // Close the input stream.
+                    inputStream.close();
+                }
+                catch(IOException e) {
+                    // Ignore.
+                }
+            }
+
+            // Check if the output stream exists.
+            if (outputStream != null) {
+                try {
+
+                    // Close the output stream.
+                    outputStream.close();
+                }
+                catch(IOException e) {
+                    // Ignore.
+                }
+            }
+        }
+
+        return fileCopy;
     }
 
     /**
@@ -193,7 +174,7 @@ public class ImageUtility {
             process2 = new ProcessBuilder("pnmscale", "-width=400").start();
             process3 = new ProcessBuilder("pnmtojpeg", "-quality=75", "-optimize", "-density=72x72dpi").start();
 
-            // Get the JPG file.
+            // Get the output stream for the JPG file.
             outputStream = new FileOutputStream(jpgFile);
 
             // Pipe the processes.
@@ -205,12 +186,18 @@ public class ImageUtility {
             jpgFile = null;
         }
         finally {
+
+            // Close the streams for the processes.
             closeStreams(process1);
             closeStreams(process2);
             closeStreams(process3);
 
+            // Check if the output stream exists.
             if (outputStream != null) {
+
                 try {
+
+                    // Close the output stream.
                     outputStream.close();
                 }
                 catch(IOException e) {
@@ -220,6 +207,93 @@ public class ImageUtility {
         }
 
         return jpgFile;
+    }
+
+    /**
+     * Get the base name of the file name.  A base name is a file name without
+     * the trailing suffix.
+     * 
+     * @param  fileName  the file name.
+     * @param  suffix    the suffix.
+     * 
+     * @return  the base name.
+     */
+    private static String getBaseName(String fileName, String suffix) {
+        return (fileName.endsWith(suffix)) 
+                ? fileName.substring(0, fileName.lastIndexOf(suffix) - 1)
+                : fileName;
+    }
+    
+    /**
+     * Get the file.
+     * 
+     * @param  directoryPath  the directory path.
+     * @param  baseName       the base name.
+     * @param  extension      the extension.
+     * 
+     * @return  the file.
+     */
+    private static File getFile(String directoryPath, String baseName, String extension) {
+        return new File(directoryPath, getFileName(baseName, extension));
+    }
+    
+    /**
+     * Get the file name.
+     * 
+     * @param  baseName   the base name.
+     * @param  extension  the extension.
+     * 
+     * @return  the file name.
+     */
+    private static String getFileName(String baseName, String extension) {
+        return new StringBuffer()
+                .append(baseName)
+                .append(EXTENSION_SEPARATOR)
+                .append(extension)
+                .toString();
+    }
+
+    /**
+     * Get the JPG file name from the TIF file name.
+     *
+     * @param  tifFileName  the TIF file name.
+     *
+     * @return  the JPG file name.
+     */
+    public static String getJpgFileName(String tifFileName) {
+        return getFileName(getBaseName(tifFileName, TIF_EXTENSION), JPG_EXTENSION);
+    }
+
+    /**
+     * Get the TIF file name from the JPG file.
+     *
+     * @param  jpgFileName  the JPG file name.
+     *
+     * @return  the TIF file name.
+     */
+    public static String getTifFileName(String jpgFileName) {
+        return getFileName(getBaseName(jpgFileName, JPG_EXTENSION), TIF_EXTENSION);
+    }
+
+    /**
+     * Get a unique base name.
+     * 
+     * @return  a unique base name.
+     */
+    private static String getUniqueBaseName() {
+        return UUID.randomUUID().toString();
+    }
+
+    /**
+     * Get a unique file.
+     * 
+     * @param  directoryPath  the directory path.
+     * @param  extension      the extension.
+     * 
+     * @return  a unique file.
+     */
+    public static File getUniqueFile(String directoryPath, String extension) {
+        return getFile(directoryPath, getUniqueBaseName(), extension);
     }
 
     /**

@@ -143,6 +143,12 @@ e.printStackTrace();
      */
     public void uploadImage(UploadEvent uploadEvent) {
 
+        // Declare.
+        File uploadFile;
+
+        // Get the upload file.
+        uploadFile = uploadEvent.getUploadItem().getFile();
+
         try {
 
             // Declare.
@@ -151,10 +157,6 @@ e.printStackTrace();
             ImageType imageType;
             File jpgFile;
             File tifFile;
-            File uploadFile;
-
-            // Get the upload file.
-            uploadFile = uploadEvent.getUploadItem().getFile();
 
             // Get the TIF file.
             criteria = comicService.getCriteria(ImageType.class);
@@ -162,10 +164,10 @@ e.printStackTrace();
             imageType = comicService.find(ImageType.class, criteria);
             tifFile = ImageUtility.getUniqueFile(imageType.getDirectoryPath(), ImageUtility.TIF_EXTENSION);
 
-            // Move the upload file to the TIF file.
-            uploadFile.renameTo(tifFile);
+            // Copy the upload file to the TIF file.
+            ImageUtility.copyFile(uploadFile, tifFile);
 
-            // Get the JPG file.
+            // Create the JPG file from the TIF file..
             criteria = comicService.getCriteria(ImageType.class);
             criteria.add(ComparisonOperation.eq("value", "Comic"));
             imageType = comicService.find(ImageType.class, criteria);
@@ -186,6 +188,11 @@ e.printStackTrace();
 e.printStackTrace();
             FacesContext.getCurrentInstance().addMessage(null,
                     new FacesMessage("Cannot upload the comic image."));
+        }
+        finally {
+
+            // Delete the upload file.
+            uploadFile.delete();
         }
     }
 }
