@@ -9,7 +9,7 @@
     <head/>
     <body>
         <ui:composition>
-            <h:form id="cm-${entityType}-form">
+            <h:form id="cm-#{entityType}-form">
                 <ui:include src="/pages/common/perspectiveButtons.xhtml">
                     <ui:param name="entityType" value="#{entityType}"/>
                     <ui:param name="managedBean" value="#{managedBean}"/>

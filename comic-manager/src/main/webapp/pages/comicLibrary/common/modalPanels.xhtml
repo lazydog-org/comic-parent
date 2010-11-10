@@ -8,6 +8,24 @@
     <body>
         <ui:composition>
             <ui:include src="/pages/comicLibrary/common/modalPanel.xhtml">
+                <ui:param name="entityType" value="category"/>
+                <ui:param name="managedBean" value="#{categoryBean}"/>
+                <ui:param name="parentEntityType" value="title"/>
+                <ui:param name="parentManagedBean" value="#{titleBean}"/>
+            </ui:include>
+            <ui:include src="/pages/comicLibrary/common/modalPanel.xhtml">
+                <ui:param name="entityType" value="publisher"/>
+                <ui:param name="managedBean" value="#{publisherBean}"/>
+                <ui:param name="parentEntityType" value="title"/>
+                <ui:param name="parentManagedBean" value="#{titleBean}"/>
+            </ui:include>
+            <ui:include src="/pages/comicLibrary/common/modalPanel.xhtml">
+                <ui:param name="entityType" value="titletype"/>
+                <ui:param name="managedBean" value="#{titleTypeBean}"/>
+                <ui:param name="parentEntityType" value="title"/>
+                <ui:param name="parentManagedBean" value="#{titleBean}"/>
+            </ui:include>
+            <ui:include src="/pages/comicLibrary/common/modalPanel.xhtml">
                 <ui:param name="entityType" value="comiccharacter"/>
                 <ui:param name="managedBean" value="#{comicCharacterBean}"/>
                 <ui:param name="parentEntityType" value="comic"/>

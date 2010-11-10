@@ -10,7 +10,7 @@
     <head/>
     <body>
         <ui:composition>
-            <h:panelGroup id="cm-${entityType}-form-buttons" styleClass="cm-form-buttons">
+            <h:panelGroup id="cm-#{entityType}-form-buttons" styleClass="cm-form-buttons">
                 <a4j:commandButton value="Reset"
                                    actionListener="#{managedBean.processResetButton}"
                                    disabled="#{managedBean.formButtonController.buttonDisabledMap['Reset']}"
