@@ -45,9 +45,12 @@
                                 <li>
                                     <label for="title-publishers">
                                         <a4j:commandLink value="Publisher"
-                                                 actionListener="#{publisherBean.processFirstButton}"
-                                                 oncomplete="Richfaces.showModalPanel('cm-publisher-modal-panel');"
-                                                 reRender="cm-publisher-modal-panel-content"/>
+                                                         actionListener="#{publisherBean.processFirstButton}"
+                                                         oncomplete="Richfaces.showModalPanel('cm-publisher-modal-panel');"
+                                                         reRender="cm-publisher-modal-panel-content"
+                                                         rendered="#{titleBean.formButtonController.formDisabled}"/>
+                                        <h:outputText value="Publisher"
+                                                      rendered="#{!titleBean.formButtonController.formDisabled}"/>
                                         Name(s):
                                     </label>
                                     <h:selectManyListbox id="title-publishers"
@@ -62,7 +65,10 @@
                                         <a4j:commandLink value="Title Type"
                                                          actionListener="#{titleTypeBean.processFirstButton}"
                                                          oncomplete="Richfaces.showModalPanel('cm-titletype-modal-panel');"
-                                                         reRender="cm-titletype-modal-panel-content"/>
+                                                         reRender="cm-titletype-modal-panel-content"
+                                                         rendered="#{titleBean.formButtonController.formDisabled}"/>
+                                        <h:outputText value="Title Type"
+                                                      rendered="#{!titleBean.formButtonController.formDisabled}"/>
                                         Value:
                                     </label>
                                     <h:selectOneMenu id="title-type"
@@ -99,7 +105,10 @@
                                         <a4j:commandLink value="Category"
                                                          actionListener="#{categoryBean.processFirstButton}"
                                                          oncomplete="Richfaces.showModalPanel('cm-category-modal-panel');"
-                                                         reRender="cm-category-modal-panel-content"/>
+                                                         reRender="cm-category-modal-panel-content"
+                                                         rendered="#{titleBean.formButtonController.formDisabled}"/>
+                                        <h:outputText value="Category"
+                                                      rendered="#{!titleBean.formButtonController.formDisabled}"/>
                                         Name(s):
                                     </label>
                                     <h:selectManyListbox id="title-category"

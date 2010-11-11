@@ -90,7 +90,10 @@
                                         <a4j:commandLink value="Comic Type"
                                                          actionListener="#{comicTypeBean.processFirstButton}"
                                                          oncomplete="Richfaces.showModalPanel('cm-comictype-modal-panel');"
-                                                         reRender="cm-comictype-modal-panel-content"/>
+                                                         reRender="cm-comictype-modal-panel-content"
+                                                         rendered="#{comicBean.formButtonController.formDisabled}"/>
+                                        <h:outputText value="Comic Type"
+                                                      rendered="#{!comicBean.formButtonController.formDisabled}"/>
                                         Value:
                                     </label>
                                     <h:selectOneMenu id="comic-type"
@@ -105,7 +108,10 @@
                                         <a4j:commandLink value="Distribution"
                                                          actionListener="#{distributionBean.processFirstButton}"
                                                          oncomplete="Richfaces.showModalPanel('cm-distribution-modal-panel');"
-                                                         reRender="cm-distribution-modal-panel-content"/>
+                                                         reRender="cm-distribution-modal-panel-content"
+                                                         rendered="#{comicBean.formButtonController.formDisabled}"/>
+                                        <h:outputText value="Distribution"
+                                                      rendered="#{!comicBean.formButtonController.formDisabled}"/>
                                         Value:
                                     </label>
                                     <h:selectOneMenu id="comic-distribution"
@@ -158,7 +164,10 @@
                                         <a4j:commandLink value="Trait"
                                                          actionListener="#{traitBean.processFirstButton}"
                                                          oncomplete="Richfaces.showModalPanel('cm-trait-modal-panel');"
-                                                         reRender="cm-trait-modal-panel-content"/>
+                                                         reRender="cm-trait-modal-panel-content"
+                                                         rendered="#{comicBean.formButtonController.formDisabled}"/>
+                                        <h:outputText value="Trait"
+                                                      rendered="#{!comicBean.formButtonController.formDisabled}"/>
                                         Value(s):
                                     </label>
                                     <h:selectManyListbox id="comic-traits"
@@ -179,7 +188,10 @@
                                         <a4j:commandLink value="Character"
                                                          actionListener="#{comicCharacterBean.processFirstButton}"
                                                          oncomplete="Richfaces.showModalPanel('cm-comiccharacter-modal-panel');"
-                                                         reRender="cm-comiccharacter-modal-panel-content"/>
+                                                         reRender="cm-comiccharacter-modal-panel-content"
+                                                         rendered="#{comicBean.formButtonController.formDisabled}"/>
+                                        <h:outputText value="Character"
+                                                      rendered="#{!comicBean.formButtonController.formDisabled}"/>
                                         Name(s):
                                     </label>
                                     <h:selectManyListbox id="comic-characters"

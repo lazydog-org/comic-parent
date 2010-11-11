@@ -33,7 +33,10 @@
                                         <a4j:commandLink value="Image Type"
                                                          actionListener="#{imageTypeBean.processFirstButton}"
                                                          oncomplete="Richfaces.showModalPanel('cm-imagetype-modal-panel');"
-                                                         reRender="cm-imagetype-modal-panel-content"/>
+                                                         reRender="cm-imagetype-modal-panel-content"
+                                                         rendered="#{imageBean.formButtonController.formDisabled}"/>
+                                        <h:outputText value="Image Type"
+                                                      rendered="#{!imageBean.formButtonController.formDisabled}"/>
                                         Value:
                                     </label>
                                     <h:selectOneMenu id="image-type"
