@@ -9,9 +9,13 @@ import javax.faces.event.ActionEvent;
 import javax.faces.model.SelectItem;
 import org.lazydog.comic.ComicService;
 import org.lazydog.comic.model.Entity;
-import org.lazydog.comic.manager.utility.FormButtonController;
+import org.lazydog.comic.manager.utility.ButtonLinkController;
 import org.lazydog.comic.manager.utility.Perspective;
+import org.lazydog.comic.manager.utility.SessionKey;
+import org.lazydog.comic.manager.utility.SessionUtility;
 import org.lazydog.repository.Criteria;
+import org.lazydog.repository.criterion.Criterion;
+import org.lazydog.repository.criterion.LogicalOperation;
 import org.richfaces.component.html.HtmlDataTable;
 
 
@@ -29,6 +33,7 @@ public abstract class AbstractDataAccessBean<T extends Entity<T>>
      * Enumeration for a find type.
      */
     public enum FindType {
+        CURRENT,
         FIRST,
         LAST,
         NEXT,
@@ -40,9 +45,32 @@ public abstract class AbstractDataAccessBean<T extends Entity<T>>
     private List<T> entities;
     protected T entity;
     protected Class<T> entityClass;
-    protected FormButtonController formButtonController;
     protected T oldEntity;
-    protected Perspective perspective;
+
+    /**
+     * Add the criterion.
+     *
+     * @param  criteria   the criteria.
+     * @param  criterion  the criterion to add.
+     *
+     * @return  the criteria.
+     */
+    protected Criteria<T> addCriterion(Criteria<T> criteria, Criterion criterion) {
+
+        // Check if there are previous restriction criterion.
+        if (criteria.restrictionExists()) {
+
+            // Add the criterion to the existing criterion.
+            criteria.add(LogicalOperation.and(criterion));
+        }
+        else {
+
+            // Add the criterion.
+            criteria.add(criterion);
+        }
+
+        return criteria;
+    }
 
     /**
      * Find the entity specified by find type.
@@ -61,12 +89,19 @@ public abstract class AbstractDataAccessBean<T extends Entity<T>>
 
             switch (findType) {
 
+                case CURRENT:
+
+                    // Get the current entity.
+                    entity = this.getCurrentEntity();
+                    break;
+
                 case FIRST:
 
                     // Get the first entity.
                     entity = this.comicService.findFirst(
                             this.getEntityClass(), this.getCriteria());
                     break;
+
                 case LAST:
 
                     // Get the last entity.
@@ -97,16 +132,16 @@ public abstract class AbstractDataAccessBean<T extends Entity<T>>
                 // Set the entity to the entity.
                 this.entity = entity;
 
-                // Modify the perspective.
-                this.perspective = Perspective.VIEW;
+                // Put the perspective on the session.
+                SessionUtility.putValue(SessionKey.PERSPECTIVE, Perspective.VIEW);
             }
             else {
 
                 // Set the entity to a new entity.
                 this.entity = this.getNewEntity();
 
-                // Modify the perspective.
-                this.perspective = Perspective.FRESH;
+                // Put the perspective on the session.
+                SessionUtility.putValue(SessionKey.PERSPECTIVE, Perspective.FRESH);
             }
         }
         catch(Exception e) {
@@ -117,10 +152,22 @@ public abstract class AbstractDataAccessBean<T extends Entity<T>>
         }
         finally {
 
-            // Configure the form buttons.
-            this.formButtonController = new FormButtonController(
-                    this.getEntityClass(), this.perspective);
+            // Put the button/link controller on the session.
+            SessionUtility.putValue(SessionKey.BUTTON_LINK_CONTROLLER,
+                    ButtonLinkController.newInstance(
+                    this.getEntityClass(),
+                    SessionUtility.getValue(SessionKey.PERSPECTIVE, Perspective.class)));
         }
+    }
+
+    /**
+     * Get the button/link controller.
+     *
+     * @return  the button/link controller.
+     */
+    public ButtonLinkController getButtonLinkController() {
+        return SessionUtility.getValue(
+                SessionKey.BUTTON_LINK_CONTROLLER, ButtonLinkController.class);
     }
 
     /**
@@ -129,6 +176,13 @@ public abstract class AbstractDataAccessBean<T extends Entity<T>>
      * @return  the criteria.
      */
     protected abstract Criteria<T> getCriteria();
+
+    /**
+     * Get a current entity.
+     *
+     * @return  a current entity.
+     */
+    public abstract T getCurrentEntity();
 
     /**
      * Get the data table.
@@ -189,15 +243,6 @@ public abstract class AbstractDataAccessBean<T extends Entity<T>>
     protected abstract Class<T> getEntityClass();
 
     /**
-     * Get the form button controller.
-     *
-     * @return  the form button controller.
-     */
-    public FormButtonController getFormButtonController() {
-        return this.formButtonController;
-    }
-
-    /**
      * Get a new entity.
      *
      * @return  a new entity.
@@ -219,7 +264,7 @@ public abstract class AbstractDataAccessBean<T extends Entity<T>>
      * @return  the perspective.
      */
     public Perspective getPerspective() {
-        return this.perspective;
+        return SessionUtility.getValue(SessionKey.PERSPECTIVE, Perspective.class);
     }
 
     /**
@@ -235,12 +280,17 @@ public abstract class AbstractDataAccessBean<T extends Entity<T>>
         // Get a new entity.
         this.entity = this.getNewEntity();
 
-        // Modify the perspective.
-        this.perspective = Perspective.ADD;
+        // Put the perspective on the session.
+        SessionUtility.putValue(SessionKey.PERSPECTIVE, Perspective.ADD);
 
-        // Configure the form buttons.
-        this.formButtonController = new FormButtonController(
-                this.getEntityClass(), this.perspective);
+        // Put the button/link controller on the session.
+        SessionUtility.putValue(SessionKey.BUTTON_LINK_CONTROLLER,
+                ButtonLinkController.newInstance(
+                this.getEntityClass(),
+                SessionUtility.getValue(SessionKey.PERSPECTIVE, Perspective.class)));
+
+        // Store the entity on the session.
+        this.storeEntity();
     }
 
     /**
@@ -256,12 +306,17 @@ public abstract class AbstractDataAccessBean<T extends Entity<T>>
         // Get a new entity.
         this.entity = this.getNewEntity();
 
-        // Modify the perspective.
-        this.perspective = Perspective.ADD_MANY;
+        // Put the perspective on the session.
+        SessionUtility.putValue(SessionKey.PERSPECTIVE, Perspective.ADD_MANY);
 
-        // Configure the form buttons.
-        this.formButtonController = new FormButtonController(
-                this.getEntityClass(), this.perspective);
+        // Put the button/link controller on the session.
+        SessionUtility.putValue(SessionKey.BUTTON_LINK_CONTROLLER,
+                ButtonLinkController.newInstance(
+                this.getEntityClass(),
+                SessionUtility.getValue(SessionKey.PERSPECTIVE, Perspective.class)));
+
+        // Store the entity on the session.
+        this.storeEntity();
     }
 
     /**
@@ -280,21 +335,38 @@ public abstract class AbstractDataAccessBean<T extends Entity<T>>
             // Clear the old entity.
             this.oldEntity = null;
 
-            // Modify the perspective.
-            this.perspective = Perspective.VIEW;
+            // Put the perspective on the session.
+            SessionUtility.putValue(SessionKey.PERSPECTIVE, Perspective.VIEW);
         }
         else {
 
             // Set the entity to a new entity.
             this.entity = this.getNewEntity();
 
-            // Modify the perspective.
-            this.perspective = Perspective.FRESH;
+            // Put the perspective on the session.
+            SessionUtility.putValue(SessionKey.PERSPECTIVE, Perspective.FRESH);
         }
 
-        // Configure the form buttons.
-        this.formButtonController = new FormButtonController(
-                this.getEntityClass(), this.perspective);
+        // Put the button/link controller on the session.
+        SessionUtility.putValue(SessionKey.BUTTON_LINK_CONTROLLER,
+                ButtonLinkController.newInstance(
+                this.getEntityClass(),
+                SessionUtility.getValue(SessionKey.PERSPECTIVE, Perspective.class)));
+
+        // Store the entity on the session.
+        this.storeEntity();
+    }
+
+    /**
+     * Process the current button.
+     *
+     * @param  actionEvent  the action event.
+     */
+    public void processCurrentButton(ActionEvent actionEvent) {
+        this.findEntity(FindType.CURRENT);
+
+        // Store the entity on the session.
+        this.storeEntity();
     }
 
     /**
@@ -331,16 +403,16 @@ public abstract class AbstractDataAccessBean<T extends Entity<T>>
                 // Set the entity to the new entity.
                 this.entity = newEntity;
 
-                // Modify the perspective.
-                this.perspective = Perspective.VIEW;
+                // Put the perspective on the session.
+                SessionUtility.putValue(SessionKey.PERSPECTIVE, Perspective.VIEW);
             }
             else {
 
                 // Clear the entity.
                 this.entity = this.getNewEntity();
 
-                // Modify the perspective.
-                this.perspective = Perspective.FRESH;
+                // Put the perspective on the session.
+                SessionUtility.putValue(SessionKey.PERSPECTIVE, Perspective.FRESH);
             }
         }
         catch(Exception e) {
@@ -350,10 +422,15 @@ e.printStackTrace();
         }
         finally {
 
-            // Configure the form buttons.
-            this.formButtonController = new FormButtonController(
-                    this.getEntityClass(), this.perspective);
+            // Put the button/link controller on the session.
+            SessionUtility.putValue(SessionKey.BUTTON_LINK_CONTROLLER,
+                    ButtonLinkController.newInstance(
+                    this.getEntityClass(),
+                    SessionUtility.getValue(SessionKey.PERSPECTIVE, Perspective.class)));
         }
+
+        // Store the entity on the session.
+        this.storeEntity();
     }
 
 
@@ -370,12 +447,17 @@ e.printStackTrace();
         // Clear the identifier.
         this.entity.setId(null);
 
-        // Modify the perspective.
-        this.perspective = Perspective.DUPLICATE;
+        // Put the perspective on the session.
+        SessionUtility.putValue(SessionKey.PERSPECTIVE, Perspective.DUPLICATE);
 
-        // Configure the form buttons.
-        this.formButtonController = new FormButtonController(
-                this.getEntityClass(), this.perspective);
+        // Put the button/link controller on the session.
+        SessionUtility.putValue(SessionKey.BUTTON_LINK_CONTROLLER,
+                ButtonLinkController.newInstance(
+                this.getEntityClass(),
+                SessionUtility.getValue(SessionKey.PERSPECTIVE, Perspective.class)));
+
+        // Store the entity on the session.
+        this.storeEntity();
     }
 
     /**
@@ -388,12 +470,17 @@ e.printStackTrace();
         // Set the old entity to the entity.
         this.oldEntity = this.entity.copy();
 
-        // Modify the perspective.
-        this.perspective = Perspective.EDIT;
+        // Put the perspective on the session.
+        SessionUtility.putValue(SessionKey.PERSPECTIVE, Perspective.EDIT);
 
-        // Configure the form buttons.
-        this.formButtonController = new FormButtonController(
-                this.getEntityClass(), this.perspective);
+        // Put the button/link controller on the session.
+        SessionUtility.putValue(SessionKey.BUTTON_LINK_CONTROLLER,
+                ButtonLinkController.newInstance(
+                this.getEntityClass(),
+                SessionUtility.getValue(SessionKey.PERSPECTIVE, Perspective.class)));
+
+        // Store the entity on the session.
+        this.storeEntity();
     }
 
     /**
@@ -403,6 +490,9 @@ e.printStackTrace();
      */
     public void processFirstButton(ActionEvent actionEvent) {
         this.findEntity(FindType.FIRST);
+
+        // Store the entity on the session.
+        this.storeEntity();
     }
 
     /**
@@ -412,6 +502,9 @@ e.printStackTrace();
      */
     public void processLastButton(ActionEvent actionEvent) {
         this.findEntity(FindType.LAST);
+
+        // Store the entity on the session.
+        this.storeEntity();
     }
 
 
@@ -422,6 +515,9 @@ e.printStackTrace();
      */
     public void processNextButton(ActionEvent actionEvent) {
         this.findEntity(FindType.NEXT);
+
+        // Store the entity on the session.
+        this.storeEntity();
     }
 
     /**
@@ -436,8 +532,8 @@ e.printStackTrace();
             // Save the entity.
             this.entity = this.comicService.save(this.entity);
 
-            // Modify the perspective.
-            this.perspective = Perspective.VIEW;
+            // Put the perspective on the session.
+            SessionUtility.putValue(SessionKey.PERSPECTIVE, Perspective.VIEW);
         }
         catch(Exception e) {
 e.printStackTrace();
@@ -446,10 +542,15 @@ e.printStackTrace();
         }
         finally {
 
-            // Configure the form buttons.
-            this.formButtonController = new FormButtonController(
-                    this.getEntityClass(), this.perspective);
+            // Put the button/link controller on the session.
+            SessionUtility.putValue(SessionKey.BUTTON_LINK_CONTROLLER,
+                    ButtonLinkController.newInstance(
+                    this.getEntityClass(),
+                    SessionUtility.getValue(SessionKey.PERSPECTIVE, Perspective.class)));
         }
+
+        // Store the entity on the session.
+        this.storeEntity();
     }
 
     /**
@@ -459,6 +560,9 @@ e.printStackTrace();
      */
     public void processPreviousButton(ActionEvent actionEvent) {
         this.findEntity(FindType.PREVIOUS);
+
+        // Store the entity on the session.
+        this.storeEntity();
     }
 
     /**
@@ -469,22 +573,24 @@ e.printStackTrace();
     public void processResetButton(ActionEvent actionEvent) {
 
         // Check if this is the add perspective.
-        if (this.perspective == Perspective.ADD) {
+        if (SessionUtility.getValue(SessionKey.PERSPECTIVE, Perspective.class) == Perspective.ADD) {
 
             // Get a new entity.
             this.entity = this.getNewEntity();
         }
 
         // Check if this is the edit perspective.
-        else if (this.perspective == Perspective.EDIT) {
+        else if (SessionUtility.getValue(SessionKey.PERSPECTIVE, Perspective.class) == Perspective.EDIT) {
 
             // Set the entity to the old entity.
             this.entity = this.oldEntity.copy();
         }
 
-        // Configure the form buttons.
-        this.formButtonController = new FormButtonController(
-                this.getEntityClass(), this.perspective);
+        // Put the button/link controller on the session.
+        SessionUtility.putValue(SessionKey.BUTTON_LINK_CONTROLLER,
+                ButtonLinkController.newInstance(
+                this.getEntityClass(),
+                SessionUtility.getValue(SessionKey.PERSPECTIVE, Perspective.class)));
     }
     
     /**
@@ -498,12 +604,17 @@ e.printStackTrace();
         // Get the entity.
         this.entity = (T)this.dataTable.getRowData();
 
-        // Modify the perspective.
-        this.perspective = Perspective.VIEW;
+        // Put the perspective on the session.
+        SessionUtility.putValue(SessionKey.PERSPECTIVE, Perspective.VIEW);
 
-        // Configure the form buttons.
-        this.formButtonController = new FormButtonController(
-                this.getEntityClass(), this.perspective);
+        // Put the button/link controller on the session.
+        SessionUtility.putValue(SessionKey.BUTTON_LINK_CONTROLLER,
+                ButtonLinkController.newInstance(
+                this.getEntityClass(),
+                SessionUtility.getValue(SessionKey.PERSPECTIVE, Perspective.class)));
+
+        // Store the entity on the session.
+        this.storeEntity();
     }
 
     /**
@@ -549,6 +660,11 @@ e.printStackTrace();
      * @param  perspective  the perspective.
      */
     public void setPerspective(Perspective perspective) {
-        this.perspective = perspective;
+        SessionUtility.putValue(SessionKey.PERSPECTIVE, perspective);
     }
+
+    /**
+     * Store the entity.
+     */
+    protected abstract void storeEntity();
 }

@@ -36,7 +36,7 @@ public class ComicUploadBean
      * @return  the button disabled flag.
      */
     public Boolean getButtonDisabled() {
-        return SessionUtility.getValue(SessionKey.IMAGE_BUTTON_DISABLED, Boolean.class);
+        return SessionUtility.getValue(SessionKey.UPLOAD_IMAGE_BUTTON_DISABLED, Boolean.class);
     }
 
     /**
@@ -45,7 +45,7 @@ public class ComicUploadBean
      * @return  the image.
      */
     public Image getImage() {
-        return SessionUtility.getValue(SessionKey.IMAGE, Image.class);
+        return SessionUtility.getValue(SessionKey.UPLOAD_IMAGE, Image.class);
     }
 
     /**
@@ -65,7 +65,7 @@ public class ComicUploadBean
             File tifFile;
 
             // Get the JPG file.
-            image = SessionUtility.getValue(SessionKey.IMAGE, Image.class);
+            image = SessionUtility.getValue(SessionKey.UPLOAD_IMAGE, Image.class);
             jpgFile = new File(image.getType().getDirectoryPath(), image.getFileName());
 
             // Get the TIF file.
@@ -81,10 +81,10 @@ public class ComicUploadBean
             tifFile.delete();
 
             // Restore the comic image to the session.
-            SessionUtility.putValue(SessionKey.IMAGE, (SessionUtility.getValue(SessionKey.COMIC, Comic.class).getImage()));
+            SessionUtility.putValue(SessionKey.UPLOAD_IMAGE, (SessionUtility.getValue(SessionKey.COMIC, Comic.class).getImage()));
 
             // Set the button disable flag to true.
-            SessionUtility.putValue(SessionKey.IMAGE_BUTTON_DISABLED, Boolean.TRUE);
+            SessionUtility.putValue(SessionKey.UPLOAD_IMAGE_BUTTON_DISABLED, Boolean.TRUE);
         }
         catch(Exception e) {
 e.printStackTrace();
@@ -108,7 +108,7 @@ e.printStackTrace();
 
             // Get the comic and image from the session.
             comic = SessionUtility.getValue(SessionKey.COMIC, Comic.class);
-            image = SessionUtility.getValue(SessionKey.IMAGE, Image.class);
+            image = SessionUtility.getValue(SessionKey.UPLOAD_IMAGE, Image.class);
 
             // Set the image.
             comic.setImage(image);
@@ -117,7 +117,7 @@ e.printStackTrace();
             this.comicService.save(comic);
 
             // Set the button disable flag to true.
-            SessionUtility.putValue(SessionKey.IMAGE_BUTTON_DISABLED, Boolean.TRUE);
+            SessionUtility.putValue(SessionKey.UPLOAD_IMAGE_BUTTON_DISABLED, Boolean.TRUE);
         }
         catch(Exception e) {
 e.printStackTrace();
@@ -179,10 +179,10 @@ e.printStackTrace();
             image.setType(imageType);
 
             // Put the uploaded image on the session.
-            SessionUtility.putValue(SessionKey.IMAGE, image);
+            SessionUtility.putValue(SessionKey.UPLOAD_IMAGE, image);
 
             // Set the button disable flag to false.
-            SessionUtility.putValue(SessionKey.IMAGE_BUTTON_DISABLED, Boolean.FALSE);
+            SessionUtility.putValue(SessionKey.UPLOAD_IMAGE_BUTTON_DISABLED, Boolean.FALSE);
         }
         catch(Exception e) {
 e.printStackTrace();

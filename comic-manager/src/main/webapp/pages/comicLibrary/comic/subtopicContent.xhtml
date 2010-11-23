@@ -10,6 +10,12 @@
     <body>
         <ui:composition template="/layout/subtopicLayout.xhtml">
             <ui:define name="filter">
+                <ui:include src="/pages/comicLibrary/comic/filter.xhtml"/>
+            </ui:define>
+            <ui:define name="form">
+                <ui:include src="/pages/comicLibrary/comic/form.xhtml"/>
+            </ui:define>
+            <ui:define name="table">
                 <h:panelGrid>
                     <h:panelGroup>
                         <h:outputText value="#{comicBean.entity.title.name}"/>
@@ -31,15 +37,6 @@
                         (<h:outputText value="#{comicBean.entity.title.type.value}"/>)
                     </h:panelGroup>
                 </h:panelGrid>
-                <ui:include src="/pages/comicLibrary/comic/filter.xhtml"/>
-            </ui:define>
-            <ui:define name="form">
-                <ui:include src="/pages/comicLibrary/comic/form.xhtml"/>
-            </ui:define>
-            <ui:define name="search">
-                <ui:include src="/pages/search/titleSearch.xhtml"/>
-            </ui:define>
-            <ui:define name="table">
                 <ui:include src="/pages/comicLibrary/comic/table.xhtml"/>
             </ui:define>
         </ui:composition>

@@ -3,7 +3,6 @@
                       "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
                       
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:c="http://java.sun.com/jstl/core"
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:h="http://java.sun.com/jsf/html"
@@ -26,7 +25,7 @@
                                     binding="#{imageBean.dataTable}">
                         <a4j:support event="onRowClick"
                                      actionListener="#{imageBean.processRowClick}"
-                                     reRender="cm-image-table-body,cm-image-form"/>
+                                     reRender="cm-image-table,cm-image-form"/>
                         <rich:column styleClass="cm-table-cell cm-table-image-filename-cell #{(image.id == imageBean.entity.id) ? 'cm-image-table-selected-row' : ''}">
                             <h:outputText value="#{image.fileName}"/>
                         </rich:column>

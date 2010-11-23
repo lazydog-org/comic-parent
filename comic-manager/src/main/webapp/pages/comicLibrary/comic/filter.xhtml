@@ -1,19 +1,63 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
                       "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-                      
+
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:h="http://java.sun.com/jsf/html">
+      xmlns:a4j="http://richfaces.org/a4j"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:rich="http://richfaces.org/rich"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
     <head/>
     <body>
         <ui:composition>
-            <h:form id="cm-comic-filter" styleClass="cm-filter-buttons">
-                <ui:repeat value="#{comicTypeFilter.buttons}" var="button">
-                    <h:commandButton value="#{button}"
-                                     actionListener="#{comicBean.processFilterButton}"
-                                     disabled="#{comicTypeFilter.buttonDisabledMap[button]}"/>
-                </ui:repeat>
+            <h:form id="cm-comic-filter">
+                <fieldset>
+                    <ol>
+                        <li>
+                            <label for="comic-filter-distribution">
+                                <a4j:commandLink value="Distribution"
+                                                 actionListener="#{distributionBean.processFirstButton}"
+                                                 oncomplete="Richfaces.showModalPanel('cm-distribution-modal-panel');"
+                                                 reRender="cm-distribution-modal-panel-content"
+                                                 rendered="#{comicFilterBean.buttonLinkController.formDisabled}"/>
+                                <h:outputText value="Distribution"
+                                              rendered="#{!comicFilterBean.buttonLinkController.formDisabled}"/>
+                                Value:
+                            </label>
+                            <h:selectOneMenu id="comic-filter-distribution"
+                                                 value="#{comicFilterBean.distribution}"
+                                                 converter="objectHexConverter"
+                                                 disabled="#{!comicFilterBean.buttonLinkController.formDisabled}">
+                                <f:selectItem itemLabel="" itemValue=""/>
+                                <f:selectItems value="#{distributionBean.entitiesAsSelectItems}"/>
+                            </h:selectOneMenu>
+                        </li>
+                        <li>
+                            <label for="comic-filter-type">
+                                <a4j:commandLink value="Comic Type"
+                                                 actionListener="#{comicTypeBean.processFirstButton}"
+                                                 oncomplete="Richfaces.showModalPanel('cm-comictype-modal-panel');"
+                                                 reRender="cm-comictype-modal-panel-content"
+                                                 rendered="#{comicFilterBean.buttonLinkController.formDisabled}"/>
+                                <h:outputText value="Comic Type"
+                                              rendered="#{!comicFilterBean.buttonLinkController.formDisabled}"/>
+                                Value:
+                            </label>
+                            <h:selectOneMenu id="comic-filter-type"
+                                             value="#{comicFilterBean.type}"
+                                             converter="objectHexConverter"
+                                             disabled="#{!comicFilterBean.buttonLinkController.formDisabled}">
+                                <f:selectItem itemLabel="" itemValue=""/>
+                                <f:selectItems value="#{comicTypeBean.entitiesAsSelectItems}"/>
+                            </h:selectOneMenu>
+                        </li>
+                    </ol>
+                </fieldset>
+                <ui:include src="/pages/common/filterButtons.xhtml">
+                    <ui:param name="entityType" value="comic"/>
+                    <ui:param name="managedBean" value="#{comicFilterBean}"/>
+                </ui:include>
             </h:form>
         </ui:composition>
     </body>

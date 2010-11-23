@@ -20,7 +20,7 @@
                         <h:selectOneMenu id="have-comicgrade"
                                          value="#{haveBean.entity.comicGrade}"
                                          converter="objectHexConverter"
-                                         disabled="#{haveBean.formButtonController.formDisabled}">
+                                         disabled="#{haveBean.buttonLinkController.formDisabled}">
                             <f:selectItems value="#{comicGradeBean.entitiesAsSelectItems}"/>
                         </h:selectOneMenu>
                     </li>
@@ -30,15 +30,15 @@
                                              actionListener="#{locationBean.processFirstButton}"
                                              oncomplete="Richfaces.showModalPanel('cm-location-modal-panel');"
                                              reRender="cm-location-modal-panel-content"
-                                             rendered="#{haveBean.formButtonController.formDisabled}"/>
+                                             rendered="#{haveBean.buttonLinkController.formDisabled}"/>
                             <h:outputText value="Location"
-                                          rendered="#{!haveBean.formButtonController.formDisabled}"/>
+                                          rendered="#{!haveBean.buttonLinkController.formDisabled}"/>
                             Name:
                         </label>
                         <h:selectOneMenu id="have-location"
                                          value="#{haveBean.entity.location}"
                                          converter="objectHexConverter"
-                                         disabled="#{haveBean.formButtonController.formDisabled}">
+                                         disabled="#{haveBean.buttonLinkController.formDisabled}">
                             <f:selectItems value="#{locationBean.entitiesAsSelectItems}"/>
                         </h:selectOneMenu>
                     </li>
@@ -47,14 +47,14 @@
                         <h:inputText id="have-purchaseprice"
                                      value="#{haveBean.entity.purchasePrice}"
                                      size="9" maxlength="9"
-                                     disabled="#{haveBean.formButtonController.formDisabled}"/>
+                                     disabled="#{haveBean.buttonLinkController.formDisabled}"/>
                     </li>
                     <li>
                         <label for="have-quantity">Quantity: </label>
                         <rich:inputNumberSpinner id="have-quantity"
                                                  value="#{haveBean.entity.quantity}"
                                                  minValue="1" maxValue="999" inputSize="3"
-                                                 disabled="#{haveBean.formButtonController.formDisabled}"/>
+                                                 disabled="#{haveBean.buttonLinkController.formDisabled}"/>
                     </li>
                 </ol>
             </fieldset>

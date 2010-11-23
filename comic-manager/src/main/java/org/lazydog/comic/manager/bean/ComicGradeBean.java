@@ -54,6 +54,16 @@ public class ComicGradeBean
     }
 
     /**
+     * Get the current entity.
+     *
+     * @return  the current entity.
+     */
+    @Override
+    public ComicGrade getCurrentEntity() {
+        return null;
+    }
+
+    /**
      * Get the entities as select items.
      * 
      * @return  the entities as select items.
@@ -96,5 +106,13 @@ public class ComicGradeBean
     @Override
     protected ComicGrade getNewEntity() {
         return null;
+    }
+
+    /**
+     * Store the entity.
+     */
+    @Override
+    public void storeEntity() {
+        // Ignore.
     }
 }

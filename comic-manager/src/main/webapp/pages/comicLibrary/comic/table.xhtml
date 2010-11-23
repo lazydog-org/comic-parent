@@ -40,7 +40,7 @@
                                     binding="#{comicBean.dataTable}">
                         <a4j:support event="onRowClick" 
                                      actionListener="#{comicBean.processRowClick}"
-                                     reRender="cm-comic-table-body,cm-comic-form"/>
+                                     reRender="cm-comic-table,cm-comic-form"/>
                         <rich:column styleClass="cm-table-cell cm-table-comic-issue-cell #{(comic.id == comicBean.entity.id) ? 'cm-comic-table-selected-row' : ''}">
                             <h:outputText value="#{comic.number}"/>
                             <h:outputText value="#{comic.variant}"/>

@@ -13,15 +13,13 @@ import javax.faces.model.SelectItem;
 import org.lazydog.comic.model.Category;
 import org.lazydog.comic.model.Publisher;
 import org.lazydog.comic.model.Title;
+import org.lazydog.comic.model.TitleType;
 import org.lazydog.comic.model.UserPreference;
-import org.lazydog.comic.manager.helper.bean.TitleTypeFilter;
-import org.lazydog.comic.manager.utility.FormButtonController;
+import org.lazydog.comic.manager.utility.ButtonLinkController;
 import org.lazydog.comic.manager.utility.Perspective;
 import org.lazydog.comic.manager.utility.SessionKey;
 import org.lazydog.comic.manager.utility.SessionUtility;
-import org.lazydog.comic.manager.utility.TitleSearchBy;
 import org.lazydog.repository.criterion.ComparisonOperation;
-import org.lazydog.repository.criterion.LogicalOperation;
 import org.lazydog.repository.criterion.Order;
 import org.lazydog.repository.Criteria;
 
@@ -36,43 +34,6 @@ public class TitleBean
        implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    
-    private Boolean comicLinkDisabled;
-
-    /**
-     * Enable the comic link.
-     *
-     * @param  perspective  the perspective.
-     */
-    private void enableComicLink(Perspective perspective) {
-
-        // Check if this is the view perspective.
-        if (perspective == Perspective.VIEW) {
-
-            // Enable the comic link.
-            this.comicLinkDisabled = false;
-
-            // Put the title on the session.
-            SessionUtility.putValue(SessionKey.TITLE, this.entity);
-        }
-        else {
-
-            // Disable the comic link.
-            this.comicLinkDisabled = true;
-
-            // Remove the title from the session.
-            SessionUtility.removeValue(SessionKey.TITLE);
-        }
-    }
-
-    /**
-     * Get the comic link disabled.
-     *
-     * @return  the comic link disabled.
-     */
-    public Boolean getComicLinkDisabled() {
-        return this.comicLinkDisabled;
-    }
 
     /**
      * Get the criteria.
@@ -80,32 +41,60 @@ public class TitleBean
      * @return  the criteria.
      */
     @Override
-    protected Criteria<Title> getCriteria() {
+    public Criteria<Title> getCriteria() {
 
         // Declare.
         Criteria<Title> criteria;
 
         // Initialize.
         criteria = null;
-
+        
         try {
 
             // Declare.
-            TitleTypeFilter filter;
+            Category category;
+            String name;
+            Publisher publisher;
+            TitleType type;
 
-            // Initialize.
-            filter = new TitleTypeFilter();
+            // Get a new criteria.
+            criteria = this.comicService.getCriteria(Title.class);
 
-            // Get the criteria for the title searcher.
-            criteria = this.getCriteria(
-                    SessionUtility.getValue(
-                    SessionKey.TITLE_SEARCH_BY, TitleSearchBy.class),
-                    SessionUtility.getValue(
-                    SessionKey.TITLE_SEARCH_FOR, Object.class));
+            // Get the title filter values.
+            category = SessionUtility.getValue(SessionKey.TITLE_FILTER_CATEGORY, Category.class);
+            name = SessionUtility.getValue(SessionKey.TITLE_FILTER_NAME, String.class);
+            publisher = SessionUtility.getValue(SessionKey.TITLE_FILTER_PUBLISHER, Publisher.class);
+            type = SessionUtility.getValue(SessionKey.TITLE_FILTER_TYPE, TitleType.class);
 
-            // Modify the criteria.
-            criteria.add(LogicalOperation.and(ComparisonOperation.eq(
-                    "type", filter.getType())));
+            // Check if the title filter category exists.
+            if (category != null) {
+
+                // Add the criterion.
+                criteria = addCriterion(criteria, ComparisonOperation.memberOf("categories", category));
+            }
+
+            // Check if the title filter name exists.
+            if (name != null) {
+
+                // Add the criterion.
+                criteria = addCriterion(criteria, ComparisonOperation.like("name", "%" + name + "%"));
+            }
+
+            // Check if the title filter publisher exists.
+            if (publisher != null) {
+
+                // Add the criterion.
+                criteria = addCriterion(criteria, ComparisonOperation.memberOf("publishers", publisher));
+            }
+
+            // Check if the title filter type exists.
+            if (type != null) {
+
+                // Add the criterion.
+                criteria = addCriterion(criteria, ComparisonOperation.eq("type", type));
+            }
+
+            // Order the results.
             criteria.addOrder(Order.asc("name"));
         }
         catch(Exception e) {
@@ -118,50 +107,13 @@ public class TitleBean
     }
 
     /**
-     * Get the criteria.
+     * Get the current entity.
      *
-     * @param  searchBy   the search by.
-     * @param  searchFor  the search for.
-     *
-     * @return  the criteria.
+     * @return  the current entity.
      */
-    public Criteria<Title> getCriteria(TitleSearchBy searchBy,
-                                       Object searchFor) {
-
-        // Declare.
-        Criteria<Title> criteria;
-
-        // Initialize.
-        criteria = null;
-
-        // Get a new criteria.
-        criteria = this.comicService.getCriteria(Title.class);
-
-        switch(searchBy) {
-
-            case CATEGORY_NAME:
-
-                // Modify the criteria.
-                criteria.add(ComparisonOperation.memberOf(
-                        "categories", (Category)searchFor));
-                break;
-
-            case PUBLISHER_NAME:
-
-                // Modify the criteria.
-                criteria.add(ComparisonOperation.memberOf(
-                        "publishers", (Publisher)searchFor));
-                break;
-
-            case TITLE_NAME:
-
-                // Modify the criteria.
-                criteria.add(ComparisonOperation.like(
-                        "name", "%" + (String)searchFor + "%"));
-                break;
-        }
-
-        return criteria;
+    @Override
+    public Title getCurrentEntity() {
+        return SessionUtility.getValue(SessionKey.TITLE, Title.class);
     }
 
     /**
@@ -214,24 +166,52 @@ public class TitleBean
     protected Title getNewEntity() {
         
         // Declare.
-        TitleTypeFilter filter;
         Title newEntity;
 
-        // Initialize.
-        filter = new TitleTypeFilter();
-        
         // Create a new entity.
         newEntity = new Title();
 
-        // Check if the user preference exits.
-        if (SessionUtility.valueExists(SessionKey.USER_PREFERENCE)) {
-            
+        // Check if the title filter category exists.
+        if (SessionUtility.valueExists(SessionKey.TITLE_FILTER_CATEGORY)) {
+
+            // Declare.
+            List<Category> categories;
+
+            // Initialize.
+            categories = new ArrayList<Category>();
+
+            // Set the category in the new entity.
+            categories.add(SessionUtility
+                    .getValue(SessionKey.TITLE_FILTER_CATEGORY,
+                    Category.class));
+            newEntity.setCategories(categories);
+        }
+
+        // Check if the title filter publisher exists.
+        if (SessionUtility.valueExists(SessionKey.TITLE_FILTER_PUBLISHER)) {
+
             // Declare.
             List<Publisher> publishers;
-        
+
             // Initialize.
             publishers = new ArrayList<Publisher>();
-        
+
+            // Set the publishers in the new entity.
+            publishers.add(SessionUtility
+                    .getValue(SessionKey.TITLE_FILTER_PUBLISHER,
+                    Publisher.class));
+            newEntity.setPublishers(publishers);
+        }
+
+        // Check if the user preference exits.
+        else if (SessionUtility.valueExists(SessionKey.USER_PREFERENCE)) {
+
+            // Declare.
+            List<Publisher> publishers;
+
+            // Initialize.
+            publishers = new ArrayList<Publisher>();
+
             // Set the publishers in the new entity.
             publishers.add(SessionUtility
                     .getValue(SessionKey.USER_PREFERENCE, UserPreference.class)
@@ -239,8 +219,23 @@ public class TitleBean
             newEntity.setPublishers(publishers);
         }
 
-        // Set the type in the new entity.
-        newEntity.setType(filter.getType());
+        // Check if the title filter type exists.
+        if (SessionUtility.valueExists(SessionKey.TITLE_FILTER_TYPE)) {
+
+            // Set the type in the new entity.
+            newEntity.setType(SessionUtility
+                    .getValue(SessionKey.TITLE_FILTER_TYPE,
+                    TitleType.class));
+        }
+
+        // Check if the user preference exits.
+        else if (SessionUtility.valueExists(SessionKey.USER_PREFERENCE)) {
+
+            // Set the type in the new entity.
+            newEntity.setType(SessionUtility
+                    .getValue(SessionKey.USER_PREFERENCE, UserPreference.class)
+                    .getTitleType());
+        }
 
         return newEntity;
     }
@@ -281,96 +276,8 @@ public class TitleBean
     @PostConstruct
     public void initialize() {
 
-        // Disable the comic link.
-        this.comicLinkDisabled = true;
-
         // Create a new title.
         this.entity = new Title();
-    }
-
-    /**
-     * Process the cancel button.
-     *
-     * @param  actionEvent  the action event.
-     */
-    @Override
-    public void processCancelButton(ActionEvent actionEvent) {
-        super.processCancelButton(actionEvent);
-
-        // Enable the comic link.
-        this.enableComicLink(this.perspective);
-    }
-
-    /**
-     * Process the delete button.
-     *
-     * @param  actionEvent  the action event.
-     */
-    @Override
-    public void processDeleteButton(ActionEvent actionEvent) {
-        super.processDeleteButton(actionEvent);
-
-        // Enable the comic link.
-        this.enableComicLink(this.perspective);
-    }
-
-    /**
-     * Process the filter button.
-     *
-     * @param  actionEvent  the action event.
-     */
-    public void processFilterButton(ActionEvent actionEvent) {
-
-        // Declare.
-        TitleTypeFilter filter;
-
-        // Initialize.
-        filter = new TitleTypeFilter();
-
-        // Activate the filter.
-        filter.activateFilter(actionEvent, this.comicService);
-
-        // Enable the first button.
-        this.processFirstButton(actionEvent);
-    }
-
-    /**
-     * Process the first button.
-     *
-     * @param  actionEvent  the action event.
-     */
-    @Override
-    public void processFirstButton(ActionEvent actionEvent) {
-        super.processFirstButton(actionEvent);
-
-        // Enable the comic link.
-        this.enableComicLink(this.perspective);
-    }
-
-    /**
-     * Process the last button.
-     *
-     * @param  actionEvent  the action event.
-     */
-    @Override
-    public void processLastButton(ActionEvent actionEvent) {
-        super.processLastButton(actionEvent);
-
-        // Enable the comic link.
-        this.enableComicLink(this.perspective);
-    }
-
-    /**
-     * Process the next button.
-     *
-     * @param  actionEvent  the action event.
-     */
-    @Override
-    public void processNextButton(ActionEvent actionEvent) {
-        super.processNextButton(actionEvent);
-
-        // Enable the comic link.
-        this.enableComicLink(this.perspective);
     }
 
     /**
@@ -396,7 +303,7 @@ public class TitleBean
             // Check if the entity is assigned a different type value and the
             // perspective is the edit perspective.
             if (!this.oldEntity.getType().getValue().equals(this.entity.getType().getValue()) &&
-                this.perspective == Perspective.EDIT) {
+                SessionUtility.getValue(SessionKey.PERSPECTIVE, Perspective.class) == Perspective.EDIT) {
 
                 // Get the next entity.
                 newEntity = this.comicService.findNext(
@@ -421,8 +328,8 @@ public class TitleBean
             // Save the entity.
             this.entity = this.comicService.save(this.entity);
 
-            // Modify the perspective.
-            this.perspective = Perspective.VIEW;
+            // Put the perspective on the session.
+            SessionUtility.putValue(SessionKey.PERSPECTIVE, Perspective.VIEW);
 
             // Check if the new entity exists.
             if (newEntity != null) {
@@ -433,13 +340,13 @@ public class TitleBean
                 // Check if the new entity does not exist.
                 if (newEntity.equals(this.getNewEntity())) {
 
-                    // Modify the perspective.
-                    this.perspective = Perspective.FRESH;
+                    // Put the perspective on the session.
+                    SessionUtility.putValue(SessionKey.PERSPECTIVE, Perspective.FRESH);
                 }
                 else {
 
-                    // Modify the perspective.
-                    this.perspective = Perspective.VIEW;
+                    // Put the perspective on the session.
+                    SessionUtility.putValue(SessionKey.PERSPECTIVE, Perspective.VIEW);
                 }
             }
 
@@ -452,8 +359,8 @@ public class TitleBean
                 // Check if the entity does not exist.
                 if (this.entity.equals(this.getNewEntity())) {
 
-                    // Modify the perspective.
-                    this.perspective = Perspective.FRESH;
+                    // Put the perspective on the session.
+                    SessionUtility.putValue(SessionKey.PERSPECTIVE, Perspective.FRESH);
                 }
             }
         }
@@ -464,37 +371,33 @@ public class TitleBean
         }
         finally {
 
-            // Configure the form buttons.
-            this.formButtonController = new FormButtonController(this.getEntityClass(), this.perspective);
+            // Put the button/link controller on the session.
+            SessionUtility.putValue(SessionKey.BUTTON_LINK_CONTROLLER,
+                    ButtonLinkController.newInstance(
+                    this.getEntityClass(),
+                    SessionUtility.getValue(SessionKey.PERSPECTIVE, Perspective.class)));
         }
 
-        // Enable the comic link.
-        this.enableComicLink(this.perspective);
-    }
-        
-    /**
-     * Process the previous button.
-     *
-     * @param  actionEvent  the action event.
-     */
-    @Override
-    public void processPreviousButton(ActionEvent actionEvent) {
-        super.processPreviousButton(actionEvent);
-
-        // Enable the comic link.
-        this.enableComicLink(this.perspective);
+        // Store the entity.
+        this.storeEntity();
     }
 
     /**
-     * Process the row click.
-     *
-     * @param  actionEvent  the action event.
+     * Store the entity.
      */
     @Override
-    public void processRowClick(ActionEvent actionEvent) {
-        super.processRowClick(actionEvent);
+    protected void storeEntity() {
 
-        // Enable the comic link.
-        this.enableComicLink(this.perspective);
+        // Check if this is the view perspective.
+        if (SessionUtility.getValue(SessionKey.PERSPECTIVE, Perspective.class) == Perspective.VIEW) {
+
+            // Put the title on the session.
+            SessionUtility.putValue(SessionKey.TITLE, this.entity);
+        }
+        else {
+
+            // Remove the title from the session.
+            SessionUtility.removeValue(SessionKey.TITLE);
+        }
     }
 }

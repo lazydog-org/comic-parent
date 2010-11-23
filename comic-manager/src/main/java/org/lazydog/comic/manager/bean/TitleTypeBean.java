@@ -55,6 +55,16 @@ public class TitleTypeBean
     }
 
     /**
+     * Get the current entity.
+     *
+     * @return  the current entity.
+     */
+    @Override
+    public TitleType getCurrentEntity() {
+        return null;
+    }
+
+    /**
      * Get the entities as select items.
      *
      * @return  the entities as select items.
@@ -107,5 +117,13 @@ public class TitleTypeBean
 
         // Create a new entity.
         this.entity = new TitleType();
+    }
+
+    /**
+     * Store the entity.
+     */
+    @Override
+    public void storeEntity() {
+        // Ignore.
     }
 }

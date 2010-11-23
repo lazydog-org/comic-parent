@@ -30,7 +30,7 @@
                                     binding="#{imageTypeBean.dataTable}">
                         <a4j:support event="onRowClick" 
                                      actionListener="#{imageTypeBean.processRowClick}"
-                                     reRender="cm-imagetype-table-body,cm-imagetype-form"/>
+                                     reRender="cm-imagetype-table,cm-imagetype-form"/>
                         <rich:column styleClass="cm-table-cell cm-table-imagetype-value-cell #{(imageType.id == imageTypeBean.entity.id) ? 'cm-imagetype-table-selected-row' : ''}">
                             <h:outputText value="#{imageType.value}"/>
                         </rich:column>

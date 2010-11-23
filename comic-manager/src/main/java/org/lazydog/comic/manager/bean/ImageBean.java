@@ -3,17 +3,15 @@ package org.lazydog.comic.manager.bean;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
-import javax.faces.event.ActionEvent;
 import javax.faces.model.SelectItem;
 import org.lazydog.comic.model.Image;
+import org.lazydog.comic.model.ImageType;
 import org.lazydog.comic.model.Title;
-import org.lazydog.comic.manager.helper.bean.ImageTypeFilter;
-import org.lazydog.comic.manager.utility.ImageSearchBy;
+import org.lazydog.comic.model.UserPreference;
+import org.lazydog.comic.manager.utility.Perspective;
 import org.lazydog.comic.manager.utility.SessionKey;
 import org.lazydog.comic.manager.utility.SessionUtility;
 import org.lazydog.repository.criterion.ComparisonOperation;
@@ -95,7 +93,7 @@ public class ImageBean
      * @return  the criteria.
      */
     @Override
-    protected Criteria<Image> getCriteria() {
+    public Criteria<Image> getCriteria() {
 
         // Declare.
         Criteria<Image> criteria;
@@ -106,23 +104,31 @@ public class ImageBean
         try {
 
             // Declare.
-            ImageTypeFilter filter;
+            String fileName;
+            ImageType type;
 
-            // Initialize.
-            filter = new ImageTypeFilter();
+            // Get a new criteria.
+            criteria = this.comicService.getCriteria(Image.class);
 
+            // Get the image filter values.
+            fileName = SessionUtility.getValue(SessionKey.IMAGE_FILTER_FILE_NAME, String.class);
+            type = SessionUtility.getValue(SessionKey.IMAGE_FILTER_TYPE, ImageType.class);
 
-            // Get the criteria for the image searcher.
-            criteria = this.getCriteria(
-                    SessionUtility.getValue(
-                    SessionKey.IMAGE_SEARCH_BY, ImageSearchBy.class),
-                    SessionUtility.getValue(
-                    SessionKey.IMAGE_SEARCH_FOR, Object.class));
+            // Check if the image filter file name exists.
+            if (fileName != null) {
 
+                // Add the criterion.
+                criteria = addCriterion(criteria, ComparisonOperation.like("fileName", "%" + fileName + "%"));
+            }
 
-            // Modify the criteria.
-            criteria.add(LogicalOperation.and(ComparisonOperation.eq(
-                    "type", filter.getType())));
+            // Check if the image filter type exists.
+            if (type != null) {
+
+                // Add the criterion.
+                criteria = addCriterion(criteria, ComparisonOperation.eq("type", type));
+            }
+
+            // Order the results.
             criteria.addOrder(Order.asc("fileName"));
         }
         catch(Exception e) {
@@ -135,36 +141,13 @@ public class ImageBean
     }
 
     /**
-     * Get the criteria.
+     * Get the current entity.
      *
-     * @param  searchBy   the search by.
-     * @param  searchFor  the search for.
-     *
-     * @return  the criteria.
+     * @return  the current entity.
      */
-    private Criteria<Image> getCriteria(ImageSearchBy searchBy,
-                                        Object searchFor) {
-
-        // Declare.
-        Criteria<Image> criteria;
-
-        // Initialize.
-        criteria = null;
-
-        // Get a new criteria.
-        criteria = this.comicService.getCriteria(Image.class);
-
-        switch(searchBy) {
-
-            case IMAGE_FILE_NAME:
-
-                // Modify the criteria.
-                criteria.add(ComparisonOperation.like(
-                        "fileName", "%" + (String)searchFor + "%"));
-                break;
-        }
-
-        return criteria;
+    @Override
+    public Image getCurrentEntity() {
+        return SessionUtility.getValue(SessionKey.IMAGE, Image.class);
     }
 
     /**
@@ -194,18 +177,29 @@ public class ImageBean
     protected Image getNewEntity() {
         
         // Declare.
-        ImageTypeFilter filter;
         Image newEntity;
-
-        // Initialize.
-        filter = new ImageTypeFilter();
 
         // Create a new entity.
         newEntity = new Image();
 
-        // Set the type in the new entity.
-        newEntity.setType(filter.getType());
-        
+        // Check if the image filter type exists.
+        if (SessionUtility.valueExists(SessionKey.IMAGE_FILTER_TYPE)) {
+
+            // Set the type in the new entity.
+            newEntity.setType(SessionUtility
+                    .getValue(SessionKey.IMAGE_FILTER_TYPE,
+                    ImageType.class));
+        }
+
+        // Check if the user preference exits.
+        else if (SessionUtility.valueExists(SessionKey.USER_PREFERENCE)) {
+
+            // Set the type in the new entity.
+            newEntity.setType(SessionUtility
+                    .getValue(SessionKey.USER_PREFERENCE, UserPreference.class)
+                    .getImageType());
+        }
+
         return newEntity;
     }
 
@@ -220,22 +214,21 @@ public class ImageBean
     }
 
     /**
-     * Process the filter button.
-     *
-     * @param  actionEvent  the action event.
+     * Store the entity.
      */
-    public void processFilterButton(ActionEvent actionEvent) {
+    @Override
+    protected void storeEntity() {
 
-        // Declare.
-        ImageTypeFilter filter;
+        // Check if this is the view perspective.
+        if (SessionUtility.getValue(SessionKey.PERSPECTIVE, Perspective.class) == Perspective.VIEW) {
 
-        // Initialize.
-        filter = new ImageTypeFilter();
+            // Put the image on the session.
+            SessionUtility.putValue(SessionKey.IMAGE, this.entity);
+        }
+        else {
 
-        // Activate the filter.
-        filter.activateFilter(actionEvent, this.comicService);
-
-        // Enable the first button.
-        this.processFirstButton(actionEvent);
+            // Remove the image from the session.
+            SessionUtility.removeValue(SessionKey.IMAGE);
+        }
     }
 }

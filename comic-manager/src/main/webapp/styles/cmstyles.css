@@ -62,6 +62,7 @@ body {
 /* Content Layout */
 #cm-column1 {
     background-color: #ffffff;
+    clear: left;
     float: left;
     margin: 0;
     padding: 0;
@@ -80,6 +81,7 @@ body {
 
 #cm-filter {
     background-color: #ffffff;
+    clear: both;
     margin: 0;
     padding: 0;
 }
@@ -174,7 +176,15 @@ form select, form fieldset select {
     padding: 0;
 }
 
-.cm-filter-buttons, .cm-form-buttons, .cm-perspective-buttons {
+.cm-filter-buttons {
+    clear: both;
+    display: block;
+    text-align: center;
+    white-space: nowrap;
+    margin: 15px 0;
+}
+
+.cm-form-buttons, .cm-perspective-buttons {
     display: block;
     text-align: center;
     white-space: nowrap;
@@ -481,7 +491,7 @@ form select, form fieldset select {
     padding: 0;
 }
 
-.rich-table-firstrow:hover {
+.rich-table-row:hover {
     background-color: #cccccc;
 }
 

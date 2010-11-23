@@ -1,19 +1,51 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
                       "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-                      
+
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:h="http://java.sun.com/jsf/html">
+      xmlns:a4j="http://richfaces.org/a4j"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:rich="http://richfaces.org/rich"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
     <head/>
     <body>
         <ui:composition>
-            <h:form id="cm-image-filter" styleClass="cm-filter-buttons">
-                <ui:repeat value="#{imageTypeFilter.buttons}" var="button">
-                    <h:commandButton value="#{button}"
-                                     actionListener="#{imageBean.processFilterButton}"
-                                     disabled="#{imageTypeFilter.buttonDisabledMap[button]}"/>
-                </ui:repeat>
+            <h:form id="cm-image-filter">
+                <fieldset>
+                    <ol>
+                        <li>
+                            <label for="image-filter-file-name">File Name: </label>
+                            <h:inputText id="image-filter-file-name"
+                                         value="#{imageFilterBean.fileName}"
+                                         size="50" maxlength="100"
+                                         disabled="#{!imageFilterBean.buttonLinkController.formDisabled}"/>
+                        </li>
+                        <li>
+                            <label for="image-filter-type">
+                                <a4j:commandLink value="Image Type"
+                                                 actionListener="#{imageTypeBean.processFirstButton}"
+                                                 oncomplete="Richfaces.showModalPanel('cm-imagetype-modal-panel');"
+                                                 reRender="cm-imagetype-modal-panel-content"
+                                                 rendered="#{imageFilterBean.buttonLinkController.formDisabled}"/>
+                                <h:outputText value="Image Type"
+                                              rendered="#{!imageFilterBean.buttonLinkController.formDisabled}"/>
+                                Value:
+                            </label>
+                            <h:selectOneMenu id="image-filter-type"
+                                             value="#{imageFilterBean.type}"
+                                             converter="objectHexConverter"
+                                             disabled="#{!imageFilterBean.buttonLinkController.formDisabled}">
+                                <f:selectItem itemLabel="" itemValue=""/>
+                                <f:selectItems value="#{imageTypeBean.entitiesAsSelectItems}"/>
+                            </h:selectOneMenu>
+                        </li>
+                    </ol>
+                </fieldset>
+                <ui:include src="/pages/common/filterButtons.xhtml">
+                    <ui:param name="entityType" value="image"/>
+                    <ui:param name="managedBean" value="#{imageFilterBean}"/>
+                </ui:include>
             </h:form>
         </ui:composition>
     </body>

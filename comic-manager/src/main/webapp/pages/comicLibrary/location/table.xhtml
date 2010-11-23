@@ -25,7 +25,7 @@
                                     binding="#{locationBean.dataTable}">
                         <a4j:support event="onRowClick" 
                                      actionListener="#{locationBean.processRowClick}"
-                                     reRender="cm-location-table-body,cm-location-form"/>
+                                     reRender="cm-location-table,cm-location-form"/>
                         <rich:column styleClass="cm-table-cell cm-table-location-name-cell #{(location.id == locationBean.entity.id) ? 'cm-location-table-selected-row' : ''}">
                             <h:outputText value="#{location.name}"/>
                         </rich:column>

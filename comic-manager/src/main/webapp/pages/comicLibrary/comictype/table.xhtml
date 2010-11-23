@@ -25,7 +25,7 @@
                                     binding="#{comicTypeBean.dataTable}">
                         <a4j:support event="onRowClick" 
                                      actionListener="#{comicTypeBean.processRowClick}"
-                                     reRender="cm-comictype-table-body,cm-comictype-form"/>
+                                     reRender="cm-comictype-table,cm-comictype-form"/>
                         <rich:column styleClass="cm-table-cell cm-table-comictype-value-cell #{(comicType.id == comicTypeBean.entity.id) ? 'cm-comictype-table-selected-row' : ''}">
                             <h:outputText value="#{comicType.value}"/>
                         </rich:column>

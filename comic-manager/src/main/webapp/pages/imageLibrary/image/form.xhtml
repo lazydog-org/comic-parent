@@ -26,7 +26,7 @@
                                     <h:inputText id="image-filename"
                                                  value="#{imageBean.entity.fileName}"
                                                  size="50" maxlength="100"
-                                                 disabled="#{imageBean.formButtonController.formDisabled}"/>
+                                                 disabled="#{imageBean.buttonLinkController.formDisabled}"/>
                                 </li>
                                 <li>
                                     <label for="image-type">
@@ -34,15 +34,15 @@
                                                          actionListener="#{imageTypeBean.processFirstButton}"
                                                          oncomplete="Richfaces.showModalPanel('cm-imagetype-modal-panel');"
                                                          reRender="cm-imagetype-modal-panel-content"
-                                                         rendered="#{imageBean.formButtonController.formDisabled}"/>
+                                                         rendered="#{imageBean.buttonLinkController.formDisabled}"/>
                                         <h:outputText value="Image Type"
-                                                      rendered="#{!imageBean.formButtonController.formDisabled}"/>
+                                                      rendered="#{!imageBean.buttonLinkController.formDisabled}"/>
                                         Value:
                                     </label>
                                     <h:selectOneMenu id="image-type"
                                                      value="#{imageBean.entity.type}"
                                                      converter="objectHexConverter"
-                                                     disabled="#{imageBean.formButtonController.formDisabled}">
+                                                     disabled="#{imageBean.buttonLinkController.formDisabled}">
                                         <f:selectItems value="#{imageTypeBean.entitiesAsSelectItems}"/>
                                     </h:selectOneMenu>
                                 </li>

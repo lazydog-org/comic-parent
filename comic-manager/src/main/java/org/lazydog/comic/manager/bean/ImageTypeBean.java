@@ -55,6 +55,16 @@ public class ImageTypeBean
     }
 
     /**
+     * Get the current entity.
+     *
+     * @return  the current entity.
+     */
+    @Override
+    public ImageType getCurrentEntity() {
+        return null;
+    }
+
+    /**
      * Get the entities as select items.
      * 
      * @return  the entities as select items.
@@ -107,5 +117,13 @@ public class ImageTypeBean
 
         // Create a new entity.
         this.entity = new ImageType();
+    }
+
+    /**
+     * Store the entity.
+     */
+    @Override
+    public void storeEntity() {
+        // Ignore.
     }
 }

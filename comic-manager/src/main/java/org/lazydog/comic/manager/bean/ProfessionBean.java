@@ -55,29 +55,29 @@ public class ProfessionBean
     }
 
     /**
-     * Get a new entity.
-     * 
-     * @return  a new entity.
+     * Get the current entity.
+     *
+     * @return  the current entity.
      */
     @Override
-    protected Profession getNewEntity() {
-        return new Profession();
+    public Profession getCurrentEntity() {
+        return null;
     }
 
     /**
      * Get the entities as select items.
-     * 
+     *
      * @return  the entities as select items.
      */
     @Override
     public List<SelectItem> getEntitiesAsSelectItems() {
-        
+
         // Declare.
         List<SelectItem> entitiesAsSelectItems;
-        
+
         // Initialize.
         entitiesAsSelectItems = new ArrayList<SelectItem>();
-        
+
         // Loop through the entities.
         for(Profession entity : this.getEntities()) {
 
@@ -85,7 +85,7 @@ public class ProfessionBean
             entitiesAsSelectItems.add(new SelectItem(
                 entity, entity.getValue()));
         }
-        
+
         return entitiesAsSelectItems;
     }
 
@@ -100,6 +100,16 @@ public class ProfessionBean
     }
 
     /**
+     * Get a new entity.
+     * 
+     * @return  a new entity.
+     */
+    @Override
+    protected Profession getNewEntity() {
+        return new Profession();
+    }
+
+    /**
      * Initialize.
      */
     @PostConstruct
@@ -107,5 +117,13 @@ public class ProfessionBean
 
         // Create a new entity.
         this.entity = new Profession();
+    }
+
+    /**
+     * Store the entity.
+     */
+    @Override
+    public void storeEntity() {
+        // Ignore.
     }
 }

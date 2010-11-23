@@ -3,21 +3,19 @@
                       "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:c="http://java.sun.com/jstl/core"
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:h="http://java.sun.com/jsf/html">
     <head/>
     <body>
         <ui:composition>
-            <c:choose>
-                <c:when test="#{managedBean.formButtonController.formDisabled}">
-                    <h:inputHidden value="#{managedBean.entity}" converter="objectHexConverter"/>
-                </c:when>
-                <c:otherwise>
-                    <h:inputHidden value="#{managedBean.entity.id}"/>
-                    <h:inputHidden value="#{managedBean.oldEntity}" converter="objectHexConverter"/>
-                </c:otherwise>
-            </c:choose>
+            <h:inputHidden value="#{managedBean.entity}"
+                           converter="objectHexConverter"
+                           rendered="#{managedBean.buttonLinkController.formDisabled}"/>
+            <h:inputHidden value="#{managedBean.entity.id}"
+                           rendered="#{!managedBean.buttonLinkController.formDisabled}"/>
+            <h:inputHidden value="#{managedBean.oldEntity}"
+                           converter="objectHexConverter"
+                           rendered="#{!managedBean.buttonLinkController.formDisabled}"/>
             <h:inputHidden value="#{managedBean.perspective}"/>
             <fieldset>
                 <ol>

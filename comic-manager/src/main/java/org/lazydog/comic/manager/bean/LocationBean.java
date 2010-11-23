@@ -65,6 +65,16 @@ public class LocationBean
     }
 
     /**
+     * Get the current entity.
+     *
+     * @return  the current entity.
+     */
+    @Override
+    public Location getCurrentEntity() {
+        return null;
+    }
+
+    /**
      * Get the entities as select items.
      * 
      * @return  the entities as select items.
@@ -127,5 +137,13 @@ public class LocationBean
 
         // Create a new entity.
         this.entity = new Location();
+    }
+
+    /**
+     * Store the entity.
+     */
+    @Override
+    public void storeEntity() {
+        // Ignore.
     }
 }

@@ -19,16 +19,20 @@
         <managed-bean-class>org.lazydog.comic.manager.bean.ComicCharacterBean</managed-bean-class>
         <managed-bean-scope>request</managed-bean-scope></managed-bean>
     <managed-bean>
+        <managed-bean-name>comicFilterBean</managed-bean-name>
+        <managed-bean-class>org.lazydog.comic.manager.bean.ComicFilterBean</managed-bean-class>
+        <managed-bean-scope>request</managed-bean-scope>
+        <managed-property>
+            <property-name>comicBean</property-name>
+            <value>#{comicBean}</value>
+        </managed-property></managed-bean>
+    <managed-bean>
         <managed-bean-name>comicGradeBean</managed-bean-name>
         <managed-bean-class>org.lazydog.comic.manager.bean.ComicGradeBean</managed-bean-class>
         <managed-bean-scope>request</managed-bean-scope></managed-bean>
     <managed-bean>
         <managed-bean-name>comicTypeBean</managed-bean-name>
         <managed-bean-class>org.lazydog.comic.manager.bean.ComicTypeBean</managed-bean-class>
-        <managed-bean-scope>request</managed-bean-scope></managed-bean>
-    <managed-bean>
-        <managed-bean-name>comicTypeFilter</managed-bean-name>
-        <managed-bean-class>org.lazydog.comic.manager.helper.bean.ComicTypeFilter</managed-bean-class>
         <managed-bean-scope>request</managed-bean-scope></managed-bean>
     <managed-bean>
         <managed-bean-name>comicUploadBean</managed-bean-name>
@@ -47,16 +51,16 @@
         <managed-bean-class>org.lazydog.comic.manager.bean.ImageBean</managed-bean-class>
         <managed-bean-scope>request</managed-bean-scope></managed-bean>
     <managed-bean>
-        <managed-bean-name>imageSearcher</managed-bean-name>
-        <managed-bean-class>org.lazydog.comic.manager.helper.bean.ImageSearcher</managed-bean-class>
-        <managed-bean-scope>request</managed-bean-scope></managed-bean>
+        <managed-bean-name>imageFilterBean</managed-bean-name>
+        <managed-bean-class>org.lazydog.comic.manager.bean.ImageFilterBean</managed-bean-class>
+        <managed-bean-scope>request</managed-bean-scope>
+        <managed-property>
+            <property-name>imageBean</property-name>
+            <value>#{imageBean}</value>
+        </managed-property></managed-bean>
     <managed-bean>
         <managed-bean-name>imageTypeBean</managed-bean-name>
         <managed-bean-class>org.lazydog.comic.manager.bean.ImageTypeBean</managed-bean-class>
-        <managed-bean-scope>request</managed-bean-scope></managed-bean>
-    <managed-bean>
-        <managed-bean-name>imageTypeFilter</managed-bean-name>
-        <managed-bean-class>org.lazydog.comic.manager.helper.bean.ImageTypeFilter</managed-bean-class>
         <managed-bean-scope>request</managed-bean-scope></managed-bean>
     <managed-bean>
         <managed-bean-name>imprintBean</managed-bean-name>
@@ -87,20 +91,20 @@
         <managed-bean-class>org.lazydog.comic.manager.bean.TitleBean</managed-bean-class>
         <managed-bean-scope>request</managed-bean-scope></managed-bean>
     <managed-bean>
+        <managed-bean-name>titleFilterBean</managed-bean-name>
+        <managed-bean-class>org.lazydog.comic.manager.bean.TitleFilterBean</managed-bean-class>
+        <managed-bean-scope>request</managed-bean-scope>
+        <managed-property>
+            <property-name>titleBean</property-name>
+            <value>#{titleBean}</value>
+        </managed-property></managed-bean>
+    <managed-bean>
         <managed-bean-name>titleReportBean</managed-bean-name>
         <managed-bean-class>org.lazydog.comic.manager.report.bean.TitleReportBean</managed-bean-class>
         <managed-bean-scope>request</managed-bean-scope></managed-bean>
     <managed-bean>
-        <managed-bean-name>titleSearcher</managed-bean-name>
-        <managed-bean-class>org.lazydog.comic.manager.helper.bean.TitleSearcher</managed-bean-class>
-        <managed-bean-scope>request</managed-bean-scope></managed-bean>
-    <managed-bean>
         <managed-bean-name>titleTypeBean</managed-bean-name>
         <managed-bean-class>org.lazydog.comic.manager.bean.TitleTypeBean</managed-bean-class>
-        <managed-bean-scope>request</managed-bean-scope></managed-bean>
-    <managed-bean>
-        <managed-bean-name>titleTypeFilter</managed-bean-name>
-        <managed-bean-class>org.lazydog.comic.manager.helper.bean.TitleTypeFilter</managed-bean-class>
         <managed-bean-scope>request</managed-bean-scope></managed-bean>
     <managed-bean>
         <managed-bean-name>traitBean</managed-bean-name>

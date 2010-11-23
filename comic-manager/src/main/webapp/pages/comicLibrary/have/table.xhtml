@@ -40,7 +40,7 @@
                                     binding="#{haveBean.dataTable}">
                         <a4j:support event="onRowClick" 
                                      actionListener="#{haveBean.processRowClick}"
-                                     reRender="cm-have-table-body,cm-have-form"/>
+                                     reRender="cm-have-table,cm-have-form"/>
                         <rich:column styleClass="cm-table-cell cm-table-have-grade-cell #{(have.id == haveBean.entity.id) ? 'cm-have-table-selected-row' : ''}">
                             <h:outputText value="#{have.comicGrade.code}"/>
                         </rich:column>

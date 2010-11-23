@@ -55,6 +55,16 @@ public class ComicTypeBean
     }
 
     /**
+     * Get the current entity.
+     *
+     * @return  the current entity.
+     */
+    @Override
+    public ComicType getCurrentEntity() {
+        return null;
+    }
+
+    /**
      * Get the entities as select items.
      * 
      * @return  the entities as select items.
@@ -107,5 +117,13 @@ public class ComicTypeBean
 
         // Create a new entity.
         this.entity = new ComicType();
+    }
+
+    /**
+     * Store the entity.
+     */
+    @Override
+    public void storeEntity() {
+        // Ignore.
     }
 }

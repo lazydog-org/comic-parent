@@ -55,6 +55,41 @@ public class PublisherBean
     }
 
     /**
+     * Get the current entity.
+     *
+     * @return  the current entity.
+     */
+    @Override
+    public Publisher getCurrentEntity() {
+        return null;
+    }
+
+    /**
+     * Get the entities as select items.
+     *
+     * @return  the entities as select items.
+     */
+    @Override
+    public List<SelectItem> getEntitiesAsSelectItems() {
+
+        // Declare.
+        List<SelectItem> entitiesAsSelectItems;
+
+        // Initialize.
+        entitiesAsSelectItems = new ArrayList<SelectItem>();
+
+        // Loop through the entities.
+        for(Publisher entity : this.getEntities()) {
+
+            // Add the entity to the select items.
+            entitiesAsSelectItems.add(new SelectItem(
+                entity, entity.getName()));
+        }
+
+        return entitiesAsSelectItems;
+    }
+
+    /**
      * Get the entity class.
      *
      * @return  the entity class.
@@ -75,31 +110,6 @@ public class PublisherBean
     }
 
     /**
-     * Get the entities as select items.
-     * 
-     * @return  the entities as select items.
-     */
-    @Override
-    public List<SelectItem> getEntitiesAsSelectItems() {
-        
-        // Declare.
-        List<SelectItem> entitiesAsSelectItems;
-        
-        // Initialize.
-        entitiesAsSelectItems = new ArrayList<SelectItem>();
-        
-        // Loop through the entities.
-        for(Publisher entity : this.getEntities()) {
-
-            // Add the entity to the select items.
-            entitiesAsSelectItems.add(new SelectItem(
-                entity, entity.getName()));
-        }
-        
-        return entitiesAsSelectItems;
-    }
-
-    /**
      * Initialize.
      */
     @PostConstruct
@@ -107,5 +117,13 @@ public class PublisherBean
 
         // Create a new entity.
         this.entity = new Publisher();
+    }
+
+    /**
+     * Store the entity.
+     */
+    @Override
+    public void storeEntity() {
+        // Ignore.
     }
 }

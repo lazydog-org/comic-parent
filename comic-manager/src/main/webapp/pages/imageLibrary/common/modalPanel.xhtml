@@ -21,7 +21,7 @@
                     <h:panelGroup>
                         <h:form>
                             <a4j:commandLink value="close"
-                                             actionListener="#{parentManagedBean.processFirstButton}"
+                                             actionListener="#{parentManagedBean.processCurrentButton}"
                                              oncomplete="Richfaces.hideModalPanel('cm-#{entityType}-modal-panel');"
                                              reRender="cm-#{parentEntityType}-filter,cm-#{parentEntityType}-table,cm-#{parentEntityType}-form"/>
                         </h:form>

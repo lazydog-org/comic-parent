@@ -25,7 +25,7 @@
                                     binding="#{categoryBean.dataTable}">
                         <a4j:support event="onRowClick"
                                      actionListener="#{categoryBean.processRowClick}"
-                                     reRender="cm-category-table-body,cm-category-form"/>
+                                     reRender="cm-category-table,cm-category-form"/>
                         <rich:column styleClass="cm-table-cell cm-table-category-name-cell #{(category.id == categoryBean.entity.id) ? 'cm-category-table-selected-row' : ''}">
                             <h:outputText value="#{category.name}"/>
                         </rich:column>

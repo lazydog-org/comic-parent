@@ -25,7 +25,7 @@
                                     binding="#{professionBean.dataTable}">
                         <a4j:support event="onRowClick" 
                                      actionListener="#{professionBean.processRowClick}"
-                                     reRender="cm-profession-table-body,cm-profession-form"/>
+                                     reRender="cm-profession-table,cm-profession-form"/>
                         <rich:column styleClass="cm-table-cell cm-table-profession-value-cell #{(profession.id == professionBean.entity.id) ? 'cm-profession-table-selected-row' : ''}">
                             <h:outputText value="#{profession.value}"/>
                         </rich:column>

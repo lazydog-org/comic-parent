@@ -16,7 +16,7 @@
             <h:form id="cm-title-form">
                 <a4j:htmlCommandLink value="Manage Issues"
                                      actionListener="#{comicBean.processFirstButton}"
-                                     disabled="#{titleBean.comicLinkDisabled}">
+                                     disabled="#{titleBean.buttonLinkController.linkDisabledMap['Manage Issues']}">
                     <f:attribute name="subtopic" value="COMIC"/>
                     <f:actionListener type="org.lazydog.comic.manager.actionlistener.ActivateSubtopic"/>
                 </a4j:htmlCommandLink>
@@ -33,14 +33,14 @@
                                     <h:inputText id="title-name"
                                                  value="#{titleBean.entity.name}"
                                                  size="50" maxlength="100"
-                                                 disabled="#{titleBean.formButtonController.formDisabled}"/>
+                                                 disabled="#{titleBean.buttonLinkController.formDisabled}"/>
                                 </li>
                                 <li>
                                     <label for="title-volume">Volume: </label>
                                     <rich:inputNumberSpinner id="title-volume"
                                                              value="#{titleBean.entity.volume}"
                                                              minValue="1" maxValue="99" inputSize="2"
-                                                             disabled="#{titleBean.formButtonController.formDisabled}"/>
+                                                             disabled="#{titleBean.buttonLinkController.formDisabled}"/>
                                 </li>
                                 <li>
                                     <label for="title-publishers">
@@ -48,15 +48,15 @@
                                                          actionListener="#{publisherBean.processFirstButton}"
                                                          oncomplete="Richfaces.showModalPanel('cm-publisher-modal-panel');"
                                                          reRender="cm-publisher-modal-panel-content"
-                                                         rendered="#{titleBean.formButtonController.formDisabled}"/>
+                                                         rendered="#{titleBean.buttonLinkController.formDisabled}"/>
                                         <h:outputText value="Publisher"
-                                                      rendered="#{!titleBean.formButtonController.formDisabled}"/>
+                                                      rendered="#{!titleBean.buttonLinkController.formDisabled}"/>
                                         Name(s):
                                     </label>
                                     <h:selectManyListbox id="title-publishers"
                                                          value="#{titleBean.entity.publishers}" size="4"
                                                          converter="objectHexConverter"
-                                                         disabled="#{titleBean.formButtonController.formDisabled}">
+                                                         disabled="#{titleBean.buttonLinkController.formDisabled}">
                                         <f:selectItems value="#{publisherBean.entitiesAsSelectItems}"/>
                                     </h:selectManyListbox>
                                 </li>
@@ -66,15 +66,15 @@
                                                          actionListener="#{titleTypeBean.processFirstButton}"
                                                          oncomplete="Richfaces.showModalPanel('cm-titletype-modal-panel');"
                                                          reRender="cm-titletype-modal-panel-content"
-                                                         rendered="#{titleBean.formButtonController.formDisabled}"/>
+                                                         rendered="#{titleBean.buttonLinkController.formDisabled}"/>
                                         <h:outputText value="Title Type"
-                                                      rendered="#{!titleBean.formButtonController.formDisabled}"/>
+                                                      rendered="#{!titleBean.buttonLinkController.formDisabled}"/>
                                         Value:
                                     </label>
                                     <h:selectOneMenu id="title-type"
                                                      value="#{titleBean.entity.type}"
                                                      converter="objectHexConverter"
-                                                     disabled="#{titleBean.formButtonController.formDisabled}">
+                                                     disabled="#{titleBean.buttonLinkController.formDisabled}">
                                         <f:selectItems value="#{titleTypeBean.entitiesAsSelectItems}"/>
                                     </h:selectOneMenu>
                                 </li>
@@ -83,7 +83,7 @@
                                     <h:selectOneMenu id="title-publishstartdate"
                                                      value="#{titleBean.entity.publishStartDate}"
                                                      converter="monthYearConverter"
-                                                     disabled="#{titleBean.formButtonController.formDisabled}">
+                                                     disabled="#{titleBean.buttonLinkController.formDisabled}">
                                         <comic:monthYearSelectItems empty="true"
                                                                     startDate="#{titleBean.startDate}"
                                                                     endDate="#{titleBean.endDate}"/>
@@ -94,7 +94,7 @@
                                     <h:selectOneMenu id="title-publishenddate"
                                                      value="#{titleBean.entity.publishEndDate}"
                                                      converter="monthYearConverter"
-                                                     disabled="#{titleBean.formButtonController.formDisabled}">
+                                                     disabled="#{titleBean.buttonLinkController.formDisabled}">
                                         <comic:monthYearSelectItems empty="true"
                                                                     startDate="#{titleBean.startDate}"
                                                                     endDate="#{titleBean.endDate}"/>
@@ -106,15 +106,15 @@
                                                          actionListener="#{categoryBean.processFirstButton}"
                                                          oncomplete="Richfaces.showModalPanel('cm-category-modal-panel');"
                                                          reRender="cm-category-modal-panel-content"
-                                                         rendered="#{titleBean.formButtonController.formDisabled}"/>
+                                                         rendered="#{titleBean.buttonLinkController.formDisabled}"/>
                                         <h:outputText value="Category"
-                                                      rendered="#{!titleBean.formButtonController.formDisabled}"/>
+                                                      rendered="#{!titleBean.buttonLinkController.formDisabled}"/>
                                         Name(s):
                                     </label>
                                     <h:selectManyListbox id="title-category"
                                                          value="#{titleBean.entity.categories}" size="4"
                                                          converter="objectHexConverter"
-                                                         disabled="#{titleBean.formButtonController.formDisabled}">
+                                                         disabled="#{titleBean.buttonLinkController.formDisabled}">
                                         <f:selectItems value="#{categoryBean.entitiesAsSelectItems}"/>
                                     </h:selectManyListbox>
                                 </li>

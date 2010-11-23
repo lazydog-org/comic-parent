@@ -55,6 +55,16 @@ public class ImprintBean
     }
 
     /**
+     * Get the current entity.
+     *
+     * @return  the current entity.
+     */
+    @Override
+    public Imprint getCurrentEntity() {
+        return null;
+    }
+
+    /**
      * Get the entities as select items.
      * 
      * @return  the entities as select items.
@@ -107,5 +117,13 @@ public class ImprintBean
 
         // Create a new entity.
         this.entity = new Imprint();
+    }
+
+    /**
+     * Store the entity.
+     */
+    @Override
+    public void storeEntity() {
+        // Ignore.
     }
 }

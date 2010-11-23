@@ -3,17 +3,87 @@
                       "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
                       
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:h="http://java.sun.com/jsf/html">
+      xmlns:a4j="http://richfaces.org/a4j"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:rich="http://richfaces.org/rich"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
     <head/>
     <body>
         <ui:composition>
-            <h:form id="cm-title-filter" styleClass="cm-filter-buttons">
-                <ui:repeat value="#{titleTypeFilter.buttons}" var="button">
-                    <h:commandButton value="#{button}"
-                                     actionListener="#{titleBean.processFilterButton}"
-                                     disabled="#{titleTypeFilter.buttonDisabledMap[button]}"/>
-                </ui:repeat>
+            <h:form id="cm-title-filter">
+                <fieldset>
+                    <ol>
+                        <li>
+                            <label for="title-filter-name">Title Name: </label>
+                            <h:inputText id="title-filter-name"
+                                         value="#{titleFilterBean.name}"
+                                         size="50" maxlength="100"
+                                         disabled="#{!titleFilterBean.buttonLinkController.formDisabled}"/>
+                        </li>
+                        <li>
+                            <label for="title-filter-publisher">
+                                <a4j:commandLink value="Publisher"
+                                                 actionListener="#{publisherBean.processFirstButton}"
+                                                 oncomplete="Richfaces.showModalPanel('cm-publisher-modal-panel');"
+                                                 reRender="cm-publisher-modal-panel-content"
+                                                 rendered="#{titleFilterBean.buttonLinkController.formDisabled}"/>
+                                <h:outputText value="Publisher"
+                                              rendered="#{!titleFilterBean.buttonLinkController.formDisabled}"/>
+                                Name:
+                            </label>
+                            <h:selectOneMenu id="title-filter-publisher"
+                                                 value="#{titleFilterBean.publisher}"
+                                                 converter="objectHexConverter"
+                                                 disabled="#{!titleFilterBean.buttonLinkController.formDisabled}">
+                                <f:selectItem itemLabel="" itemValue=""/>
+                                <f:selectItems value="#{publisherBean.entitiesAsSelectItems}"/>
+                            </h:selectOneMenu>
+                        </li>
+                        <li>
+                            <label for="title-filter-type">
+                                <a4j:commandLink value="Title Type"
+                                                 actionListener="#{titleTypeBean.processFirstButton}"
+                                                 oncomplete="Richfaces.showModalPanel('cm-titletype-modal-panel');"
+                                                 reRender="cm-titletype-modal-panel-content"
+                                                 rendered="#{titleFilterBean.buttonLinkController.formDisabled}"/>
+                                <h:outputText value="Title Type"
+                                              rendered="#{!titleFilterBean.buttonLinkController.formDisabled}"/>
+                                Value:
+                            </label>
+                            <h:selectOneMenu id="title-filter-type"
+                                             value="#{titleFilterBean.type}"
+                                             converter="objectHexConverter"
+                                             disabled="#{!titleFilterBean.buttonLinkController.formDisabled}">
+                                <f:selectItem itemLabel="" itemValue=""/>
+                                <f:selectItems value="#{titleTypeBean.entitiesAsSelectItems}"/>
+                            </h:selectOneMenu>
+                        </li>
+                        <li>
+                            <label for="title-filter-category">
+                                <a4j:commandLink value="Category"
+                                                 actionListener="#{categoryBean.processFirstButton}"
+                                                 oncomplete="Richfaces.showModalPanel('cm-category-modal-panel');"
+                                                 reRender="cm-category-modal-panel-content"
+                                                 rendered="#{titleFilterBean.buttonLinkController.formDisabled}"/>
+                                <h:outputText value="Category"
+                                              rendered="#{!titleFilterBean.buttonLinkController.formDisabled}"/>
+                                Name:
+                            </label>
+                            <h:selectOneMenu id="title-filter-category"
+                                                 value="#{titleFilterBean.category}"
+                                                 converter="objectHexConverter"
+                                                 disabled="#{!titleFilterBean.buttonLinkController.formDisabled}">
+                                <f:selectItem itemLabel="" itemValue=""/>
+                                <f:selectItems value="#{categoryBean.entitiesAsSelectItems}"/>
+                            </h:selectOneMenu>
+                        </li>
+                    </ol>
+                </fieldset>
+                <ui:include src="/pages/common/filterButtons.xhtml">
+                    <ui:param name="entityType" value="title"/>
+                    <ui:param name="managedBean" value="#{titleFilterBean}"/>
+                </ui:include>
             </h:form>
         </ui:composition>
     </body>

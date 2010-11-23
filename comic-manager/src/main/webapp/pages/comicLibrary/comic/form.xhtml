@@ -17,32 +17,49 @@
             <h:form id="cm-comic-form">
                 <h:inputHidden value="#{comicBean.entity.title}" converter="objectHexConverter"/>
                 <h:inputHidden value="#{comicBean.entity.image}" converter="objectHexConverter"/>
-                <c:if test="#{!comicBean.listLinkDisabled}">
-                    <a4j:commandLink value="Upload Image"
-                                     oncomplete="Richfaces.showModalPanel('cm-comicupload-modal-panel');"
-                                     reRender="cm-comicupload-modal-panel-content"/>
-                    <rich:spacer width="5"/>
-                    <a4j:commandLink value="Manage Collection"
-                                     actionListener="#{haveBean.processFirstButton}"
-                                     oncomplete="Richfaces.showModalPanel('cm-have-modal-panel');"
-                                     reRender="cm-have-modal-panel-content"/>
-                    <rich:spacer width="5"/>
-                    <c:choose>
-                        <c:when test="#{comicBean.addToWishlistRendered}">
-                            <a4j:commandLink value="Add to Wishlist"
-                                             actionListener="#{comicBean.processAddToWishlist}"
-                                             reRender="cm-comic-form"/>
-                        </c:when>
-                        <c:otherwise>
-                            <a4j:commandLink value="Remove from Wishlist"
-                                             actionListener="#{comicBean.processRemoveFromWishlist}"
-                                             reRender="cm-comic-form"/>
-                        </c:otherwise>
-                    </c:choose>
-                </c:if>
+                <!-- bug in a4j:commandLink rendering when disabled="true" (RichFaces bug RF-7624) -->
+                <c:choose>
+                    <c:when test="#{!comicBean.buttonLinkController.linkDisabledMap['Manage Collection']}">
+                        <a4j:commandLink value="Manage Collection"
+                                         actionListener="#{haveBean.processFirstButton}"
+                                         oncomplete="Richfaces.showModalPanel('cm-have-modal-panel');"
+                                         reRender="cm-have-modal-panel-content"/>
+                    </c:when>
+                    <c:otherwise>
+                        <h:outputText value="Manage Collection"/>
+                    </c:otherwise>
+                </c:choose>
+                <rich:spacer width="5"/>
+                <!-- bug in a4j:commandLink rendering when disabled="true" (RichFaces bug RF-7624) -->
+                <c:choose>
+                    <c:when test="#{!comicBean.buttonLinkController.linkDisabledMap['Add to Wishlist']}">
+                        <a4j:commandLink value="Add to Wishlist"
+                                         actionListener="#{comicBean.processAddToWishlist}"
+                                         reRender="cm-comic-form"
+                                         rendered="#{comicBean.addToWishlistRendered}"/>
+                    </c:when>
+                    <c:otherwise>
+                        <h:outputText value="Add to Wishlist"
+                                      rendered="#{comicBean.addToWishlistRendered}"/>
+                    </c:otherwise>
+                </c:choose>
+                <!-- bug in a4j:commandLink rendering when disabled="true" (RichFaces bug RF-7624) -->
+                <c:choose>
+                    <c:when test="#{!comicBean.buttonLinkController.linkDisabledMap['Remove from Wishlist']}">
+                        <a4j:commandLink value="Remove from Wishlist"
+                                         actionListener="#{comicBean.processRemoveFromWishlist}"
+                                         reRender="cm-comic-form"
+                                         rendered="#{!comicBean.addToWishlistRendered}"/>
+                    </c:when>
+                    <c:otherwise>
+                        <h:outputText value="Remove from Wishlist"
+                                      rendered="#{!comicBean.addToWishlistRendered}"/>
+                    </c:otherwise>
+                </c:choose>
                 <rich:spacer width="5"/>
                 <a4j:htmlCommandLink value="Return to Title Selection"
-                                     actionListener="#{titleBean.processFirstButton}">
+                                     actionListener="#{titleBean.processCurrentButton}"
+                                     disabled="#{comicBean.buttonLinkController.linkDisabledMap['Return to Title Selection']}">
                     <f:attribute name="subtopic" value="TITLE"/>
                     <f:actionListener type="org.lazydog.comic.manager.actionlistener.ActivateSubtopic"/>
                 </a4j:htmlCommandLink>
@@ -59,7 +76,7 @@
                                     <rich:inputNumberSpinner id="comic-number"
                                                              value="#{comicBean.entity.number}"
                                                              minValue="0" maxValue="1000" inputSize="3"
-                                                             disabled="#{comicBean.formButtonController.formDisabled}"/>
+                                                             disabled="#{comicBean.buttonLinkController.formDisabled}"/>
                                 </li>
                                 <c:if test="#{comicBean.perspective == 'ADD_MANY'}">
                                     <li>
@@ -67,14 +84,14 @@
                                         <rich:inputNumberSpinner id="comic-endnumber"
                                                                  value="#{comicBean.endNumber}"
                                                                  minValue="0" maxValue="1000" inputSize="3"
-                                                                 disabled="#{comicBean.formButtonController.formDisabled}"/>
+                                                                 disabled="#{comicBean.buttonLinkController.formDisabled}"/>
                                     </li>
                                 </c:if>
                                 <li>
                                     <label for="comic-variant">Variant: </label>
                                     <h:selectOneMenu id="comic-variant"
                                                      value="#{comicBean.entity.variant}"
-                                                     disabled="#{comicBean.formButtonController.formDisabled}">
+                                                     disabled="#{comicBean.buttonLinkController.formDisabled}">
                                         <f:selectItems value="#{comicBean.variantsAsSelectItems}"/>
                                     </h:selectOneMenu>
                                 </li>
@@ -83,7 +100,7 @@
                                     <rich:inputNumberSpinner id="comic-print"
                                                              value="#{comicBean.entity.print}"
                                                              minValue="1" maxValue="99" inputSize="2"
-                                                             disabled="#{comicBean.formButtonController.formDisabled}"/>
+                                                             disabled="#{comicBean.buttonLinkController.formDisabled}"/>
                                 </li>
                                 <li>
                                     <label for="comic-type">
@@ -91,15 +108,15 @@
                                                          actionListener="#{comicTypeBean.processFirstButton}"
                                                          oncomplete="Richfaces.showModalPanel('cm-comictype-modal-panel');"
                                                          reRender="cm-comictype-modal-panel-content"
-                                                         rendered="#{comicBean.formButtonController.formDisabled}"/>
+                                                         rendered="#{comicBean.buttonLinkController.formDisabled}"/>
                                         <h:outputText value="Comic Type"
-                                                      rendered="#{!comicBean.formButtonController.formDisabled}"/>
+                                                      rendered="#{!comicBean.buttonLinkController.formDisabled}"/>
                                         Value:
                                     </label>
                                     <h:selectOneMenu id="comic-type"
                                                      value="#{comicBean.entity.type}"
                                                      converter="objectHexConverter"
-                                                     disabled="#{comicBean.formButtonController.formDisabled}">
+                                                     disabled="#{comicBean.buttonLinkController.formDisabled}">
                                         <f:selectItems value="#{comicTypeBean.entitiesAsSelectItems}"/>
                                     </h:selectOneMenu>
                                 </li>
@@ -109,15 +126,15 @@
                                                          actionListener="#{distributionBean.processFirstButton}"
                                                          oncomplete="Richfaces.showModalPanel('cm-distribution-modal-panel');"
                                                          reRender="cm-distribution-modal-panel-content"
-                                                         rendered="#{comicBean.formButtonController.formDisabled}"/>
+                                                         rendered="#{comicBean.buttonLinkController.formDisabled}"/>
                                         <h:outputText value="Distribution"
-                                                      rendered="#{!comicBean.formButtonController.formDisabled}"/>
+                                                      rendered="#{!comicBean.buttonLinkController.formDisabled}"/>
                                         Value:
                                     </label>
                                     <h:selectOneMenu id="comic-distribution"
                                                      value="#{comicBean.entity.distribution}"
                                                      converter="objectHexConverter"
-                                                     disabled="#{comicBean.formButtonController.formDisabled}">
+                                                     disabled="#{comicBean.buttonLinkController.formDisabled}">
                                         <f:selectItems value="#{distributionBean.entitiesAsSelectItems}"/>
                                     </h:selectOneMenu>
                                 </li>
@@ -126,7 +143,7 @@
                                     <h:selectOneMenu id="comic-publishdate"
                                                      value="#{comicBean.entity.publishDate}"
                                                      converter="monthYearConverter"
-                                                     disabled="#{comicBean.formButtonController.formDisabled}">
+                                                     disabled="#{comicBean.buttonLinkController.formDisabled}">
                                         <comic:monthYearSelectItems empty="true"
                                                                     startDate="#{comicBean.startDate}"
                                                                     endDate="#{comicBean.endDate}"/>
@@ -137,14 +154,14 @@
                                     <h:inputText id="comic-coverprice"
                                                  value="#{comicBean.entity.coverPrice}"
                                                  size="6" maxlength="6"
-                                                 disabled="#{comicBean.formButtonController.formDisabled}"/>
+                                                 disabled="#{comicBean.buttonLinkController.formDisabled}"/>
                                 </li>
                                 <li>
                                     <label for="comic-description">Description: </label>
                                     <h:inputTextarea id="comic-description"
                                                      value="#{comicBean.entity.description}"
                                                      cols="20" rows="8"
-                                                     disabled="#{comicBean.formButtonController.formDisabled}"/>
+                                                     disabled="#{comicBean.buttonLinkController.formDisabled}"/>
                                 </li>
                             </ol>
                         </fieldset>
@@ -155,6 +172,17 @@
                                  src="#{request.contextPath}/getImage?fileName=#{comicBean.entity.image.fileName}&amp;typeValue=#{comicBean.entity.image.type.value}&amp;height=300"
                                  alt="Image Unavailable"/>
                         </a>
+                        <!-- bug in a4j:commandLink rendering when disabled="true" (RichFaces bug RF-7624) -->
+                        <c:choose>
+                            <c:when test="#{comicBean.buttonLinkController.formDisabled and comicBean.perspective == 'VIEW'}">
+                                <a4j:commandLink value="Upload Image"
+                                                 oncomplete="Richfaces.showModalPanel('cm-comicupload-modal-panel');"
+                                                 reRender="cm-comicupload-modal-panel-content"/>
+                            </c:when>
+                            <c:otherwise>
+                                <h:outputText value="Upload Image"/>
+                            </c:otherwise>
+                        </c:choose>
                     </rich:panelBarItem>
                     <rich:panelBarItem label="Trait">
                         <fieldset>
@@ -165,15 +193,15 @@
                                                          actionListener="#{traitBean.processFirstButton}"
                                                          oncomplete="Richfaces.showModalPanel('cm-trait-modal-panel');"
                                                          reRender="cm-trait-modal-panel-content"
-                                                         rendered="#{comicBean.formButtonController.formDisabled}"/>
+                                                         rendered="#{comicBean.buttonLinkController.formDisabled}"/>
                                         <h:outputText value="Trait"
-                                                      rendered="#{!comicBean.formButtonController.formDisabled}"/>
+                                                      rendered="#{!comicBean.buttonLinkController.formDisabled}"/>
                                         Value(s):
                                     </label>
                                     <h:selectManyListbox id="comic-traits"
                                                          value="#{comicBean.entity.traits}" size="6"
                                                          converter="objectHexConverter"
-                                                         disabled="#{comicBean.formButtonController.formDisabled}">
+                                                         disabled="#{comicBean.buttonLinkController.formDisabled}">
                                         <f:selectItems value="#{traitBean.entitiesAsSelectItems}"/>
                                     </h:selectManyListbox>
                                 </li>
@@ -189,15 +217,15 @@
                                                          actionListener="#{comicCharacterBean.processFirstButton}"
                                                          oncomplete="Richfaces.showModalPanel('cm-comiccharacter-modal-panel');"
                                                          reRender="cm-comiccharacter-modal-panel-content"
-                                                         rendered="#{comicBean.formButtonController.formDisabled}"/>
+                                                         rendered="#{comicBean.buttonLinkController.formDisabled}"/>
                                         <h:outputText value="Character"
-                                                      rendered="#{!comicBean.formButtonController.formDisabled}"/>
+                                                      rendered="#{!comicBean.buttonLinkController.formDisabled}"/>
                                         Name(s):
                                     </label>
                                     <h:selectManyListbox id="comic-characters"
                                                          value="#{comicBean.entity.characters}" size="6"
                                                          converter="objectHexConverter"
-                                                         disabled="#{comicBean.formButtonController.formDisabled}">
+                                                         disabled="#{comicBean.buttonLinkController.formDisabled}">
                                         <f:selectItems value="#{comicCharacterBean.entitiesAsSelectItems}"/>
                                     </h:selectManyListbox>
                                 </li>

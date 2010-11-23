@@ -13,17 +13,17 @@
             <h:panelGroup id="cm-#{entityType}-form-buttons" styleClass="cm-form-buttons">
                 <a4j:commandButton value="Reset"
                                    actionListener="#{managedBean.processResetButton}"
-                                   disabled="#{managedBean.formButtonController.buttonDisabledMap['Reset']}"
+                                   disabled="#{managedBean.buttonLinkController.buttonDisabledMap['Reset']}"
                                    reRender="cm-#{entityType}-form"/>
                 <a4j:commandButton value="Cancel"
                                    actionListener="#{managedBean.processCancelButton}"
-                                   disabled="#{managedBean.formButtonController.buttonDisabledMap['Cancel']}"
-                                   reRender="cm-#{entityType}-form"/>
+                                   disabled="#{managedBean.buttonLinkController.buttonDisabledMap['Cancel']}"
+                                   reRender="cm-#{entityType}-form,cm-#{entityType}-filter"/>
                 <rich:spacer width="20"/>
                 <a4j:commandButton value="OK"
                                    actionListener="#{managedBean.processOkButton}"
-                                   disabled="#{managedBean.formButtonController.buttonDisabledMap['OK']}"
-                                   reRender="cm-#{entityType}-table,cm-#{entityType}-form"/>
+                                   disabled="#{managedBean.buttonLinkController.buttonDisabledMap['OK']}"
+                                   reRender="cm-#{entityType}-table,cm-#{entityType}-form,cm-#{entityType}-filter"/>
             </h:panelGroup>
         </ui:composition>
     </body>

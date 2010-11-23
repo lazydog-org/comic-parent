@@ -25,7 +25,7 @@
                                     binding="#{publisherBean.dataTable}">
                         <a4j:support event="onRowClick" 
                                      actionListener="#{publisherBean.processRowClick}"
-                                     reRender="cm-profession-table-body,cm-profession-form"/>
+                                     reRender="cm-profession-table,cm-profession-form"/>
                         <rich:column styleClass="cm-table-cell cm-table-publisher-name-cell #{(publisher.id == publisherBean.entity.id) ? 'cm-publisher-table-selected-row' : ''}">
                             <h:outputText value="#{publisher.name}"/>
                         </rich:column>

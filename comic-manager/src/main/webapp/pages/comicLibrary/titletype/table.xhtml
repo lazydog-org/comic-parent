@@ -25,7 +25,7 @@
                                     binding="#{titleTypeBean.dataTable}">
                         <a4j:support event="onRowClick" 
                                      actionListener="#{titleTypeBean.processRowClick}"
-                                     reRender="cm-titletype-table-body,cm-titletype-form"/>
+                                     reRender="cm-titletype-table,cm-titletype-form"/>
                         <rich:column styleClass="cm-table-cell cm-table-titletype-value-cell #{(titleType.id == titleTypeBean.entity.id) ? 'cm-titletype-table-selected-row' : ''}">
                             <h:outputText value="#{titleType.value}"/>
                         </rich:column>

@@ -55,6 +55,16 @@ public class TraitBean
     }
 
     /**
+     * Get the current entity.
+     *
+     * @return  the current entity.
+     */
+    @Override
+    public Trait getCurrentEntity() {
+        return null;
+    }
+
+    /**
      * Get a new entity.
      * 
      * @return  a new entity.
@@ -106,5 +116,13 @@ public class TraitBean
 
         // Create a new entity.
         this.entity = new Trait();
+    }
+
+    /**
+     * Store the entity.
+     */
+    @Override
+    public void storeEntity() {
+        // Ignore.
     }
 }

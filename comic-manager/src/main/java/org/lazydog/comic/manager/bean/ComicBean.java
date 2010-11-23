@@ -12,13 +12,13 @@ import javax.faces.event.ActionEvent;
 import javax.faces.model.SelectItem;
 import org.lazydog.comic.model.Comic;
 import org.lazydog.comic.model.ComicCharacter;
-import org.lazydog.comic.model.Image;
+import org.lazydog.comic.model.ComicType;
+import org.lazydog.comic.model.Distribution;
 import org.lazydog.comic.model.Title;
 import org.lazydog.comic.model.Trait;
 import org.lazydog.comic.model.UserPreference;
 import org.lazydog.comic.model.Want;
-import org.lazydog.comic.manager.helper.bean.ComicTypeFilter;
-import org.lazydog.comic.manager.utility.FormButtonController;
+import org.lazydog.comic.manager.utility.ButtonLinkController;
 import org.lazydog.comic.manager.utility.Perspective;
 import org.lazydog.comic.manager.utility.SessionKey;
 import org.lazydog.comic.manager.utility.SessionUtility;
@@ -38,81 +38,49 @@ public class ComicBean
        implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    
     private Integer endNumber;
-    private Boolean listLinkDisabled;
 
     /**
-     * Enable the list link.
+     * Get the add to wishlist rendered value.
      *
-     * @param  perspective  the perspective.
-     */
-    private void enableListLink(Perspective perspective) {
-
-        // Check if this is the view perspective.
-        if (perspective == Perspective.VIEW) {
-
-            // Enable the list link.
-            this.listLinkDisabled = false;
-
-            // Put the comic on the session.
-            SessionUtility.putValue(SessionKey.COMIC, this.entity);
-
-            // Put the comic image on the session.
-            SessionUtility.putValue(SessionKey.IMAGE, this.entity.getImage());
-
-            // Put the image button disabled flag on the session.
-            SessionUtility.putValue(SessionKey.IMAGE_BUTTON_DISABLED, Boolean.TRUE);
-        }
-        else {
-
-            // Disable the list link.
-            this.listLinkDisabled = true;
-
-            // Remove the comic from the session.
-            SessionUtility.removeValue(SessionKey.COMIC);
-
-            // Remove the comic image from the session.
-            SessionUtility.removeValue(SessionKey.IMAGE);
-
-            // Remove the image button disabled flag from the session.
-            SessionUtility.removeValue(SessionKey.IMAGE_BUTTON_DISABLED);
-        }
-    }
-
-    /**
-     * Get the add to wishlist rendered.
-     *
-     * @return  the add link rendered.
+     * @return  the add to wishlist rendered value.
      */
     public Boolean getAddToWishlistRendered() {
 
         // Declare.
-        Boolean addLinkRendered;
+        Boolean addToWishlistRendered;
 
-        // Initialize.
-        addLinkRendered = false;
+        addToWishlistRendered = Boolean.TRUE;
 
         try {
             // Declare.
             Want want;
-            Criteria<Want> criteria;
 
-            // Create the criteria.
-            criteria = this.comicService.getCriteria(Want.class);
-            criteria.add(ComparisonOperation.eq("comic",
-                    SessionUtility.getValue(SessionKey.COMIC, Comic.class)));
-            criteria.add(LogicalOperation.and(ComparisonOperation.eq("uuid",
-                    SessionUtility.getValue(SessionKey.UUID, String.class))));
+            // Initialize.
+            want = null;
+            
+            // Check if there is a comic on the session.
+            if (SessionUtility.valueExists(SessionKey.COMIC)) {
 
-            // Get the want.
-            want = this.comicService.find(Want.class, criteria);
+                // Declare.
+                Criteria<Want> criteria;
 
-            // Check if there is not already a want.
-            if (want == null) {
+                // Create the criteria.
+                criteria = this.comicService.getCriteria(Want.class);
+                criteria.add(ComparisonOperation.eq("comic",
+                        SessionUtility.getValue(SessionKey.COMIC, Comic.class)));
+                criteria.add(LogicalOperation.and(ComparisonOperation.eq("uuid",
+                        SessionUtility.getValue(SessionKey.UUID, String.class))));
 
-                // Render the add link.
-                addLinkRendered = true;
+                // Get the want.
+                want = this.comicService.find(Want.class, criteria);
+            }
+
+            // Check if there is a want.
+            if (want != null) {
+
+                // Set the add to wishlist rendered to false.
+                addToWishlistRendered = Boolean.FALSE;
             }
         }
         catch(Exception e) {
@@ -121,7 +89,7 @@ public class ComicBean
                     new FacesMessage("Unable to determine wishlist status."));
         }
 
-        return addLinkRendered;
+        return addToWishlistRendered;
     }
 
     /**
@@ -130,7 +98,7 @@ public class ComicBean
      * @return  the criteria.
      */
     @Override
-    protected Criteria<Comic> getCriteria() {
+    public Criteria<Comic> getCriteria() {
 
         // Declare.
         Criteria<Comic> criteria;
@@ -140,27 +108,39 @@ public class ComicBean
 
         try {
 
-            // Check if the title session value exists.
-            if (SessionUtility.valueExists(SessionKey.TITLE)) {
+            // Declare.
+            Distribution distribution;
+            Title title;
+            ComicType type;
 
-                // Declare.
-                ComicTypeFilter filter;
+            // Get a new criteria.
+            criteria = this.comicService.getCriteria(Comic.class);
 
-                // Initialize.
-                filter = new ComicTypeFilter();
+            // Add the title criterion.
+            criteria.add(ComparisonOperation.eq(
+                    "title", SessionUtility.getValue(SessionKey.TITLE, Title.class)));
 
-                // Create a new criteria.
-                criteria = this.comicService.getCriteria(Comic.class);
+            // Get the comic filter values.
+            distribution = SessionUtility.getValue(SessionKey.COMIC_FILTER_DISTRIBUTION, Distribution.class);
+            type = SessionUtility.getValue(SessionKey.COMIC_FILTER_TYPE, ComicType.class);
 
-                // Modify the criteria.
-                criteria.add(ComparisonOperation.eq(
-                        "title",
-                        SessionUtility.getValue(SessionKey.TITLE, Title.class)));
-                criteria.add(LogicalOperation.and(ComparisonOperation.eq(
-                        "type", filter.getType())));
-                criteria.addOrder(Order.asc("number"));
-                criteria.addOrder(Order.asc("variant"));
+            // Check if the comic filter distribution exists.
+            if (distribution != null) {
+
+                // Add the criterion.
+                criteria = addCriterion(criteria, ComparisonOperation.eq("distribution", distribution));
             }
+
+            // Check if the comic filter type exists.
+            if (type != null) {
+
+                // Add the criterion.
+                criteria = addCriterion(criteria, ComparisonOperation.eq("type", type));
+            }
+
+            // Order the results.
+            criteria.addOrder(Order.asc("number"));
+            criteria.addOrder(Order.asc("variant"));
         }
         catch(Exception e) {
 
@@ -169,6 +149,16 @@ public class ComicBean
         }
 
         return criteria;
+    }
+
+    /**
+     * Get the current entity.
+     *
+     * @return  the current entity.
+     */
+    @Override
+    public Comic getCurrentEntity() {
+        return SessionUtility.getValue(SessionKey.COMIC, Comic.class);
     }
 
     /**
@@ -239,15 +229,6 @@ public class ComicBean
     }
 
     /**
-     * Get the list link disabled.
-     *
-     * @return  the list link disabled.
-     */
-    public Boolean getListLinkDisabled() {
-        return this.listLinkDisabled;
-    }
-
-    /**
      * Get a new entity.
      * 
      * @return  a new entity.
@@ -256,30 +237,50 @@ public class ComicBean
     protected Comic getNewEntity() {
         
         // Declare.
-        ComicTypeFilter filter;
         Comic newEntity;
-
-        // Initialize.
-        filter = new ComicTypeFilter();
 
         // Create a new entity.
         newEntity = new Comic();
 
         // Set the title in the new entity.
         newEntity.setTitle(SessionUtility.getValue(SessionKey.TITLE, Title.class));
-        
+
+        // Check if the comic filter distribution exists.
+        if (SessionUtility.valueExists(SessionKey.COMIC_FILTER_DISTRIBUTION)) {
+
+            // Set the distribution in the new entity.
+            newEntity.setDistribution(SessionUtility
+                    .getValue(SessionKey.COMIC_FILTER_DISTRIBUTION,
+                    Distribution.class));
+        }
+
         // Check if the user preference exits.
-        if (SessionUtility.valueExists(SessionKey.USER_PREFERENCE)) {
- 
+        else if (SessionUtility.valueExists(SessionKey.USER_PREFERENCE)) {
+
             // Set the distribution in the new entity.
             newEntity.setDistribution(SessionUtility
                     .getValue(SessionKey.USER_PREFERENCE, UserPreference.class)
                     .getDistribution());
         }
 
-        // Set the type in the new entity.
-        newEntity.setType(filter.getType());
-        
+        // Check if the comic filter type exists.
+        if (SessionUtility.valueExists(SessionKey.COMIC_FILTER_TYPE)) {
+
+            // Set the type in the new entity.
+            newEntity.setType(SessionUtility
+                    .getValue(SessionKey.COMIC_FILTER_TYPE,
+                    ComicType.class));
+        }
+
+        // Check if the user preference exists.
+        else if (SessionUtility.valueExists(SessionKey.USER_PREFERENCE)) {
+
+            // Set the type in the new entity.
+            newEntity.setType(SessionUtility
+                    .getValue(SessionKey.USER_PREFERENCE, UserPreference.class)
+                    .getComicType());
+        }
+
         return newEntity;
     }
 
@@ -355,9 +356,6 @@ public class ComicBean
     @PostConstruct
     public void initialize() {
 
-        // Disable the list link.
-        this.listLinkDisabled = true;
-
         // Create a new entity.
         this.entity = new Comic();
     }
@@ -388,96 +386,14 @@ public class ComicBean
                     new FacesMessage("Unable to add the comic to the wishlist."));
         }
 
-        // Configure the form buttons.
-        this.formButtonController = new FormButtonController(this.getEntityClass(), this.perspective);
+        // Put the button/link controller on the session.
+        SessionUtility.putValue(SessionKey.BUTTON_LINK_CONTROLLER,
+                ButtonLinkController.newInstance(
+                this.getEntityClass(),
+                SessionUtility.getValue(SessionKey.PERSPECTIVE, Perspective.class)));
 
-        // Enable the list link.
-        this.enableListLink(this.perspective);
-    }
-
-    /**
-     * Process the cancel button.
-     *
-     * @param  actionEvent  the action event.
-     */
-    @Override
-    public void processCancelButton(ActionEvent actionEvent) {
-        super.processCancelButton(actionEvent);
-
-        // Enable the list link.
-        this.enableListLink(this.perspective);
-    }
-
-    /**
-     * Process the delete button.
-     *
-     * @param  actionEvent  the action event.
-     */
-    @Override
-    public void processDeleteButton(ActionEvent actionEvent) {
-        super.processDeleteButton(actionEvent);
-
-        // Enable the list link.
-        this.enableListLink(this.perspective);
-    }
-
-    /**
-     * Process the filter button.
-     *
-     * @param  actionEvent  the action event.
-     */
-    public void processFilterButton(ActionEvent actionEvent) {
-
-        // Declare.
-        ComicTypeFilter filter;
-
-        // Initialize.
-        filter = new ComicTypeFilter();
-
-        // Activate the filter.
-        filter.activateFilter(actionEvent, this.comicService);
-
-        // Process the first button.
-        this.processFirstButton(actionEvent);
-    }
-
-    /**
-     * Process the first button.
-     *
-     * @param  actionEvent  the action event.
-     */
-    @Override
-    public void processFirstButton(ActionEvent actionEvent) {
-        super.processFirstButton(actionEvent);
-
-        // Enable the list link.
-        this.enableListLink(this.perspective);
-    }
-
-    /**
-     * Process the last button.
-     *
-     * @param  actionEvent  the action event.
-     */
-    @Override
-    public void processLastButton(ActionEvent actionEvent) {
-        super.processLastButton(actionEvent);
-
-        // Enable the list link.
-        this.enableListLink(this.perspective);
-    }
-
-    /**
-     * Process the next button.
-     *
-     * @param  actionEvent  the action event.
-     */
-    @Override
-    public void processNextButton(ActionEvent actionEvent) {
-        super.processNextButton(actionEvent);
-
-        // Enable the list link.
-        this.enableListLink(this.perspective);
+        // Store the entity.
+        this.storeEntity();
     }
 
     /**
@@ -493,9 +409,9 @@ public class ComicBean
         this.entity.setTraits(new ArrayList<Trait>(this.entity.getTraits()));
 
         // Check if this is the add, duplicate, or edit perspective.
-        if (this.perspective == Perspective.ADD ||
-            this.perspective == Perspective.DUPLICATE ||
-            this.perspective == Perspective.EDIT) {
+        if (SessionUtility.getValue(SessionKey.PERSPECTIVE, Perspective.class) == Perspective.ADD ||
+            SessionUtility.getValue(SessionKey.PERSPECTIVE, Perspective.class) == Perspective.DUPLICATE ||
+            SessionUtility.getValue(SessionKey.PERSPECTIVE, Perspective.class) == Perspective.EDIT) {
 
             try {
 
@@ -508,7 +424,7 @@ public class ComicBean
                 // Check if the entity is assigned a different type value and the
                 // perspective is the edit perspective.
                 if (!this.oldEntity.getType().getValue().equals(this.entity.getType().getValue()) &&
-                    this.perspective == Perspective.EDIT) {
+                    SessionUtility.getValue(SessionKey.PERSPECTIVE, Perspective.class) == Perspective.EDIT) {
 
                     // Get the next entity.
                     newEntity = this.comicService.findNext(
@@ -533,8 +449,8 @@ public class ComicBean
                 // Save the entity.
                 this.entity = this.comicService.save(this.entity);
 
-                // Modify the perspective.
-                this.perspective = Perspective.VIEW;
+                // Put the perspective on the session.
+                SessionUtility.putValue(SessionKey.PERSPECTIVE, Perspective.VIEW);
 
                 // Check if the new entity exists.
                 if (newEntity != null) {
@@ -545,13 +461,13 @@ public class ComicBean
                     // Check if the new entity does not exist.
                     if (newEntity.equals(this.getNewEntity())) {
 
-                        // Modify the perspective.
-                        this.perspective = Perspective.FRESH;
+                        // Put the perspective on the session.
+                        SessionUtility.putValue(SessionKey.PERSPECTIVE, Perspective.FRESH);
                     }
                     else {
 
-                        // Modify the perspective.
-                        this.perspective = Perspective.VIEW;
+                        // Put the perspective on the session.
+                        SessionUtility.putValue(SessionKey.PERSPECTIVE, Perspective.VIEW);
                     }
                 }
 
@@ -564,26 +480,29 @@ public class ComicBean
                     // Check if the entity does not exist.
                     if (this.entity.equals(this.getNewEntity())) {
 
-                        // Modify the perspective.
-                        this.perspective = Perspective.FRESH;
+                        // Put the perspective on the session.
+                        SessionUtility.putValue(SessionKey.PERSPECTIVE, Perspective.FRESH);
                     }
                 }
             }
             catch(Exception e) {
-
+e.printStackTrace();
                 FacesContext.getCurrentInstance().addMessage(null, 
                         new FacesMessage("Cannot save the entity."));
             }
             finally {
             
-                // Configure the form buttons.
-                this.formButtonController = new FormButtonController(this.getEntityClass(), this.perspective);
+                // Put the button/link controller on the session.
+                SessionUtility.putValue(SessionKey.BUTTON_LINK_CONTROLLER,
+                        ButtonLinkController.newInstance(
+                        this.getEntityClass(),
+                        SessionUtility.getValue(SessionKey.PERSPECTIVE, Perspective.class)));
 
             }
         }
 
         // Check if this is the add many perspective.
-        else if (this.perspective == Perspective.ADD_MANY) {
+        else if (SessionUtility.getValue(SessionKey.PERSPECTIVE, Perspective.class) == Perspective.ADD_MANY) {
 
             try {
 
@@ -599,97 +518,95 @@ public class ComicBean
                     this.endNumber != null &&
                     this.endNumber >= beginNumber) {
 
+                    // Declare.
+                    List<Comic> entities;
+                    Comic newEntity;
+
+                    // Initialize.
+                    entities = new ArrayList<Comic>();
+                    newEntity = null;
+
+                    // Loop through the number range.
+                    for (int x = beginNumber; x <= this.endNumber; x++) {
+
                         // Declare.
-                        List<Comic> entities;
-                        Comic newEntity;
+                        Comic addEntity;
 
-                        // Initialize.
-                        entities = new ArrayList<Comic>();
-                        newEntity = null;
+                        // Set the new entity.
+                        addEntity = this.entity.copy();
+                        addEntity.setId(null);
+                        addEntity.setNumber(x);
 
-                        // Loop through the number range.
-                        for (int x = beginNumber; x <= this.endNumber; x++) {
+                        // Add the new entity to the comics.
+                        entities.add(addEntity);
+                    }
 
-                            // Declare.
-                            Comic addEntity;
+                    // Check if the entity is assigned a different type value and the
+                    // perspective is the edit perspective.
+                    if (!this.oldEntity.getType().getValue().equals(this.entity.getType().getValue()) &&
+                        SessionUtility.getValue(SessionKey.PERSPECTIVE, Perspective.class) == Perspective.EDIT) {
 
-                            // Set the new entity.
-                            addEntity = this.entity.copy();
-                            addEntity.setId(null);
-                            addEntity.setNumber(x);
+                        // Get the next entity.
+                        newEntity = this.comicService.findNext(
+                                this.entity, this.getEntityClass(), this.getCriteria());
 
-                            // Add the new entity to the comics.
-                            entities.add(addEntity);
-                        }
+                        // Check if the next entity does not exist.
+                        if (newEntity == null) {
 
-                        // Check if the entity is assigned a different type value and the
-                        // perspective is the edit perspective.
-                        if (!this.oldEntity.getType().getValue().equals(this.entity.getType().getValue()) &&
-                            this.perspective == Perspective.EDIT) {
-
-                            // Get the next entity.
-                            newEntity = this.comicService.findNext(
+                            // Get the previous entity.
+                            newEntity = this.comicService.findPrevious(
                                     this.entity, this.getEntityClass(), this.getCriteria());
 
-                            // Check if the next entity does not exist.
+                            // Check if the previous entity does not exist.
                             if (newEntity == null) {
 
-                                // Get the previous entity.
-                                newEntity = this.comicService.findPrevious(
-                                        this.entity, this.getEntityClass(), this.getCriteria());
-
-                                // Check if the previous entity does not exist.
-                                if (newEntity == null) {
-
-                                    // Get a new entity.
-                                    newEntity = this.getNewEntity();
-                                }
+                                // Get a new entity.
+                                newEntity = this.getNewEntity();
                             }
                         }
+                    }
 
-                        // Save the entities.
-                        entities = this.comicService.saveList(entities);
+                    // Save the entities.
+                    entities = this.comicService.saveList(entities);
 
-                        // Set the entity to the first saved entity.
-                        this.entity = entities.get(0);
+                    // Set the entity to the first saved entity.
+                    this.entity = entities.get(0);
 
-                        // Modify the perspective.
-                        this.perspective = Perspective.VIEW;
+                    // Put the perspective on the session.
+                    SessionUtility.putValue(SessionKey.PERSPECTIVE, Perspective.VIEW);
 
-                        // Check if the new comic exists.
-                        if (newEntity != null) {
+                    // Check if the new comic exists.
+                    if (newEntity != null) {
 
-                            // Set the entity to the new entity.
-                            this.entity = newEntity;
+                        // Set the entity to the new entity.
+                        this.entity = newEntity;
 
-                            // Check if the new comic does not exist.
-                            if (newEntity.equals(this.getNewEntity())) {
+                        // Check if the new comic does not exist.
+                        if (newEntity.equals(this.getNewEntity())) {
 
-                                // Modify the perspective.
-                                this.perspective = Perspective.FRESH;
-                            }
-                            else {
-
-                                // Modify the perspective.
-                                this.perspective = Perspective.VIEW;
-                            }
+                            // Put the perspective on the session.
+                            SessionUtility.putValue(SessionKey.PERSPECTIVE, Perspective.FRESH);
                         }
+                        else {
 
-                        // Check if the entity is assigned a different type value.
-                        else if (!this.oldEntity.getType().getValue().equals(this.entity.getType().getValue())) {
-
-                            // Set the comic to the old comic.
-                            this.entity = this.oldEntity;
-
-                            // Check if the comic does not exist.
-                            if (this.entity.equals(this.getNewEntity())) {
-
-                                // Modify the perspective..
-                                this.perspective = Perspective.FRESH;
-                            }
+                            // Put the perspective on the session.
+                            SessionUtility.putValue(SessionKey.PERSPECTIVE, Perspective.VIEW);
                         }
+                    }
 
+                    // Check if the entity is assigned a different type value.
+                    else if (!this.oldEntity.getType().getValue().equals(this.entity.getType().getValue())) {
 
+                        // Set the comic to the old comic.
+                        this.entity = this.oldEntity;
+
+                        // Check if the comic does not exist.
+                        if (this.entity.equals(this.getNewEntity())) {
+
+                            // Put the perspective on the session.
+                            SessionUtility.putValue(SessionKey.PERSPECTIVE, Perspective.FRESH);
+                        }
+                    }
                 }
                 else {
 
@@ -698,33 +615,23 @@ public class ComicBean
                 }
             }
             catch(Exception e) {
-
+e.printStackTrace();
                 FacesContext.getCurrentInstance().addMessage(null,
                         new FacesMessage("Cannot save the entities."));
             }
             finally {
 
-                // Configure the form buttons.
-                this.formButtonController = new FormButtonController(this.getEntityClass(), this.perspective);
+                // Put the button/link controller on the session.
+                SessionUtility.putValue(SessionKey.BUTTON_LINK_CONTROLLER,
+                        ButtonLinkController.newInstance(
+                        this.getEntityClass(),
+                        SessionUtility.getValue(SessionKey.PERSPECTIVE, Perspective.class)));
 
             }
         }
 
-        // Enable the list link.
-        this.enableListLink(this.perspective);
-    }
-
-    /**
-     * Process the previous button.
-     *
-     * @param  actionEvent  the action event.
-     */
-    @Override
-    public void processPreviousButton(ActionEvent actionEvent) {
-        super.processPreviousButton(actionEvent);
-
-        // Enable the list link.
-        this.enableListLink(this.perspective);
+        // Store the entity.
+        this.storeEntity();
     }
 
     /**
@@ -759,11 +666,14 @@ public class ComicBean
                     new FacesMessage("Unable to remove the comic from the wishlist."));
         }
 
-        // Configure the form buttons.
-        this.formButtonController = new FormButtonController(this.getEntityClass(), this.perspective);
+        // Put the button/link controller on the session.
+        SessionUtility.putValue(SessionKey.BUTTON_LINK_CONTROLLER,
+                ButtonLinkController.newInstance(
+                this.getEntityClass(),
+                SessionUtility.getValue(SessionKey.PERSPECTIVE, Perspective.class)));
 
-        // Enable the list link.
-        this.enableListLink(this.perspective);
+        // Store the entity.
+        this.storeEntity();
     }
 
     /**
@@ -775,8 +685,8 @@ public class ComicBean
     public void processResetButton(ActionEvent actionEvent) {
 
         // Check if this is the add or add many perspective.
-        if (this.perspective == Perspective.ADD ||
-            this.perspective == Perspective.ADD_MANY) {
+        if (SessionUtility.getValue(SessionKey.PERSPECTIVE, Perspective.class) == Perspective.ADD ||
+            SessionUtility.getValue(SessionKey.PERSPECTIVE, Perspective.class) == Perspective.ADD_MANY) {
 
             // Get a new entity.
             this.entity = this.getNewEntity();
@@ -786,14 +696,14 @@ public class ComicBean
         }
 
         // Check if this is the edit perspective.
-        else if (this.perspective == Perspective.EDIT) {
+        else if (SessionUtility.getValue(SessionKey.PERSPECTIVE, Perspective.class) == Perspective.EDIT) {
 
             // Set the entity to the old entity.
             this.entity = this.oldEntity.copy();
         }
 
         // Check if this is the duplicate perspective.
-        else if (this.perspective == Perspective.DUPLICATE) {
+        else if (SessionUtility.getValue(SessionKey.PERSPECTIVE, Perspective.class) == Perspective.DUPLICATE) {
 
             // Get the entity.
             this.entity = this.oldEntity.copy();
@@ -802,21 +712,11 @@ public class ComicBean
             this.entity.setId(null);
         }
 
-        // Configure the form buttons.
-        this.formButtonController = new FormButtonController(this.getEntityClass(), this.perspective);
-    }
-
-    /**
-     * Process the row click.
-     *
-     * @param  actionEvent  the action event.
-     */
-    @Override
-    public void processRowClick(ActionEvent actionEvent) {
-        super.processRowClick(actionEvent);
-
-        // Enable the list link.
-        this.enableListLink(this.perspective);
+        // Put the button/link controller on the session.
+        SessionUtility.putValue(SessionKey.BUTTON_LINK_CONTROLLER,
+                ButtonLinkController.newInstance(
+                this.getEntityClass(),
+                SessionUtility.getValue(SessionKey.PERSPECTIVE, Perspective.class)));
     }
 
     /**
@@ -826,5 +726,36 @@ public class ComicBean
      */
     public void setEndNumber(Integer endNumber) {
         this.endNumber = endNumber;
+    }
+
+    /**
+     * Store the entity.
+     */
+    @Override
+    protected void storeEntity() {
+
+        // Check if this is the view perspective.
+        if (SessionUtility.getValue(SessionKey.PERSPECTIVE, Perspective.class) == Perspective.VIEW) {
+
+            // Put the comic on the session.
+            SessionUtility.putValue(SessionKey.COMIC, this.entity);
+
+            // Put the comic image on the session.
+            SessionUtility.putValue(SessionKey.UPLOAD_IMAGE, this.entity.getImage());
+
+            // Put the upload image button disabled flag on the session.
+            SessionUtility.putValue(SessionKey.UPLOAD_IMAGE_BUTTON_DISABLED, Boolean.TRUE);
+        }
+        else {
+
+            // Remove the comic from the session.
+            SessionUtility.removeValue(SessionKey.COMIC);
+
+            // Remove the comic image from the session.
+            SessionUtility.removeValue(SessionKey.UPLOAD_IMAGE);
+
+            // Remove the upload image button disabled flag from the session.
+            SessionUtility.removeValue(SessionKey.UPLOAD_IMAGE_BUTTON_DISABLED);
+        }
     }
 }

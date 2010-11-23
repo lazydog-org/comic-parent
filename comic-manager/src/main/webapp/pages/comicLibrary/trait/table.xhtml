@@ -25,7 +25,7 @@
                                     binding="#{traitBean.dataTable}">
                         <a4j:support event="onRowClick" 
                                      actionListener="#{traitBean.processRowClick}"
-                                     reRender="cm-trait-table-body,cm-trait-form"/>
+                                     reRender="cm-trait-table,cm-trait-form"/>
                         <rich:column styleClass="cm-table-cell cm-table-trait-value-cell #{(trait.id == traitBean.entity.id) ? 'cm-trait-table-selected-row' : ''}">
                             <h:outputText value="#{trait.value}"/>
                         </rich:column>

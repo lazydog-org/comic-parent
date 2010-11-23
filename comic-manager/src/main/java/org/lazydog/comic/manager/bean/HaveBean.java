@@ -9,6 +9,7 @@ import javax.faces.model.SelectItem;
 import org.lazydog.comic.model.Comic;
 import org.lazydog.comic.model.Have;
 import org.lazydog.comic.model.UserPreference;
+import org.lazydog.comic.manager.utility.Perspective;
 import org.lazydog.comic.manager.utility.SessionKey;
 import org.lazydog.comic.manager.utility.SessionUtility;
 import org.lazydog.repository.criterion.ComparisonOperation;
@@ -73,6 +74,16 @@ public class HaveBean
     }
 
     /**
+     * Get the current entity.
+     *
+     * @return  the current entity.
+     */
+    @Override
+    public Have getCurrentEntity() {
+        return SessionUtility.getValue(SessionKey.HAVE, Have.class);
+    }
+
+    /**
      * Get the entities as select items.
      * 
      * @return  the entities as select items.
@@ -132,5 +143,24 @@ public class HaveBean
 
         // Create a new entity.
         this.entity = new Have();
+    }
+
+    /**
+     * Store the entity.
+     */
+    @Override
+    protected void storeEntity() {
+
+        // Check if this is the view perspective.
+        if (SessionUtility.getValue(SessionKey.PERSPECTIVE, Perspective.class) == Perspective.VIEW) {
+
+            // Put the have on the session.
+            SessionUtility.putValue(SessionKey.HAVE, this.entity);
+        }
+        else {
+
+            // Remove the have from the session.
+            SessionUtility.removeValue(SessionKey.HAVE);
+        }
     }
 }
