@@ -210,14 +210,15 @@ form select, form fieldset select {
     overflow: auto;
 }
 
+.cm-table-selected-row {
+    background-color: #999999;
+}
+
 /* Category Table */
 #cm-category-table-scroller {
     width: 225px;
 }
 
-.cm-category-table-selected-row {
-    background-color: #999999;
-}
 
 .cm-table-category-name-cell {
     width: 200px;
@@ -228,10 +229,6 @@ form select, form fieldset select {
     width: 225px;
 }
 
-.cm-comiccharacter-table-selected-row {
-    background-color: #999999;
-}
-
 .cm-table-comiccharacter-name-cell {
     width: 200px;
 }
@@ -240,10 +237,6 @@ form select, form fieldset select {
 #cm-comic-table-scroller {
     height: 500px;
     width: 325px;
-}
-
-.cm-comic-table-selected-row {
-    background-color: #999999;
 }
 
 .cm-table-comic-issue-cell {
@@ -267,10 +260,6 @@ form select, form fieldset select {
     width: 225px;
 }
 
-.cm-comictype-table-selected-row {
-    background-color: #999999;
-}
-
 .cm-table-comictype-value-cell {
     width: 200px;
 }
@@ -280,10 +269,6 @@ form select, form fieldset select {
     width: 225px;
 }
 
-.cm-distribution-table-selected-row {
-    background-color: #999999;
-}
-
 .cm-table-distribution-value-cell {
     width: 200px;
 }
@@ -291,10 +276,6 @@ form select, form fieldset select {
 /* Have Table */
 #cm-have-table-scroller {
     width: 250px;
-}
-
-.cm-have-table-selected-row {
-    background-color: #999999;
 }
 
 .cm-table-have-grade-cell {
@@ -319,10 +300,6 @@ form select, form fieldset select {
     width: 325px;
 }
 
-.cm-image-table-selected-row {
-    background-color: #999999;
-}
-
 .cm-table-image-filename-cell {
     width: 300px;
 }
@@ -330,10 +307,6 @@ form select, form fieldset select {
 /* Image Type Table */
 #cm-imagetype-table-scroller {
     width: 430px;
-}
-
-.cm-imagetype-table-selected-row {
-    background-color: #999999;
 }
 
 .cm-table-imagetype-directorypath-cell {
@@ -349,10 +322,6 @@ form select, form fieldset select {
     width: 225px;
 }
 
-.cm-location-table-selected-row {
-    background-color: #999999;
-}
-
 .cm-table-location-name-cell {
     width: 200px;
 }
@@ -362,10 +331,6 @@ form select, form fieldset select {
     width: 225px;
 }
 
-.cm-profession-table-selected-row {
-    background-color: #999999;
-}
-
 .cm-table-profession-value-cell {
     width: 200px;
 }
@@ -373,10 +338,6 @@ form select, form fieldset select {
 /* Publisher Table */
 #cm-publisher-table-scroller {
     width: 225px;
-}
-
-.cm-publisher-table-selected-row {
-    background-color: #999999;
 }
 
 .cm-table-publisher-name-cell {
@@ -389,10 +350,6 @@ form select, form fieldset select {
     width: 325px;
 }
 
-.cm-title-table-selected-row {
-    background-color: #999999;
-}
-
 .cm-table-title-name-cell {
     width: 300px;
 }
@@ -402,10 +359,6 @@ form select, form fieldset select {
     width: 225px;
 }
 
-.cm-titletype-table-selected-row {
-    background-color: #999999;
-}
-
 .cm-table-titletype-value-cell {
     width: 200px;
 }
@@ -413,10 +366,6 @@ form select, form fieldset select {
 /* Trait Table */
 #cm-trait-table-scroller {
     width: 225px;
-}
-
-.cm-trait-table-selected-row {
-    background-color: #999999;
 }
 
 .cm-table-trait-value-cell {

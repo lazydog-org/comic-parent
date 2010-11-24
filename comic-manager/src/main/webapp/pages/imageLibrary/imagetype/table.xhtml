@@ -31,10 +31,10 @@
                         <a4j:support event="onRowClick" 
                                      actionListener="#{imageTypeBean.processRowClick}"
                                      reRender="cm-imagetype-table,cm-imagetype-form"/>
-                        <rich:column styleClass="cm-table-cell cm-table-imagetype-value-cell #{(imageType.id == imageTypeBean.entity.id) ? 'cm-imagetype-table-selected-row' : ''}">
+                        <rich:column styleClass="cm-table-cell cm-table-imagetype-value-cell #{(imageType.id == imageTypeBean.entity.id) ? 'cm-table-selected-row' : ''}">
                             <h:outputText value="#{imageType.value}"/>
                         </rich:column>
-                        <rich:column styleClass="cm-table-cell cm-table-imagetype-directorypath-cell #{(imageType.id == imageTypeBean.entity.id) ? 'cm-imagetype-table-selected-row' : ''}">
+                        <rich:column styleClass="cm-table-cell cm-table-imagetype-directorypath-cell #{(imageType.id == imageTypeBean.entity.id) ? 'cm-table-selected-row' : ''}">
                             <h:outputText value="#{imageType.directoryPath}"/>
                         </rich:column>
                     </rich:dataTable>
@@ -44,14 +44,22 @@
                     scroll();
 
                     function scroll() {
-                        getElementByClass('cm-imagetype-table-selected-row').scrollIntoView(true);
+                        getTopElement('cm-imagetype-table-scroller','cm-table-selected-row','rich-table-row',7).scrollIntoView(true);
                     }
 
-                    function getElementByClass(theClass) {
+                    function getTopElement(parentElementId,selectedRowClass,rowClass,offset) {
 
-                        // Create array of all elements.
-                        var elements = document.getElementsByTagName("*");
-                        var pattern = new RegExp("\\b" + theClass + "\\b");
+                        // Element to return.
+                        var element;
+
+                        // Get the parent element.
+                        var parentElement = document.getElementById(parentElementId);
+
+                        // Create array of all elements in the parent element.
+                        var elements = parentElement.getElementsByTagName("*");
+
+                        // Get pattern for selected row class.
+                        var pattern = new RegExp("\\b" + selectedRowClass + "\\b");
 
                         // Loop through the elements.
                         for (i = 0; i < elements.length; i++) {
@@ -59,8 +67,30 @@
                             // Check if the element has the specified class.
                             if (pattern.test(elements[i].className)) {
 
-                                // Get the first element.
-                                var element = elements[i];
+                                // Row count.
+                                var count = 0;
+
+                                // Get pattern for row class.
+                                var pattern = new RegExp("\\b" + rowClass + "\\b");
+
+                                // Loop back through the elements.
+                                for (j = i; j > 0; j--) {
+
+                                    // check if the element has the specified class.
+                                    if (pattern.test(elements[j].className)) {
+
+                                        // Set the element to the current element.
+                                        element = elements[j];
+
+                                        // Increment the row count.
+                                        count++;
+
+                                        // Check if the row count is the desired offset.
+                                        if (count >= offset) {
+                                            break;
+                                        }
+                                    }
+                                }
                                 break;
 
                             }
