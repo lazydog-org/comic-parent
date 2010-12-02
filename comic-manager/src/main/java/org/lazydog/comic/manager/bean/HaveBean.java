@@ -1,11 +1,9 @@
 package org.lazydog.comic.manager.bean;
 
 import java.io.Serializable;
-import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
-import javax.faces.model.SelectItem;
 import org.lazydog.comic.model.Comic;
 import org.lazydog.comic.model.Have;
 import org.lazydog.comic.model.UserPreference;
@@ -84,16 +82,6 @@ public class HaveBean
     }
 
     /**
-     * Get the entities as select items.
-     * 
-     * @return  the entities as select items.
-     */
-    @Override
-    public List<SelectItem> getEntitiesAsSelectItems() {
-        return null;
-    }
-
-    /**
      * Get the entity class.
      *
      * @return  the entity class.
@@ -101,6 +89,18 @@ public class HaveBean
     @Override
     protected Class<Have> getEntityClass() {
         return Have.class;
+    }
+
+    /**
+     * Get the entity select property.
+     *
+     * @param  entity  the entity.
+     *
+     * @return  the entity select property.
+     */
+    @Override
+    protected String getEntitySelectProperty(Have entity) {
+        return null;
     }
 
     /**
@@ -138,8 +138,10 @@ public class HaveBean
     /**
      * Initialize.
      */
+    @Override
     @PostConstruct
-    public void initialize() {
+    protected void initialize() {
+        super.initialize();
 
         // Create a new entity.
         this.entity = new Have();

@@ -151,16 +151,6 @@ public class ImageBean
     }
 
     /**
-     * Get the entities as select items.
-     *
-     * @return  the entities as select items.
-     */
-    @Override
-    public List<SelectItem> getEntitiesAsSelectItems() {
-        return null;
-    }
-
-    /**
      * Get the entity class.
      *
      * @return  the entity class.
@@ -168,6 +158,18 @@ public class ImageBean
     @Override
     protected Class<Image> getEntityClass() {
         return Image.class;
+    }
+
+    /**
+     * Get the entity select property.
+     *
+     * @param  entity  the entity.
+     *
+     * @return  the entity select property.
+     */
+    @Override
+    protected String getEntitySelectProperty(Image entity) {
+        return null;
     }
 
     /**
@@ -206,8 +208,10 @@ public class ImageBean
     /**
      * Initialize.
      */
+    @Override
     @PostConstruct
     protected void initialize() {
+        super.initialize();
 
         // Create a new entity.
         this.entity = new Image();

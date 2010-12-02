@@ -9,7 +9,6 @@ import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
-import javax.faces.model.SelectItem;
 import org.lazydog.comic.model.Category;
 import org.lazydog.comic.model.Publisher;
 import org.lazydog.comic.model.Title;
@@ -140,16 +139,6 @@ public class TitleBean
     }
 
     /**
-     * Get the entities as select items.
-     *
-     * @return  the entities as select items.
-     */
-    @Override
-    public List<SelectItem> getEntitiesAsSelectItems() {
-        return null;
-    }
-
-    /**
      * Get the entity class.
      *
      * @return  the entity class.
@@ -157,6 +146,18 @@ public class TitleBean
     @Override
     protected Class<Title> getEntityClass() {
         return Title.class;
+    }
+
+    /**
+     * Get the entity select property.
+     *
+     * @param  entity  the entity.
+     *
+     * @return  the entity select property.
+     */
+    @Override
+    protected String getEntitySelectProperty(Title entity) {
+        return null;
     }
 
     /**
@@ -273,8 +274,10 @@ public class TitleBean
     /**
      * Initialize.
      */
+    @Override
     @PostConstruct
-    public void initialize() {
+    protected void initialize() {
+        super.initialize();
 
         // Create a new title.
         this.entity = new Title();
@@ -327,6 +330,10 @@ public class TitleBean
 
             // Save the entity.
             this.entity = this.comicService.save(this.entity);
+
+            // Get the entities.
+            this.entities = this.comicService.findList(
+                    this.getEntityClass(), this.getCriteria());
 
             // Put the perspective on the session.
             SessionUtility.putValue(SessionKey.PERSPECTIVE, Perspective.VIEW);

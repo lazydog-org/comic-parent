@@ -1,12 +1,9 @@
 package org.lazydog.comic.manager.bean;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
-import javax.faces.model.SelectItem;
 import org.lazydog.comic.model.ComicCharacter;
 import org.lazydog.repository.criterion.Order;
 import org.lazydog.repository.Criteria;
@@ -65,31 +62,6 @@ public class ComicCharacterBean
     }
 
     /**
-     * Get the entities as select items.
-     * 
-     * @return  the entities as select items.
-     */
-    @Override
-    public List<SelectItem> getEntitiesAsSelectItems() {
-        
-        // Declare.
-        List<SelectItem> entitiesAsSelectItems;
-        
-        // Initialize.
-        entitiesAsSelectItems = new ArrayList<SelectItem>();
-        
-        // Loop through the entities.
-        for(ComicCharacter entity : this.getEntities()) {
-
-            // Add the entity to the select items.
-            entitiesAsSelectItems.add(new SelectItem(
-                entity, entity.getName()));
-        }
-        
-        return entitiesAsSelectItems;
-    }
-
-    /**
      * Get the entity class.
      *
      * @return  the entity class.
@@ -97,6 +69,18 @@ public class ComicCharacterBean
     @Override
     protected Class<ComicCharacter> getEntityClass() {
         return ComicCharacter.class;
+    }
+
+    /**
+     * Get the entity select property.
+     *
+     * @param  entity  the entity.
+     *
+     * @return  the entity select property.
+     */
+    @Override
+    protected String getEntitySelectProperty(ComicCharacter entity) {
+        return entity.getName();
     }
 
     /**
@@ -112,9 +96,11 @@ public class ComicCharacterBean
     /**
      * Initialize.
      */
+    @Override
     @PostConstruct
-    public void initialize() {
-
+    protected void initialize() {
+        super.initialize();
+        
         // Create a new entity.
         this.entity = new ComicCharacter();
     }

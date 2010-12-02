@@ -1,6 +1,7 @@
 package org.lazydog.comic.manager.bean;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
@@ -42,7 +43,7 @@ public abstract class AbstractDataAccessBean<T extends Entity<T>>
 
     protected ComicService comicService;
     protected HtmlDataTable dataTable;
-    private List<T> entities;
+    protected List<T> entities;
     protected T entity;
     protected Class<T> entityClass;
     protected T oldEntity;
@@ -199,24 +200,7 @@ public abstract class AbstractDataAccessBean<T extends Entity<T>>
      * @return  the entities.
      */
     public List<T> getEntities() {
-
-        try {
-
-            // Check if the criteria exists.
-            if (this.getCriteria() != null) {
-
-                // Get the entities.
-                this.entities = this.comicService.findList(
-                        this.getEntityClass(), this.getCriteria());
-            }
-        }
-        catch(Exception e) {
-
-            FacesContext.getCurrentInstance().addMessage(null,
-                    new FacesMessage("Cannot get the entities."));
-        }
-
-        return entities;
+        return this.entities;
     }
 
     /**
@@ -224,7 +208,32 @@ public abstract class AbstractDataAccessBean<T extends Entity<T>>
      *
      * @return  the entities as select items.
      */
-    public abstract List<SelectItem> getEntitiesAsSelectItems();
+
+    /**
+     * Get the entities as select items.
+     *
+     * @return  the entities as select items.
+     */
+    public List<SelectItem> getEntitiesAsSelectItems() {
+java.util.Date startDate = new java.util.Date();
+System.err.println(startDate + " " + this.getEntityClass().getName() + " getEntitiesAsSelectItems() entered");
+        // Declare.
+        List<SelectItem> entitiesAsSelectItems;
+
+        // Initialize.
+        entitiesAsSelectItems = new ArrayList<SelectItem>();
+
+        // Loop through the entities.
+        for(T entity : this.entities) {
+
+            // Add the entity to the select items.
+            entitiesAsSelectItems.add(new SelectItem(
+                entity, this.getEntitySelectProperty(entity)));
+        }
+java.util.Date endDate = new java.util.Date();
+System.err.println(endDate + " " + this.getEntityClass().getName() + " getEntitiesAsSelectItems() exited (" + (endDate.getTime() - startDate.getTime()) + " ms)");
+        return entitiesAsSelectItems;
+    }
 
     /**
      * Get the entity.
@@ -241,6 +250,15 @@ public abstract class AbstractDataAccessBean<T extends Entity<T>>
      * @return  the entity class.
      */
     protected abstract Class<T> getEntityClass();
+
+    /**
+     * Get the entity select property.
+     *
+     * @param  entity  the entity.
+     *
+     * @return  the entity select property.
+     */
+    protected abstract String getEntitySelectProperty(T entity);
 
     /**
      * Get a new entity.
@@ -268,12 +286,38 @@ public abstract class AbstractDataAccessBean<T extends Entity<T>>
     }
 
     /**
+     * Initialize.
+     */
+    protected void initialize() {
+java.util.Date startDate = new java.util.Date();
+System.err.println(startDate + " " + this.getEntityClass().getName() + " initialize() entered");
+        try {
+
+            // Check if the criteria exists.
+            if (this.getCriteria() != null) {
+
+                // Get the entities.
+                this.entities = this.comicService.findList(
+                        this.getEntityClass(), this.getCriteria());
+            }
+        }
+        catch(Exception e) {
+
+            FacesContext.getCurrentInstance().addMessage(null,
+                    new FacesMessage("Cannot get the entities."));
+        }
+java.util.Date endDate = new java.util.Date();
+System.err.println(endDate + " " + this.getEntityClass().getName() + " initialize() exited (" + (endDate.getTime() - startDate.getTime()) + " ms)");
+    }
+
+    /**
      * Process the add button.
      *
      * @param  actionEvent  the action event.
      */
     public void processAddButton(ActionEvent actionEvent) {
-
+java.util.Date startDate = new java.util.Date();
+System.err.println(startDate + " " + this.getEntityClass().getName() + " processAddButton() entered");
         // Set the old entity to the entity.
         this.oldEntity = this.entity.copy();
 
@@ -291,6 +335,8 @@ public abstract class AbstractDataAccessBean<T extends Entity<T>>
 
         // Store the entity on the session.
         this.storeEntity();
+java.util.Date endDate = new java.util.Date();
+System.err.println(endDate + " " + this.getEntityClass().getName() + " processAddButton() exited (" + (endDate.getTime() - startDate.getTime()) + " ms)");
     }
 
     /**
@@ -299,7 +345,8 @@ public abstract class AbstractDataAccessBean<T extends Entity<T>>
      * @param  actionEvent  the action event.
      */
     public void processAddManyButton(ActionEvent actionEvent) {
-
+java.util.Date startDate = new java.util.Date();
+System.err.println(startDate + " " + this.getEntityClass().getName() + " processAddManyButton() entered");
         // Set the old entity to the entity.
         this.oldEntity = this.entity.copy();
 
@@ -317,6 +364,8 @@ public abstract class AbstractDataAccessBean<T extends Entity<T>>
 
         // Store the entity on the session.
         this.storeEntity();
+java.util.Date endDate = new java.util.Date();
+System.err.println(endDate + " " + this.getEntityClass().getName() + " processAddManyButton() exited (" + (endDate.getTime() - startDate.getTime()) + " ms)");
     }
 
     /**
@@ -325,7 +374,8 @@ public abstract class AbstractDataAccessBean<T extends Entity<T>>
      * @param  actionEvent  the action event.
      */
     public void processCancelButton(ActionEvent actionEvent) {
-
+java.util.Date startDate = new java.util.Date();
+System.err.println(startDate + " " + this.getEntityClass().getName() + " processCancelButton() entered");
         // Check if the old entity exists.
         if (this.oldEntity != null && this.oldEntity.getId() != null) {
 
@@ -355,6 +405,8 @@ public abstract class AbstractDataAccessBean<T extends Entity<T>>
 
         // Store the entity on the session.
         this.storeEntity();
+java.util.Date endDate = new java.util.Date();
+System.err.println(endDate + " " + this.getEntityClass().getName() + " processCancelButton() exited (" + (endDate.getTime() - startDate.getTime()) + " ms)");
     }
 
     /**
@@ -363,10 +415,14 @@ public abstract class AbstractDataAccessBean<T extends Entity<T>>
      * @param  actionEvent  the action event.
      */
     public void processCurrentButton(ActionEvent actionEvent) {
+java.util.Date startDate = new java.util.Date();
+System.err.println(startDate + " " + this.getEntityClass().getName() + " processCurrentButton() entered");
         this.findEntity(FindType.CURRENT);
 
         // Store the entity on the session.
         this.storeEntity();
+java.util.Date endDate = new java.util.Date();
+System.err.println(endDate + " " + this.getEntityClass().getName() + " processCurrentButton() exited (" + (endDate.getTime() - startDate.getTime()) + " ms)");
     }
 
     /**
@@ -375,7 +431,8 @@ public abstract class AbstractDataAccessBean<T extends Entity<T>>
      * @param  actionEvent  the action event.
      */
     public void processDeleteButton(ActionEvent actionEvent) {
-
+java.util.Date startDate = new java.util.Date();
+System.err.println(startDate + " " + this.getEntityClass().getName() + " processDeleteButton() entered");
         try {
 
             // Declare.
@@ -396,6 +453,10 @@ public abstract class AbstractDataAccessBean<T extends Entity<T>>
             // Delete the entity.
             this.comicService.remove(
                     this.getEntityClass(), this.entity.getId());
+
+            // Get the entities.
+            this.entities = this.comicService.findList(
+                    this.getEntityClass(), this.getCriteria());
 
             // Check if the next or previous entity is not the deleted entity.
             if (!this.entity.equals(newEntity)) {
@@ -431,6 +492,8 @@ e.printStackTrace();
 
         // Store the entity on the session.
         this.storeEntity();
+java.util.Date endDate = new java.util.Date();
+System.err.println(endDate + " " + this.getEntityClass().getName() + " processDeleteButton() exited (" + (endDate.getTime() - startDate.getTime()) + " ms)");
     }
 
 
@@ -440,7 +503,8 @@ e.printStackTrace();
      * @param  actionEvent  the action event.
      */
     public void processDuplicateButton(ActionEvent actionEvent) {
-
+java.util.Date startDate = new java.util.Date();
+System.err.println(startDate + " " + this.getEntityClass().getName() + " processDuplicateButton() entered");
         // Set the old entity to the entity.
         this.oldEntity = this.entity.copy();
 
@@ -458,6 +522,8 @@ e.printStackTrace();
 
         // Store the entity on the session.
         this.storeEntity();
+java.util.Date endDate = new java.util.Date();
+System.err.println(endDate + " " + this.getEntityClass().getName() + " processDuplicateButton() exited (" + (endDate.getTime() - startDate.getTime()) + " ms)");
     }
 
     /**
@@ -466,7 +532,8 @@ e.printStackTrace();
      * @param  actionEvent  the action event.
      */
     public void processEditButton(ActionEvent actionEvent) {
-
+java.util.Date startDate = new java.util.Date();
+System.err.println(startDate + " " + this.getEntityClass().getName() + " processEditButton() entered");
         // Set the old entity to the entity.
         this.oldEntity = this.entity.copy();
 
@@ -481,6 +548,8 @@ e.printStackTrace();
 
         // Store the entity on the session.
         this.storeEntity();
+java.util.Date endDate = new java.util.Date();
+System.err.println(endDate + " " + this.getEntityClass().getName() + " processEditButton() exited (" + (endDate.getTime() - startDate.getTime()) + " ms)");
     }
 
     /**
@@ -489,10 +558,14 @@ e.printStackTrace();
      * @param  actionEvent  the action event.
      */
     public void processFirstButton(ActionEvent actionEvent) {
+java.util.Date startDate = new java.util.Date();
+System.err.println(startDate + " " + this.getEntityClass().getName() + " processFirstButton() entered");
         this.findEntity(FindType.FIRST);
 
         // Store the entity on the session.
         this.storeEntity();
+java.util.Date endDate = new java.util.Date();
+System.err.println(endDate + " " + this.getEntityClass().getName() + " processFirstButton() exited (" + (endDate.getTime() - startDate.getTime()) + " ms)");
     }
 
     /**
@@ -501,10 +574,14 @@ e.printStackTrace();
      * @param  actionEvent  the action event.
      */
     public void processLastButton(ActionEvent actionEvent) {
+java.util.Date startDate = new java.util.Date();
+System.err.println(startDate + " " + this.getEntityClass().getName() + " processLastButton() entered");
         this.findEntity(FindType.LAST);
 
         // Store the entity on the session.
         this.storeEntity();
+java.util.Date endDate = new java.util.Date();
+System.err.println(endDate + " " + this.getEntityClass().getName() + " processLastButton() exited (" + (endDate.getTime() - startDate.getTime()) + " ms)");
     }
 
 
@@ -514,10 +591,14 @@ e.printStackTrace();
      * @param  actionEvent  the action event.
      */
     public void processNextButton(ActionEvent actionEvent) {
+java.util.Date startDate = new java.util.Date();
+System.err.println(startDate + " " + this.getEntityClass().getName() + " processNextButton() entered");
         this.findEntity(FindType.NEXT);
 
         // Store the entity on the session.
         this.storeEntity();
+java.util.Date endDate = new java.util.Date();
+System.err.println(endDate + " " + this.getEntityClass().getName() + " processNextButton() exited (" + (endDate.getTime() - startDate.getTime()) + " ms)");
     }
 
     /**
@@ -526,11 +607,16 @@ e.printStackTrace();
      * @param  actionEvent  the action event.
      */
     public void processOkButton(ActionEvent actionEvent) {
-
+java.util.Date startDate = new java.util.Date();
+System.err.println(startDate + " " + this.getEntityClass().getName() + " processOkButton() entered");
         try {
 
             // Save the entity.
             this.entity = this.comicService.save(this.entity);
+
+            // Get the entities.
+            this.entities = this.comicService.findList(
+                    this.getEntityClass(), this.getCriteria());
 
             // Put the perspective on the session.
             SessionUtility.putValue(SessionKey.PERSPECTIVE, Perspective.VIEW);
@@ -551,6 +637,8 @@ e.printStackTrace();
 
         // Store the entity on the session.
         this.storeEntity();
+java.util.Date endDate = new java.util.Date();
+System.err.println(endDate + " " + this.getEntityClass().getName() + " processOkButton() exited (" + (endDate.getTime() - startDate.getTime()) + " ms)");
     }
 
     /**
@@ -559,10 +647,14 @@ e.printStackTrace();
      * @param  actionEvent  the action event.
      */
     public void processPreviousButton(ActionEvent actionEvent) {
+java.util.Date startDate = new java.util.Date();
+System.err.println(startDate + " " + this.getEntityClass().getName() + " processPreviousButton() entered");
         this.findEntity(FindType.PREVIOUS);
 
         // Store the entity on the session.
         this.storeEntity();
+java.util.Date endDate = new java.util.Date();
+System.err.println(endDate + " " + this.getEntityClass().getName() + " processPreviousButton() exited (" + (endDate.getTime() - startDate.getTime()) + " ms)");
     }
 
     /**
@@ -571,7 +663,8 @@ e.printStackTrace();
      * @param  actionEvent  the action event.
      */
     public void processResetButton(ActionEvent actionEvent) {
-
+java.util.Date startDate = new java.util.Date();
+System.err.println(startDate + " " + this.getEntityClass().getName() + " processResetButton() entered");
         // Check if this is the add perspective.
         if (SessionUtility.getValue(SessionKey.PERSPECTIVE, Perspective.class) == Perspective.ADD) {
 
@@ -591,6 +684,8 @@ e.printStackTrace();
                 ButtonLinkController.newInstance(
                 this.getEntityClass(),
                 SessionUtility.getValue(SessionKey.PERSPECTIVE, Perspective.class)));
+java.util.Date endDate = new java.util.Date();
+System.err.println(endDate + " " + this.getEntityClass().getName() + " processResetButton() exited (" + (endDate.getTime() - startDate.getTime()) + " ms)");
     }
     
     /**
@@ -600,7 +695,8 @@ e.printStackTrace();
      */
     @SuppressWarnings("unchecked")
     public void processRowClick(ActionEvent actionEvent) {
-
+java.util.Date startDate = new java.util.Date();
+System.err.println(startDate + " " + this.getEntityClass().getName() + " processRowClick() entered");
         // Get the entity.
         this.entity = (T)this.dataTable.getRowData();
 
@@ -615,6 +711,8 @@ e.printStackTrace();
 
         // Store the entity on the session.
         this.storeEntity();
+java.util.Date endDate = new java.util.Date();
+System.err.println(endDate + " " + this.getEntityClass().getName() + " processRowClick() exited (" + (endDate.getTime() - startDate.getTime()) + " ms)");
     }
 
     /**

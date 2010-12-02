@@ -1,12 +1,9 @@
 package org.lazydog.comic.manager.bean;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
-import javax.faces.model.SelectItem;
 import org.lazydog.comic.model.Publisher;
 import org.lazydog.repository.criterion.Order;
 import org.lazydog.repository.Criteria;
@@ -65,31 +62,6 @@ public class PublisherBean
     }
 
     /**
-     * Get the entities as select items.
-     *
-     * @return  the entities as select items.
-     */
-    @Override
-    public List<SelectItem> getEntitiesAsSelectItems() {
-
-        // Declare.
-        List<SelectItem> entitiesAsSelectItems;
-
-        // Initialize.
-        entitiesAsSelectItems = new ArrayList<SelectItem>();
-
-        // Loop through the entities.
-        for(Publisher entity : this.getEntities()) {
-
-            // Add the entity to the select items.
-            entitiesAsSelectItems.add(new SelectItem(
-                entity, entity.getName()));
-        }
-
-        return entitiesAsSelectItems;
-    }
-
-    /**
      * Get the entity class.
      *
      * @return  the entity class.
@@ -98,7 +70,19 @@ public class PublisherBean
     protected Class<Publisher> getEntityClass() {
         return Publisher.class;
     }
-    
+
+    /**
+     * Get the entity select property.
+     *
+     * @param  entity  the entity.
+     *
+     * @return  the entity select property.
+     */
+    @Override
+    protected String getEntitySelectProperty(Publisher entity) {
+        return entity.getName();
+    }
+
     /**
      * Get a new entity.
      * 
@@ -112,8 +96,10 @@ public class PublisherBean
     /**
      * Initialize.
      */
+    @Override
     @PostConstruct
-    public void initialize() {
+    protected void initialize() {
+        super.initialize();
 
         // Create a new entity.
         this.entity = new Publisher();

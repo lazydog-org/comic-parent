@@ -1,11 +1,9 @@
 package org.lazydog.comic.manager.bean;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
+import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
-import javax.faces.model.SelectItem;
 import org.lazydog.comic.model.ComicGrade;
 import org.lazydog.repository.criterion.Order;
 import org.lazydog.repository.Criteria;
@@ -64,31 +62,6 @@ public class ComicGradeBean
     }
 
     /**
-     * Get the entities as select items.
-     * 
-     * @return  the entities as select items.
-     */
-    @Override
-    public List<SelectItem> getEntitiesAsSelectItems() {
-        
-        // Declare.
-        List<SelectItem> entitiesAsSelectItems;
-        
-        // Initialize.
-        entitiesAsSelectItems = new ArrayList<SelectItem>();
-        
-        // Loop through the entities.
-        for(ComicGrade entity : this.getEntities()) {
-
-            // Add the entity to the select items.
-            entitiesAsSelectItems.add(new SelectItem(
-                entity, entity.getCode()));
-        }
-        
-        return entitiesAsSelectItems;
-    }
-
-    /**
      * Get the entity class.
      *
      * @return  the entity class.
@@ -96,6 +69,18 @@ public class ComicGradeBean
     @Override
     protected Class<ComicGrade> getEntityClass() {
         return ComicGrade.class;
+    }
+
+    /**
+     * Get the entity select property.
+     *
+     * @param  entity  the entity.
+     *
+     * @return  the entity select property.
+     */
+    @Override
+    protected String getEntitySelectProperty(ComicGrade entity) {
+        return entity.getCode();
     }
 
     /**
@@ -108,6 +93,15 @@ public class ComicGradeBean
         return null;
     }
 
+    /**
+     * Initialize.
+     */
+    @Override
+    @PostConstruct
+    protected void initialize() {
+        super.initialize();
+    }
+    
     /**
      * Store the entity.
      */

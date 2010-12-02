@@ -1,12 +1,9 @@
 package org.lazydog.comic.manager.bean;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
-import javax.faces.model.SelectItem;
 import org.lazydog.comic.model.Location;
 import org.lazydog.comic.manager.utility.SessionKey;
 import org.lazydog.comic.manager.utility.SessionUtility;
@@ -75,31 +72,6 @@ public class LocationBean
     }
 
     /**
-     * Get the entities as select items.
-     * 
-     * @return  the entities as select items.
-     */
-    @Override
-    public List<SelectItem> getEntitiesAsSelectItems() {
-        
-        // Declare.
-        List<SelectItem> entitiesAsSelectItems;
-        
-        // Initialize.
-        entitiesAsSelectItems = new ArrayList<SelectItem>();
-        
-        // Loop through the entities.
-        for(Location entity : this.getEntities()) {
-
-            // Add the entity to the select items.
-            entitiesAsSelectItems.add(new SelectItem(
-                entity, entity.getName()));
-        }
-        
-        return entitiesAsSelectItems;
-    }
-
-    /**
      * Get the entity class.
      *
      * @return  the entity class.
@@ -107,6 +79,18 @@ public class LocationBean
     @Override
     protected Class<Location> getEntityClass() {
         return Location.class;
+    }
+
+    /**
+     * Get the entity select property.
+     *
+     * @param  entity  the entity.
+     *
+     * @return  the entity select property.
+     */
+    @Override
+    protected String getEntitySelectProperty(Location entity) {
+        return entity.getName();
     }
 
     /**
@@ -132,8 +116,10 @@ public class LocationBean
     /**
      * Initialize.
      */
+    @Override
     @PostConstruct
-    public void initialize() {
+    protected void initialize() {
+        super.initialize();
 
         // Create a new entity.
         this.entity = new Location();
