@@ -40,6 +40,9 @@ public class TitleFilterBean implements Serializable {
 
         // Process the first button.
         this.titleBean.processFirstButton(event);
+
+        // Find the entities.
+        this.titleBean.findEntities();
     }
 
     /**

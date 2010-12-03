@@ -34,6 +34,9 @@ public class ImageFilterBean implements Serializable {
 
         // Process the first button.
         this.imageBean.processFirstButton(event);
+
+        // Find the entities.
+        this.imageBean.findEntities();
     }
 
     /**

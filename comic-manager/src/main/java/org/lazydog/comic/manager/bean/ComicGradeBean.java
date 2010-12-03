@@ -96,10 +96,11 @@ public class ComicGradeBean
     /**
      * Initialize.
      */
-    @Override
     @PostConstruct
     protected void initialize() {
-        super.initialize();
+
+        // Find the entities.
+        this.findEntities();
     }
     
     /**

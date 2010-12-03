@@ -355,10 +355,11 @@ public class ComicBean
     /**
      * Initialize.
      */
-    @Override
     @PostConstruct
     protected void initialize() {
-        super.initialize();
+
+        // Find the entities.
+        this.findEntities();
 
         // Create a new entity.
         this.entity = new Comic();
@@ -453,9 +454,8 @@ public class ComicBean
                 // Save the entity.
                 this.entity = this.comicService.save(this.entity);
 
-                // Get the entities.
-                this.entities = this.comicService.findList(
-                        this.getEntityClass(), this.getCriteria());
+                // Find the entities.
+                this.findEntities();
 
                 // Put the perspective on the session.
                 SessionUtility.putValue(SessionKey.PERSPECTIVE, Perspective.VIEW);
@@ -577,9 +577,8 @@ e.printStackTrace();
                     // Save the entities.
                     entities = this.comicService.saveList(entities);
 
-                    // Get the entities.
-                    this.entities = this.comicService.findList(
-                            this.getEntityClass(), this.getCriteria());
+                    // Find the entities.
+                    this.findEntities();
 
                     // Set the entity to the first saved entity.
                     this.entity = entities.get(0);

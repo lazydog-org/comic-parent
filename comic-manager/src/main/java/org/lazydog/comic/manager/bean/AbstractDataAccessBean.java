@@ -43,7 +43,7 @@ public abstract class AbstractDataAccessBean<T extends Entity<T>>
 
     protected ComicService comicService;
     protected HtmlDataTable dataTable;
-    protected List<T> entities;
+    private List<T> entities;
     protected T entity;
     protected Class<T> entityClass;
     protected T oldEntity;
@@ -71,6 +71,31 @@ public abstract class AbstractDataAccessBean<T extends Entity<T>>
         }
 
         return criteria;
+    }
+
+    /**
+     * Find the entities.
+     */
+    protected void findEntities() {
+        java.util.Date startDate = new java.util.Date();
+System.err.println(startDate + " " + this.getEntityClass().getName() + " findEntities() entered");
+        try {
+
+            // Check if the criteria exists.
+            if (this.getCriteria() != null) {
+
+                // Get the entities.
+                this.entities = this.comicService.findList(
+                        this.getEntityClass(), this.getCriteria());
+            }
+        }
+        catch(Exception e) {
+
+            FacesContext.getCurrentInstance().addMessage(null,
+                    new FacesMessage("Cannot get the entities."));
+        }
+java.util.Date endDate = new java.util.Date();
+System.err.println(endDate + " " + this.getEntityClass().getName() + " findEntities() exited (" + (endDate.getTime() - startDate.getTime()) + " ms)");
     }
 
     /**
@@ -286,31 +311,6 @@ System.err.println(endDate + " " + this.getEntityClass().getName() + " getEntiti
     }
 
     /**
-     * Initialize.
-     */
-    protected void initialize() {
-java.util.Date startDate = new java.util.Date();
-System.err.println(startDate + " " + this.getEntityClass().getName() + " initialize() entered");
-        try {
-
-            // Check if the criteria exists.
-            if (this.getCriteria() != null) {
-
-                // Get the entities.
-                this.entities = this.comicService.findList(
-                        this.getEntityClass(), this.getCriteria());
-            }
-        }
-        catch(Exception e) {
-
-            FacesContext.getCurrentInstance().addMessage(null,
-                    new FacesMessage("Cannot get the entities."));
-        }
-java.util.Date endDate = new java.util.Date();
-System.err.println(endDate + " " + this.getEntityClass().getName() + " initialize() exited (" + (endDate.getTime() - startDate.getTime()) + " ms)");
-    }
-
-    /**
      * Process the add button.
      *
      * @param  actionEvent  the action event.
@@ -454,9 +454,8 @@ System.err.println(startDate + " " + this.getEntityClass().getName() + " process
             this.comicService.remove(
                     this.getEntityClass(), this.entity.getId());
 
-            // Get the entities.
-            this.entities = this.comicService.findList(
-                    this.getEntityClass(), this.getCriteria());
+            // Find the entities.
+            this.findEntities();
 
             // Check if the next or previous entity is not the deleted entity.
             if (!this.entity.equals(newEntity)) {
@@ -614,9 +613,8 @@ System.err.println(startDate + " " + this.getEntityClass().getName() + " process
             // Save the entity.
             this.entity = this.comicService.save(this.entity);
 
-            // Get the entities.
-            this.entities = this.comicService.findList(
-                    this.getEntityClass(), this.getCriteria());
+            // Find the entities.
+            this.findEntities();
 
             // Put the perspective on the session.
             SessionUtility.putValue(SessionKey.PERSPECTIVE, Perspective.VIEW);

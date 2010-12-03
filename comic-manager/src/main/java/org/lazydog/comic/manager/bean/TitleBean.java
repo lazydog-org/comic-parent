@@ -274,10 +274,11 @@ public class TitleBean
     /**
      * Initialize.
      */
-    @Override
     @PostConstruct
     protected void initialize() {
-        super.initialize();
+
+        // Find the entities.
+        this.findEntities();
 
         // Create a new title.
         this.entity = new Title();
@@ -331,9 +332,8 @@ public class TitleBean
             // Save the entity.
             this.entity = this.comicService.save(this.entity);
 
-            // Get the entities.
-            this.entities = this.comicService.findList(
-                    this.getEntityClass(), this.getCriteria());
+            // Find the entities.
+            this.findEntities();
 
             // Put the perspective on the session.
             SessionUtility.putValue(SessionKey.PERSPECTIVE, Perspective.VIEW);

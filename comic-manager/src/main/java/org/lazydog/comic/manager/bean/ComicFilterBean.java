@@ -35,6 +35,9 @@ public class ComicFilterBean implements Serializable {
 
         // Process the first button.
         this.comicBean.processFirstButton(event);
+
+        // Find the entities.
+        this.comicBean.findEntities();
     }
 
     /**

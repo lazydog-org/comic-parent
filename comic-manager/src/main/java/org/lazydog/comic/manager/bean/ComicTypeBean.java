@@ -96,10 +96,11 @@ public class ComicTypeBean
     /**
      * Initialize.
      */
-    @Override
     @PostConstruct
     protected void initialize() {
-        super.initialize();
+
+        // Find the entities.
+        this.findEntities();
 
         // Create a new entity.
         this.entity = new ComicType();
