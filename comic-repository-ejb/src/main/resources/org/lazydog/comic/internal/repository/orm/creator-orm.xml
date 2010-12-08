@@ -7,7 +7,7 @@
     version="2.0">
 
     <package>org.lazydog.comic.model</package>
-    <entity class="Creator" access="FIELD" metadata-complete="true">
+    <entity class="Creator" access="FIELD">
         <table name="creator" schema="comic"/>
         <attributes>
             <many-to-one name="person" fetch="EAGER">

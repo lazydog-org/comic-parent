@@ -7,7 +7,7 @@
     version="2.0">
 
     <package>org.lazydog.comic.model</package>
-    <entity class="ComicCharacter" access="FIELD" metadata-complete="true">
+    <entity class="ComicCharacter" access="FIELD">
         <table name="comic_character" schema="comic"/>
         <attributes>  
             <basic name="name">

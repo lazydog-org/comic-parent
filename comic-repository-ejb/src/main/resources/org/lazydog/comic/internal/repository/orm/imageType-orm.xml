@@ -7,7 +7,7 @@
     version="2.0">
 
     <package>org.lazydog.comic.model</package>
-    <entity class="ImageType" access="FIELD" metadata-complete="true">
+    <entity class="ImageType" access="FIELD">
         <table name="image_type" schema="comic"/>
         <attributes>
             <basic name="directoryPath">

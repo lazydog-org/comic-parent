@@ -7,7 +7,7 @@
     version="2.0">
 
     <package>org.lazydog.comic.model</package>
-    <entity class="Profession" access="FIELD" metadata-complete="true">
+    <entity class="Profession" access="FIELD">
         <table name="profession" schema="comic"/>
         <attributes>
             <basic name="value">

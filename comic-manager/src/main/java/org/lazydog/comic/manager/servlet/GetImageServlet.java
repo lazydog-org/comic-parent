@@ -209,7 +209,7 @@ public class GetImageServlet
      *
      * @param  comicService  the comic service.
      */
-    @EJB(mappedName="ejb/ComicService", beanInterface=ComicService.class)
+    @EJB(beanName="ejb/ComicService", beanInterface=ComicService.class)
     protected void setComicService(ComicService comicService) {
         this.comicService = comicService;
     }

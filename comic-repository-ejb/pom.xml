@@ -7,8 +7,7 @@
         <version>1.7-SNAPSHOT</version>
     </parent>
     <artifactId>comic-repository-ejb</artifactId>
-    <!-- packaging should be ejb, but there is an unknown bug lurking here -->
-    <packaging>jar</packaging>
+    <packaging>ejb</packaging>
     <name>Comic Repository EJB</name>
     <dependencies>
         <dependency>
@@ -26,13 +25,13 @@
         <dependency>
             <groupId>org.eclipse.persistence</groupId>
             <artifactId>eclipselink</artifactId>
-            <version>2.1.0</version>
+            <version>2.1.1</version>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.eclipse.persistence</groupId>
             <artifactId>javax.persistence</artifactId>
-            <version>2.0.0</version>
+            <version>2.0.3</version>
             <scope>test</scope>
         </dependency>
         <dependency>
@@ -48,7 +47,7 @@
         <dependency>
             <groupId>org.lazydog.repository</groupId>
             <artifactId>repository</artifactId>
-            <version>1.4</version>
+            <version>1.5</version>
         </dependency>
         <!-- stub API needs to follow the actual implementation to avoid ClassFormatError -->
         <dependency>

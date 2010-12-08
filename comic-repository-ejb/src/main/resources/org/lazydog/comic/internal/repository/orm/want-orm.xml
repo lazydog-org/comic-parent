@@ -7,7 +7,7 @@
     version="2.0">
 
     <package>org.lazydog.comic.model</package>
-    <entity class="Want" access="FIELD" metadata-complete="true">
+    <entity class="Want" access="FIELD">
         <table name="want" schema="comic"/>
         <attributes>
             <basic name="uuid">

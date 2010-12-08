@@ -3,7 +3,7 @@ package org.lazydog.comic.internal.service;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.ejb.EJBException;
-import javax.ejb.Remote;
+import javax.ejb.Local;
 import javax.ejb.Stateless;
 import javax.interceptor.Interceptors;
 import org.lazydog.comic.ComicRepository;
@@ -18,8 +18,8 @@ import org.lazydog.ejbmonitor.interceptor.EJBMonitor;
  * 
  * @author  Ron Rickard
  */
-@Stateless(name="ejb/ComicService", mappedName="ejb/ComicService")
-@Remote(ComicService.class)
+@Stateless(name="ejb/ComicService")
+@Local(ComicService.class)
 @Interceptors(EJBMonitor.class)
 public class ComicServiceImpl
        implements ComicService {

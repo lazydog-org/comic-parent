@@ -7,7 +7,7 @@
     version="2.0">
 
     <package>org.lazydog.comic.model</package>
-    <entity class="Category" access="FIELD" metadata-complete="true">
+    <entity class="Category" access="FIELD">
         <table name="category" schema="comic"/>
         <attributes>
             <basic name="name">

@@ -7,7 +7,7 @@
     version="2.0">
 
     <package>org.lazydog.comic.model</package>
-    <entity class="Have" access="FIELD" metadata-complete="true">
+    <entity class="Have" access="FIELD">
         <table name="have" schema="comic"/>
         <attributes>
             <basic name="purchasePrice">

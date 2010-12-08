@@ -7,7 +7,7 @@
     version="2.0">
 
     <package>org.lazydog.comic.model</package>
-    <entity class="Person" access="FIELD" metadata-complete="true">
+    <entity class="Person" access="FIELD">
         <table name="person" schema="comic">
             <unique-constraint>
                 <column-name>first_name</column-name>

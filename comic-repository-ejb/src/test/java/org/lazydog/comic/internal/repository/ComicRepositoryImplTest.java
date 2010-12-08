@@ -23,6 +23,8 @@ import org.lazydog.comic.model.TitleType;
 import org.lazydog.comic.model.Trait;
 import org.lazydog.comic.model.UserPreference;
 import org.lazydog.comic.model.Want;
+import org.lazydog.repository.Criteria;
+import org.lazydog.repository.criterion.JoinOperation;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Ignore;
@@ -79,6 +81,26 @@ public class ComicRepositoryImplTest {
     @Test
     public void findListComic() throws Exception {
         findList(Comic.class);
+    }
+
+    @Test
+    public void findListComicEager() throws Exception {
+
+        Criteria<Comic> criteria;
+        List<Comic> entities;
+        Date endTime;
+        Date startTime;
+
+        startTime = new Date();
+        criteria = repository.getCriteria(Comic.class);
+        criteria.addJoin(JoinOperation.leftJoinFetch("characters"));
+        criteria.addJoin(JoinOperation.leftJoinFetch("creators"));
+        criteria.addJoin(JoinOperation.leftJoinFetch("traits"));
+        entities = repository.findList(Comic.class, criteria);
+        endTime = new Date();
+        System.out.println(entities.size() + " " + Comic.class.getSimpleName()
+                + "s retrieved in " + duration(startTime, endTime)
+                + " seconds");
     }
 
     @Test
@@ -149,6 +171,25 @@ public class ComicRepositoryImplTest {
     @Test
     public void findListTitle() throws Exception {
         findList(Title.class);
+    }
+
+    @Test
+    public void findListTitleEager() throws Exception {
+
+        Criteria<Title> criteria;
+        List<Title> entities;
+        Date endTime;
+        Date startTime;
+
+        startTime = new Date();
+        criteria = repository.getCriteria(Title.class);
+        criteria.addJoin(JoinOperation.leftJoinFetch("categories"));
+        criteria.addJoin(JoinOperation.leftJoinFetch("publishers"));
+        entities = repository.findList(Title.class, criteria);
+        endTime = new Date();
+        System.out.println(entities.size() + " " + Title.class.getSimpleName()
+                + "s retrieved in " + duration(startTime, endTime)
+                + " seconds");
     }
 
     @Test

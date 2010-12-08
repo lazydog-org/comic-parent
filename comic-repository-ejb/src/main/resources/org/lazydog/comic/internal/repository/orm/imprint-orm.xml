@@ -7,7 +7,7 @@
     version="2.0">
 
     <package>org.lazydog.comic.model</package>
-    <entity class="Imprint" access="FIELD" metadata-complete="true">
+    <entity class="Imprint" access="FIELD">
         <table name="imprint" schema="comic"/>
         <attributes>
             <basic name="name">
