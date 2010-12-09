@@ -52,7 +52,7 @@ public class Authenticate
                 // Get the comic service and entry service.
                 context = new InitialContext();
                 // TODO: once this application is upgraded to JEE6, the lookup can use the non-FQ JNDI name.
-                comicService = (ComicService)context.lookup("java:global/comic-manager-ear-1.8/comic-service-ejb-1.8/ejb/ComicService");
+                comicService = (ComicService)context.lookup("java:global/org.lazydog.comic_comic-manager-ear_ear_1.9-SNAPSHOT/comic-service-ejb-1.9-SNAPSHOT/ejb/ComicService");
                 entryService = (EntryService)context.lookup("ejb/EntryService");
 
                 // Get the username.
