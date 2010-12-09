@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<faces-config 
+    xmlns="http://java.sun.com/xml/ns/javaee"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://java.sun.com/xml/ns/javaee
+                        http://java.sun.com/xml/ns/javaee/web-facesconfig_1_2.xsd"
+    version="1.2">
+
+    <application>
+        <locale-config>
+          <default-locale>en</default-locale>
+        </locale-config>
+        <view-handler>com.sun.facelets.FaceletViewHandler</view-handler>
+    </application>
+    <converter>
+        <converter-id>monthYearConverter</converter-id>
+        <converter-class>org.lazydog.comic.converter.MonthYearConverter</converter-class>
+    </converter>
+    <managed-bean>
+        <managed-bean-name>testBean</managed-bean-name>
+        <managed-bean-class>org.lazydog.comic.bean.TestBean</managed-bean-class>
+        <managed-bean-scope>request</managed-bean-scope>
+    </managed-bean>
+</faces-config>
+
+
+
+
+
+
+
+
+
