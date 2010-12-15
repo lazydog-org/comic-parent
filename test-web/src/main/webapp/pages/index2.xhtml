@@ -1,0 +1,316 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html">
+    <head>
+        <title>Introduction</title>
+
+    </head>
+    <body>
+        <h:form>
+            <fieldset>
+                <label for="startMonthYear">Start/End Month/Year: </label>
+                <div id="monthYearInput">
+                    <h:inputText id="startMonthYear"
+                                 value="#{testBean.startMonthYear}"
+                                 size="6"
+                                 converter="monthYearConverter"
+                                 readonly="true"/>
+                    <h:inputText id="endMonthYear"
+                                 value="#{testBean.endMonthYear}"
+                                 size="6"
+                                 converter="monthYearConverter"
+                                 readonly="true"/>
+                    <input type="submit"
+                           value="calendar"
+                           onclick="toggleSelector(1920,5); return false;"/>
+                    <div id="monthYearSelector" class="monthYearSelector">
+                        <select id="startYears" onchange="fillEndYears(5)" class="years">
+                        </select>
+                        <input id="closeButton"
+                               type="submit"
+                               value="close"
+                               onclick="hideSelector(); return false;"/>
+                        <input id="clearButton"
+                               type="submit"
+                               value="clear"
+                               onclick="clearSelection(); return false;"/>
+                        <div class="monthRow">
+                            <div class="monthCell" onclick="selectStartMonth(1); return false">
+                                January
+                            </div>
+                            <div class="monthCell" onclick="selectStartMonth(2); return false">
+                                February
+                            </div>
+                            <div class="monthCell" onclick="selectStartMonth(3); return false">
+                                March
+                            </div>
+                        </div>
+                        <div class="monthRow">
+                            <div class="monthCell" onclick="selectStartMonth(4); return false">
+                                April
+                            </div>
+                            <div class="monthCell" onclick="selectStartMonth(5); return false">
+                                May
+                            </div>
+                            <div class="monthCell" onclick="selectStartMonth(6); return false">
+                                June
+                            </div>
+                        </div>
+                        <div class="monthRow">
+                            <div class="monthCell" onclick="selectStartMonth(7); return false">
+                                July
+                            </div>
+                            <div class="monthCell" onclick="selectStartMonth(8); return false">
+                                August
+                            </div>
+                            <div class="monthCell" onclick="selectStartMonth(9); return false">
+                                September
+                            </div>
+                        </div>
+                        <div class="monthRow">
+                            <div class="monthCell" onclick="selectStartMonth(10); return false">
+                                October
+                            </div>
+                            <div class="monthCell" onclick="selectStartMonth(11); return false">
+                                November
+                            </div>
+                            <div class="monthCell" onclick="selectStartMonth(12); return false">
+                                December
+                            </div>
+                        </div>
+                        <select id="endYears" onchange="fillStartYears(1920)" class="years">
+                        </select>
+                        <div class="monthRow">
+                            <div class="monthCell" onclick="selectEndMonth(1); return false">
+                                January
+                            </div>
+                            <div class="monthCell" onclick="selectEndMonth(2); return false">
+                                February
+                            </div>
+                            <div class="monthCell" onclick="selectEndMonth(3); return false">
+                                March
+                            </div>
+                        </div>
+                        <div class="monthRow">
+                            <div class="monthCell" onclick="selectEndMonth(4); return false">
+                                April
+                            </div>
+                            <div class="monthCell" onclick="selectEndMonth(5); return false">
+                                May
+                            </div>
+                            <div class="monthCell" onclick="selectEndMonth(6); return false">
+                                June
+                            </div>
+                        </div>
+                        <div class="monthRow">
+                            <div class="monthCell" onclick="selectEndMonth(7); return false">
+                                July
+                            </div>
+                            <div class="monthCell" onclick="selectEndMonth(8); return false">
+                                August
+                            </div>
+                            <div class="monthCell" onclick="selectEndMonth(9); return false">
+                                September
+                            </div>
+                        </div>
+                        <div class="monthRow">
+                            <div class="monthCell" onclick="selectEndMonth(10); return false">
+                                October
+                            </div>
+                            <div class="monthCell" onclick="selectEndMonth(11); return false">
+                                November
+                            </div>
+                            <div class="monthCell" onclick="selectEndMonth(12); return false">
+                                December
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <style type="text/css">
+                    #clearButton, #closeButton {
+                        float: right;
+                        font-family: Arial,Helvetica,sans-serif;
+                        font-size: 10px;
+                    }
+
+                    #clearButton:hover, #closeButton:hover {
+                        background-color: #cccccc;
+                    }
+
+                    .monthCell {
+                        border: 2px groove black;
+                        float: left;
+                        font-family: Arial,Helvetica,sans-serif;
+                        font-size: 10px;
+                        text-align: center;
+                        width: 76px;
+                    }
+
+                    .monthCell:hover {
+                        background-color: #cccccc;
+                    }
+
+                    .monthRow {
+                        clear: both;
+                    }
+
+                    #monthYearInput {
+                        display: inline-block;
+                        position: relative;
+                    }
+
+                    .monthYearSelector {
+                        background-color: #ffffff;
+                        border: 1px solid black;
+                        display:none;
+                        position: absolute;
+                        width: 240px;
+                        z-index: 1;
+                    }
+
+                    .years {
+                        float: left;
+                        font-family: Arial,Helvetica,sans-serif;
+                        font-size: 10px;
+                    }
+                </style>
+                <script type="text/javascript">
+                    //<![CDATA[
+                    var selector = document.getElementById('monthYearSelector');
+                    var startYears = document.getElementById('startYears');
+                    var endYears = document.getElementById('endYears');
+                    var startSelection = document.getElementById(startYears.form.name + ':startMonthYear');
+                    var endSelection = document.getElementById(endYears.form.name + ':endMonthYear');
+
+                    function clearSelection() {
+                        startSelection.value = '';
+                        endSelection.value = '';
+
+                        hideSelector();
+                    }
+
+                    function getEndYear(latestYear) {
+                        var endYear = latestYear;
+
+                        if (endYears.selectedIndex >= 0) {
+                            endYear = endYears.options[endYears.selectedIndex].value;
+                        }
+                        else if (endSelection.value != '') {
+                            endYear = getYear(endSelection.value);
+                        }
+
+                        return endYear;
+                    }
+
+                    function getStartYear(earliestYear) {
+                        var startYear = earliestYear;
+
+                        if (startYears.selectedIndex >= 0) {
+                            startYear = startYears.options[startYears.selectedIndex].value;
+                        }
+                        else if (startSelection.value != '') {
+                            startYear = getYear(startSelection.value);
+                        }
+
+                        return startYear;
+                    }
+
+                    function getMonthYear(month, year) {
+                        return month + "/" + year;
+                    }
+
+                    function getYear(monthYear) {
+                        return monthYear.slice(monthYear.indexOf('/') + 1);
+                    }
+
+                    function hideSelector() {
+                        startYears.options.length = 0;
+                        endYears.options.length = 0;
+                        selector.style.display = 'none';
+                    }
+
+                    function selectEndMonth(month) {;
+                        endSelection.value = getMonthYear(month, endYears.options[endYears.selectedIndex].value);
+
+                        hideSelector();
+                    }
+
+                    function selectStartMonth(month) {;
+                        startSelection.value = getMonthYear(month, startYears.options[startYears.selectedIndex].value);
+
+                        //hideSelector();
+                    }
+
+                    function toggleSelector(earliestYear, latestYearModifier) {
+                        if (selector.style.display == 'block') {
+                            selector.style.display = 'none';
+                        }
+                        else {
+                            fillStartYears(earliestYear);
+                            fillEndYears(latestYearModifier);
+                            selector.style.display = 'block';
+                        }
+                    }
+
+                    function fillEndYears(latestYearModifier) {
+                        var currentYear = new Date().getFullYear();
+                        var endYear = currentYear + latestYearModifier;
+                        var startYear = getStartYear(currentYear);
+                        var defaultSelected;
+
+                        currentYear = getEndYear(currentYear);
+
+                        endYears.options.length = 0;
+
+                        for (var year = startYear; year <= endYear; year++) {
+
+                            if (year == currentYear) {
+                                defaultSelected = true;
+                            }
+                            else {
+                                defaultSelected = false;
+                            }
+
+                            endYears.options[endYear - year] = new Option(year, year, defaultSelected);
+                        }
+                    }
+
+                    function fillStartYears(earliestYear) {
+                        var currentYear = new Date().getFullYear();
+                        var endYear = getEndYear(currentYear);
+                        var startYear = earliestYear;
+                        var defaultSelected;
+
+                        currentYear = getStartYear(currentYear);
+
+                        startYears.options.length = 0;
+                        
+                        for (var year = startYear; year <= endYear; year++) {
+
+                            if (year == currentYear) {
+                                defaultSelected = true;
+                            }
+                            else {
+                                defaultSelected = false;
+                            }
+
+                            startYears.options[endYear - year] = new Option(year, year, defaultSelected);
+                        }
+                    }
+                    //]]>
+                </script>
+                <br/>
+                <label for="moreStuff">More Stuff: </label>
+                <h:inputText id="moreStuff"
+                             value="hello"
+                             size="6" maxlength="6"/>
+                <br/>
+                <label for="moreStuff2">More Stuff2: </label>
+                <h:inputText id="moreStuff2"
+                             value="hello"
+                             size="6" maxlength="6"/>
+            </fieldset>
+        </h:form>
+    </body>
+</html>

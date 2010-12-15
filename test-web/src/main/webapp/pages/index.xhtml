@@ -4,118 +4,199 @@
       xmlns:h="http://java.sun.com/jsf/html">
     <head>
         <title>Introduction</title>
-        <script type="text/javascript">
-            //<![CDATA[
-            function hidePicker(month) {
-                if (month != null) {
-                    var index = document.getElementById('years').selectedIndex;
-                    var value = month + "/" + document.getElementById('years').options[index].value;
-                    document.getElementById('monthYearPickerForm:monthYear').value = value;
-                }
 
-                document.getElementById('monthYearPicker').style.display = 'none';
-            }
-
-            function showPicker(startYear) {
-                fillYears(startYear);
-                document.getElementById('monthYearPicker').style.display = 'block'; 
-            }
-
-            function fillYears(startYear) {
-                var currentYear = new Date().getFullYear();
-                var endYear = currentYear + 1;
-                var defaultSelected;
-
-                for (var year = startYear; year <= endYear; year++) {
-
-                    if (year == currentYear) {
-                        defaultSelected = true;
-                    }
-                    else {
-                        defaultSelected = false;
-                    }
-
-                    document.getElementById('years').options[endYear - year] = new Option(year, year, defaultSelected);
-                }
-            }
-            //]]>
-        </script>
     </head>
     <body>
-        <h:form id="monthYearPickerForm">
+        <h:form>
             <fieldset>
                 <label for="monthYear">Month/Year: </label>
-                <h:inputText id="monthYear"
-                             value="#{testBean.monthYear}"
-                             size="6" maxlength="6"
-                             converter="monthYearConverter"
-                             readonly="true"/>
-                <input type="submit"
-                       value="calendar"
-                       onclick="showPicker(1920); return false;"/>
-                <div id="monthYearPicker" style="display:none;">
-                    <select id="years">
-                    </select>
+                <div id="monthYearInput">
+                    <h:inputText id="monthYear"
+                                 value="#{testBean.monthYear}"
+                                 size="6"
+                                 converter="monthYearConverter"
+                                 readonly="true"/>
                     <input type="submit"
-                           value="close"
-                           onclick="hidePicker(); return false;"/>
-                    <div style="display: block;">
-                        <input type="submit"
-                               value="January"
-                               onclick="hidePicker(1); return false;"
-                               style="width: 100px;"/>
-                        <input type="submit"
-                               value="February"
-                               onclick="hidePicker(2); return false;"
-                               style="width: 100px;"/>
-                        <input type="submit"
-                               value="March"
-                               onclick="hidePicker(3); return false;"
-                               style="width: 100px;"/>
-                    </div>
-                    <div style="display: block;">
-                        <input type="submit"
-                               value="April"
-                               onclick="hidePicker(4); return false;"
-                               style="width: 100px;"/>
-                        <input type="submit"
-                               value="May"
-                               onclick="hidePicker(5); return false;"
-                               style="width: 100px;"/>
-                        <input type="submit"
-                               value="June"
-                               onclick="hidePicker(6); return false;"
-                               style="width: 100px;"/>
-                    </div>
-                    <div style="display: block;">
-                        <input type="submit"
-                               value="July"
-                               onclick="hidePicker(7); return false;"
-                               style="width: 100px;"/>
-                        <input type="submit"
-                               value="August"
-                               onclick="hidePicker(8); return false;"
-                               style="width: 100px;"/>
-                        <input type="submit"
-                               value="September"
-                               onclick="hidePicker(9); return false;"
-                               style="width: 100px;"/>
-                    </div>
-                    <div style="display: block;">
-                        <input type="submit"
-                               value="October"
-                               onclick="hidePicker(10); return false;"
-                               style="width: 100px;"/>
-                        <input type="submit"
-                               value="November"
-                               onclick="hidePicker(11); return false;"
-                               style="width: 100px;"/>
-                        <input type="submit"
-                               value="December"
-                               onclick="hidePicker(12); return false;"
-                               style="width: 100px;"/>
+                           value="calendar"
+                           onclick="toggleSelector(1920); return false;"/>
+                    <div id="monthYearSelector" class="monthYearSelector">
+                        <select id="years">
+                        </select>
+                        <input id="closeButton"
+                               type="submit"
+                               value="close"
+                               onclick="hideSelector(); return false;"/>
+                        <input id="clearButton"
+                               type="submit"
+                               value="clear"
+                               onclick="clearSelection(); return false;"/>
+                        <div class="monthRow">
+                            <div class="monthCell" onclick="selectMonth(1); return false">
+                                January
+                            </div>
+                            <div class="monthCell" onclick="selectMonth(2); return false">
+                                February
+                            </div>
+                            <div class="monthCell" onclick="selectMonth(3); return false">
+                                March
+                            </div>
+                        </div>
+                        <div class="monthRow">
+                            <div class="monthCell" onclick="selectMonth(4); return false">
+                                April
+                            </div>
+                            <div class="monthCell" onclick="selectMonth(5); return false">
+                                May
+                            </div>
+                            <div class="monthCell" onclick="selectMonth(6); return false">
+                                June
+                            </div>
+                        </div>
+                        <div class="monthRow">
+                            <div class="monthCell" onclick="selectMonth(7); return false">
+                                July
+                            </div>
+                            <div class="monthCell" onclick="selectMonth(8); return false">
+                                August
+                            </div>
+                            <div class="monthCell" onclick="selectMonth(9); return false">
+                                September
+                            </div>
+                        </div>
+                        <div class="monthRow">
+                            <div class="monthCell" onclick="selectMonth(10); return false">
+                                October
+                            </div>
+                            <div class="monthCell" onclick="selectMonth(11); return false">
+                                November
+                            </div>
+                            <div class="monthCell" onclick="selectMonth(12); return false">
+                                December
+                            </div>
+                        </div>
                     </div>
                 </div>
+                <style type="text/css">
+                    #clearButton, #closeButton {
+                        float: right;
+                        font-family: Arial,Helvetica,sans-serif;
+                        font-size: 10px;
+                    }
+
+                    #clearButton:hover, #closeButton:hover {
+                        background-color: #cccccc;
+                    }
+
+                    .monthCell {
+                        border: 2px groove black;
+                        float: left;
+                        font-family: Arial,Helvetica,sans-serif;
+                        font-size: 10px;
+                        text-align: center;
+                        width: 76px;
+                    }
+
+                    .monthCell:hover {
+                        background-color: #cccccc;
+                    }
+
+                    .monthRow {
+                        clear: both;
+                    }
+
+                    #monthYearInput {
+                        display: inline-block;
+                        position: relative;
+                    }
+
+                    .monthYearSelector {
+                        background-color: #ffffff;
+                        border: 1px solid black;
+                        display:none;
+                        position: absolute;
+                        width: 240px;
+                        z-index: 1;
+                    }
+
+                    #years {
+                        float: left;
+                        font-family: Arial,Helvetica,sans-serif;
+                        font-size: 10px;
+                    }
+                </style>
+                <script type="text/javascript">
+                    //<![CDATA[
+                    var selector = document.getElementById('monthYearSelector');
+                    var years = document.getElementById('years');
+                    var selection = document.getElementById(years.form.name + ':monthYear');
+
+                    function clearSelection() {
+                        selection.value = '';
+
+                        hideSelector();
+                    }
+
+                    function getMonthYear(month, year) {
+                        return month + "/" + year;
+                    }
+
+                    function getYear(monthYear) {
+                        return monthYear.slice(monthYear.indexOf('/') + 1);
+                    }
+
+                    function hideSelector() {
+                        selector.style.display = 'none';
+                    }
+
+                    function selectMonth(month) {;
+                        selection.value = getMonthYear(month, years.options[years.selectedIndex].value);
+
+                        hideSelector();
+                    }
+
+                    function toggleSelector(startYear) {
+                        if (selector.style.display == 'block') {
+                            selector.style.display = 'none';
+                        }
+                        else {
+                            fillYears(startYear);
+                            selector.style.display = 'block';
+                        }
+                    }
+
+                    function fillYears(startYear) {
+                        var currentYear = new Date().getFullYear();
+                        var endYear = currentYear + 1;
+                        var defaultSelected;
+
+                        if (selection.value != '') {
+                            currentYear = getYear(selection.value);
+                        }
+
+                        for (var year = startYear; year <= endYear; year++) {
+
+                            if (year == currentYear) {
+                                defaultSelected = true;
+                            }
+                            else {
+                                defaultSelected = false;
+                            }
+
+                            years.options[endYear - year] = new Option(year, year, defaultSelected);
+                        }
+                    }
+                    //]]>
+                </script>
+                <br/>
+                <label for="moreStuff">More Stuff: </label>
+                <h:inputText id="moreStuff"
+                             value="hello"
+                             size="6" maxlength="6"/>
+                <br/>
+                <label for="moreStuff2">More Stuff2: </label>
+                <h:inputText id="moreStuff2"
+                             value="hello"
+                             size="6" maxlength="6"/>
             </fieldset>
         </h:form>
     </body>
