@@ -52,7 +52,7 @@
         <class>org.lazydog.comic.model.Want</class>
         <properties>
             <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
-            <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/comic"/>
+            <property name="javax.persistence.jdbc.url" value="jdbc:mysql://db1.home:3306/comic"/>
             <property name="javax.persistence.jdbc.user" value="comicuser"/>
             <property name="javax.persistence.jdbc.password" value="c0m1c4s3r"/>
             <property name="eclipselink.logging.level" value="WARNING"/>
