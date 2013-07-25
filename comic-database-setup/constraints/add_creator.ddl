@@ -1,9 +1,0 @@
-alter table comic.creator
-	add index (person_id),
-	add constraint creator__person__fk
-                foreign key (person_id)
-		references person (id),
-	add index (profession_id),
-	add constraint creator__profession__fk
-                foreign key (profession_id)
-		references profession (id);

@@ -1,9 +1,0 @@
-alter table comic.publisher_imprint
-	add index (imprint_id),
-	add constraint publisher_imprint__imprint__fk
-                foreign key (imprint_id)
-		references imprint (id),
-	add index (publisher_id),
-	add constraint publisher_imprint__publisher__fk
-                foreign key (publisher_id)
-		references publisher (id);

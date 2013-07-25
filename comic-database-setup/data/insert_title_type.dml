@@ -1,7 +1,0 @@
-insert into comic.title_type
-		(id,value)
-	 values (null,'Ongoing'),
-	        (null,'Mini-Series'),
-	        (null,'One-Shot'),
-	        (null,'Magazine'),
-	        (null,'Graphic Novel');

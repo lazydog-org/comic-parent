@@ -1,6 +1,0 @@
-insert into comic.comic_type
-		(id,value)
-	 values (null,'Regular'),
-	        (null,'Annual'),
-	        (null,'Special'),
-	        (null,'Giant-Sized');

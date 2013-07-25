@@ -12,46 +12,164 @@
     <artifactId>comic-database-setup</artifactId>
     <packaging>pom</packaging>
     <name>Comic Database Setup</name>
+    <properties>
+        <mysql.admin.username>root</mysql.admin.username>
+        <mysql.admin.password>root</mysql.admin.password>
+        <mysql.user.username>comicuser</mysql.user.username>
+        <mysql.user.password>c0m1c4s3r</mysql.user.password>
+        <mysql.database.name>comic</mysql.database.name>
+        <mysql.database.server>db1.home</mysql.database.server>
+        <mysql.database.port>3306</mysql.database.port>
+    </properties>
     <build>
         <plugins>
             <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-antrun-plugin</artifactId>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>sql-maven-plugin</artifactId>
+                <version>1.5</version>
+                <configuration>
+                    <driver>com.mysql.jdbc.Driver</driver>
+                    <url>jdbc:mysql://${mysql.database.server}:${mysql.database.port}</url>
+                    <username>${mysql.admin.username}</username>
+                    <password>${mysql.admin.password}</password>
+                    <autocommit>true</autocommit>
+                    <forceMojoExecution>true</forceMojoExecution>
+                </configuration>
                 <executions>
                     <execution>
-                        <id>create</id>
-                        <phase>compile</phase>
-                        <configuration>
-                            <tasks>
-                                <ant>
-                                    <target name="create"/>
-                                </ant>
-                            </tasks>
-                        </configuration>
+                        <id>drop-db</id>
+                        <phase>clean</phase>
                         <goals>
-                            <goal>run</goal>
+                            <goal>execute</goal>
                         </goals>
+                        <configuration>
+                            <autocommit>true</autocommit>
+                            <sqlCommand>drop database ${mysql.database.name}</sqlCommand>
+                            <onError>continue</onError>
+                        </configuration>
                     </execution>
                     <execution>
-                        <id>drop</id>
+                        <id>drop-local-user</id>
                         <phase>clean</phase>
-                        <configuration>
-                            <tasks>
-                                <ant>
-                                    <target name="drop"/>
-                                </ant>
-                            </tasks>
-                        </configuration>
                         <goals>
-                            <goal>run</goal>
+                            <goal>execute</goal>
                         </goals>
+                        <configuration>
+                            <autocommit>true</autocommit>
+                            <sqlCommand>drop user '${mysql.user.username}'@'localhost'</sqlCommand>
+                            <onError>continue</onError>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>drop-remote-user</id>
+                        <phase>clean</phase>
+                        <goals>
+                            <goal>execute</goal>
+                        </goals>
+                        <configuration>
+                            <autocommit>true</autocommit>
+                            <sqlCommand>drop user '${mysql.user.username}'@'%'</sqlCommand>
+                            <onError>continue</onError>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>create-db</id>
+                        <phase>compile</phase>
+                        <goals>
+                            <goal>execute</goal>
+                        </goals>
+                        <configuration>
+                            <autocommit>true</autocommit>
+                            <sqlCommand>create database ${mysql.database.name}</sqlCommand>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>create-local-user</id>
+                        <phase>compile</phase>
+                        <goals>
+                            <goal>execute</goal>
+                        </goals>
+                        <configuration>
+                            <autocommit>true</autocommit>
+                            <sqlCommand>create user '${mysql.user.username}'@'localhost' identified by '${mysql.user.password}'</sqlCommand>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>grant-local-user</id>
+                        <phase>compile</phase>
+                        <goals>
+                            <goal>execute</goal>
+                        </goals>
+                        <configuration>
+                            <autocommit>true</autocommit>
+                            <sqlCommand>grant all on ${mysql.database.name}.* to '${mysql.user.username}'@'localhost'</sqlCommand>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>create-remote-user</id>
+                        <phase>compile</phase>
+                        <goals>
+                            <goal>execute</goal>
+                        </goals>
+                        <configuration>
+                            <autocommit>true</autocommit>
+                            <sqlCommand>create user '${mysql.user.username}'@'%' identified by '${mysql.user.password}'</sqlCommand>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>grant-remote-user</id>
+                        <phase>compile</phase>
+                        <goals>
+                            <goal>execute</goal>
+                        </goals>
+                        <configuration>
+                            <autocommit>true</autocommit>
+                            <sqlCommand>grant all on ${mysql.database.name}.* to '${mysql.user.username}'@'%'</sqlCommand>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>flush-privileges</id>
+                        <phase>compile</phase>
+                        <goals>
+                            <goal>execute</goal>
+                        </goals>
+                        <configuration>
+                            <autocommit>true</autocommit>
+                            <sqlCommand>flush privileges</sqlCommand>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>create-schema</id>
+                        <phase>compile</phase>
+                        <goals>
+                            <goal>execute</goal>
+                        </goals>
+                        <configuration>
+                            <autocommit>true</autocommit>
+                            <srcFiles>
+                                <srcFile>src/main/resources/schema.sql</srcFile>
+                            </srcFiles>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>create-data</id>
+                        <phase>compile</phase>
+                        <goals>
+                            <goal>execute</goal>
+                        </goals>
+                        <configuration>
+                            <autocommit>true</autocommit>
+                            <srcFiles>
+                                <srcFile>src/main/resources/data.sql</srcFile>
+                            </srcFiles>
+                        </configuration>
                     </execution>
                 </executions>
                 <dependencies>
                     <dependency>
                         <groupId>mysql</groupId>
                         <artifactId>mysql-connector-java</artifactId>
-                        <version>5.1.12</version>
+                        <version>5.1.13</version>
                     </dependency>
                 </dependencies>
             </plugin>

@@ -1,7 +1,0 @@
-insert into comic.profession
-		(id,value)
-	 values (null,'Colorist'),
-	 	(null,'Editor'),
-	 	(null,'Inker'),
-	 	(null,'Penciller'),
-	 	(null,'Writer');

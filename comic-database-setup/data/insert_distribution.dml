@@ -1,7 +1,0 @@
-insert into comic.distribution
-		(id,value)
-	 values (null,'Direct'),
-	 	(null,'Newsstand'),
-		(null,'Mail Away'),
-		(null,'Store Giveaway'),
-		(null,'Convention');

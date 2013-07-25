@@ -1,8 +1,0 @@
-insert into comic.image_type
-		(id,value,directory_path)
-	 values (null,'Incoming','/image/incoming'),
-		(null,'Comic','/image/comic'),
-		(null,'Title','/image/title'),
-		(null,'Publisher','/image/publisher'),
-		(null,'Character','/image/character'),
-		(null,'Certificate','/image/certificate');

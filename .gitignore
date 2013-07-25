@@ -1,0 +1,7 @@
+/comic-api/target/
+/comic-repository-ejb/target/
+/comic-service-ejb/target/
+/comic-ejbs-ear/target/
+/comic-faces/target/
+/comic-manager/target/
+/comic-manager-ear/target/
