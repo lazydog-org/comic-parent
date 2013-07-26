@@ -143,7 +143,7 @@ public class TitleReportBean
      * Initialize.
      */
     @PostConstruct
-    public void initialize() {
+    protected void initialize() {
 
         // Create a new entity.
         this.title = new Title();
@@ -188,7 +188,7 @@ public class TitleReportBean
      *
      * @param  comicService  the comic service.
      */
-    @EJB(beanName="ejb/ComicService", beanInterface=ComicService.class)
+    @EJB
     protected void setComicService(ComicService comicService) {
         this.comicService = comicService;
     }

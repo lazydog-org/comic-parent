@@ -26,7 +26,7 @@
                                 <a4j:commandLink value="Publisher"
                                                  actionListener="#{publisherBean.processFirstButton}"
                                                  oncomplete="Richfaces.showModalPanel('cm-publisher-modal-panel');"
-                                                 reRender="cm-publisher-modal-panel-content"
+                                                 render="cm-publisher-modal-panel-content"
                                                  rendered="#{titleFilterBean.buttonLinkController.formDisabled}"/>
                                 <h:outputText value="Publisher"
                                               rendered="#{!titleFilterBean.buttonLinkController.formDisabled}"/>
@@ -45,7 +45,7 @@
                                 <a4j:commandLink value="Title Type"
                                                  actionListener="#{titleTypeBean.processFirstButton}"
                                                  oncomplete="Richfaces.showModalPanel('cm-titletype-modal-panel');"
-                                                 reRender="cm-titletype-modal-panel-content"
+                                                 render="cm-titletype-modal-panel-content"
                                                  rendered="#{titleFilterBean.buttonLinkController.formDisabled}"/>
                                 <h:outputText value="Title Type"
                                               rendered="#{!titleFilterBean.buttonLinkController.formDisabled}"/>
@@ -64,7 +64,7 @@
                                 <a4j:commandLink value="Category"
                                                  actionListener="#{categoryBean.processFirstButton}"
                                                  oncomplete="Richfaces.showModalPanel('cm-category-modal-panel');"
-                                                 reRender="cm-category-modal-panel-content"
+                                                 render="cm-category-modal-panel-content"
                                                  rendered="#{titleFilterBean.buttonLinkController.formDisabled}"/>
                                 <h:outputText value="Category"
                                               rendered="#{!titleFilterBean.buttonLinkController.formDisabled}"/>

@@ -34,13 +34,16 @@
                         </f:facet>
                     </rich:column>
                 </rich:dataTable>
+                <a4j:jsFunction name="selectRow" 
+                                actionListener="#{haveBean.processRowClick}" 
+                                render="cm-have-table,cm-have-form">
+                    <a4j:param name="currentRow" assignTo="#{haveBean.entity}"/>
+                </a4j:jsFunction>
                 <div id="cm-have-table-scroller" class="cm-table-scroller">
                     <rich:dataTable id="cm-have-table-body"
                                     value="#{haveBean.entities}" var="have"
-                                    binding="#{haveBean.dataTable}">
-                        <a4j:support event="onRowClick" 
-                                     actionListener="#{haveBean.processRowClick}"
-                                     reRender="cm-have-table,cm-have-form"/>
+                                    binding="#{haveBean.dataTable}"
+                                    onrowclick="selectRow('#{have}')">
                         <rich:column styleClass="cm-table-cell cm-table-have-grade-cell #{(have.id == haveBean.entity.id) ? 'cm-table-selected-row' : ''}">
                             <h:outputText value="#{have.comicGrade.code}"/>
                         </rich:column>

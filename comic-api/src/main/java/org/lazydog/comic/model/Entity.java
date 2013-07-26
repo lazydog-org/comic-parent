@@ -1,6 +1,5 @@
 package org.lazydog.comic.model;
 
-import java.io.Serializable;
 import java.lang.reflect.ParameterizedType;
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -18,8 +17,7 @@ import javax.validation.ValidatorFactory;
  * 
  * @author  Ron Rickard
  */
-public abstract class Entity<T extends Entity<T>>
-       implements Serializable {
+public abstract class Entity<T extends Entity<T>> extends Model {
 
     private static final long serialVersionUID = 1L;
     private static final String EPOCH = "01/01/1900";
@@ -47,11 +45,7 @@ public abstract class Entity<T extends Entity<T>>
      */
     public T copy() {
 
-        // Declare.
-        T copy;
-        
-        // Initialize.
-        copy = null;
+        T copy = null;
 
         try {
 
@@ -60,11 +54,9 @@ public abstract class Entity<T extends Entity<T>>
 
             // Create a copy.
             copy.setId(this.getId());
-        }
-        catch (IllegalAccessException e) {
+        } catch (IllegalAccessException e) {
             // Ignore.
-        }
-        catch(InstantiationException e) {
+        } catch (InstantiationException e) {
             // Ignore.
         }
 
@@ -78,18 +70,13 @@ public abstract class Entity<T extends Entity<T>>
      */
     protected static Date epoch() {
 
-        // Declare.
-        Date epoch;
-
-        // Initialize.
-        epoch = null;
+        Date epoch = null;
 
         try {
 
             // Get the epoch.
             epoch = DATE_FORMAT.parse(EPOCH);
-        }
-        catch(ParseException e) {
+        } catch (ParseException e) {
             // Ignore.
         }
 
@@ -112,29 +99,6 @@ public abstract class Entity<T extends Entity<T>>
      */
     protected static String nilUuid() {
         return NIL_UUID;
-    }
-
-    /**
-     * Replace the original object with the replacement object
-     * if the original object is null.
-     *
-     * @param  original     the original object.
-     * @param  replacement  the replacement object.
-     *
-     * @return  the original object if it is not null, otherwise the replacement
-     *          object.
-     *
-     * @throws  IllegalArgumentException  if the replacement object is null.
-     */
-    protected static <U, V extends U> U replaceNull(U original, V replacement) {
-
-        // Check if the replacement object is null.
-        if (replacement == null) {
-            throw new IllegalArgumentException(
-                    "The replacement object cannot be null.");
-        }
-
-        return (original == null) ? replacement : original;
     }
 
     /**

@@ -28,8 +28,7 @@ public class SessionUtility {
      * @param  key    the key.
      * @param  value  the value.
      */
-    public static void putValue(SessionKey key,
-                                Object value) {
+    public static void putValue(SessionKey key, Object value) {
 
         // Put the key-value pair on the session map.
         FacesContext.getCurrentInstance().getExternalContext()

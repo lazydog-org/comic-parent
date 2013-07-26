@@ -23,9 +23,9 @@
                     <rich:dataTable id="cm-image-table-body"
                                     value="#{imageBean.entities}" var="image"
                                     binding="#{imageBean.dataTable}">
-                        <a4j:support event="onRowClick"
-                                     actionListener="#{imageBean.processRowClick}"
-                                     reRender="cm-image-table,cm-image-form"/>
+                        <a4j:ajax event="onRowClick"
+                                     listener="#{imageBean.processRowClick}"
+                                     render="cm-image-table,cm-image-form"/>
                         <rich:column styleClass="cm-table-cell cm-table-image-filename-cell #{(image.id == imageBean.entity.id) ? 'cm-table-selected-row' : ''}">
                             <h:outputText value="#{image.fileName}"/>
                         </rich:column>

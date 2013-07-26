@@ -5,8 +5,8 @@ import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import org.lazydog.comic.model.ComicType;
-import org.lazydog.repository.criterion.Order;
 import org.lazydog.repository.Criteria;
+import org.lazydog.repository.criterion.Order;
 
 
 /**

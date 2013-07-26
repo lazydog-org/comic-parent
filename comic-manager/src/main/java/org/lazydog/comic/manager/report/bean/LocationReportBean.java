@@ -63,7 +63,7 @@ public class LocationReportBean
      * Initialize.
      */
     @PostConstruct
-    public void initialize() {
+    protected void initialize() {
 
         // Create a new entity.
         this.location = new Location();
@@ -108,7 +108,7 @@ public class LocationReportBean
      *
      * @param  comicService  the comic service.
      */
-    @EJB(beanName="ejb/ComicService", beanInterface=ComicService.class)
+    @EJB
     protected void setComicService(ComicService comicService) {
         this.comicService = comicService;
     }

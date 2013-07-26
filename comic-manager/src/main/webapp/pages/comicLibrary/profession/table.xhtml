@@ -19,13 +19,16 @@
                         </f:facet>
                     </rich:column>
                 </rich:dataTable>
+                <a4j:jsFunction name="selectRow" 
+                                actionListener="#{professionBean.processRowClick}" 
+                                render="cm-profession-table,cm-profession-form">
+                    <a4j:param name="currentRow" assignTo="#{professionBean.entity}"/>
+                </a4j:jsFunction>
                 <div id="cm-profession-table-scroller" class="cm-table-scroller">
                     <rich:dataTable id="cm-profession-table-body"
                                     value="#{professionBean.entities}" var="profession"
-                                    binding="#{professionBean.dataTable}">
-                        <a4j:support event="onRowClick" 
-                                     actionListener="#{professionBean.processRowClick}"
-                                     reRender="cm-profession-table,cm-profession-form"/>
+                                    binding="#{professionBean.dataTable}"
+                                    onrowclick="selectRow('#{profession}')">
                         <rich:column styleClass="cm-table-cell cm-table-profession-value-cell #{(profession.id == professionBean.entity.id) ? 'cm-table-selected-row' : ''}">
                             <h:outputText value="#{profession.value}"/>
                         </rich:column>

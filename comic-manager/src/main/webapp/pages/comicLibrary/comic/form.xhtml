@@ -3,7 +3,7 @@
                       "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
                       
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:c="http://java.sun.com/jstl/core"
+      xmlns:c="http://java.sun.com/jsp/jstl/core"
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:h="http://java.sun.com/jsf/html"
@@ -23,19 +23,18 @@
                         <a4j:commandLink value="Manage Collection"
                                          actionListener="#{haveBean.processFirstButton}"
                                          oncomplete="Richfaces.showModalPanel('cm-have-modal-panel');"
-                                         reRender="cm-have-modal-panel-content"/>
+                                         render="cm-have-modal-panel-content"/>
                     </c:when>
                     <c:otherwise>
                         <h:outputText value="Manage Collection"/>
                     </c:otherwise>
                 </c:choose>
-                <rich:spacer width="5"/>
                 <!-- bug in a4j:commandLink rendering when disabled="true" (RichFaces bug RF-7624) -->
                 <c:choose>
                     <c:when test="#{!comicBean.buttonLinkController.linkDisabledMap['Add to Wishlist']}">
                         <a4j:commandLink value="Add to Wishlist"
                                          actionListener="#{comicBean.processAddToWishlist}"
-                                         reRender="cm-comic-form"
+                                         render="cm-comic-form"
                                          rendered="#{comicBean.addToWishlistRendered}"/>
                     </c:when>
                     <c:otherwise>
@@ -48,7 +47,7 @@
                     <c:when test="#{!comicBean.buttonLinkController.linkDisabledMap['Remove from Wishlist']}">
                         <a4j:commandLink value="Remove from Wishlist"
                                          actionListener="#{comicBean.processRemoveFromWishlist}"
-                                         reRender="cm-comic-form"
+                                         render="cm-comic-form"
                                          rendered="#{!comicBean.addToWishlistRendered}"/>
                     </c:when>
                     <c:otherwise>
@@ -56,19 +55,18 @@
                                       rendered="#{!comicBean.addToWishlistRendered}"/>
                     </c:otherwise>
                 </c:choose>
-                <rich:spacer width="5"/>
-                <a4j:htmlCommandLink value="Return to Title Selection"
+                <a4j:commandLink value="Return to Title Selection"
                                      actionListener="#{titleBean.processCurrentButton}"
                                      disabled="#{comicBean.buttonLinkController.linkDisabledMap['Return to Title Selection']}">
                     <f:attribute name="subtopic" value="TITLE"/>
                     <f:actionListener type="org.lazydog.comic.manager.actionlistener.ActivateSubtopic"/>
-                </a4j:htmlCommandLink>
+                </a4j:commandLink>
                 <ui:include src="/pages/common/perspectiveButtons.xhtml">
                     <ui:param name="entityType" value="comic"/>
                     <ui:param name="managedBean" value="#{comicBean}"/>
                 </ui:include>
-                <rich:panelBar>
-                    <rich:panelBarItem label="Main">
+                <rich:accordion>
+                    <rich:accordionItem label="Main">
                         <fieldset>
                             <ol>
                                 <li>
@@ -107,7 +105,7 @@
                                         <a4j:commandLink value="Comic Type"
                                                          actionListener="#{comicTypeBean.processFirstButton}"
                                                          oncomplete="Richfaces.showModalPanel('cm-comictype-modal-panel');"
-                                                         reRender="cm-comictype-modal-panel-content"
+                                                         render="cm-comictype-modal-panel-content"
                                                          rendered="#{comicBean.buttonLinkController.formDisabled}"/>
                                         <h:outputText value="Comic Type"
                                                       rendered="#{!comicBean.buttonLinkController.formDisabled}"/>
@@ -125,7 +123,7 @@
                                         <a4j:commandLink value="Distribution"
                                                          actionListener="#{distributionBean.processFirstButton}"
                                                          oncomplete="Richfaces.showModalPanel('cm-distribution-modal-panel');"
-                                                         reRender="cm-distribution-modal-panel-content"
+                                                         render="cm-distribution-modal-panel-content"
                                                          rendered="#{comicBean.buttonLinkController.formDisabled}"/>
                                         <h:outputText value="Distribution"
                                                       rendered="#{!comicBean.buttonLinkController.formDisabled}"/>
@@ -177,14 +175,14 @@
                             <c:when test="#{comicBean.buttonLinkController.formDisabled and comicBean.perspective == 'VIEW'}">
                                 <a4j:commandLink value="Upload Image"
                                                  oncomplete="Richfaces.showModalPanel('cm-comicupload-modal-panel');"
-                                                 reRender="cm-comicupload-modal-panel-content"/>
+                                                 render="cm-comicupload-modal-panel-content"/>
                             </c:when>
                             <c:otherwise>
                                 <h:outputText value="Upload Image"/>
                             </c:otherwise>
                         </c:choose>
-                    </rich:panelBarItem>
-                    <rich:panelBarItem label="Trait">
+                    </rich:accordionItem>
+                    <rich:accordionItem label="Trait">
                         <fieldset>
                             <ol>
                                 <li>
@@ -192,7 +190,7 @@
                                         <a4j:commandLink value="Trait"
                                                          actionListener="#{traitBean.processFirstButton}"
                                                          oncomplete="Richfaces.showModalPanel('cm-trait-modal-panel');"
-                                                         reRender="cm-trait-modal-panel-content"
+                                                         render="cm-trait-modal-panel-content"
                                                          rendered="#{comicBean.buttonLinkController.formDisabled}"/>
                                         <h:outputText value="Trait"
                                                       rendered="#{!comicBean.buttonLinkController.formDisabled}"/>
@@ -207,8 +205,8 @@
                                 </li>
                             </ol>
                         </fieldset>
-                    </rich:panelBarItem>
-                    <rich:panelBarItem label="Character">
+                    </rich:accordionItem>
+                    <rich:accordionItem label="Character">
                         <fieldset>
                             <ol>
                                 <li>
@@ -216,7 +214,7 @@
                                         <a4j:commandLink value="Character"
                                                          actionListener="#{comicCharacterBean.processFirstButton}"
                                                          oncomplete="Richfaces.showModalPanel('cm-comiccharacter-modal-panel');"
-                                                         reRender="cm-comiccharacter-modal-panel-content"
+                                                         render="cm-comiccharacter-modal-panel-content"
                                                          rendered="#{comicBean.buttonLinkController.formDisabled}"/>
                                         <h:outputText value="Character"
                                                       rendered="#{!comicBean.buttonLinkController.formDisabled}"/>
@@ -231,14 +229,14 @@
                                 </li>
                             </ol>
                         </fieldset>
-                    </rich:panelBarItem>
-                    <rich:panelBarItem label="Administrative">
+                    </rich:accordionItem>
+                    <rich:accordionItem label="Administrative">
                         <ui:include src="/pages/common/administrativePanel.xhtml">
                             <ui:param name="entityType" value="comic"/>
                             <ui:param name="managedBean" value="#{comicBean}"/>
                         </ui:include>
-                    </rich:panelBarItem>
-                </rich:panelBar>
+                    </rich:accordionItem>
+                </rich:accordion>
                 <ui:include src="/pages/common/formButtons.xhtml">
                     <ui:param name="entityType" value="comic"/>
                     <ui:param name="managedBean" value="#{comicBean}"/>

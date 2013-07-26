@@ -7,17 +7,17 @@ import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.faces.model.SelectItem;
+import org.lazydog.comic.manager.utility.Perspective;
+import org.lazydog.comic.manager.utility.SessionKey;
+import org.lazydog.comic.manager.utility.SessionUtility;
 import org.lazydog.comic.model.Image;
 import org.lazydog.comic.model.ImageType;
 import org.lazydog.comic.model.Title;
 import org.lazydog.comic.model.UserPreference;
-import org.lazydog.comic.manager.utility.Perspective;
-import org.lazydog.comic.manager.utility.SessionKey;
-import org.lazydog.comic.manager.utility.SessionUtility;
+import org.lazydog.repository.Criteria;
 import org.lazydog.repository.criterion.ComparisonOperation;
 import org.lazydog.repository.criterion.LogicalOperation;
 import org.lazydog.repository.criterion.Order;
-import org.lazydog.repository.Criteria;
 
 
 /**

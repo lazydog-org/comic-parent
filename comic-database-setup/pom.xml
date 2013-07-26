@@ -26,7 +26,6 @@
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>sql-maven-plugin</artifactId>
-                <version>1.5</version>
                 <configuration>
                     <driver>com.mysql.jdbc.Driver</driver>
                     <url>jdbc:mysql://${mysql.database.server}:${mysql.database.port}</url>
@@ -165,13 +164,6 @@
                         </configuration>
                     </execution>
                 </executions>
-                <dependencies>
-                    <dependency>
-                        <groupId>mysql</groupId>
-                        <artifactId>mysql-connector-java</artifactId>
-                        <version>5.1.13</version>
-                    </dependency>
-                </dependencies>
             </plugin>
         </plugins>
     </build>

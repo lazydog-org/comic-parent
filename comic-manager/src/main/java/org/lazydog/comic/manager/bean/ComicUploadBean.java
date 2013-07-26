@@ -1,21 +1,22 @@
 package org.lazydog.comic.manager.bean;
 
 import java.io.File;
+import java.io.InputStream;
 import java.io.Serializable;
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
 import org.lazydog.comic.ComicService;
-import org.lazydog.comic.model.Comic;
-import org.lazydog.comic.model.Image;
-import org.lazydog.comic.model.ImageType;
 import org.lazydog.comic.manager.utility.ImageUtility;
 import org.lazydog.comic.manager.utility.SessionKey;
 import org.lazydog.comic.manager.utility.SessionUtility;
-import org.lazydog.repository.criterion.ComparisonOperation;
+import org.lazydog.comic.model.Comic;
+import org.lazydog.comic.model.Image;
+import org.lazydog.comic.model.ImageType;
 import org.lazydog.repository.Criteria;
-import org.richfaces.event.UploadEvent;
+import org.lazydog.repository.criterion.ComparisonOperation;
+import org.richfaces.event.FileUploadEvent;
 
 
 /**
@@ -131,7 +132,7 @@ e.printStackTrace();
      *
      * @param  comicService  the comic service.
      */
-    @EJB(beanName="ejb/ComicService", beanInterface=ComicService.class)
+    @EJB
     protected void setComicService(ComicService comicService) {
         this.comicService = comicService;
     }
@@ -141,16 +142,12 @@ e.printStackTrace();
      *
      * @param  uploadEvent  the upload event.
      */
-    public void uploadImage(UploadEvent uploadEvent) {
-
-        // Declare.
-        File uploadFile;
-
-        // Get the upload file.
-        uploadFile = uploadEvent.getUploadItem().getFile();
+    public void uploadImage(FileUploadEvent uploadEvent) {
 
         try {
 
+            InputStream inputStream = uploadEvent.getUploadedFile().getInputStream();
+            
             // Declare.
             Criteria<ImageType> criteria;
             Image image;
@@ -164,10 +161,10 @@ e.printStackTrace();
             imageType = comicService.find(ImageType.class, criteria);
             tifFile = ImageUtility.getUniqueFile(imageType.getDirectoryPath(), ImageUtility.TIF_EXTENSION);
 
-            // Copy the upload file to the TIF file.
-            ImageUtility.copyFile(uploadFile, tifFile);
+            // Copy the input stream to the TIF file.
+            ImageUtility.copyFile(inputStream, tifFile);
 
-            // Create the JPG file from the TIF file..
+            // Create the JPG file from the TIF file.
             criteria = comicService.getCriteria(ImageType.class);
             criteria.add(ComparisonOperation.eq("value", "Comic"));
             imageType = comicService.find(ImageType.class, criteria);
@@ -188,11 +185,6 @@ e.printStackTrace();
 e.printStackTrace();
             FacesContext.getCurrentInstance().addMessage(null,
                     new FacesMessage("Cannot upload the comic image."));
-        }
-        finally {
-
-            // Delete the upload file.
-            uploadFile.delete();
         }
     }
 }

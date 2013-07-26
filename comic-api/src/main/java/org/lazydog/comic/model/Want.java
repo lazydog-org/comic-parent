@@ -1,8 +1,7 @@
 package org.lazydog.comic.model;
 
-import java.io.Serializable;
-import javax.validation.constraints.NotNull;
 import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
 
 
 /**
@@ -10,10 +9,7 @@ import javax.validation.Valid;
  *
  * @author  Ron Rickard
  */
-public class Want
-       extends Entity<Want>
-       implements Comparable<Want>,
-                  Serializable {
+public class Want extends Entity<Want> implements Comparable<Want> {
 
     private static final long serialVersionUID = 1L;
     

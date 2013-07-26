@@ -9,76 +9,65 @@
     <artifactId>comic-manager</artifactId>
     <packaging>war</packaging>
     <name>Comic Manager</name>
+    <properties>
+        <org.richfaces.bom.version>4.3.3.Final</org.richfaces.bom.version>
+    </properties>
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.richfaces</groupId>
+                <artifactId>richfaces-bom</artifactId>
+                <version>${org.richfaces.bom.version}</version>
+                <scope>import</scope>
+                <type>pom</type>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
     <dependencies>
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+        </dependency>
         <dependency>
             <groupId>commons-codec</groupId>
             <artifactId>commons-codec</artifactId>
-            <version>1.3</version>
         </dependency>
         <dependency>
-            <groupId>com.sun.facelets</groupId>
-            <artifactId>jsf-facelets</artifactId>
-            <version>1.1.14</version>
-        </dependency>
-        <dependency>
-            <groupId>javax.ejb</groupId>
-            <artifactId>ejb-api</artifactId>
-            <version>3.0</version>
-            <scope>provided</scope>
-        </dependency>
-        <dependency>
-            <groupId>javax.faces</groupId>
-            <artifactId>jsf-api</artifactId>
-            <version>1.2_02</version>
-            <scope>provided</scope>
-        </dependency>
-        <dependency>
-            <groupId>javax.servlet</groupId>
-            <artifactId>jstl</artifactId>
-            <version>1.2</version>
-            <scope>provided</scope>
-        </dependency>
-        <dependency>
-            <groupId>javax.servlet</groupId>
-            <artifactId>servlet-api</artifactId>
-            <version>2.5</version>
-            <scope>provided</scope>
-        </dependency>
-        <dependency>
-            <groupId>javax.servlet.jsp</groupId>
-            <artifactId>jsp-api</artifactId>
-            <version>2.1</version>
+            <groupId>javax</groupId>
+            <artifactId>javaee-api</artifactId>
             <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>org.lazydog.entry</groupId>
-            <artifactId>entry-application-manager</artifactId>
-            <version>1.0</version>
+            <artifactId>entry-service-ejb</artifactId>
         </dependency>
         <dependency>
             <groupId>org.lazydog.entry</groupId>
             <artifactId>entry-faces-ui</artifactId>
-            <version>1.0</version>
         </dependency>
         <dependency>
             <groupId>org.lazydog.repository</groupId>
             <artifactId>repository</artifactId>
-            <version>1.5</version>
         </dependency>
         <dependency>
             <groupId>org.richfaces.ui</groupId>
-            <artifactId>richfaces-ui</artifactId>
-            <version>3.3.2.GA</version>
+            <artifactId>richfaces-components-ui</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.richfaces.core</groupId>
+            <artifactId>richfaces-core-impl</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
         </dependency>
         <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>comic-api</artifactId>
-            <version>${project.version}</version>
         </dependency>
         <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>comic-faces</artifactId>
-            <version>${project.version}</version>
         </dependency>
     </dependencies>
 </project>

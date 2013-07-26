@@ -1,10 +1,9 @@
 package org.lazydog.comic.manager.utility;
 
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileOutputStream;
-import java.io.InputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.UUID;
 import java.util.concurrent.Executor;
@@ -73,15 +72,14 @@ public class ImageUtility {
     /**
      * Copy the file.
      *
-     * @param  file      the file.
-     * @param  fileCopy  the file copy.
+     * @param  inputStream  the input stream.
+     * @param  fileCopy     the file copy.
      *
      * @return  the file copy.
      */
-    public static File copyFile(File file, File fileCopy) {
+    public static File copyFile(InputStream inputStream, File fileCopy) {
 
         // Declare.
-        InputStream inputStream;
         OutputStream outputStream;
 
         // Initialize.
@@ -96,8 +94,7 @@ public class ImageUtility {
             // Initialize.
             pipeExecutor = PipeExecutor.newInstance();
 
-            // Get the input and output streams for the file and the file copy.
-            inputStream = new FileInputStream(file);
+            // Get the output streams for the file copy.
             outputStream = new FileOutputStream(fileCopy);
 
             // Copy the file to the file copy.

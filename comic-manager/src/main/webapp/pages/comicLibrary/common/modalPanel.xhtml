@@ -11,7 +11,7 @@
     <head/>
     <body>
         <ui:composition>
-            <rich:modalPanel id="cm-#{entityType}-modal-panel" minWidth="600" minHeight="200" autosized="true">
+            <rich:popupPanel id="cm-#{entityType}-modal-panel" minWidth="600" minHeight="200" autosized="true">
                 <f:facet name="header">
                     <h:panelGroup>
                         #{entityType}
@@ -23,7 +23,7 @@
                             <a4j:commandLink value="close"
                                              actionListener="#{parentManagedBean.processCurrentButton}"
                                              oncomplete="Richfaces.hideModalPanel('cm-#{entityType}-modal-panel');"
-                                             reRender="cm-#{parentEntityType}-filter,cm-#{parentEntityType}-table,cm-#{parentEntityType}-form"/>
+                                             render="cm-#{parentEntityType}-filter,cm-#{parentEntityType}-table,cm-#{parentEntityType}-form"/>
                         </h:form>
                     </h:panelGroup>
                 </f:facet>
@@ -34,7 +34,7 @@
                         <ui:param name="managedBean" value="#{managedBean}"/>
                     </ui:include>
                 </h:panelGrid>
-            </rich:modalPanel>
+            </rich:popupPanel>
         </ui:composition>
     </body>
 </html>

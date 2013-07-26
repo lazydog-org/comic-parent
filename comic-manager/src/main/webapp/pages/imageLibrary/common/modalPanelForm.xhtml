@@ -14,17 +14,17 @@
                     <ui:param name="entityType" value="#{entityType}"/>
                     <ui:param name="managedBean" value="#{managedBean}"/>
                 </ui:include>
-                <rich:panelBar>
-                    <rich:panelBarItem label="Main">
+                <rich:accordion>
+                    <rich:accordionItem label="Main">
                         <ui:include src="/pages/imageLibrary/#{entityType}/form.xhtml"/>
-                    </rich:panelBarItem>
-                    <rich:panelBarItem label="Administrative">
+                    </rich:accordionItem>
+                    <rich:accordionItem label="Administrative">
                         <ui:include src="/pages/common/administrativePanel.xhtml">
                             <ui:param name="entityType" value="#{entityType}"/>
                             <ui:param name="managedBean" value="#{managedBean}"/>
                         </ui:include>
-                    </rich:panelBarItem>
-                </rich:panelBar>
+                    </rich:accordionItem>
+                </rich:accordion>
                 <ui:include src="/pages/common/formButtons.xhtml">
                     <ui:param name="entityType" value="#{entityType}"/>
                     <ui:param name="managedBean" value="#{managedBean}"/>

@@ -1,10 +1,9 @@
 package org.lazydog.comic.model;
 
-import java.io.Serializable;
 import java.util.Calendar;
 import java.util.Date;
-import javax.validation.constraints.NotNull;
 import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
 
 
 /**
@@ -12,10 +11,7 @@ import javax.validation.Valid;
  *
  * @author  Ron Rickard
  */
-public class UserPreference 
-       extends Entity<UserPreference>
-       implements Comparable<UserPreference>,
-                  Serializable {
+public class UserPreference extends Entity<UserPreference> implements Comparable<UserPreference> {
 
     private static final long serialVersionUID = 1L;
 

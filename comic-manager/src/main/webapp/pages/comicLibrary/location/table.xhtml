@@ -19,13 +19,16 @@
                         </f:facet>
                     </rich:column>
                 </rich:dataTable>
+                <a4j:jsFunction name="selectRow" 
+                                actionListener="#{locationBean.processRowClick}" 
+                                render="cm-location-table,cm-location-form">
+                    <a4j:param name="currentRow" assignTo="#{locationBean.entity}"/>
+                </a4j:jsFunction>
                 <div id="cm-location-table-scroller" class="cm-table-scroller">
                     <rich:dataTable id="cm-location-table-body"
                                     value="#{locationBean.entities}" var="location"
-                                    binding="#{locationBean.dataTable}">
-                        <a4j:support event="onRowClick" 
-                                     actionListener="#{locationBean.processRowClick}"
-                                     reRender="cm-location-table,cm-location-form"/>
+                                    binding="#{locationBean.dataTable}"
+                                    onrowclick="selectRow('#{location}')">
                         <rich:column styleClass="cm-table-cell cm-table-location-name-cell #{(location.id == locationBean.entity.id) ? 'cm-table-selected-row' : ''}">
                             <h:outputText value="#{location.name}"/>
                         </rich:column>

@@ -3,9 +3,8 @@
     xmlns="http://java.sun.com/xml/ns/javaee"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://java.sun.com/xml/ns/javaee
-                        http://java.sun.com/xml/ns/javaee/web-facesconfig_1_2.xsd"
-    version="1.2">
-
+                        http://java.sun.com/xml/ns/javaee/web-facesconfig_2_0.xsd"
+    version="2.0">
     <converter>
         <converter-for-class>java.util.Date</converter-for-class>
         <converter-class>org.lazydog.comic.manager.converter.CustomDateTimeConverter</converter-class>
@@ -27,8 +26,7 @@
         <converter-class>org.lazydog.comic.manager.converter.PublisherListConverter</converter-class>
     </converter>
     <lifecycle>
-        <!--<phase-listener>org.lazydog.comic.manager.phaselistener.Debug</phase-listener>-->
-        <phase-listener>org.lazydog.comic.manager.phaselistener.Authenticate</phase-listener>
+        <phase-listener>org.lazydog.comic.manager.phaselistener.Debug</phase-listener>
     </lifecycle>
 </faces-config>
 

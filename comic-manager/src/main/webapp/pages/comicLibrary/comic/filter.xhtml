@@ -19,7 +19,7 @@
                                 <a4j:commandLink value="Distribution"
                                                  actionListener="#{distributionBean.processFirstButton}"
                                                  oncomplete="Richfaces.showModalPanel('cm-distribution-modal-panel');"
-                                                 reRender="cm-distribution-modal-panel-content"
+                                                 render="cm-distribution-modal-panel-content"
                                                  rendered="#{comicFilterBean.buttonLinkController.formDisabled}"/>
                                 <h:outputText value="Distribution"
                                               rendered="#{!comicFilterBean.buttonLinkController.formDisabled}"/>
@@ -38,7 +38,7 @@
                                 <a4j:commandLink value="Comic Type"
                                                  actionListener="#{comicTypeBean.processFirstButton}"
                                                  oncomplete="Richfaces.showModalPanel('cm-comictype-modal-panel');"
-                                                 reRender="cm-comictype-modal-panel-content"
+                                                 render="cm-comictype-modal-panel-content"
                                                  rendered="#{comicFilterBean.buttonLinkController.formDisabled}"/>
                                 <h:outputText value="Comic Type"
                                               rendered="#{!comicFilterBean.buttonLinkController.formDisabled}"/>

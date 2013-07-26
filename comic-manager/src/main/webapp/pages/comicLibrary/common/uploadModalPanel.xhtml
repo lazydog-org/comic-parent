@@ -11,7 +11,7 @@
     <head/>
     <body>
         <ui:composition>
-            <rich:modalPanel id="cm-#{entityType}-modal-panel" minWidth="600" minHeight="200" autosized="true">
+            <rich:popupPanel id="cm-#{entityType}-modal-panel" minWidth="600" minHeight="200" autosized="true">
                 <f:facet name="header">
                     <h:panelGroup>
                         #{entityType}
@@ -23,33 +23,31 @@
                             <a4j:commandLink value="close"
                                              actionListener="#{parentManagedBean.processCurrentButton}"
                                              oncomplete="Richfaces.hideModalPanel('cm-#{entityType}-modal-panel');"
-                                             reRender="cm-#{parentEntityType}-filter,cm-#{parentEntityType}-table,cm-#{parentEntityType}-form"/>
+                                             render="cm-#{parentEntityType}-filter,cm-#{parentEntityType}-table,cm-#{parentEntityType}-form"/>
                         </h:form>
                     </h:panelGroup>
                 </f:facet>
                 <h:form id="cm-#{entityType}-form">
                     <h:panelGrid id="cm-#{entityType}-modal-panel-content" columns="2" columnClasses="cm-modal-panel-content, cm-modal-panel-content">
                         <h:panelGroup id="#{entityType}-upload">
-                            <rich:fileUpload addControlLabel="Add Image"
-                                             autoclear="#{true}"
+                            <rich:fileUpload addLabel="Add Image"
                                              id="cm-#{entityType}-file-upload"
                                              fileUploadListener="#{managedBean.uploadImage}"
                                              immediateUpload="#{true}"
                                              acceptedTypes="tif"
-                                             listHeight="70px"
+                                             listHeight="70px" 
                                              listWidth="300px">
-                                <a4j:support event="onuploadcomplete" reRender="cm-#{entityType}-image,cm-#{entityType}-close,cm-#{entityType}-form-buttons"/>
+                                <a4j:ajax event="uploadcomplete" execute="@none" render="cm-#{entityType}-image,cm-#{entityType}-close,cm-#{entityType}-form-buttons"/>
                             </rich:fileUpload>
                             <h:panelGroup id="cm-#{entityType}-form-buttons" styleClass="cm-form-buttons">
                                 <a4j:commandButton value="Cancel"
                                                    actionListener="#{managedBean.processCancelButton}"
                                                    disabled="#{managedBean.buttonDisabled}"
-                                                   reRender="cm-#{entityType}-form,cm-#{entityType}-close"/>
-                                <rich:spacer width="20"/>
+                                                   render="cm-#{entityType}-form,cm-#{entityType}-close"/>
                                 <a4j:commandButton value="OK"
                                                    actionListener="#{managedBean.processOkButton}"
                                                    disabled="#{managedBean.buttonDisabled}"
-                                                   reRender="cm-#{entityType}-form,cm-#{entityType}-close"/>
+                                                   render="cm-#{entityType}-form,cm-#{entityType}-close"/>
                             </h:panelGroup>
                         </h:panelGroup>
                         <h:panelGroup id="cm-#{entityType}-image">
@@ -61,7 +59,7 @@
                         </h:panelGroup>
                     </h:panelGrid>
                 </h:form>
-            </rich:modalPanel>
+            </rich:popupPanel>
         </ui:composition>
     </body>
 </html>

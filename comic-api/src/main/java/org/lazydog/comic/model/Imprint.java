@@ -1,9 +1,7 @@
 package org.lazydog.comic.model;
 
-import java.io.Serializable;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import javax.validation.Valid;
 
 
 /**
@@ -11,10 +9,7 @@ import javax.validation.Valid;
  *
  * @author  Ron Rickard
  */
-public class Imprint 
-       extends Entity<Imprint>
-       implements Comparable<Imprint>,
-                  Serializable {
+public class Imprint extends Entity<Imprint> implements Comparable<Imprint> {
     
     private static final long serialVersionUID = 1L;
     

@@ -34,13 +34,16 @@
                         </f:facet>
                     </rich:column>
                 </rich:dataTable>
+                <a4j:jsFunction name="selectRow" 
+                                actionListener="#{comicBean.processRowClick}" 
+                                render="cm-comic-table,cm-comic-form">
+                    <a4j:param name="currentRow" assignTo="#{comicBean.entity}"/>
+                </a4j:jsFunction>
                 <div id="cm-comic-table-scroller" class="cm-table-scroller">
                     <rich:dataTable id="cm-comic-table-body"
                                     value="#{comicBean.entities}" var="comic"
-                                    binding="#{comicBean.dataTable}">
-                        <a4j:support event="onRowClick" 
-                                     actionListener="#{comicBean.processRowClick}"
-                                     reRender="cm-comic-table,cm-comic-form"/>
+                                    binding="#{comicBean.dataTable}"
+                                    onrowclick="selectRow('#{comic}')">
                         <rich:column styleClass="cm-table-cell cm-table-comic-issue-cell #{(comic.id == comicBean.entity.id) ? 'cm-table-selected-row' : ''}">
                             <h:outputText value="#{comic.number}"/>
                             <h:outputText value="#{comic.variant}"/>

@@ -4,12 +4,14 @@ import java.io.Serializable;
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
-import org.lazydog.comic.model.Location;
 import org.lazydog.comic.manager.utility.SessionKey;
 import org.lazydog.comic.manager.utility.SessionUtility;
+import org.lazydog.comic.model.Location;
+import org.lazydog.repository.Criteria;
 import org.lazydog.repository.criterion.ComparisonOperation;
 import org.lazydog.repository.criterion.Order;
-import org.lazydog.repository.Criteria;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 
 /**
@@ -17,11 +19,10 @@ import org.lazydog.repository.Criteria;
  * 
  * @author  Ron Rickard
  */
-public class LocationBean
-       extends AbstractDataAccessBean<Location>
-       implements Serializable {
+public class LocationBean extends AbstractDataAccessBean<Location> implements Serializable {
 
     private static final long serialVersionUID = 1L;
+    private static final Logger logger = LoggerFactory.getLogger(LocationBean.class);
     
     /**
      * Get the criteria.
@@ -31,31 +32,25 @@ public class LocationBean
     @Override
     protected Criteria<Location> getCriteria() {
 
-        // Declare.
-        Criteria<Location> criteria;
-
-        // Initialize.
-        criteria = null;
+        Criteria<Location> criteria = null;
 
         try {
 
             // Check if the UUID session values exist.
             if (SessionUtility.valueExists(SessionKey.UUID)) {
 
+                String uuid = SessionUtility.getValue(SessionKey.UUID, String.class);
+                logger.debug("Get the uuid {} from the session.", uuid);
+                
                 // Create a new criteria.
                 criteria = this.comicService.getCriteria(Location.class);
 
                 // Modify the criteria.
-                criteria.add(ComparisonOperation.eq(
-                        "uuid",
-                        SessionUtility.getValue(SessionKey.UUID, String.class)));
+                criteria.add(ComparisonOperation.eq("uuid", uuid));
                 criteria.addOrder(Order.desc("name"));
             }
-        }
-        catch(Exception e) {
-
-            FacesContext.getCurrentInstance().addMessage(null,
-                    new FacesMessage("Cannot get criteria."));
+        } catch (Exception e) {
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Cannot get criteria."));
         }
 
         return criteria;
@@ -101,13 +96,8 @@ public class LocationBean
     @Override
     protected Location getNewEntity() {
 
-        // Declare.
-        Location newEntity;
-
-        // Create a new entity.
-        newEntity = new Location();
-
         // Set the UUID in the new entity.
+        Location newEntity = new Location();
         newEntity.setUuid(SessionUtility.getValue(SessionKey.UUID, String.class));
 
         return newEntity;

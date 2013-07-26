@@ -26,7 +26,7 @@
                                 <a4j:commandLink value="Image Type"
                                                  actionListener="#{imageTypeBean.processFirstButton}"
                                                  oncomplete="Richfaces.showModalPanel('cm-imagetype-modal-panel');"
-                                                 reRender="cm-imagetype-modal-panel-content"
+                                                 render="cm-imagetype-modal-panel-content"
                                                  rendered="#{imageFilterBean.buttonLinkController.formDisabled}"/>
                                 <h:outputText value="Image Type"
                                               rendered="#{!imageFilterBean.buttonLinkController.formDisabled}"/>

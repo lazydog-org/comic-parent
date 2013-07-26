@@ -1,6 +1,5 @@
 package org.lazydog.comic.model;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import javax.validation.constraints.NotNull;
@@ -12,10 +11,7 @@ import javax.validation.constraints.Size;
  *
  * @author  Ron Rickard
  */
-public class Publisher 
-       extends Entity<Publisher>
-       implements Comparable<Publisher>,
-                  Serializable {
+public class Publisher extends Entity<Publisher> implements Comparable<Publisher> {
     
     private static final long serialVersionUID = 1L;
     

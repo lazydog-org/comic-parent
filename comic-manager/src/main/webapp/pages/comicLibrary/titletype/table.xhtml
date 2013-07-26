@@ -19,13 +19,16 @@
                         </f:facet>
                     </rich:column>
                 </rich:dataTable>
+                <a4j:jsFunction name="selectRow" 
+                                actionListener="#{titleTypeBean.processRowClick}" 
+                                render="cm-titletype-table,cm-titletype-form">
+                    <a4j:param name="currentRow" assignTo="#{titleTypeBean.entity}"/>
+                </a4j:jsFunction>
                 <div id="cm-titletype-table-scroller" class="cm-table-scroller">
                     <rich:dataTable id="cm-titletype-table-body"
                                     value="#{titleTypeBean.entities}" var="titleType"
-                                    binding="#{titleTypeBean.dataTable}">
-                        <a4j:support event="onRowClick" 
-                                     actionListener="#{titleTypeBean.processRowClick}"
-                                     reRender="cm-titletype-table,cm-titletype-form"/>
+                                    binding="#{titleTypeBean.dataTable}"
+                                    onrowclick="selectRow('#{titleType}')">
                         <rich:column styleClass="cm-table-cell cm-table-titletype-value-cell #{(titleType.id == titleTypeBean.entity.id) ? 'cm-table-selected-row' : ''}">
                             <h:outputText value="#{titleType.value}"/>
                         </rich:column>

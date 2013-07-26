@@ -4,13 +4,13 @@ import java.util.List;
 import javax.ejb.EJB;
 import javax.ejb.EJBException;
 import javax.ejb.Local;
-import javax.ejb.Stateless;
+import javax.ejb.Singleton;
 import javax.interceptor.Interceptors;
 import org.lazydog.comic.ComicRepository;
 import org.lazydog.comic.ComicService;
 import org.lazydog.comic.model.Entity;
-import org.lazydog.repository.Criteria;
 import org.lazydog.ejbmonitor.interceptor.EJBMonitor;
+import org.lazydog.repository.Criteria;
 
 
 /**
@@ -18,13 +18,13 @@ import org.lazydog.ejbmonitor.interceptor.EJBMonitor;
  * 
  * @author  Ron Rickard
  */
-@Stateless(name="ejb/ComicService")
+@Singleton(name="ejb/ComicService")
 @Local(ComicService.class)
 @Interceptors(EJBMonitor.class)
 public class ComicServiceImpl
        implements ComicService {
 
-    @EJB(beanName="ejb/ComicRepository", beanInterface=ComicRepository.class)
+    @EJB
     private ComicRepository comicRepository;
 
     /**

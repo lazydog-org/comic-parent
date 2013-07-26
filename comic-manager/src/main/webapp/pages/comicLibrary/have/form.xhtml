@@ -29,7 +29,7 @@
                             <a4j:commandLink value="Location"
                                              actionListener="#{locationBean.processFirstButton}"
                                              oncomplete="Richfaces.showModalPanel('cm-location-modal-panel');"
-                                             reRender="cm-location-modal-panel-content"
+                                             render="cm-location-modal-panel-content"
                                              rendered="#{haveBean.buttonLinkController.formDisabled}"/>
                             <h:outputText value="Location"
                                           rendered="#{!haveBean.buttonLinkController.formDisabled}"/>

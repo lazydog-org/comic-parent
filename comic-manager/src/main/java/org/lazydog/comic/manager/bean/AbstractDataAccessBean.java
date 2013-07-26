@@ -9,15 +9,17 @@ import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
 import javax.faces.model.SelectItem;
 import org.lazydog.comic.ComicService;
-import org.lazydog.comic.model.Entity;
 import org.lazydog.comic.manager.utility.ButtonLinkController;
 import org.lazydog.comic.manager.utility.Perspective;
 import org.lazydog.comic.manager.utility.SessionKey;
 import org.lazydog.comic.manager.utility.SessionUtility;
+import org.lazydog.comic.model.Entity;
 import org.lazydog.repository.Criteria;
 import org.lazydog.repository.criterion.Criterion;
 import org.lazydog.repository.criterion.LogicalOperation;
-import org.richfaces.component.html.HtmlDataTable;
+import org.richfaces.component.UIDataTable;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 
 /**
@@ -29,6 +31,7 @@ public abstract class AbstractDataAccessBean<T extends Entity<T>>
        implements Serializable {
 
     private static final long serialVersionUID = 1L;
+    private static final Logger logger = LoggerFactory.getLogger(AbstractDataAccessBean.class);
     
     /**
      * Enumeration for a find type.
@@ -42,7 +45,7 @@ public abstract class AbstractDataAccessBean<T extends Entity<T>>
     };
 
     protected ComicService comicService;
-    protected HtmlDataTable dataTable;
+    protected UIDataTable dataTable;
     private List<T> entities;
     protected T entity;
     protected Class<T> entityClass;
@@ -84,14 +87,12 @@ public abstract class AbstractDataAccessBean<T extends Entity<T>>
             if (this.getCriteria() != null) {
 
                 // Get the entities.
-                this.entities = this.comicService.findList(
-                        this.getEntityClass(), this.getCriteria());
+                this.entities = this.comicService.findList(this.getEntityClass(), this.getCriteria());
+                logger.debug("Found {} entities.", this.entities.size());
             }
-        }
-        catch(Exception e) {
-
-            FacesContext.getCurrentInstance().addMessage(null,
-                    new FacesMessage("Cannot get the entities."));
+        } catch (Exception e) {
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Cannot find the entities."));
+            logger.debug("Cannot find the entities.");
         }
     }
 
@@ -212,7 +213,7 @@ public abstract class AbstractDataAccessBean<T extends Entity<T>>
      *
      * @return  the data table.
      */
-    public HtmlDataTable getDataTable() {
+    public UIDataTable getDataTable() {
         return this.dataTable;
     }
 
@@ -245,7 +246,7 @@ public abstract class AbstractDataAccessBean<T extends Entity<T>>
         entitiesAsSelectItems = new ArrayList<SelectItem>();
 
         // Loop through the entities.
-        for(T entity : this.entities) {
+        for (T entity : this.entities) {
 
             // Add the entity to the select items.
             entitiesAsSelectItems.add(new SelectItem(
@@ -655,9 +656,6 @@ e.printStackTrace();
     @SuppressWarnings("unchecked")
     public void processRowClick(ActionEvent actionEvent) {
 
-        // Get the entity.
-        this.entity = (T)this.dataTable.getRowData();
-
         // Put the perspective on the session.
         SessionUtility.putValue(SessionKey.PERSPECTIVE, Perspective.VIEW);
 
@@ -676,7 +674,7 @@ e.printStackTrace();
      *
      * @param  comicService  the comic service.
      */
-    @EJB(beanName="ejb/ComicService", beanInterface=ComicService.class)
+    @EJB
     protected void setComicService(ComicService comicService) {
         this.comicService = comicService;
     }
@@ -686,7 +684,7 @@ e.printStackTrace();
      *
      * @param  dataTable  the data table.
      */
-    public void setDataTable(HtmlDataTable dataTable) {
+    public void setDataTable(UIDataTable dataTable) {
         this.dataTable = dataTable;
     }
 

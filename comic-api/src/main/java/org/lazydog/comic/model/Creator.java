@@ -1,8 +1,7 @@
 package org.lazydog.comic.model;
-
-import java.io.Serializable;
-import javax.validation.constraints.NotNull;
+ 
 import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
 
 
 /**
@@ -10,10 +9,7 @@ import javax.validation.Valid;
  *
  * @author  Ron Rickard
  */
-public class Creator 
-       extends Entity<Creator>
-       implements Comparable<Creator>,
-                  Serializable {
+public class Creator  extends Entity<Creator> implements Comparable<Creator> {
 
     private static final long serialVersionUID = 1L;
 

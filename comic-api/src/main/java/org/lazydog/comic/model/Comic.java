@@ -1,6 +1,5 @@
 package org.lazydog.comic.model;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -17,10 +16,7 @@ import javax.validation.Valid;
  *
  * @author  Ron Rickard
  */
-public class Comic 
-       extends Entity<Comic>
-       implements Comparable<Comic>,
-                  Serializable {
+public class Comic extends Entity<Comic> implements Comparable<Comic> {
 
     private static final long serialVersionUID = 1L;
 

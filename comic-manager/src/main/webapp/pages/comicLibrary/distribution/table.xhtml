@@ -19,13 +19,16 @@
                         </f:facet>
                     </rich:column>
                 </rich:dataTable>
+                <a4j:jsFunction name="selectRow" 
+                                actionListener="#{distributionBean.processRowClick}" 
+                                render="cm-distribution-table,cm-distribution-form">
+                    <a4j:param name="currentRow" assignTo="#{distributionBean.entity}"/>
+                </a4j:jsFunction>
                 <div id="cm-distribution-table-scroller" class="cm-table-scroller">
                     <rich:dataTable id="cm-distribution-table-body"
                                     value="#{distributionBean.entities}" var="distribution"
-                                    binding="#{distributionBean.dataTable}">
-                        <a4j:support event="onRowClick" 
-                                     actionListener="#{distributionBean.processRowClick}"
-                                     reRender="cm-distribution-table,cm-distribution-form"/>
+                                    binding="#{distributionBean.dataTable}"
+                                    onrowclick="selectRow('#{distribution}')">
                         <rich:column styleClass="cm-table-cell cm-table-distribution-value-cell #{(distribution.id == distributionBean.entity.id) ? 'cm-table-selected-row' : ''}">
                             <h:outputText value="#{distribution.value}"/>
                         </rich:column>

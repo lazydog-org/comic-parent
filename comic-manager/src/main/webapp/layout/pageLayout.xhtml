@@ -3,14 +3,15 @@
                       "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
           
 <html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
       xmlns:ui="http://java.sun.com/jsf/facelets">
-    <head>
+    <h:head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
         <link rel="stylesheet" href="#{request.contextPath}/styles/cmstyles.css" type="text/css"/>
         <link rel="stylesheet" href="#{request.contextPath}/styles/cmprintstyles.css" type="text/css" media="print"/>
         <title><ui:insert name="title">Default Title</ui:insert></title>
-    </head>
-    <body>
+    </h:head>
+    <h:body>
         <div id="cm-page">
             <div id="cm-header">
                 <ui:insert name="header">
@@ -32,5 +33,5 @@
             </div>
         </div>
         <ui:debug hotkey="v" rendered="#{initParam.debugMode}"/>
-    </body>
+    </h:body>
 </html>

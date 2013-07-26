@@ -1,6 +1,5 @@
 package org.lazydog.comic.model;
 
-import java.io.Serializable;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
@@ -10,10 +9,7 @@ import javax.validation.constraints.Size;
  *
  * @author  Ron Rickard
  */
-public class Location
-       extends Entity<Location>
-       implements Comparable<Location>,
-                  Serializable {
+public class Location extends Entity<Location> implements Comparable<Location> {
     
     private static final long serialVersionUID = 1L;
     

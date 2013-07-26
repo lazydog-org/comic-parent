@@ -17,8 +17,8 @@
                     <ui:param name="entityType" value="image"/>
                     <ui:param name="managedBean" value="#{imageBean}"/>
                 </ui:include>
-                <rich:panelBar>
-                    <rich:panelBarItem label="Main">
+                <rich:accordion>
+                    <rich:accordionItem label="Main">
                         <fieldset>
                             <ol>
                                 <li>
@@ -33,7 +33,7 @@
                                         <a4j:commandLink value="Image Type"
                                                          actionListener="#{imageTypeBean.processFirstButton}"
                                                          oncomplete="Richfaces.showModalPanel('cm-imagetype-modal-panel');"
-                                                         reRender="cm-imagetype-modal-panel-content"
+                                                         render="cm-imagetype-modal-panel-content"
                                                          rendered="#{imageBean.buttonLinkController.formDisabled}"/>
                                         <h:outputText value="Image Type"
                                                       rendered="#{!imageBean.buttonLinkController.formDisabled}"/>
@@ -53,14 +53,14 @@
                             <img src="#{request.contextPath}/getImage?fileName=#{imageBean.entity.fileName}&amp;typeValue=#{imageBean.entity.type.value}&amp;height=300"
                                  alt="Image Unavailable"/>
                         </a>
-                    </rich:panelBarItem>
-                    <rich:panelBarItem label="Administrative">
+                    </rich:accordionItem>
+                    <rich:accordionItem label="Administrative">
                         <ui:include src="/pages/common/administrativePanel.xhtml">
                             <ui:param name="entityType" value="image"/>
                             <ui:param name="managedBean" value="#{imageBean}"/>
                         </ui:include>
-                    </rich:panelBarItem>
-                </rich:panelBar>
+                    </rich:accordionItem>
+                </rich:accordion>
             </h:form>
         </ui:composition>
     </body>

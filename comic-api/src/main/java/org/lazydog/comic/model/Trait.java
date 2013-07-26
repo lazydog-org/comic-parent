@@ -1,6 +1,5 @@
 package org.lazydog.comic.model;
 
-import java.io.Serializable;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
@@ -10,10 +9,7 @@ import javax.validation.constraints.Size;
  *
  * @author  Ron Rickard
  */
-public class Trait 
-       extends Entity<Trait>
-       implements Comparable<Trait>,
-                  Serializable {
+public class Trait extends Entity<Trait> implements Comparable<Trait> {
     
     private static final long serialVersionUID = 1L;
 

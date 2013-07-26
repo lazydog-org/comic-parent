@@ -14,18 +14,18 @@
         <ui:composition>
             <ui:include src="/pages/comicLibrary/common/modalPanels.xhtml"/>
             <h:form id="cm-title-form">
-                <a4j:htmlCommandLink value="Manage Issues"
+                <a4j:commandLink value="Manage Issues"
                                      actionListener="#{comicBean.processFirstButton}"
                                      disabled="#{titleBean.buttonLinkController.linkDisabledMap['Manage Issues']}">
                     <f:attribute name="subtopic" value="COMIC"/>
                     <f:actionListener type="org.lazydog.comic.manager.actionlistener.ActivateSubtopic"/>
-                </a4j:htmlCommandLink>
+                </a4j:commandLink>
                 <ui:include src="/pages/common/perspectiveButtons.xhtml">
                     <ui:param name="entityType" value="title"/>
                     <ui:param name="managedBean" value="#{titleBean}"/>
                 </ui:include>
-                <rich:panelBar>
-                    <rich:panelBarItem label="Main">
+                <rich:accordion>
+                    <rich:accordionItem label="Main">
                         <fieldset>
                             <ol>
                                 <li>
@@ -47,7 +47,7 @@
                                         <a4j:commandLink value="Publisher"
                                                          actionListener="#{publisherBean.processFirstButton}"
                                                          oncomplete="Richfaces.showModalPanel('cm-publisher-modal-panel');"
-                                                         reRender="cm-publisher-modal-panel-content"
+                                                         render="cm-publisher-modal-panel-content"
                                                          rendered="#{titleBean.buttonLinkController.formDisabled}"/>
                                         <h:outputText value="Publisher"
                                                       rendered="#{!titleBean.buttonLinkController.formDisabled}"/>
@@ -65,7 +65,7 @@
                                         <a4j:commandLink value="Title Type"
                                                          actionListener="#{titleTypeBean.processFirstButton}"
                                                          oncomplete="Richfaces.showModalPanel('cm-titletype-modal-panel');"
-                                                         reRender="cm-titletype-modal-panel-content"
+                                                         render="cm-titletype-modal-panel-content"
                                                          rendered="#{titleBean.buttonLinkController.formDisabled}"/>
                                         <h:outputText value="Title Type"
                                                       rendered="#{!titleBean.buttonLinkController.formDisabled}"/>
@@ -105,7 +105,7 @@
                                         <a4j:commandLink value="Category"
                                                          actionListener="#{categoryBean.processFirstButton}"
                                                          oncomplete="Richfaces.showModalPanel('cm-category-modal-panel');"
-                                                         reRender="cm-category-modal-panel-content"
+                                                         render="cm-category-modal-panel-content"
                                                          rendered="#{titleBean.buttonLinkController.formDisabled}"/>
                                         <h:outputText value="Category"
                                                       rendered="#{!titleBean.buttonLinkController.formDisabled}"/>
@@ -120,14 +120,14 @@
                                 </li>
                             </ol>
                         </fieldset>
-                    </rich:panelBarItem>
-                    <rich:panelBarItem label="Administrative">
+                    </rich:accordionItem>
+                    <rich:accordionItem label="Administrative">
                         <ui:include src="/pages/common/administrativePanel.xhtml">
                             <ui:param name="entityType" value="title"/>
                             <ui:param name="managedBean" value="#{titleBean}"/>
                         </ui:include>
-                    </rich:panelBarItem>
-                </rich:panelBar>
+                    </rich:accordionItem>
+                </rich:accordion>
                 <ui:include src="/pages/common/formButtons.xhtml">
                     <ui:param name="entityType" value="title"/>
                     <ui:param name="managedBean" value="#{titleBean}"/>
